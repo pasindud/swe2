@@ -1,0 +1,115 @@
+<html ng-app="banking" >
+<head>
+  <title>Banking</title>
+  <base href="/">
+  <!--Import Google Icon Font-->
+  <link href="ico/iconCDN.file" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="css/libs/materialize.css"  media="screen,projection"/>
+  <link type="text/css" rel="stylesheet" href="css/nny.css"  media="screen,projection"/>
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!--Import JQuery-->
+  <script type"text/javascript" src="js/libs/jquery.3.2.1.min.js"></script>
+
+  <!--Import AngularJs 1.6.1-->
+  <script src="js/libs/angular1.6.1.js"></script>
+</head>
+<body class="grey" ng-controller="OverviewController" >
+
+  <!--Import materialize.js-->
+  <script type="text/javascript" src="js/libs/materialize.js"></script>
+  <!--Import AngularJs UI Router-->
+  <script type="text/javascript" src="js/libs/angular-ui-router.min.js"></script>
+  <!--Import materialize for AngularJs-->
+  <script type="text/javascript" src="js/libs/angular-materialize.0.2.2.js"></script>
+  <!--Import AngularJs animate-->
+  <script type="text/javascript" src="js/libs/angular-animate-1.6.1.js"></script>
+
+  <script type="text/javascript" src="js/libs/angularfire.js"></script>
+  <script type="text/javascript" src="js/libs/tweenMax.min.js"></script>
+
+  <!--Import Application-->
+  <script type="text/javascript" src="js/nny.js"></script>
+  <script type="text/javascript" src="js/custom.js"></script>
+
+  <!--Import Controllers-->
+  <script type="text/javascript" src="areas/login/loginController.js"></script>
+  <script type="text/javascript" src="areas/account/accountController.js"></script>
+  <script type="text/javascript" src="areas/activity/activityController.js"></script>
+  <script type="text/javascript" src="areas/common/datePickerController.js"></script>
+  <script type="text/javascript" src="areas/account/CreateNewAccountController.js"></script>
+  <script type="text/javascript" src="areas/admin/adminController.js"></script>
+
+  <div id="wrapper" style="min-height:100%">
+    <div id="navigationBar" class="">
+      <ul id="dropdown1" class="dropdown-content">
+        <li><a ng-click="setLanguage('en-us')">EN</a></li>
+        <li class="divider"></li>
+        <li><a ng-click="setLanguage('fr')">FR</a></li>
+        <li class="divider"></li>
+        <li><a ng-click="setLanguage('ie')">IE</a></li>
+      </ul>
+      <nav>
+        <div class="nav-wrapper nny-theme" >
+          <a href="#!" class="brand-logo">{{ title }}</a>
+          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+          <div class="row">
+            <div class="col s12 hide-on-med-and-down">
+              <div class="col s4">
+              </div>
+              <div class="center col s4">
+                <center>
+                  <ul class="nny-tabs">
+                    <li class="col s4 nny-tab-selected"><a ui-sref="account">{{labels.Account}}</a></li>
+                    <li class="col s4 nny-tab"><a ui-sref="activity">{{labels.Activity}}</a></li>
+                    <li class="col s4 nny-tab"><a ui-sref=="payments">{{labels.Payments}}</a></li>
+                  </ul>
+                </center>
+              </div>
+              <div class=" col s4">
+                <ul class="right">
+                  <li><a ui-sref="settings"><i class="material-icons">settings</i></a></li>
+                  <li><a ui-sref="logout"><i class="material-icons">power_settings_new</i></a></li>
+                  <li>
+                    <a class="dropdown-button" href="#!" data-activates="dropdown1">EN
+                      <i class="material-icons right">arrow_drop_down</i>
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+            <ul class="side-nav" id="mobile-demo">
+              <li><a ui-sref="account">{{labels.Account}}</a></li>
+              <li><a ui-sref="activity">{{labels.Activity}}</a></li>
+              <li><a ui-sref="payments">{{labels.Payments}}</a></li>
+              <li><a ui-sref="settings">{{labels.Settings}}</a></li>
+              <li><a ui-sref="logout">{{labels.Logout}}</a></li>
+              <li><a ui-sref="Help">{{labels.Help}}</a></li>
+              <li><a ui-sref="contact">{{labels.Contact}}</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div id="container">
+      <div class="row">
+        <div class="col s12">
+          <div class="col l2 xl2 hide-on-med-and-down"></div>
+          <div ui-view></div>
+          <div class="col l2 xl2 hide-on-med-and-down"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="nny-footer nny-theme">
+    {{labels.Copyright}}
+  </div>
+
+
+</body>
+</html>

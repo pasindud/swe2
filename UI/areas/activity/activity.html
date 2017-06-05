@@ -1,0 +1,91 @@
+<div id="ActivityFilter" class="col s12 m12 l8 xl8 card-panel">
+  <div class="section col s12">
+      <h5>{{labels.TransactionHistroy}}</h5>
+      <div class="divider col s12"></div>
+    </br>
+
+  <div class="col s12 m12 l8" ng-controller="DatePickerController">
+    <div class="input-field col s6">
+      <label for="start_date">{{labels.StartDate}}</label>
+      <input input-date type="text" name="created"  id="start_date"  ng-model="currentTime" container="" format="dd/mm/yyyy"
+      months-full="{{ month }}" months-short="{{ monthShort }}" weekdays-full="{{ weekdaysFull }}" weekdays-short="{{ weekdaysShort }}"
+      weekdays-letter="{{ weekdaysLetter }}" disable="disable"  min="{{ minDate }}" max="{{ maxDate }}" today="today" first-day="1"
+      clear="clear" close="close" select-years="15" on-start="onStart()" on-render="onRender()" on-open="onOpen()" on-close="onClose()"
+      on-set="onSet()" on-stop="onStop()" />
+    </div>
+    <div class="input-field col s6">
+      <label for="end_date">{{labels.EndDate}}</label>
+      <input input-date type="text" name="created"  id="end_date"  ng-model="currentTime" container="" format="dd/mm/yyyy"
+      months-full="{{ month }}" months-short="{{ monthShort }}" weekdays-full="{{ weekdaysFull }}" weekdays-short="{{ weekdaysShort }}"
+      weekdays-letter="{{ weekdaysLetter }}" disable="disable"  min="{{ minDate }}" max="{{ maxDate }}" today="today" first-day="1"
+      clear="clear" close="close" select-years="15" on-start="onStart()" on-render="onRender()" on-open="onOpen()" on-close="onClose()"
+      on-set="onSet()" on-stop="onStop()" />
+    </div>
+  </div>
+  <div id="" class="input-field col s12 m12 l4">
+    <input id="activitySearch" type="search" required>
+    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+  </div>
+
+  <div class="col s2 hide-on-med-and-down"></div>
+</div>
+  <div class="col s12">
+    <div class="">
+      <table class="striped highlight responsive-table">
+        <thead>
+          <tr>
+            <th>{{labels.Date}}</th>
+            <th>{{labels.Name}}</th>
+            <th>{{labels.Type}}</th>
+            <th>{{labels.Amount}}</th>
+            <th>{{labels.Balance}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>01-22-2017</td>
+            <td>Eclair</td>
+            <td>Payment</td>
+            <td>-90</td>
+            <td>100</td>
+          </tr>
+          <tr>
+            <td>01-22-2017</td>
+            <td>Eclair</td>
+            <td>Payment</td>
+            <td>-90</td>
+            <td>100</td>
+          </tr>
+          <tr>
+            <td>01-22-2017</td>
+            <td>Eclair</td>
+            <td>Payment</td>
+            <td>-90</td>
+            <td>100</td>
+          </tr>
+          <tr>
+            <td>01-22-2017</td>
+            <td>Eclair</td>
+            <td>Payment</td>
+            <td>-90</td>
+            <td>100</td>
+          </tr>
+          <tr>
+            <td>01-22-2017</td>
+            <td>Eclair</td>
+            <td>Payment</td>
+            <td>-90</td>
+            <td>100</td>
+          </tr>
+          <tr>
+            <td>01-22-2017</td>
+            <td>Eclair</td>
+            <td>Payment</td>
+            <td>-90</td>
+            <td>100</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
