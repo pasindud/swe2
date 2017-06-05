@@ -2,7 +2,7 @@ angular.module('banking', [
   'ui.router',
   'ui.materialize'
 ])
-.constant('ENDPOINT_URI','localhost:8989/sampleJson')
+.constant('ENDPOINT_URI','localhost:8989/SampleJSON')
 .config(function ($stateProvider,$urlRouterProvider,$locationProvider) {
   $urlRouterProvider.otherwise('/login');
   $stateProvider.state('login',{

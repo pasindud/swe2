@@ -11,7 +11,7 @@
       months-full="{{ month }}" months-short="{{ monthShort }}" weekdays-full="{{ weekdaysFull }}" weekdays-short="{{ weekdaysShort }}"
       weekdays-letter="{{ weekdaysLetter }}" disable="disable"  min="{{ minDate }}" max="{{ maxDate }}" today="today" first-day="1"
       clear="clear" close="close" select-years="15" on-start="onStart()" on-render="onRender()" on-open="onOpen()" on-close="onClose()"
-      on-set="onSet()" on-stop="onStop()" />
+      on-set="onSet()" on-st  op="onStop()" />
     </div>
     <div class="input-field col s6">
       <label for="end_date">{{labels.EndDate}}</label>
@@ -42,47 +42,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>01-22-2017</td>
-            <td>Eclair</td>
-            <td>Payment</td>
-            <td>-90</td>
-            <td>100</td>
-          </tr>
-          <tr>
-            <td>01-22-2017</td>
-            <td>Eclair</td>
-            <td>Payment</td>
-            <td>-90</td>
-            <td>100</td>
-          </tr>
-          <tr>
-            <td>01-22-2017</td>
-            <td>Eclair</td>
-            <td>Payment</td>
-            <td>-90</td>
-            <td>100</td>
-          </tr>
-          <tr>
-            <td>01-22-2017</td>
-            <td>Eclair</td>
-            <td>Payment</td>
-            <td>-90</td>
-            <td>100</td>
-          </tr>
-          <tr>
-            <td>01-22-2017</td>
-            <td>Eclair</td>
-            <td>Payment</td>
-            <td>-90</td>
-            <td>100</td>
-          </tr>
-          <tr>
-            <td>01-22-2017</td>
-            <td>Eclair</td>
-            <td>Payment</td>
-            <td>-90</td>
-            <td>100</td>
+          <tr ng-repeat = "transaction in Transactions">
+            <td>{{transaction.Date}}</td>
+            <td>{{transaction.Name}}</td>
+            <td>{{transaction.Type}}</td>
+            <td>{{transaction.Amount}}</td>
+            <td>{{transaction.Balance}}</td>
           </tr>
         </tbody>
       </table>

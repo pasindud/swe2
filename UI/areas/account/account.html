@@ -4,11 +4,9 @@
     <div class="divider col s12"></div>
     <div class="input-field col s12 m12 l12 xl6">
       {{labels.AccountNumber}}
-      <select material-select>
+      <select material-select watch>
         <option value="" disabled selected>Choose your Account</option>
-        <option value="1">12234-23444-12344</option>
-        <option value="2">12234-23444-12344</option>
-        <option value="3">12234-23444-12344</option>
+        <option ng-repeat="account in Accounts" value={{account.AccountNumber}}>{{account.AccountNumber}}</option>
       </select>
       <div class="col s12">
         <div class="col s6">
@@ -36,15 +34,15 @@
     <h5>{{labels.PersonalInformation}}</h5>
     <div class="divider col s12"></div>
     <div class="input-field col s12">
-        <p class="nny-p0-1"><b>{{labels.FirstName}} : </b>Ishanka</p>
-        <p class="nny-p0-1"><b>{{labels.LastName}} : </b>Ranathunga</p>
-        <p class="nny-p0-1"><b>{{labels.DateOfBirth}} : </b>21-12-1993</p>
-        <p class="nny-p0-1"><b>{{labels.Gender}} : </b>Male</p>
-        <p class="nny-p0-1"><b>{{labels.NationalIdentityCard}} : </b>989387652v</p>
-        <p class="nny-p0-1"><b>{{labels.EmailAddress}} : </b>ish.rox@gmail.com</p>
-        <p class="nny-p0-1"><b>{{labels.Contact1}} : </b>999 999 9999</p>
-        <p class="nny-p0-1"><b>{{labels.Contact2}} : </b>999 999 9999</p>
-        <p class="nny-p0-1"><b>{{labels.Address}} : </b>matara, matara</p>
+        <p class="nny-p0-1"><b>{{labels.FirstName}} : </b>{{PersonalInformation.FirstName}}</p>
+        <p class="nny-p0-1"><b>{{labels.LastName}} : </b>{{PersonalInformation.LastName}}</p>
+        <p class="nny-p0-1"><b>{{labels.DateOfBirth}} : </b>{{PersonalInformation.DOB}}</p>
+        <p class="nny-p0-1"><b>{{labels.Gender}} : </b>{{PersonalInformation.Gender}}</p>
+        <p class="nny-p0-1"><b>{{labels.NationalIdentityCard}} : </b>{{PersonalInformation.NIC}}</p>
+        <p class="nny-p0-1"><b>{{labels.EmailAddress}} : </b>{{PersonalInformation.Email}}</p>
+        <p class="nny-p0-1"><b>{{labels.Contact1}} : </b>{{PersonalInformation.Contact1}}</p>
+        <p class="nny-p0-1"><b>{{labels.Contact2}} : </b>{{PersonalInformation.Contact2}}</p>
+        <p class="nny-p0-1"><b>{{labels.Address}} : </b>{{PersonalInformation.Address}}</p>
     </div>
     <div class="col s12 m6 l6 xl6 center">
     </div>
