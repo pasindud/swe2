@@ -7,9 +7,9 @@
         <div class="col s4"><i class="large material-icons">insert_chart</i></div>
         <div class="col s8">
           <ul class="">
-            <li ><a class="waves-effect" ng-click="setPage('createnew')">{{labels.CreateNewAccount}}</a></li>
-            <li ><a class="waves-effect" ng-click="setPage('viewallaccounts')">{{labels.ViewAllAccounts}}</a></li>
-            <li ><a class="waves-effect" ng-click="setPage('deleteaccounts')">{{labels.DeleteAccounts}}</a></li>
+            <li ><a class="waves-effect" ui-sref="createnew">{{labels.CreateNewAccount}}</a></li>
+            <li ><a class="waves-effect" ui-sref="">{{labels.ViewAllAccounts}}</a></li>
+            <li ><a class="waves-effect" ui-sref="">{{labels.DeleteAccounts}}</a></li>
           </ul>
         </div>
       </div>
@@ -35,11 +35,11 @@
         <div class="col s2 hide-on-small-and-down"><i class="large material-icons">report_problem</i></div>
         <div class="col s2 hide-on-med-and-up"><i class="medium material-icons">report_problem</i></div>
         <div class="col s10"style="min-height:90px">
-          <p class="right-align" style="margin-top:1px;margin-bottom:1px"><i>Latest Activities</i></p>
+          <p class="right-align" style="margin-top:1px;margin-bottom:1px"><i>{{labels.LatestActivities}}</i></p>
           <div class="divider" ></div>
           <ul class="center">
-            <li>No New Activity</li>
-            <li><a>view Suspicious Activities</a></li>
+            <li>{{labels.NoNewActivities}}</li>
+            <li><a class="waves-effect" ui-sref="flags">{{labels.ViewSuspiciousActivities}}</a></li>
           </ul>
         </div>
         <div class="divider col s12" style="margin-bottom:20px"></div>
@@ -52,11 +52,11 @@
         <div class="col s2 hide-on-small-and-down"><i class="large material-icons">verified_user</i></div>
         <div class="col s2 hide-on-med-and-up"><i class="medium material-icons">verified_user</i></div>
         <div class="col s10"style="min-height:90px">
-          <p class="right-align" style="margin-top:1px;margin-bottom:1px"><i>Latest Approval requests</i></p>
+          <p class="right-align" style="margin-top:1px;margin-bottom:1px"><i>{{labels.LatestApprovals}}</i></p>
           <div class="divider" ></div>
           <ul class="center">
-            <li>No New Approvals</li>
-            <li><a>view all approval requests</a></li>
+            <li>{{labels.NoNewApprovals}}</li>
+            <li><a class="waves-effect" ui-sref="">{{labels.ViewAllApprovals}}</a></li>
           </ul>
         </div>
         <div class="divider col s12" style="margin-bottom:20px"></div>
