@@ -1,0 +1,47 @@
+<div id="flagsUI" class="col s12 m12 l8 xl8 card-panel">
+  <div class="col s12 m12 l12">
+    <div class="col s5" style="padding-top:30px">
+      <h5>{{labels.SuspiciousActivity}}</h5>
+    </div>
+    <div class="col s7 nny-rounded-flat-card2">
+      <div class="col s3" style="padding-top:15px">
+        <select material-select class="center">
+          <option value="1">{{labels.Username}}</option>
+          <option value="2">{{labels.Violation}}</option>
+          <option value="3">{{labels.Severity}}</option>
+        </select>
+      </div>
+      <div class="input-field col s9" >
+        <input id="activitySearch" type="search" required>
+        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+      </div>
+    </div>
+    <div class="divider col s12"></div>
+  </div>
+  <div class="col s12">
+    <div class="">
+      <table class="striped highlight">
+        <thead>
+          <tr>
+            <th>{{labels.Username}}</th>
+            <th>{{labels.Violation}}</th>
+            <th>{{labels.Severity}}</th>
+            <th>{{labels.Date}}</th>
+            <th>{{labels.Time}}</th>
+            <th>{{labels.Actions}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat = "flag in FlaggedList">
+            <td>{{flag.Username}}</td>
+            <td>{{flag.Violation}}</td>
+            <td>{{flag.Severity}}</td>
+            <td>{{flag.Date}}</td>
+            <td>{{flag.Time}}</td>
+            <td>{{flag.Actions}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
