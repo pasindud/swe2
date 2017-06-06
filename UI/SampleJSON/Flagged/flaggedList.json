@@ -1,1 +1,8 @@
-[{}]
+[{
+  "AdminID" : "0007",
+  "FlaggedList" : [
+    {"Username":"foxtrot","Violation" : "Invalid Password", "Severity" : "Low","Date":"06/07/2017","Time":"12:00"},
+    {"Username":"charlie","Violation" : "Invalid Password", "Severity" : "Low","Date":"06/07/2017","Time":"12:00"},
+    {"Username":"lima","Violation" : "Invalid Password", "Severity" : "Low","Date":"06/07/2017","Time":"12:00"}
+  ]
+  }]
