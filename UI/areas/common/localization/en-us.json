@@ -59,5 +59,15 @@
   "MonthLong" : ["Januar", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
   "MonthShort" : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
   "WeekDaysFull" : ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-  "Copyright" : "NoNameYet © 2017 Copyright"
+  "Copyright" : "NoNameYet © 2017 Copyright",
+  "Violation" : "Violation",
+  "Time" : "Time",
+  "Severity" : "Severity",
+  "Actions" : "Actions",
+  "ViewSuspiciousActivities" : "view Suspicious Activities",
+  "NoNewActivities" : "No New Activities",
+  "LatestActivities" : "Latest Activities",
+  "LatestApprovals":"Latest Approval requests",
+  "ViewAllApprovals":"view all approval requests",
+  "NoNewApprovals":"No New Approvals"
   }]
