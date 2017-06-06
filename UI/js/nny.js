@@ -34,15 +34,25 @@ angular.module('banking', [
     controller:'ActivityController',
 
   })
-  .state('CreateNewAccountController',{
+  .state('createnew',{
     url:'/createnew',
     templateUrl:'areas/account/createNewAccount.html',
     controller:'CreateNewAccountController'
   })
-  .state('AdminController',{
+  .state('admin',{
       url:'/admin',
       templateUrl:'areas/admin/admin.html',
       controller:'AdminController'
+  })
+  .state('flags',{
+    url:'/admin/flagged',
+    templateUrl : 'areas/admin/flagged/flags.html',
+    controller: 'FlagsController'
+  })
+  .state('flaggedActivity',{
+    url : '/admin/flaggedActivity',
+    templateUrl: 'areas/admin/flagged/flaggedActivity.html',
+    controller: 'FlaggedActivityController'
   })
   .state('DatePickerController',{
     controller:'DatePickerController'
