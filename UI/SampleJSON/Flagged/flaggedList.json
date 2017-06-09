@@ -1,8 +1,8 @@
 [{
   "AdminID" : "0007",
   "FlaggedList" : [
-    {"Username":"foxtrot","Violation" : "Invalid Password", "Severity" : "Low","Date":"06/07/2017","Time":"12:00"},
-    {"Username":"charlie","Violation" : "Invalid Password", "Severity" : "Low","Date":"06/07/2017","Time":"12:00"},
-    {"Username":"lima","Violation" : "Invalid Password", "Severity" : "Low","Date":"06/07/2017","Time":"12:00"}
+    {"ViolationID": "111","Username":"Foxtrot","Violation" : "Invalid Password", "Severity" : "Low","Date":"06/07/2017","Time":"12:00"},
+    {"ViolationID": "112","Username":"Charlie","Violation" : "Invalid Password", "Severity" : "Low","Date":"06/07/2017","Time":"12:00"},
+    {"ViolationID": "113","Username":"Lima","Violation" : "Invalid Password", "Severity" : "Low","Date":"06/07/2017","Time":"12:00"}
   ]
   }]
