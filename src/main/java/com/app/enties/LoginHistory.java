@@ -7,8 +7,9 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -17,44 +18,32 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "LoginHistory")
-@IdClass(LoginHistoryPK.class)
 public class LoginHistory {
 
-    @Column(name = "id", table = "LoginHistory", nullable = false)
+    @Column(name = "id",  nullable = false)
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
-    @Column(name = "userId", table = "LoginHistory", nullable = false)
-    @Id
-    private int userId;
-
-    @Column(name = "time", table = "LoginHistory")
+    @Column(name = "time")
     @Basic
     @Temporal(TemporalType.DATE)
     private Date time;
 
-    @Column(name = "ipAddress", table = "LoginHistory", length = 132)
+    @Column(name = "ipAddress",  length = 132)
     @Basic
     private String ipAddress;
 
-    @ManyToOne(optional = false, targetEntity = User.class)
-    @JoinColumn(name = "USERID", referencedColumnName = "USERID", insertable = false, updatable = false)
-    private User user;
+    @ManyToOne(optional = false, targetEntity = Users.class)
+    @JoinColumn(name = "USERID", referencedColumnName = "USERID")
+    private Users userId;
 
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
-    }
-
-    public int getUserId() {
-        return this.userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public Date getTime() {
@@ -73,12 +62,12 @@ public class LoginHistory {
         this.ipAddress = ipAddress;
     }
 
-    public User getUser() {
-        return this.user;
+    public Users getUserId() {
+        return this.userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Users userId) {
+        this.userId = userId;
     }
 
 }

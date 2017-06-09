@@ -4,52 +4,42 @@
 package com.app.enties;
 
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "Account")
-@IdClass(AccountPK.class)
 public class Account {
 
-    @Column(name = "accountId", table = "Account", nullable = false)
+    @Column(name = "accountid",  nullable = false)
     @Id
-    private int accountId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer accountid;
 
-    @Column(name = "MerchantServices_serviceId", table = "Account", nullable = false)
-    @Id
-    private int merchantServicesserviceId;
-
-    @Column(name = "MerchantServices_Merchant_userId", table = "Account", nullable = false)
-    @Id
-    private int merchantServicesMerchantuserId;
-
-    @Column(name = "expireDate", table = "Account")
+    @Column(name = "expireDate")
     @Basic
     @Temporal(TemporalType.DATE)
     private Date expireDate;
 
-    @Column(name = "createdDate", table = "Account")
+    @Column(name = "createdDate")
     @Basic
     @Temporal(TemporalType.DATE)
     private Date createdDate;
 
-    @Column(name = "balance", table = "Account", precision = 12)
+    @Column(name = "balance",  precision = 12)
     @Basic
     private Float balance;
 
-    @Column(name = "currency", table = "Account", length = 45)
+    @Column(name = "currency",  length = 45)
     @Basic
     private String currency;
 
@@ -57,45 +47,20 @@ public class Account {
     @JoinColumn(name = "ACCTYPEID", referencedColumnName = "ACCTYPEID")
     private AccountType accTypeId;
 
+    @ManyToOne(optional = false, targetEntity = Users.class)
+    @JoinColumn(name = "USERID", referencedColumnName = "USERID")
+    private Users userId;
+
     @ManyToOne(optional = false, targetEntity = Branch.class)
     @JoinColumn(name = "BRANCHID", referencedColumnName = "BRANCHID")
     private Branch branchId;
 
-    @ManyToOne(optional = false, targetEntity = MerchantServices.class)
-    @JoinColumns({
-        @JoinColumn(name = "MERCHANTSERVICES_SERVICEID", referencedColumnName = "SERVICEID", insertable = false, updatable = false)
-        ,@JoinColumn(name = "MERCHANTSERVICES_MERCHANT_USERID", referencedColumnName = "MERCHANT_USERID", insertable = false, updatable = false)})
-    private MerchantServices merchantServices;
-
-    @ManyToOne(optional = false, targetEntity = User.class)
-    @JoinColumn(name = "USERID", referencedColumnName = "USERID")
-    private User userId;
-
-    @OneToMany(targetEntity = Transaction.class, mappedBy = "accountId")
-    private List<Transaction> transactionCollection;
-
-    public int getAccountId() {
-        return this.accountId;
+    public Integer getAccountid() {
+        return this.accountid;
     }
 
-    public void setAccountId(int accountId) {
-        this.accountId = accountId;
-    }
-
-    public int getMerchantServicesserviceId() {
-        return this.merchantServicesserviceId;
-    }
-
-    public void setMerchantServicesserviceId(int merchantServicesserviceId) {
-        this.merchantServicesserviceId = merchantServicesserviceId;
-    }
-
-    public int getMerchantServicesMerchantuserId() {
-        return this.merchantServicesMerchantuserId;
-    }
-
-    public void setMerchantServicesMerchantuserId(int merchantServicesMerchantuserId) {
-        this.merchantServicesMerchantuserId = merchantServicesMerchantuserId;
+    public void setAccountid(Integer accountid) {
+        this.accountid = accountid;
     }
 
     public Date getExpireDate() {
@@ -138,36 +103,20 @@ public class Account {
         this.accTypeId = accTypeId;
     }
 
+    public Users getUserId() {
+        return this.userId;
+    }
+
+    public void setUserId(Users userId) {
+        this.userId = userId;
+    }
+
     public Branch getBranchId() {
         return this.branchId;
     }
 
     public void setBranchId(Branch branchId) {
         this.branchId = branchId;
-    }
-
-    public MerchantServices getMerchantServices() {
-        return this.merchantServices;
-    }
-
-    public void setMerchantServices(MerchantServices merchantServices) {
-        this.merchantServices = merchantServices;
-    }
-
-    public User getUserId() {
-        return this.userId;
-    }
-
-    public void setUserId(User userId) {
-        this.userId = userId;
-    }
-
-    public List<Transaction> getTransactionCollection() {
-        return this.transactionCollection;
-    }
-
-    public void setTransactionCollection(List<Transaction> transactionCollection) {
-        this.transactionCollection = transactionCollection;
     }
 
 }

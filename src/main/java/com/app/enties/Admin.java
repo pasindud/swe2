@@ -6,75 +6,56 @@ package com.app.enties;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Admin")
-@IdClass(AdminPK.class)
 public class Admin {
 
-    @Column(name = "userId", table = "Admin", nullable = false)
+    @Column(name = "adminid",  nullable = false)
     @Id
-    private int userId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer adminid;
 
-    @Column(name = "postionId", table = "Admin", nullable = false)
-    @Id
-    private int postionId;
-
-    @Column(name = "branchId", table = "Admin", nullable = false)
-    @Id
-    private int branchId;
-
-    @Column(name = "title", table = "Admin")
+    @Column(name = "title")
     @Basic
     private Integer title;
 
-    @Column(name = "firstName", table = "Admin", length = 45)
+    @Column(name = "firstName",  length = 45)
     @Basic
     private String firstName;
 
-    @Column(name = "lastName", table = "Admin", length = 45)
+    @Column(name = "lastName",  length = 45)
     @Basic
     private String lastName;
 
-    @ManyToOne(optional = false, targetEntity = Branch.class)
-    @JoinColumn(name = "BRANCHID", referencedColumnName = "BRANCHID", insertable = false, updatable = false)
-    private Branch branch;
+    @Column(name = "userIdCopy",  nullable = false)
+    @Basic(optional = false)
+    private int userIdCopy;
+
+    @ManyToOne(optional = false, targetEntity = Users.class)
+    @JoinColumn(name = "USERID", referencedColumnName = "USERID")
+    private Users userId;
 
     @ManyToOne(optional = false, targetEntity = Postion.class)
-    @JoinColumn(name = "POSTIONID", referencedColumnName = "POSTIONID", insertable = false, updatable = false)
-    private Postion postion;
+    @JoinColumn(name = "POSTIONID", referencedColumnName = "POSTIONID")
+    private Postion postionId;
 
-    @ManyToOne(optional = false, targetEntity = User.class)
-    @JoinColumn(name = "USERID", referencedColumnName = "USERID", insertable = false, updatable = false)
-    private User user;
+    @ManyToOne(optional = false, targetEntity = Branch.class)
+    @JoinColumn(name = "BRANCHID", referencedColumnName = "BRANCHID")
+    private Branch branchId;
 
-    public int getUserId() {
-        return this.userId;
+    public Integer getAdminid() {
+        return this.adminid;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public int getPostionId() {
-        return this.postionId;
-    }
-
-    public void setPostionId(int postionId) {
-        this.postionId = postionId;
-    }
-
-    public int getBranchId() {
-        return this.branchId;
-    }
-
-    public void setBranchId(int branchId) {
-        this.branchId = branchId;
+    public void setAdminid(Integer adminid) {
+        this.adminid = adminid;
     }
 
     public Integer getTitle() {
@@ -101,28 +82,36 @@ public class Admin {
         this.lastName = lastName;
     }
 
-    public Branch getBranch() {
-        return this.branch;
+    public int getUserIdCopy() {
+        return this.userIdCopy;
     }
 
-    public void setBranch(Branch branch) {
-        this.branch = branch;
+    public void setUserIdCopy(int userIdCopy) {
+        this.userIdCopy = userIdCopy;
     }
 
-    public Postion getPostion() {
-        return this.postion;
+    public Users getUserId() {
+        return this.userId;
     }
 
-    public void setPostion(Postion postion) {
-        this.postion = postion;
+    public void setUserId(Users userId) {
+        this.userId = userId;
     }
 
-    public User getUser() {
-        return this.user;
+    public Postion getPostionId() {
+        return this.postionId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setPostionId(Postion postionId) {
+        this.postionId = postionId;
+    }
+
+    public Branch getBranchId() {
+        return this.branchId;
+    }
+
+    public void setBranchId(Branch branchId) {
+        this.branchId = branchId;
     }
 
 }

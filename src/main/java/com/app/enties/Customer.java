@@ -15,29 +15,28 @@ import javax.persistence.Table;
 @Table(name = "Customer")
 public class Customer {
 
-    @Column(name = "userId", table = "Customer", nullable = false)
+    @Column(name = "userId",  nullable = false)
     @Id
     private Integer userId;
 
-    @Column(name = "title", table = "Customer", length = 5)
+    @Column(name = "title",  length = 5)
     @Basic
     private String title;
 
-    @Column(name = "firstName", table = "Customer", length = 45)
+    @Column(name = "firstName",  length = 45)
     @Basic
     private String firstName;
 
-    @Column(name = "lostName", table = "Customer", length = 45)
+    @Column(name = "lostName",  length = 45)
     @Basic
     private String lostName;
 
-    @Column(name = "dob", table = "Customer", length = 45)
+    @Column(name = "dob",  length = 45)
     @Basic
     private String dob;
 
-    @OneToOne(optional = false, targetEntity = User.class, mappedBy = "customer")
-    @JoinColumn(name = "USERID", referencedColumnName = "USERID", insertable = false, updatable = false)
-    private User user;
+    @OneToOne(optional = false, targetEntity = Users.class)
+    private Users users;
 
     public Integer getUserId() {
         return this.userId;
@@ -79,12 +78,12 @@ public class Customer {
         this.dob = dob;
     }
 
-    public User getUser() {
-        return this.user;
+    public Users getUsers() {
+        return this.users;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsers(Users users) {
+        this.users = users;
     }
 
 }

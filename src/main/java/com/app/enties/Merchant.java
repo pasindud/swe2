@@ -17,31 +17,31 @@ import javax.persistence.Table;
 @Table(name = "Merchant")
 public class Merchant {
 
-    @Column(name = "userId", table = "Merchant", nullable = false)
+    @Column(name = "userId",  nullable = false)
     @Id
     private Integer userId;
 
-    @Column(name = "OrgName", table = "Merchant", nullable = false, length = 45)
+    @Column(name = "OrgName",  nullable = false, length = 45)
     @Basic(optional = false)
     private String orgName;
 
-    @Column(name = "registrationNo", table = "Merchant", nullable = false, length = 45)
+    @Column(name = "registrationNo",  nullable = false, length = 45)
     @Basic(optional = false)
     private String registrationNo;
 
-    @Column(name = "taxNo", table = "Merchant", nullable = false, length = 45)
+    @Column(name = "taxNo",  nullable = false, length = 45)
     @Basic(optional = false)
     private String taxNo;
 
-    @Column(name = "logoUrl", table = "Merchant")
+    @Column(name = "logoUrl")
     @Basic
     private String logoUrl;
 
-    @OneToOne(optional = false, targetEntity = User.class, mappedBy = "merchant")
+    @OneToOne(optional = false, targetEntity = Users.class, mappedBy = "merchant")
     @JoinColumn(name = "USERID", referencedColumnName = "USERID", insertable = false, updatable = false)
-    private User user;
+    private Users users;
 
-    @OneToMany(targetEntity = MerchantServices.class, mappedBy = "merchant")
+    @OneToMany(targetEntity = MerchantServices.class, mappedBy = "merchantuserId")
     private List<MerchantServices> merchantServicesCollection;
 
     public Integer getUserId() {
@@ -84,12 +84,12 @@ public class Merchant {
         this.logoUrl = logoUrl;
     }
 
-    public User getUser() {
-        return this.user;
+    public Users getUsers() {
+        return this.users;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsers(Users users) {
+        this.users = users;
     }
 
     public List<MerchantServices> getMerchantServicesCollection() {

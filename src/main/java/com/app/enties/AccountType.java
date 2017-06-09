@@ -15,35 +15,35 @@ import javax.persistence.Table;
 @Table(name = "AccountType")
 public class AccountType {
 
-    @Column(name = "accTypeId", table = "AccountType", nullable = false)
+    @Column(name = "accTypeId",  nullable = false)
     @Id
     private Integer accTypeId;
 
-    @Column(name = "accName", table = "AccountType", length = 45)
+    @Column(name = "accName",  length = 45)
     @Basic
     private String accName;
 
-    @Column(name = "accInterestRates", table = "AccountType", precision = 12)
+    @Column(name = "accInterestRates",  precision = 12)
     @Basic
     private Float accInterestRates;
 
-    @Column(name = "minInitBalance", table = "AccountType", precision = 12)
+    @Column(name = "minInitBalance",  precision = 12)
     @Basic
     private Float minInitBalance;
 
-    @Column(name = "minAvgBalance", table = "AccountType", precision = 12)
+    @Column(name = "minAvgBalance",  precision = 12)
     @Basic
     private Float minAvgBalance;
 
-    @Column(name = "minMonths", table = "AccountType")
+    @Column(name = "minMonths")
     @Basic
     private Integer minMonths;
 
-    @Column(name = "maxMonths", table = "AccountType")
+    @Column(name = "maxMonths")
     @Basic
     private Integer maxMonths;
 
-    @Column(name = "maxOverDraftAmount", table = "AccountType", precision = 12)
+    @Column(name = "maxOverDraftAmount",  precision = 12)
     @Basic
     private Float maxOverDraftAmount;
 

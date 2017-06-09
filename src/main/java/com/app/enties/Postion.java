@@ -15,15 +15,15 @@ import javax.persistence.Table;
 @Table(name = "Postion")
 public class Postion {
 
-    @Column(name = "postionId", table = "Postion", nullable = false)
+    @Column(name = "postionId",  nullable = false)
     @Id
     private Integer postionId;
 
-    @Column(name = "position", table = "Postion", nullable = false, length = 45)
+    @Column(name = "position",  nullable = false, length = 45)
     @Basic(optional = false)
     private String position;
 
-    @OneToMany(targetEntity = Admin.class, mappedBy = "postion")
+    @OneToMany(targetEntity = Admin.class, mappedBy = "postionId")
     private List<Admin> adminCollection;
 
     public Integer getPostionId() {

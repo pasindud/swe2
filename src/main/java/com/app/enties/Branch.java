@@ -15,46 +15,46 @@ import javax.persistence.Table;
 @Table(name = "Branch")
 public class Branch {
 
-    @Column(name = "branchId", table = "Branch", nullable = false)
+    @Column(name = "branchId",  nullable = false)
     @Id
     private Integer branchId;
 
-    @Column(name = "branchName", table = "Branch", length = 45)
+    @Column(name = "branchName",  length = 45)
     @Basic
     private String branchName;
 
-    @Column(name = "addressLine1", table = "Branch", length = 45)
+    @Column(name = "addressLine1",  length = 45)
     @Basic
     private String addressLine1;
 
-    @Column(name = "addressLine2", table = "Branch", length = 45)
+    @Column(name = "addressLine2",  length = 45)
     @Basic
     private String addressLine2;
 
-    @Column(name = "addressLine3", table = "Branch", length = 45)
+    @Column(name = "addressLine3",  length = 45)
     @Basic
     private String addressLine3;
 
-    @Column(name = "city", table = "Branch", length = 45)
+    @Column(name = "city",  length = 45)
     @Basic
     private String city;
 
-    @Column(name = "telephoneNo", table = "Branch", length = 45)
+    @Column(name = "telephoneNo",  length = 45)
     @Basic
     private String telephoneNo;
 
-    @Column(name = "email", table = "Branch", length = 45)
+    @Column(name = "email",  length = 45)
     @Basic
     private String email;
 
-    @Column(name = "faxNo", table = "Branch", length = 45)
+    @Column(name = "faxNo",  length = 45)
     @Basic
     private String faxNo;
 
     @OneToMany(targetEntity = Account.class, mappedBy = "branchId")
     private List<Account> accountCollection;
 
-    @OneToMany(targetEntity = Admin.class, mappedBy = "branch")
+    @OneToMany(targetEntity = Admin.class, mappedBy = "branchId")
     private List<Admin> adminCollection;
 
     public Integer getBranchId() {

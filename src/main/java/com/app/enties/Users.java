@@ -16,26 +16,23 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "User")
-public class User {
+@Table(name = "Users")
+public class Users {
 
-    @Column(name = "userId", table = "User", nullable = false)
+    @Column(name = "userId",  nullable = false)
     @Id
     private Integer userId;
 
-    @Column(name = "userType", table = "User", nullable = false, length = 45)
+    @Column(name = "userType",  nullable = false, length = 45)
     @Basic(optional = false)
     private String userType;
 
-    @Column(name = "creationDate", table = "User", nullable = false)
+    @Column(name = "creationDate",  nullable = false)
     @Basic(optional = false)
     @Temporal(TemporalType.DATE)
     private Date creationDate;
 
-    @OneToOne(targetEntity = LoginInfo.class)
-    private LoginInfo loginInfo;
-
-    @OneToOne(targetEntity = Customer.class)
+    @OneToOne(targetEntity = Customer.class, mappedBy = "users")
     private Customer customer;
 
     @OneToOne(targetEntity = Merchant.class)
@@ -44,16 +41,19 @@ public class User {
     @OneToMany(targetEntity = Account.class, mappedBy = "userId")
     private List<Account> accountCollection;
 
-    @OneToMany(targetEntity = Admin.class, mappedBy = "user")
+    @OneToMany(targetEntity = LoginInfo.class, mappedBy = "userId")
+    private List<LoginInfo> loginInfoCollection;
+
+    @OneToMany(targetEntity = Admin.class, mappedBy = "userId")
     private List<Admin> adminCollection;
 
     @OneToMany(targetEntity = Transaction.class, mappedBy = "userId")
     private List<Transaction> transactionCollection;
 
-    @OneToMany(targetEntity = LoginHistory.class, mappedBy = "user")
+    @OneToMany(targetEntity = LoginHistory.class, mappedBy = "userId")
     private List<LoginHistory> loginHistoryCollection;
 
-    @OneToMany(targetEntity = ContactInfo.class, mappedBy = "user")
+    @OneToMany(targetEntity = ContactInfo.class, mappedBy = "userId")
     private List<ContactInfo> contactInfoCollection;
 
     public Integer getUserId() {
@@ -80,14 +80,6 @@ public class User {
         this.creationDate = creationDate;
     }
 
-    public LoginInfo getLoginInfo() {
-        return this.loginInfo;
-    }
-
-    public void setLoginInfo(LoginInfo loginInfo) {
-        this.loginInfo = loginInfo;
-    }
-
     public Customer getCustomer() {
         return this.customer;
     }
@@ -110,6 +102,14 @@ public class User {
 
     public void setAccountCollection(List<Account> accountCollection) {
         this.accountCollection = accountCollection;
+    }
+
+    public List<LoginInfo> getLoginInfoCollection() {
+        return this.loginInfoCollection;
+    }
+
+    public void setLoginInfoCollection(List<LoginInfo> loginInfoCollection) {
+        this.loginInfoCollection = loginInfoCollection;
     }
 
     public List<Admin> getAdminCollection() {

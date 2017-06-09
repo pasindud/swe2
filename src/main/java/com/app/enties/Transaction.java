@@ -15,28 +15,29 @@ import javax.persistence.Table;
 @Table(name = "Transaction")
 public class Transaction {
 
-    @Column(name = "transactionId", table = "Transaction", nullable = false)
+    @Column(name = "transactionId",  nullable = false)
     @Id
     private Integer transactionId;
 
-    @Column(name = "transType", table = "Transaction", length = 45)
+    @Column(name = "accountId",  nullable = false)
+    @Basic(optional = false)
+    private int accountId;
+
+    @Column(name = "transType",  length = 45)
     @Basic
     private String transType;
 
-    @Column(name = "currency", table = "Transaction", length = 45)
+    @Column(name = "currency",  length = 45)
     @Basic
     private String currency;
 
-    @Column(name = "amount", table = "Transaction", precision = 12)
+    @Column(name = "amount",  precision = 12)
     @Basic
     private Float amount;
 
-    @ManyToOne(optional = false, targetEntity = Account.class)
-    private Account accountId;
-
-    @ManyToOne(optional = false, targetEntity = User.class)
+    @ManyToOne(optional = false, targetEntity = Users.class)
     @JoinColumn(name = "USERID", referencedColumnName = "USERID")
-    private User userId;
+    private Users userId;
 
     public Integer getTransactionId() {
         return this.transactionId;
@@ -44,6 +45,14 @@ public class Transaction {
 
     public void setTransactionId(Integer transactionId) {
         this.transactionId = transactionId;
+    }
+
+    public int getAccountId() {
+        return this.accountId;
+    }
+
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
     }
 
     public String getTransType() {
@@ -70,19 +79,11 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public Account getAccountId() {
-        return this.accountId;
-    }
-
-    public void setAccountId(Account accountId) {
-        this.accountId = accountId;
-    }
-
-    public User getUserId() {
+    public Users getUserId() {
         return this.userId;
     }
 
-    public void setUserId(User userId) {
+    public void setUserId(Users userId) {
         this.userId = userId;
     }
 

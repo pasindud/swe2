@@ -6,45 +6,48 @@ package com.app.enties;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "LoginInfo")
 public class LoginInfo {
 
-    @Column(name = "userId", table = "LoginInfo", nullable = false)
+    @Column(name = "loginfoid",  nullable = false)
     @Id
-    private Integer userId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer loginfoid;
 
-    @Column(name = "userName", table = "LoginInfo", nullable = false, length = 45)
+    @Column(name = "userName",  nullable = false, length = 45)
     @Basic(optional = false)
     private String userName;
 
-    @Column(name = "password", table = "LoginInfo", nullable = false, length = 45)
+    @Column(name = "password",  nullable = false, length = 45)
     @Basic(optional = false)
     private String password;
 
-    @Column(name = "sequrityAns", table = "LoginInfo", length = 45)
+    @Column(name = "sequrityAns",  length = 45)
     @Basic
     private String sequrityAns;
 
-    @Column(name = "defaultIP", table = "LoginInfo", length = 132)
+    @Column(name = "defaultIP",  length = 132)
     @Basic
     private String defaultIP;
 
-    @OneToOne(optional = false, targetEntity = User.class, mappedBy = "loginInfo")
-    @JoinColumn(name = "USERID", referencedColumnName = "USERID", insertable = false, updatable = false)
-    private User user;
+    @ManyToOne(optional = false, targetEntity = Users.class)
+    @JoinColumn(name = "USERID", referencedColumnName = "USERID")
+    private Users userId;
 
-    public Integer getUserId() {
-        return this.userId;
+    public Integer getLoginfoid() {
+        return this.loginfoid;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setLoginfoid(Integer loginfoid) {
+        this.loginfoid = loginfoid;
     }
 
     public String getUserName() {
@@ -79,12 +82,12 @@ public class LoginInfo {
         this.defaultIP = defaultIP;
     }
 
-    public User getUser() {
-        return this.user;
+    public Users getUserId() {
+        return this.userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Users userId) {
+        this.userId = userId;
     }
 
 }

@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" pkg="com.app.enties" v="4.2.2" rws="_1497035542171108" cws="_1497035542171108" sm="false" xs="false" id="_14970355415161" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
+    <jpa:entity xre="false" compositePrimaryKeyClass="AccountPK" abs="false" class="Account" v="true" m="false" rootElement="_14970355415161" id="_14970355415282">
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="java.util.Date" v="true" name="expireDate" id="_149703554153516">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:temporal>DATE</jpa:temporal>
+                <jpa:column name="expireDate" unique="false" nullable="true" insertable="true" updatable="true" table="Account"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="java.util.Date" v="true" name="createdDate" id="_149703554153517">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:temporal>DATE</jpa:temporal>
+                <jpa:column name="createdDate" unique="false" nullable="true" insertable="true" updatable="true" table="Account"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Float" v="true" name="balance" id="_149703554153518">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="balance" unique="false" nullable="true" insertable="true" updatable="true" table="Account" precision="12"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="currency" id="_149703554153519">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="currency" unique="false" nullable="true" insertable="true" updatable="true" table="Account" length="45"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_14970355415307" connected-attribute-id="_149703554153762" v="true" name="accTypeId" id="_149703554153520">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:join-column name="ACCTYPEID" rc="ACCTYPEID" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_14970355415295" connected-attribute-id="_149703554153638" v="true" name="userId" id="_149703554153521">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:join-column name="USERID" rc="USERID" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_149703554153013" connected-attribute-id="_149703554153796" v="true" name="branchId" id="_149703554153522">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:join-column name="BRANCHID" rc="BRANCHID" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="Integer" v="true" name="accountid" id="_149703554153515">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="accountid" unique="false" nullable="false" insertable="true" updatable="true" table="Account"/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Account"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="LoginInfoPK" abs="false" class="LoginInfo" v="true" m="false" rootElement="_14970355415161" id="_14970355415293">
+        <jpa:attributes>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="userName" id="_149703554153623">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="userName" unique="false" nullable="false" insertable="true" updatable="true" table="LoginInfo" length="45"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="password" id="_149703554153624">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="password" unique="false" nullable="false" insertable="true" updatable="true" table="LoginInfo" length="45"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="sequrityAns" id="_149703554153625">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="sequrityAns" unique="false" nullable="true" insertable="true" updatable="true" table="LoginInfo" length="45"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="defaultIP" id="_149703554153626">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="defaultIP" unique="false" nullable="true" insertable="true" updatable="true" table="LoginInfo" length="132"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_14970355415295" connected-attribute-id="_149703554153639" v="true" name="userId" id="_149703554153628">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:join-column name="USERID" rc="USERID" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="Integer" v="true" name="loginfoid" id="_149703554153627">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="loginfoid" unique="false" nullable="false" insertable="true" updatable="true" table="LoginInfo"/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="LoginInfo"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="CustomerPK" abs="false" class="Customer" v="true" m="false" rootElement="_14970355415161" id="_14970355415294">
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="title" id="_149703554153630">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="title" unique="false" nullable="true" insertable="true" updatable="true" table="Customer" length="5"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="firstName" id="_149703554153631">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="firstName" unique="false" nullable="true" insertable="true" updatable="true" table="Customer" length="45"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="lostName" id="_149703554153632">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="lostName" unique="false" nullable="true" insertable="true" updatable="true" table="Customer" length="45"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="dob" id="_149703554153633">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="dob" unique="false" nullable="true" insertable="true" updatable="true" table="Customer" length="45"/>
+            </jpa:basic>
+            <jpa:one-to-one own="true" optional="false" primaryKey="false" connected-entity-id="_14970355415295" connected-attribute-id="_149703554153640" v="true" name="users" id="_149703554153634">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:join-column name="USERID" rc="USERID" unique="false" nullable="true" insertable="false" updatable="false"/>
+            </jpa:one-to-one>
+            <jpa:id attribute-type="Integer" v="true" name="userId" id="_149703554153629">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="userId" unique="false" nullable="false" insertable="true" updatable="true" table="Customer"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Customer"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="UsersPK" abs="false" class="Users" v="true" m="false" rootElement="_14970355415161" id="_14970355415295">
+        <jpa:attributes>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="userType" id="_149703554153636">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="userType" unique="false" nullable="false" insertable="true" updatable="true" table="Users" length="45"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="java.util.Date" v="true" name="creationDate" id="_149703554153637">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:temporal>DATE</jpa:temporal>
+                <jpa:column name="creationDate" unique="false" nullable="false" insertable="true" updatable="true" table="Users"/>
+            </jpa:basic>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_14970355415282" connected-attribute-id="_149703554153521" v="true" name="accountCollection" id="_149703554153638">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+            </jpa:one-to-many>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_14970355415293" connected-attribute-id="_149703554153628" v="true" name="loginInfoCollection" id="_149703554153639">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+            </jpa:one-to-many>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_14970355415296" connected-attribute-id="_149703554153651" v="true" name="adminCollection" id="_149703554153641">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+            </jpa:one-to-many>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_149703554153010" connected-attribute-id="_149703554153778" v="true" name="transactionCollection" id="_149703554153643">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+            </jpa:one-to-many>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_149703554153011" connected-attribute-id="_149703554153782" v="true" name="loginHistoryCollection" id="_149703554153644">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+            </jpa:one-to-many>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_149703554153014" connected-attribute-id="_1497035541538107" v="true" name="contactInfoCollection" id="_149703554153645">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+            </jpa:one-to-many>
+            <jpa:one-to-one own="false" primaryKey="false" connected-entity-id="_14970355415294" connected-attribute-id="_149703554153634" v="true" name="customer" id="_149703554153640">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+            </jpa:one-to-one>
+            <jpa:one-to-one own="true" primaryKey="false" connected-entity-id="_14970355415309" connected-attribute-id="_149703554153771" v="true" name="merchant" id="_149703554153642">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+            </jpa:one-to-one>
+            <jpa:id attribute-type="Integer" v="true" name="userId" id="_149703554153635">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="userId" unique="false" nullable="false" insertable="true" updatable="true" table="Users"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Users"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="AdminPK" abs="false" class="Admin" v="true" m="false" rootElement="_14970355415161" id="_14970355415296">
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="title" id="_149703554153647">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="title" unique="false" nullable="true" insertable="true" updatable="true" table="Admin"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="firstName" id="_149703554153648">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="firstName" unique="false" nullable="true" insertable="true" updatable="true" table="Admin" length="45"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="lastName" id="_149703554153649">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="lastName" unique="false" nullable="true" insertable="true" updatable="true" table="Admin" length="45"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="int" v="true" name="userIdCopy" id="_149703554153650">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="userIdCopy" unique="false" nullable="false" insertable="true" updatable="true" table="Admin"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_14970355415295" connected-attribute-id="_149703554153641" v="true" name="userId" id="_149703554153651">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:join-column name="USERID" rc="USERID" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_14970355415308" connected-attribute-id="_149703554153765" v="true" name="postionId" id="_149703554153652">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:join-column name="POSTIONID" rc="POSTIONID" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_149703554153013" connected-attribute-id="_149703554153797" v="true" name="branchId" id="_149703554153653">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:join-column name="BRANCHID" rc="BRANCHID" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="Integer" v="true" name="adminid" id="_149703554153646">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="adminid" unique="false" nullable="false" insertable="true" updatable="true" table="Admin"/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Admin"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="AccountTypePK" abs="false" class="AccountType" v="true" m="false" rootElement="_14970355415161" id="_14970355415307">
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="accName" id="_149703554153655">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="accName" unique="false" nullable="true" insertable="true" updatable="true" table="AccountType" length="45"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Float" v="true" name="accInterestRates" id="_149703554153756">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="accInterestRates" unique="false" nullable="true" insertable="true" updatable="true" table="AccountType" precision="12"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Float" v="true" name="minInitBalance" id="_149703554153757">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="minInitBalance" unique="false" nullable="true" insertable="true" updatable="true" table="AccountType" precision="12"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Float" v="true" name="minAvgBalance" id="_149703554153758">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="minAvgBalance" unique="false" nullable="true" insertable="true" updatable="true" table="AccountType" precision="12"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="minMonths" id="_149703554153759">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="minMonths" unique="false" nullable="true" insertable="true" updatable="true" table="AccountType"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="maxMonths" id="_149703554153760">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="maxMonths" unique="false" nullable="true" insertable="true" updatable="true" table="AccountType"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Float" v="true" name="maxOverDraftAmount" id="_149703554153761">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="maxOverDraftAmount" unique="false" nullable="true" insertable="true" updatable="true" table="AccountType" precision="12"/>
+            </jpa:basic>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_14970355415282" connected-attribute-id="_149703554153520" v="true" name="accountCollection" id="_149703554153762">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+            </jpa:one-to-many>
+            <jpa:id attribute-type="Integer" v="true" name="accTypeId" id="_149703554153654">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="accTypeId" unique="false" nullable="false" insertable="true" updatable="true" table="AccountType"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="AccountType"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="PostionPK" abs="false" class="Postion" v="true" m="false" rootElement="_14970355415161" id="_14970355415308">
+        <jpa:attributes>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="position" id="_149703554153764">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="position" unique="false" nullable="false" insertable="true" updatable="true" table="Postion" length="45"/>
+            </jpa:basic>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_14970355415296" connected-attribute-id="_149703554153652" v="true" name="adminCollection" id="_149703554153765">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+            </jpa:one-to-many>
+            <jpa:id attribute-type="Integer" v="true" name="postionId" id="_149703554153763">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="postionId" unique="false" nullable="false" insertable="true" updatable="true" table="Postion"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Postion"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="MerchantPK" abs="false" class="Merchant" v="true" m="false" rootElement="_14970355415161" id="_14970355415309">
+        <jpa:attributes>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="orgName" id="_149703554153767">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="OrgName" unique="false" nullable="false" insertable="true" updatable="true" table="Merchant" length="45"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="registrationNo" id="_149703554153768">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="registrationNo" unique="false" nullable="false" insertable="true" updatable="true" table="Merchant" length="45"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="taxNo" id="_149703554153769">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="taxNo" unique="false" nullable="false" insertable="true" updatable="true" table="Merchant" length="45"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="logoUrl" id="_149703554153770">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="logoUrl" unique="false" nullable="true" insertable="true" updatable="true" table="Merchant" length="255"/>
+            </jpa:basic>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_149703554153012" connected-attribute-id="_149703554153786" v="true" name="merchantServicesCollection" id="_149703554153772">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+            </jpa:one-to-many>
+            <jpa:one-to-one optional="false" primaryKey="false" connected-entity-id="_14970355415295" connected-attribute-id="_149703554153642" v="true" name="users" id="_149703554153771">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:join-column name="USERID" rc="USERID" unique="false" nullable="true" insertable="false" updatable="false"/>
+            </jpa:one-to-one>
+            <jpa:id attribute-type="Integer" v="true" name="userId" id="_149703554153766">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="userId" unique="false" nullable="false" insertable="true" updatable="true" table="Merchant"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Merchant"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="TransactionPK" abs="false" class="Transaction" v="true" m="false" rootElement="_14970355415161" id="_149703554153010">
+        <jpa:attributes>
+            <jpa:basic optional="false" attribute-type="int" v="true" name="accountId" id="_149703554153774">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="accountId" unique="false" nullable="false" insertable="true" updatable="true" table="Transaction"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="transType" id="_149703554153775">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="transType" unique="false" nullable="true" insertable="true" updatable="true" table="Transaction" length="45"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="currency" id="_149703554153776">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="currency" unique="false" nullable="true" insertable="true" updatable="true" table="Transaction" length="45"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Float" v="true" name="amount" id="_149703554153777">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="amount" unique="false" nullable="true" insertable="true" updatable="true" table="Transaction" precision="12"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_14970355415295" connected-attribute-id="_149703554153643" v="true" name="userId" id="_149703554153778">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:join-column name="USERID" rc="USERID" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="Integer" v="true" name="transactionId" id="_149703554153773">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="transactionId" unique="false" nullable="false" insertable="true" updatable="true" table="Transaction"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Transaction"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="LoginHistoryPK" abs="false" class="LoginHistory" v="true" m="false" rootElement="_14970355415161" id="_149703554153011">
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="java.util.Date" v="true" name="time" id="_149703554153780">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:temporal>DATE</jpa:temporal>
+                <jpa:column name="time" unique="false" nullable="true" insertable="true" updatable="true" table="LoginHistory"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="ipAddress" id="_149703554153781">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ipAddress" unique="false" nullable="true" insertable="true" updatable="true" table="LoginHistory" length="132"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_14970355415295" connected-attribute-id="_149703554153644" v="true" name="userId" id="_149703554153782">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:join-column name="USERID" rc="USERID" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="Integer" v="true" name="id" id="_149703554153779">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="id" unique="false" nullable="false" insertable="true" updatable="true" table="LoginHistory"/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="LoginHistory"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="MerchantServicesPK" abs="false" class="MerchantServices" v="true" m="false" rootElement="_14970355415161" id="_149703554153012">
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="descrition" id="_149703554153784">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="descrition" unique="false" nullable="true" insertable="true" updatable="true" table="MerchantServices" length="45"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="serviceLogpURL" id="_149703554153785">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="serviceLogpURL" unique="false" nullable="true" insertable="true" updatable="true" table="MerchantServices" length="45"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_14970355415309" connected-attribute-id="_149703554153772" v="true" name="merchantuserId" id="_149703554153786">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:join-column name="MERCHANT_USERID" rc="USERID" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="Integer" v="true" name="serviceId" id="_149703554153783">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="serviceId" unique="false" nullable="false" insertable="true" updatable="true" table="MerchantServices"/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="MerchantServices"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="BranchPK" abs="false" class="Branch" v="true" m="false" rootElement="_14970355415161" id="_149703554153013">
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="branchName" id="_149703554153788">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="branchName" unique="false" nullable="true" insertable="true" updatable="true" table="Branch" length="45"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="addressLine1" id="_149703554153789">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="addressLine1" unique="false" nullable="true" insertable="true" updatable="true" table="Branch" length="45"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="addressLine2" id="_149703554153790">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="addressLine2" unique="false" nullable="true" insertable="true" updatable="true" table="Branch" length="45"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="addressLine3" id="_149703554153791">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="addressLine3" unique="false" nullable="true" insertable="true" updatable="true" table="Branch" length="45"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="city" id="_149703554153792">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="city" unique="false" nullable="true" insertable="true" updatable="true" table="Branch" length="45"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="telephoneNo" id="_149703554153793">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="telephoneNo" unique="false" nullable="true" insertable="true" updatable="true" table="Branch" length="45"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="email" id="_149703554153794">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="email" unique="false" nullable="true" insertable="true" updatable="true" table="Branch" length="45"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="faxNo" id="_149703554153795">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="faxNo" unique="false" nullable="true" insertable="true" updatable="true" table="Branch" length="45"/>
+            </jpa:basic>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_14970355415282" connected-attribute-id="_149703554153522" v="true" name="accountCollection" id="_149703554153796">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+            </jpa:one-to-many>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_14970355415296" connected-attribute-id="_149703554153653" v="true" name="adminCollection" id="_149703554153797">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+            </jpa:one-to-many>
+            <jpa:id attribute-type="Integer" v="true" name="branchId" id="_149703554153787">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="branchId" unique="false" nullable="false" insertable="true" updatable="true" table="Branch"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Branch"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="ContactInfoPK" abs="false" class="ContactInfo" v="true" m="false" rootElement="_14970355415161" id="_149703554153014">
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="addressLine1" id="_149703554153899">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="addressLine1" unique="false" nullable="true" insertable="true" updatable="true" table="ContactInfo" length="45"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="addressLine2" id="_1497035541538100">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="addressLine2" unique="false" nullable="true" insertable="true" updatable="true" table="ContactInfo" length="45"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="addressLine3" id="_1497035541538101">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="addressLine3" unique="false" nullable="true" insertable="true" updatable="true" table="ContactInfo" length="45"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="city" id="_1497035541538102">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="city" unique="false" nullable="true" insertable="true" updatable="true" table="ContactInfo" length="45"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="telephoneNo" id="_1497035541538103">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="telephoneNo" unique="false" nullable="true" insertable="true" updatable="true" table="ContactInfo" length="45"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="mobileNo" id="_1497035541538104">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="mobileNo" unique="false" nullable="true" insertable="true" updatable="true" table="ContactInfo" length="45"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="email" id="_1497035541538105">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="email" unique="false" nullable="true" insertable="true" updatable="true" table="ContactInfo" length="45"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="faxNo" id="_1497035541538106">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="faxNo" unique="false" nullable="true" insertable="true" updatable="true" table="ContactInfo" length="45"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_14970355415295" connected-attribute-id="_149703554153645" v="true" name="userId" id="_1497035541538107">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:join-column name="USERID" rc="USERID" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="Integer" v="true" name="contactId" id="_149703554153898">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="contactId" unique="false" nullable="false" insertable="true" updatable="true" table="ContactInfo"/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="ContactInfo"/>
+    </jpa:entity>
+    <jpa:snp loc="BEFORE_PACKAGE" e="true">/**
+ * This file was generated by the Jeddict
+ */</jpa:snp>
+    <jpa:wsl>
+        <jpa:ws n="Main" id="_1497035542171108">
+            <i ref="_149703554153011" x="482" y="622">
+                <el/>
+            </i>
+            <i ref="_149703554153010" x="965" y="32">
+                <el/>
+            </i>
+            <i ref="_149703554153013" x="482" y="1152">
+                <el/>
+            </i>
+            <i ref="_149703554153012" x="1474" y="1152">
+                <el/>
+            </i>
+            <i ref="_14970355415307" x="32" y="1152">
+                <el/>
+            </i>
+            <i ref="_14970355415308" x="965" y="1152">
+                <el/>
+            </i>
+            <i ref="_149703554153014" x="1198" y="277">
+                <el/>
+            </i>
+            <i ref="_14970355415309" x="1198" y="867">
+                <el/>
+            </i>
+            <i ref="_14970355415295" x="722" y="277">
+                <el/>
+            </i>
+            <i ref="_14970355415296" x="722" y="867">
+                <el/>
+            </i>
+            <i ref="_14970355415282" x="272" y="867">
+                <el/>
+            </i>
+            <i ref="_14970355415293" x="965" y="622">
+                <el/>
+            </i>
+            <i ref="_14970355415294" x="482" y="32">
+                <el/>
+            </i>
+        </jpa:ws>
+    </jpa:wsl>
+</jpa:entity-mappings>

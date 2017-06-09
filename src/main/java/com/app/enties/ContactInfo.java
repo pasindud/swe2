@@ -6,75 +6,64 @@ package com.app.enties;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "ContactInfo")
-@IdClass(ContactInfoPK.class)
 public class ContactInfo {
 
-    @Column(name = "contactId", table = "ContactInfo", nullable = false)
+    @Column(name = "contactId",  nullable = false)
     @Id
-    private int contactId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer contactId;
 
-    @Column(name = "userId", table = "ContactInfo", nullable = false)
-    @Id
-    private int userId;
-
-    @Column(name = "addressLine1", table = "ContactInfo", length = 45)
+    @Column(name = "addressLine1",  length = 45)
     @Basic
     private String addressLine1;
 
-    @Column(name = "addressLine2", table = "ContactInfo", length = 45)
+    @Column(name = "addressLine2",  length = 45)
     @Basic
     private String addressLine2;
 
-    @Column(name = "addressLine3", table = "ContactInfo", length = 45)
+    @Column(name = "addressLine3",  length = 45)
     @Basic
     private String addressLine3;
 
-    @Column(name = "city", table = "ContactInfo", length = 45)
+    @Column(name = "city",  length = 45)
     @Basic
     private String city;
 
-    @Column(name = "telephoneNo", table = "ContactInfo", length = 45)
+    @Column(name = "telephoneNo",  length = 45)
     @Basic
     private String telephoneNo;
 
-    @Column(name = "mobileNo", table = "ContactInfo", length = 45)
+    @Column(name = "mobileNo",  length = 45)
     @Basic
     private String mobileNo;
 
-    @Column(name = "email", table = "ContactInfo", length = 45)
+    @Column(name = "email",  length = 45)
     @Basic
     private String email;
 
-    @Column(name = "faxNo", table = "ContactInfo", length = 45)
+    @Column(name = "faxNo",  length = 45)
     @Basic
     private String faxNo;
 
-    @ManyToOne(optional = false, targetEntity = User.class)
-    @JoinColumn(name = "USERID", referencedColumnName = "USERID", insertable = false, updatable = false)
-    private User user;
+    @ManyToOne(optional = false, targetEntity = Users.class)
+    @JoinColumn(name = "USERID", referencedColumnName = "USERID")
+    private Users userId;
 
-    public int getContactId() {
+    public Integer getContactId() {
         return this.contactId;
     }
 
-    public void setContactId(int contactId) {
+    public void setContactId(Integer contactId) {
         this.contactId = contactId;
-    }
-
-    public int getUserId() {
-        return this.userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public String getAddressLine1() {
@@ -141,12 +130,12 @@ public class ContactInfo {
         this.faxNo = faxNo;
     }
 
-    public User getUser() {
-        return this.user;
+    public Users getUserId() {
+        return this.userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Users userId) {
+        this.userId = userId;
     }
 
 }
