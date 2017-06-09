@@ -1,6 +1,9 @@
 mvn install
 mvn spring-boot:run 
 
+- SQL user info
+That data is locate at main/resources/application.properties
+
 - Get the token
 
 ```
