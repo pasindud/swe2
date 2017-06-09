@@ -73,11 +73,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.and().csrf().disable();
 	}
 
-	@Autowired
-	void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication() //
-				.withUser("user").password("password").authorities("ROLE_USER") //
-				.and() //
-				.withUser("admin").password("password").authorities("ROLE_USER", "ROLE_ADMIN");
-	}
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+    }
+    
+	// @Autowired
+	// void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+	// 	auth.inMemoryAuthentication() //
+	// 			.withUser("user").password("password").authorities("ROLE_USER") //
+	// 			.and() //
+	// 			.withUser("admin").password("password").authorities("ROLE_USER", "ROLE_ADMIN");
+	// }
 }
