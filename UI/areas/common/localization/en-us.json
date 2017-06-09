@@ -56,7 +56,7 @@
   "Approvals" : "Approvals",
   "AdminDashboard" : "Admin Dashboard",
   "NationalIdentityCard" : "National Identity Card",
-  "MonthLong" : ["Januar", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+  "MonthLong" : ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
   "MonthShort" : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
   "WeekDaysFull" : ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
   "Copyright" : "NoNameYet © 2017 Copyright",
@@ -69,5 +69,12 @@
   "LatestActivities" : "Latest Activities",
   "LatestApprovals":"Latest Approval requests",
   "ViewAllApprovals":"view all approval requests",
-  "NoNewApprovals":"No New Approvals"
+  "NoNewApprovals":"No New Approvals",
+  "Browser" : "Browser",
+  "IPAddress": "IP Address",
+  "ViolationID" : "Violation ID",
+  "LockUser" : "Lock User",
+  "Remove" : "Remove",
+  "Cancel" : "Cancel",
+  "Description" : "Description"
   }]
