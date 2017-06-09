@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.app;
+package com.app.controller;
 
 import java.security.Principal;
 import java.util.Collections;

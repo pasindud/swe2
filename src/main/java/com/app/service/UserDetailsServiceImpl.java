@@ -1,5 +1,8 @@
-package com.app;
+package com.app.service;
 
+import com.app.repository.UserRepository;
+import com.app.model.User;
+import com.app.model.Role;
 import java.util.HashSet;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;

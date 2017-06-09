@@ -1,5 +1,8 @@
-package com.app;
+package com.app.service;
 
+import com.app.repository.RoleRepository;
+import com.app.repository.UserRepository;
+import com.app.model.User;
 import java.util.HashSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
