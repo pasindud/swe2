@@ -17,3 +17,9 @@ That data is locate at main/resources/application.properties
 ```
 	curl --noproxy localhost -H "x-auth-token: $AUTH_TOKEN" -v http://localhost:8080/api/greet
 ```
+
+
+- Small cmd to remove table = " " from JPA modeler
+ cd src/main/java/com/app/enties/
+ sed -i '' "s/table \= \"[A-z]*\",//g" *.java
+ sed -i '' "s/, table \= \"[A-z]*\"//g" *.java
