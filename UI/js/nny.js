@@ -45,12 +45,12 @@ angular.module('banking', [
       controller:'AdminController'
   })
   .state('flags',{
-    url:'/admin/flagged',
+    url:'/admin/flags',
     templateUrl : 'areas/admin/flagged/flags.html',
     controller: 'FlagsController'
   })
-  .state('flaggedActivity',{
-    url : '/admin/flaggedActivity',
+  .state('flag',{
+    url : '/admin/flag/{flagID}',
     templateUrl: 'areas/admin/flagged/flaggedActivity.html',
     controller: 'FlaggedActivityController'
   })
