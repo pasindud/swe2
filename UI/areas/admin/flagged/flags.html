@@ -1,4 +1,4 @@
-<div id="flagsUI" class="col s12 m12 l8 xl8 card-panel">
+<div id="flagsUI" class="col s12 m12 l8 xl8 card-panel grey lighten-4">
   <div class="col s12 m12 l12">
     <div class="col s5" style="padding-top:30px">
       <h5>{{labels.SuspiciousActivity}}</h5>
@@ -38,7 +38,7 @@
             <td>{{flag.Severity}}</td>
             <td>{{flag.Date}}</td>
             <td>{{flag.Time}}</td>
-            <td>{{flag.Actions}}</td>
+            <td>{{flag.Actions}}<a ui-sref="flag({flagID: flag.ViolationID})">View</a></td>
           </tr>
         </tbody>
       </table>
