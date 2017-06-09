@@ -14,21 +14,17 @@ import org.springframework.session.config.annotation.web.http.EnableSpringHttpSe
 import org.springframework.session.web.http.HeaderHttpSessionStrategy;
 import org.springframework.session.web.http.HttpSessionStrategy;
 
-/**
- *
- * @author Pasindu
- */
-
+/** @author Pasindu */
 @Configuration
 @EnableSpringHttpSession
 class HttpSessionConfig {
-	@Bean
-	SessionRepository<ExpiringSession> inmemorySessionRepository() {
-		return new MapSessionRepository();
-	}
+  @Bean
+  SessionRepository<ExpiringSession> inmemorySessionRepository() {
+    return new MapSessionRepository();
+  }
 
-	@Bean
-	HttpSessionStrategy httpSessionStrategy() {
-		return new HeaderHttpSessionStrategy();
-	}
+  @Bean
+  HttpSessionStrategy httpSessionStrategy() {
+    return new HeaderHttpSessionStrategy();
+  }
 }

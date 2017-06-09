@@ -17,7 +17,6 @@
 //  * @author Pasindu
 //  */
 
-
 // @EnableWebSecurity
 // class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -49,41 +48,44 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.savedrequest.NullRequestCache;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.savedrequest.NullRequestCache;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private UserDetailsService userDetailsService;
+  @Autowired private UserDetailsService userDetailsService;
 
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+  @Bean
+  public BCryptPasswordEncoder bCryptPasswordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
 
- 
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests() //
-				.anyRequest().authenticated() //
-				.and().requestCache().requestCache(new NullRequestCache()) //
-				.and().httpBasic() //
-				.and().csrf().disable();
-	}
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+    http.authorizeRequests() //
+        .anyRequest()
+        .authenticated() //
+        .and()
+        .requestCache()
+        .requestCache(new NullRequestCache()) //
+        .and()
+        .httpBasic() //
+        .and()
+        .csrf()
+        .disable();
+  }
 
+  @Autowired
+  public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+  }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
-    }
-    
-	// @Autowired
-	// void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-	// 	auth.inMemoryAuthentication() //
-	// 			.withUser("user").password("password").authorities("ROLE_USER") //
-	// 			.and() //
-	// 			.withUser("admin").password("password").authorities("ROLE_USER", "ROLE_ADMIN");
-	// }
+  // @Autowired
+  // void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+  // 	auth.inMemoryAuthentication() //
+  // 			.withUser("user").password("password").authorities("ROLE_USER") //
+  // 			.and() //
+  // 			.withUser("admin").password("password").authorities("ROLE_USER", "ROLE_ADMIN");
+  // }
 }
