@@ -34,8 +34,8 @@
           <tr ng-repeat = "user in UsersList">
             <td>{{user.Username}}</td>
             <td>{{user.UserID}}</td>
-            <td>{{user.NoOfBankAccounts}}</td>
-            <td>{{user.NIC}}</td>
+            <td>{{user.Accounts.length}}</td>
+            <td>{{user.PersonalInformation.NIC}}</td>
             <td>{{user.Actions}}<a ui-sref="user({userID: user.UserID})">View</a></td>
           </tr>
         </tbody>

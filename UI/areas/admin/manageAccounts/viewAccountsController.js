@@ -5,5 +5,6 @@ angular.module('banking')
   .then(function(res) {
     $scope.AdminID = res.data[0].AdminID;
     $scope.UsersList = res.data[0].UsersList;
-  })
+    })
+    
 });
