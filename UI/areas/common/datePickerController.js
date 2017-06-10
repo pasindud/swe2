@@ -11,7 +11,7 @@ angular.module('banking')
   $scope.today = $scope.labels.Today;
   $scope.clear = $scope.labels.Clear;
   $scope.close = $scope.labels.Close;
-  var days = 365;
+  var days = 365*100;
   $scope.minDate = (new Date($scope.currentTime.getTime() - ( 1000 * 60 * 60 *24 * days ))).toISOString();
   $scope.maxDate = (new Date($scope.currentTime.getTime() + ( 1000 * 60 * 60 *24 * days ))).toISOString();
   $scope.maxDateToday = (new Date($scope.currentTime.getTime())).toISOString();
