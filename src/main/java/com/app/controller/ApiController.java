@@ -5,27 +5,56 @@
  */
 package com.app.controller;
 
+import com.app.model.User;
+import com.app.repository.UserRepository;
+import com.app.request.CreateUserRequest;
+import com.app.service.UserServiceImpl;
 import java.security.Principal;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
+import org.aspectj.bridge.Message;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /** @author Pasindu */
 @RestController
 public class ApiController {
-
+    
+  @Autowired private UserRepository userRepository;
+  
   @RequestMapping("/api/auth")
   @GetMapping
   Map<String, Object> getToken(HttpSession session) {
     return Collections.singletonMap("session", session.getId());
   }
-
+    
+/*
+* Creates new user
+*/
+  @RequestMapping(value="/api/createUser",method = RequestMethod.POST)
+  public String createUser(@RequestBody CreateUserRequest createuserRequest){
+    
+    User user= new User();
+    user.setUsername(createuserRequest.getUsername());
+    user.setPassword(createuserRequest.getPassword());
+    user.setPasswordConfirm(createuserRequest.getPasswordConfirm());
+    
+    //  TODO need to implement the user type /roles 
+    //user.setRoles(createuserRequest.getRoles());
+    
+    UserServiceImpl userService=new UserServiceImpl(this.userRepository);
+    userService.save(user);
+    return "ok";
+  }
+  
   @Secured("ROLE_USER")
   @RequestMapping("/api/greet")
   @GetMapping

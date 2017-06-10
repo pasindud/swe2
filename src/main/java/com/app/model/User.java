@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user")
 public class User {
-  private Long id;
+  private Long userId;
   private String username;
   private String password;
   private String passwordConfirm;
@@ -15,11 +15,11 @@ public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   public Long getId() {
-    return id;
+    return userId;
   }
 
   public void setId(Long id) {
-    this.id = id;
+    this.userId = id;
   }
 
   public String getUsername() {
