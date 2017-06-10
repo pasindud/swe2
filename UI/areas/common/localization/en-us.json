@@ -90,5 +90,8 @@
   "AdminTools" : "Admin Tools",
   "UnOrLockAccount" : "Un/Lock",
   "UpdateAccount" : "Update Account",
-  "DeleteAccount" : "Delete Account"
+  "DeleteAccount" : "Delete Account",
+  "ViewActivity" : "View Activity",
+  "Personal" : "Personal",
+  "Accounts" : "Accounts"
   }]
