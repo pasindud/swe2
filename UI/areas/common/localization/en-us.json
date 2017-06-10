@@ -76,5 +76,19 @@
   "LockUser" : "Lock User",
   "Remove" : "Remove",
   "Cancel" : "Cancel",
-  "Description" : "Description"
+  "Description" : "Description",
+  "ApprovalType" : "Approval Type",
+  "Requestor" : "Requestor",
+  "ApprovalDetails" : "Approval Details",
+  "ApprovalID" : "Approval ID",
+  "UnlockUser" : "Unlock User",
+  "Reject" : "Reject",
+  "Comply" : "Comply",
+  "NIC" : "NIC",
+  "NoOfBankAccounts" : "# Accounts",
+  "UserID" : "User ID",
+  "AdminTools" : "Admin Tools",
+  "UnOrLockAccount" : "Un/Lock",
+  "UpdateAccount" : "Update Account",
+  "DeleteAccount" : "Delete Account"
   }]
