@@ -22,7 +22,7 @@
         <div class="col s8">
           <ul class="">
             <li ><a class="waves-effect" ng-click="setPage('createnew')">{{labels.CreateNewAccount}}</a></li>
-            <li ><a class="waves-effect" ng-click="setPage('viewallaccounts')">{{labels.ViewAllAccounts}}</a></li>
+            <li ><a class="waves-effect" ui-sref="users">{{labels.ViewAllAccounts}}</a></li>
             <li ><a class="waves-effect" ng-click="setPage('deleteaccounts')">{{labels.DeleteAccounts}}</a></li>
           </ul>
         </div>
@@ -56,7 +56,7 @@
           <div class="divider" ></div>
           <ul class="center">
             <li>{{labels.NoNewApprovals}}</li>
-            <li><a class="waves-effect" ui-sref="">{{labels.ViewAllApprovals}}</a></li>
+            <li><a class="waves-effect" ui-sref="approvals">{{labels.ViewAllApprovals}}</a></li>
           </ul>
         </div>
         <div class="divider col s12" style="margin-bottom:20px"></div>
