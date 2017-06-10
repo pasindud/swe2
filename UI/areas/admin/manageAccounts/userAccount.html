@@ -5,6 +5,7 @@
     <div class="col s12 center hide-on-small-and-down">
       <a class="waves-effect waves-light btn">{{labels.UnOrLockAccount}}</a>
       <a class="waves-effect waves-light btn">{{labels.UpdateAccount}}</a>
+      <a class="waves-effect waves-light btn">{{labels.ViewActivity}}</a>
       <a class="waves-effect waves-light btn">{{labels.DeleteAccount}}</a>
       <a class="waves-effect waves-light btn red" ui-sref="users">{{labels.Cancel}}</a>
     </div>
@@ -15,28 +16,28 @@
     <div class="divider col s12"></div>
     <div class="input-field col s12 m12 l12 xl6">
       {{labels.AccountNumber}}
-      <select material-select watch>
+      <select material-select watch  ng-change="setAccountDetails()" ng-model="selectedAccount">
         <option value="" disabled selected>Choose Bank Account</option>
         <option ng-repeat="account in user.Accounts" value={{account.AccountNumber}}>{{account.AccountNumber}}</option>
       </select>
       <div class="col s12">
         <div class="col s6">
-          <p><b>{{labels.Branch}} : </b> Colombo</p>
-          <p><b>{{labels.AccountType}} : </b> Personal</p>
+          <p><b>{{labels.Branch}} : </b> {{selectedAccountDetails.branch}}</p>
+          <p><b>{{labels.AccountType}} : </b> {{selectedAccountDetails.accountType}}</p>
         </div>
         <div class="col s6">
-          <p><b>{{labels.AccountOpenDate}} : </b> 21/05/2017</p>
+          <p><b>{{labels.AccountOpenDate}} : </b> {{selectedAccountDetails.openDate}}</p>
         </div>
       </div>
     </div>
     <div class="col s12 m12 l12 xl6">
       <div class="col s12 nny-rounded-flat-card">
         <div class="col s6">
-          <p class="nny-p1">{{labels.Balance}} : $1000</p>
-          <p class="nny-p1">{{labels.Loan}} : $500</p>
+          <p class="nny-p1">{{labels.Balance}} : {{selectedAccountDetails.balance}}</p>
+          <p class="nny-p1">{{labels.Loan}} : {{selectedAccountDetails.loan}}</p>
         </div>
         <div class="col s6">
-          <p style="font-size:15pt">{{labels.InterestRate}} : 12%</p>
+          <p style="font-size:15pt">{{labels.InterestRate}} : {{selectedAccountDetails.Interest}}</p>
         </div>
       </div>
     </div>
