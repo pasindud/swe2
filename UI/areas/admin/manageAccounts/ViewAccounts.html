@@ -1,0 +1,46 @@
+<div id="viewAllAccountsUI" class="col s12 m12 l8 xl8 card-panel grey lighten-4">
+  <div class="col s12 m12 l12">
+    <div class="col s5" style="padding-top:30px">
+      <h5>{{labels.Accounts}} : {{labels.Personal}}</h5>
+    </div>
+    <div class="col s7 nny-rounded-flat-card2">
+      <div class="col s3" style="padding-top:15px">
+        <select material-select class="center">
+          <option value="1">{{labels.Username}}</option>
+          <option value="2">{{labels.UserID}}</option>
+          <option value="3">{{labels.NIC}}</option>
+        </select>
+      </div>
+      <div class="input-field col s9" >
+        <input id="accountsSearch" type="search" required>
+        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+      </div>
+    </div>
+    <div class="divider col s12"></div>
+  </div>
+  <div class="col s12">
+    <div class="">
+      <table class="striped highlight">
+        <thead>
+          <tr>
+            <th>{{labels.Username}}</th>
+            <th>{{labels.UserID}}</th>
+            <th>{{labels.NoOfBankAccounts}}</th>
+            <th>{{labels.NIC}}</th>
+            <th>{{labels.Actions}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat = "user in UsersList">
+            <td>{{user.Username}}</td>
+            <td>{{user.UserID}}</td>
+            <td>{{user.NoOfBankAccounts}}</td>
+            <td>{{user.NIC}}</td>
+            <td>{{user.Actions}}<a ui-sref="user({userID: user.UserID})">View</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col s12" style="margin-bottom:15px;"></div>
+</div>
