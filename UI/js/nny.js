@@ -15,6 +15,7 @@ angular.module('banking', [
     templateUrl:'areas/home/home.html',
     controller:'HomeController',
 
+
   })
   .state('account',{
     url:'/account',
@@ -40,9 +41,9 @@ angular.module('banking', [
     controller:'CreateNewAccountController'
   })
   .state('admin',{
-      url:'/admin',
-      templateUrl:'areas/admin/admin.html',
-      controller:'AdminController'
+    url:'/admin',
+    templateUrl:'areas/admin/admin.html',
+    controller:'AdminController'
   })
   .state('flags',{
     url:'/admin/flags',
@@ -54,6 +55,26 @@ angular.module('banking', [
     templateUrl: 'areas/admin/flagged/flaggedActivity.html',
     controller: 'FlaggedActivityController'
   })
+  .state('approvals',{
+    url : '/admin/approvals',
+    templateUrl: 'areas/admin/approvals/approvals.html',
+    controller: 'ApprovalsController'
+  })
+  .state('approval',{
+    url : '/admin/approval/{approvalID}',
+    templateUrl: 'areas/admin/approvals/approvalDetails.html',
+    controller: 'ApprovalDetailsController'
+  })
+  .state('users',{
+    url : '/admin/users',
+    templateUrl: 'areas/admin/manageAccounts/ViewAccounts.html',
+    controller: 'ViewAccountsController'
+  })
+  .state('user',{
+      url : '/admin/user/{userID}',
+      templateUrl: 'areas/admin/manageAccounts/userAccount.html',
+      controller: 'UserAccountController'
+    })
   .state('DatePickerController',{
     controller:'DatePickerController'
   })
@@ -63,97 +84,32 @@ angular.module('banking', [
 
 })
 .controller('OverviewController',function ($scope, $http,$rootScope,$location) {
-      $scope.title = 'No Name Yet';
-      $scope.setLanguage = function (provider) {
-        $http.get('areas/common/localization/'+ provider +'.json')
-         .then(function(res){
-            $rootScope.labels = res.data[0];
-          });
-      };
-      $scope.$on('$viewContentLoaded', function(){
-        $http.get('areas/common/localization/en-us.json')
-         .then(function(res){
-            $rootScope.labels = res.data[0];
-          });
-      });
+  $scope.title = 'No Name Yet';
+  $scope.setLanguage = function (provider) {
+    $http.get('areas/common/localization/'+ provider +'.json')
+    .then(function(res){
+      $rootScope.labels = res.data[0];
+    });
+  };
+  $scope.$on('$viewContentLoaded', function(){
+    $http.get('areas/common/localization/en-us.json')
+    .then(function(res){
+      $rootScope.labels = res.data[0];
+    });
+  });
 
-      $scope.getLabels = function () {
-        return $rootScope.labels;
-      };
-      $scope.setPage = function(view) {
-        $location.path(view);
-      };
-  })
-.run(function ($rootScope,$state) {
+  $scope.getLabels = function () {
+    return $rootScope.labels;
+  };
+  $scope.setPage = function(view) {
+    $location.path(view);
+  };
+})
+.run(function ($rootScope,$state, AuthService) {
     $rootScope.$on('',function (event, toState, toParams, fromState, fromParams, error) {
       event.preventDefault();
-      if(error = 'AUTH_REQUIRED'){
-
+      if (!authRoute($location.url()) && !AuthService.isLoggedin()) {
+        $location.path('/login');
       }
     });
-});
-
-
-
-/*.controller('LoginController',function ($scope, StateService) {
-  $scope.title = 'Authentication';
-  $scope.body = 'Testing';
-})
-.controller('HomeController',function ($scope, StateService) {
-  $scope.title = 'Home';
-
-})
-.factory('StateService', function () {
-        var message = 'Hello Message';
-        var getMessage = function () {
-            return message;
-        };
-        var setMessage = function (m) {
-            message = m;
-        };
-
-        return {
-            getMessage: getMessage,
-            setMessage: setMessage
-        }
-    })
-    .service('ExperimentsService', function () {
-        var service = this,
-            experiments = [
-                {name: 'Experiment 1', description: 'This is an experiment', completed:0},
-                {name: 'Experiment 2', description: 'This is an experiment', completed:0},
-                {name: 'Experiment 3', description: 'This is an experiment', completed:0},
-                {name: 'Experiment 4', description: 'This is an experiment', completed:0}
-            ];
-
-        service.getExperiments = function() {
-            return experiments;
-        };
-    })
-    .directive('experiment', function(){
-        var linker = function (scope, element, attrs) {
-            element.on('click', function(){
-                scope.doExperiment();
-            })
-        };
-
-        var controller =  function($scope){
-            $scope.doExperiment = function() {
-                $scope.$apply(function(){
-                    $scope.experiment.completed++;
-                });
-            };
-        };
-
-        return {
-            scope: true,
-            restrict: 'E',
-            template: '<div class="experiment">' +
-                '<h3>{{experiment.name}}</h3>' +
-                '<p>{{experiment.description}}</p>' +
-                '<p><strong>{{experiment.completed}}</strong></p>' +
-                '</div>',
-            link: linker,
-            controller: controller
-        }
-    });*/
+  });
