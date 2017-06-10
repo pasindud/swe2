@@ -13,7 +13,6 @@
       "Address" : "matara, matara"
     },
     "Accounts" : [
-      {"AccountNumber":"1111-2222-3333-4444","AcccountType":"Personal","Branch":"Colombo","OpenDate":"1/1/2012","Balance":"1000","loan":"0","Interest":"10%"},
-      {"AccountNumber":"3333-2222-3333-4444","AcccountType":"Personal","Branch":"Colombo","OpenDate":"1/7/2017","Balance":"500000","loan":"0","Interest":"17%"}
-    ]
+      {"AccountNumber":"1111-2222-3333-4444","AcccountType":"Personal","Branch":"Colombo","OpenDate":"1/1/2012","Balance":"1000","loan":"0","Interest":"10%"}
+      ]
   }]
