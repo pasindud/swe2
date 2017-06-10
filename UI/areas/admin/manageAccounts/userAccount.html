@@ -1,0 +1,110 @@
+<div class="col s12 m12 l8 xl8">
+  <div id="adminTool" class="section col s12 card-panel grey lighten-4">
+    <h5>{{labels.AdminTools}}</h5>
+    <div class="divider col s12"></div>
+    <div class="col s12 center hide-on-small-and-down">
+      <a class="waves-effect waves-light btn">{{labels.UnOrLockAccount}}</a>
+      <a class="waves-effect waves-light btn">{{labels.UpdateAccount}}</a>
+      <a class="waves-effect waves-light btn">{{labels.DeleteAccount}}</a>
+      <a class="waves-effect waves-light btn red" ui-sref="users">{{labels.Cancel}}</a>
+    </div>
+    <div class="col s12" style="margin-bottom:15px;"></div>
+  </div>
+  <div class="section col s12 card-panel grey lighten-4">
+    <h5>{{labels.BankAccountInformation}}</h5>
+    <div class="divider col s12"></div>
+    <div class="input-field col s12 m12 l12 xl6">
+      {{labels.AccountNumber}}
+      <select material-select watch>
+        <option value="" disabled selected>Choose Bank Account</option>
+        <option ng-repeat="account in user.Accounts" value={{account.AccountNumber}}>{{account.AccountNumber}}</option>
+      </select>
+      <div class="col s12">
+        <div class="col s6">
+          <p><b>{{labels.Branch}} : </b> Colombo</p>
+          <p><b>{{labels.AccountType}} : </b> Personal</p>
+        </div>
+        <div class="col s6">
+          <p><b>{{labels.AccountOpenDate}} : </b> 21/05/2017</p>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m12 l12 xl6">
+      <div class="col s12 nny-rounded-flat-card">
+        <div class="col s6">
+          <p class="nny-p1">{{labels.Balance}} : $1000</p>
+          <p class="nny-p1">{{labels.Loan}} : $500</p>
+        </div>
+        <div class="col s6">
+          <p style="font-size:15pt">{{labels.InterestRate}} : 12%</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div  ng-switch on="mode" class="section col s12 card-panel grey lighten-4">
+    <h5>{{labels.PersonalInformation}}</h5>
+    <div class="divider col s12"></div>
+    <div id="Read-PersonalInformation" ng-switch-when="readonly" class="input-field col s12">
+      <p class="nny-p0-1"><b>{{labels.FirstName}} : </b>{{user.PersonalInformation.FirstName}}</p>
+      <p class="nny-p0-1"><b>{{labels.LastName}} : </b>{{user.PersonalInformation.LastName}}</p>
+      <p class="nny-p0-1"><b>{{labels.DateOfBirth}} : </b>{{user.PersonalInformation.DOB}}</p>
+      <p class="nny-p0-1"><b>{{labels.Gender}} : </b>{{user.PersonalInformation.Gender}}</p>
+      <p class="nny-p0-1"><b>{{labels.NationalIdentityCard}} : </b>{{user.PersonalInformation.NIC}}</p>
+      <p class="nny-p0-1"><b>{{labels.EmailAddress}} : </b>{{user.PersonalInformation.Email}}</p>
+      <p class="nny-p0-1"><b>{{labels.Contact1}} : </b>{{user.PersonalInformation.Contact1}}</p>
+      <p class="nny-p0-1"><b>{{labels.Contact2}} : </b>{{user.PersonalInformation.Contact2}}</p>
+      <p class="nny-p0-1"><b>{{labels.Address}} : </b>{{user.PersonalInformation.Address}}</p>
+    </div>
+    <div id="Edit-PersonalInformation" ng-switch-when="edit" class="col s12">
+      <div input-field class="col s12 m12 16 xl6">
+        <input id="first_name" type="text" length="150" ng-model="user.PersonalInformation.FirstName">
+        <label for="first_name">{{labels.FirstName}}</label>
+      </div>
+      <div input-field class="col s12 m12 16 xl6">
+        <input id="last_name" type="text" length="150" ng-model="user.PersonalInformation.LastName">
+        <label>{{labels.LastName}}</label>
+      </div>
+      <div class="col s12 m12 16 xl6" ng-controller="DatePickerController">
+        <label for="dob">{{labels.DateOfBirth}}</label>
+        <input input-date type="text" name="dob"  id="dob"  ng-model="user.PersonalInformation.DOB" container="" format="dd/mm/yyyy"
+        months-full="{{ month }}" months-short="{{ monthShort }}" weekdays-full="{{ weekdaysFull }}" weekdays-short="{{ weekdaysShort }}"
+        weekdays-letter="{{ weekdaysLetter }}" disable="disable"  min="{{ minDate }}" max="{{ maxDateToday }}" today="today" first-day="1"
+        clear="clear" close="close" select-years="100" on-start="onStart()" on-render="onRender()" on-open="onOpen()" on-close="onClose()"
+        on-set="onSet()" on-stop="onStop()" />
+      </div>
+      <div class="col s12 m12 16 xl6">
+        <p class="col s12 center">
+          {{labels.Gender}} :
+          <input name="gender" type="radio" id="gender_male" ng-model="user.PersonalInformation.Gender" value="Male" />
+          <label for="gender_male">{{labels.Male}}</label>
+          <input name="gender" type="radio" id="gender_female" ng-model="user.PersonalInformation.Gender" value="Female" />
+          <label for="gender_female" >{{labels.Female}}</label>
+        </p>
+      </div>
+      <div input-field class="col s12">
+        <input id="NIC" type="text" ng-model="user.PersonalInformation.NIC">
+        <label>{{labels.NationalIdentityCard}}</label>
+      </div>
+      <div input-field class="col s12">
+        <input id="email_address" type="email" class="validate" ng-model="user.PersonalInformation.Email">
+        <label>{{labels.EmailAddress}}</label>
+      </div>
+      <div input-field class="col s6 m6 l6 xl6">
+        <input id="contact1" type="text" class="validate" ng-model="user.PersonalInformation.Contact1">
+        <label>{{labels.Contact1}}</label>
+      </div>
+      <div input-field class="col s6 m6 l6 xl6">
+        <input id="contact2" type="text" class="validate" ng-model="user.PersonalInformation.Contact2">
+        <label>{{labels.Contact2}}</label>
+      </div>
+      <div input-field class="col s12">
+        <input id="address" type="text" length="150" ng-model="user.PersonalInformation.Address">
+        <label>{{labels.Address}}</label>
+      </div>
+
+    </div>
+    <div class="col s12 m6 l6 xl6 center">
+    </div>
+  </div>
+</div>
+<div class="col s12" style="margin-bottom:30px;"></div>
