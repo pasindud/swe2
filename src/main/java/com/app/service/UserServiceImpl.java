@@ -1,9 +1,8 @@
 package com.app.service;
 
+import com.app.model.User;
 import com.app.repository.RoleRepository;
 import com.app.repository.UserRepository;
-import com.app.model.User;
-import java.util.HashSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,22 +13,21 @@ public class UserServiceImpl implements UserService {
   @Autowired private RoleRepository roleRepository;
   @Autowired private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UserServiceImpl() {
-         bCryptPasswordEncoder=new BCryptPasswordEncoder();
-    }
+  public UserServiceImpl() {
+    bCryptPasswordEncoder = new BCryptPasswordEncoder();
+  }
 
-    public UserServiceImpl(UserRepository userRepository) {
-        this();
-        this.userRepository = userRepository;
-    }
-    
+  public UserServiceImpl(UserRepository userRepository) {
+    this();
+    this.userRepository = userRepository;
+  }
+
   @Override
   public void save(User user) {
     user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-    
-    //  TODO need to implement the user type /roles 
+    //  TODO need to implement the user type /roles
     //user.setRoles(new HashSet<>(roleRepository.findAll()));
-    
+
     userRepository.save(user);
   }
 

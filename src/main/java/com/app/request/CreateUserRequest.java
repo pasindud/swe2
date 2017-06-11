@@ -5,45 +5,35 @@
  */
 package com.app.request;
 
-import com.app.model.Role;
-import java.util.Set;
-
-/**
- *
- * @author dilsh
- * maps the values of create user http request
- */
+/** @author dilsh maps the values of create user http request */
 public class CreateUserRequest {
-   String username;
-   String password;
-   String passwordConfirm;
+  String username;
+  String password;
+  String passwordConfirm;
 
-    public CreateUserRequest() {
-    }
+  public CreateUserRequest() {}
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+  public void setUsername(String username) {
+    this.username = username;
+  }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+  public void setPassword(String password) {
+    this.password = password;
+  }
 
-    public void setPasswordConfirm(String passwordConfirm) {
-        this.passwordConfirm = passwordConfirm;
-    }
+  public void setPasswordConfirm(String passwordConfirm) {
+    this.passwordConfirm = passwordConfirm;
+  }
 
-    public String getUsername() {
-        return username;
-    }
+  public String getUsername() {
+    return username;
+  }
 
-    public String getPassword() {
-        return password;
-    }
+  public String getPassword() {
+    return password;
+  }
 
-    public String getPasswordConfirm() {
-        return passwordConfirm;
-    }
-
-    
+  public String getPasswordConfirm() {
+    return passwordConfirm;
+  }
 }

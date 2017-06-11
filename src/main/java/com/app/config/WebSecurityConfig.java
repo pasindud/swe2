@@ -23,14 +23,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests() //
+
+    http.authorizeRequests()
+        .antMatchers("/api/registration")
+        .permitAll()
         .anyRequest()
-        .authenticated() //
+        .authenticated()
         .and()
         .requestCache()
-        .requestCache(new NullRequestCache()) //
+        .requestCache(new NullRequestCache())
         .and()
-        .httpBasic() //
+        .httpBasic()
         .and()
         .csrf()
         .disable();
@@ -38,10 +41,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired
   public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-      auth.inMemoryAuthentication() //
-				.withUser("user").password("password").authorities("ROLE_USER") //
-				.and() //
-				.withUser("admin").password("password").authorities("ROLE_USER", "ROLE_ADMIN");
+    // HARD coding for testing.
+    //    auth.inMemoryAuthentication() //
+    //        .withUser("user")
+    //        .password("password")
+    //        .authorities("ROLE_USER") //
+    //        .and() //
+    //        .withUser("admin")
+    //        .password("password")
+    //        .authorities("ROLE_USER", "ROLE_ADMIN");
+    //
     auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
   }
 }
