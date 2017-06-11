@@ -1,6 +1,6 @@
 package com.app.service;
 
-import com.app.model.User;
+import com.app.enties.User;
 import com.app.repository.RoleRepository;
 import com.app.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

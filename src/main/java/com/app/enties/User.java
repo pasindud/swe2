@@ -1,5 +1,6 @@
-package com.app.model;
+package com.app.enties;
 
+import com.app.enties.Role;
 import java.util.Set;
 import javax.persistence.*;
 

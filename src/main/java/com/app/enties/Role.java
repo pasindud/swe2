@@ -1,4 +1,4 @@
-package com.app.model;
+package com.app.enties;
 
 import java.util.HashSet;
 import java.util.Set;

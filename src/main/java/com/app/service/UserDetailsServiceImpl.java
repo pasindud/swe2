@@ -1,7 +1,7 @@
 package com.app.service;
 
-import com.app.model.Role;
-import com.app.model.User;
+import com.app.enties.Role;
+import com.app.enties.User;
 import com.app.repository.UserRepository;
 import java.util.HashSet;
 import java.util.Set;

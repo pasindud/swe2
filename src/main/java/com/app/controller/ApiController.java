@@ -5,7 +5,7 @@
  */
 package com.app.controller;
 
-import com.app.model.User;
+import com.app.enties.User;
 import com.app.repository.UserRepository;
 import com.app.request.CreateUserRequest;
 import com.app.service.UserService;
