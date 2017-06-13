@@ -1,9 +1,9 @@
 package com.app.service;
 
-import com.app.enties.User;
+import com.app.enties.SpringUserStatic;
 
 public interface UserService {
-  void save(User user);
+  void save(SpringUserStatic user);
 
-  User findByUsername(String username);
+  SpringUserStatic findByUsername(String username);
 }

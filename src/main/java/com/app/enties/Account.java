@@ -47,7 +47,7 @@ public class Account {
 
   @ManyToOne(optional = false, targetEntity = Users.class)
   @JoinColumn(name = "USERID", referencedColumnName = "USERID")
-  private Users userId;
+  private Users userid;
 
   @ManyToOne(optional = false, targetEntity = Branch.class)
   @JoinColumn(name = "BRANCHID", referencedColumnName = "BRANCHID")
@@ -102,11 +102,11 @@ public class Account {
   }
 
   public Users getUserId() {
-    return this.userId;
+    return this.userid;
   }
 
   public void setUserId(Users userId) {
-    this.userId = userId;
+    this.userid = userId;
   }
 
   public Branch getBranchId() {

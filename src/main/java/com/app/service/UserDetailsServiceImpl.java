@@ -1,7 +1,7 @@
 package com.app.service;
 
 import com.app.enties.Role;
-import com.app.enties.User;
+import com.app.enties.SpringUserStatic;
 import com.app.repository.UserRepository;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,7 +21,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
   @Override
   @Transactional(readOnly = true)
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    User user = userRepository.findByUsername(username);
+    SpringUserStatic user = userRepository.findByUsername(username);
 
     Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
     for (Role role : user.getRoles()) {

@@ -1,12 +1,11 @@
 package com.app.enties;
 
-import com.app.enties.Role;
 import java.util.Set;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class SpringUserStatic {
   private Long userId;
   private String username;
   private String password;

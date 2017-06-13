@@ -5,7 +5,10 @@
  */
 package com.app.controller;
 
-import com.app.enties.User;
+import com.app.enties.Account;
+import com.app.enties.SpringUserStatic;
+import com.app.enties.Users;
+import com.app.repository.AccountRepository;
 import com.app.repository.UserRepository;
 import com.app.request.CreateUserRequest;
 import com.app.service.UserService;
@@ -13,6 +16,7 @@ import com.app.service.UserServiceImpl;
 import java.security.Principal;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +33,8 @@ import org.springframework.web.bind.annotation.RestController;
 /** @author Pasindu */
 @RestController
 public class ApiController {
+  @Autowired private AccountRepository accountRepository;
+
   @Autowired private UserService userService;
 
   @Autowired private UserRepository userRepository;
@@ -39,13 +45,23 @@ public class ApiController {
     return Collections.singletonMap("session", session.getId());
   }
 
+  @RequestMapping("/api/accounts")
+  @GetMapping
+  List<Account> getAccounts(HttpSession session) {
+    System.out.println(accountRepository.findAll());
+    Users users = new Users();
+    users.setUserId(1);
+    return accountRepository.findByUserid(users);
+    //    return Collections.singletonMap("session", session.getId());
+  }
+
   /*
    * Creates new user
    */
   @RequestMapping(value = "/api/createUser", method = RequestMethod.POST)
   public String createUser(@RequestBody CreateUserRequest createuserRequest) {
 
-    User user = new User();
+    SpringUserStatic user = new SpringUserStatic();
     user.setUsername(createuserRequest.getUsername());
     user.setPassword(createuserRequest.getPassword());
     user.setPasswordConfirm(createuserRequest.getPasswordConfirm());
@@ -59,7 +75,8 @@ public class ApiController {
   }
 
   @RequestMapping(value = "/api/registration", method = RequestMethod.POST)
-  public String registration(@RequestBody User user, BindingResult bindingResult, Model model) {
+  public String registration(
+      @RequestBody SpringUserStatic user, BindingResult bindingResult, Model model) {
     System.out.println("User " + user.getUsername());
     System.out.println("User " + user.getPassword());
 

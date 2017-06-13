@@ -2,12 +2,10 @@
 package com.app.enties;
 
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -35,24 +33,24 @@ public class Users {
 
   @OneToOne(targetEntity = Merchant.class)
   private Merchant merchant;
-
-  @OneToMany(targetEntity = Account.class, mappedBy = "userId")
-  private List<Account> accountCollection;
-
-  @OneToMany(targetEntity = LoginInfo.class, mappedBy = "userId")
-  private List<LoginInfo> loginInfoCollection;
-
-  @OneToMany(targetEntity = Admin.class, mappedBy = "userId")
-  private List<Admin> adminCollection;
-
-  @OneToMany(targetEntity = Transaction.class, mappedBy = "userId")
-  private List<Transaction> transactionCollection;
-
-  @OneToMany(targetEntity = LoginHistory.class, mappedBy = "userId")
-  private List<LoginHistory> loginHistoryCollection;
-
-  @OneToMany(targetEntity = ContactInfo.class, mappedBy = "userId")
-  private List<ContactInfo> contactInfoCollection;
+  //
+  //  @OneToMany(targetEntity = Account.class, mappedBy = "userid")
+  //  private List<Account> accountCollection;
+  //
+  //  @OneToMany(targetEntity = LoginInfo.class, mappedBy = "userId")
+  //  private List<LoginInfo> loginInfoCollection;
+  //
+  //  @OneToMany(targetEntity = Admin.class, mappedBy = "userId")
+  //  private List<Admin> adminCollection;
+  //
+  //  @OneToMany(targetEntity = Transaction.class, mappedBy = "userId")
+  //  private List<Transaction> transactionCollection;
+  //
+  //  @OneToMany(targetEntity = LoginHistory.class, mappedBy = "userId")
+  //  private List<LoginHistory> loginHistoryCollection;
+  //
+  //  @OneToMany(targetEntity = ContactInfo.class, mappedBy = "userId")
+  //  private List<ContactInfo> contactInfoCollection;
 
   public Integer getUserId() {
     return this.userId;
@@ -94,51 +92,51 @@ public class Users {
     this.merchant = merchant;
   }
 
-  public List<Account> getAccountCollection() {
-    return this.accountCollection;
-  }
+  //  public List<Account> getAccountCollection() {
+  //    return this.accountCollection;
+  //  }
 
-  public void setAccountCollection(List<Account> accountCollection) {
-    this.accountCollection = accountCollection;
-  }
-
-  public List<LoginInfo> getLoginInfoCollection() {
-    return this.loginInfoCollection;
-  }
-
-  public void setLoginInfoCollection(List<LoginInfo> loginInfoCollection) {
-    this.loginInfoCollection = loginInfoCollection;
-  }
-
-  public List<Admin> getAdminCollection() {
-    return this.adminCollection;
-  }
-
-  public void setAdminCollection(List<Admin> adminCollection) {
-    this.adminCollection = adminCollection;
-  }
-
-  public List<Transaction> getTransactionCollection() {
-    return this.transactionCollection;
-  }
-
-  public void setTransactionCollection(List<Transaction> transactionCollection) {
-    this.transactionCollection = transactionCollection;
-  }
-
-  public List<LoginHistory> getLoginHistoryCollection() {
-    return this.loginHistoryCollection;
-  }
-
-  public void setLoginHistoryCollection(List<LoginHistory> loginHistoryCollection) {
-    this.loginHistoryCollection = loginHistoryCollection;
-  }
-
-  public List<ContactInfo> getContactInfoCollection() {
-    return this.contactInfoCollection;
-  }
-
-  public void setContactInfoCollection(List<ContactInfo> contactInfoCollection) {
-    this.contactInfoCollection = contactInfoCollection;
-  }
+  //  public void setAccountCollection(List<Account> accountCollection) {
+  //    this.accountCollection = accountCollection;
+  //  }
+  //
+  //  public List<LoginInfo> getLoginInfoCollection() {
+  //    return this.loginInfoCollection;
+  //  }
+  //
+  //  public void setLoginInfoCollection(List<LoginInfo> loginInfoCollection) {
+  //    this.loginInfoCollection = loginInfoCollection;
+  //  }
+  //
+  //  public List<Admin> getAdminCollection() {
+  //    return this.adminCollection;
+  //  }
+  //
+  //  public void setAdminCollection(List<Admin> adminCollection) {
+  //    this.adminCollection = adminCollection;
+  //  }
+  //
+  //  public List<Transaction> getTransactionCollection() {
+  //    return this.transactionCollection;
+  //  }
+  //
+  //  public void setTransactionCollection(List<Transaction> transactionCollection) {
+  //    this.transactionCollection = transactionCollection;
+  //  }
+  //
+  //  public List<LoginHistory> getLoginHistoryCollection() {
+  //    return this.loginHistoryCollection;
+  //  }
+  //
+  //  public void setLoginHistoryCollection(List<LoginHistory> loginHistoryCollection) {
+  //    this.loginHistoryCollection = loginHistoryCollection;
+  //  }
+  //
+  //  public List<ContactInfo> getContactInfoCollection() {
+  //    return this.contactInfoCollection;
+  //  }
+  //
+  //  public void setContactInfoCollection(List<ContactInfo> contactInfoCollection) {
+  //    this.contactInfoCollection = contactInfoCollection;
+  //  }
 }
