@@ -48,15 +48,15 @@ public class ApiController {
   @RequestMapping("/api/accounts")
   @GetMapping
   List<Account> getAccounts(HttpSession session) {
+    // Testing.
     System.out.println(accountRepository.findAll());
     Users users = new Users();
     users.setUserId(1);
     return accountRepository.findByUserid(users);
-    //    return Collections.singletonMap("session", session.getId());
   }
 
   /*
-   * Creates new user
+   * Testing creates new user
    */
   @RequestMapping(value = "/api/createUser", method = RequestMethod.POST)
   public String createUser(@RequestBody CreateUserRequest createuserRequest) {
@@ -65,9 +65,6 @@ public class ApiController {
     user.setUsername(createuserRequest.getUsername());
     user.setPassword(createuserRequest.getPassword());
     user.setPasswordConfirm(createuserRequest.getPasswordConfirm());
-
-    //  TODO need to implement the user type /roles
-    //user.setRoles(createuserRequest.getRoles());
 
     UserServiceImpl userService = new UserServiceImpl(this.userRepository);
     userService.save(user);

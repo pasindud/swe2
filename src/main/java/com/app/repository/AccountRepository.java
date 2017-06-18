@@ -11,6 +11,5 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 /** @author Pasindu */
 public interface AccountRepository extends JpaRepository<Account, Long> {
-  //    List<Account> findByUsersid(Users users);
   List<Account> findByUserid(Users users);
 }
