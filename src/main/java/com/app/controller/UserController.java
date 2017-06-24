@@ -32,6 +32,12 @@ public class UserController {
     return Collections.singletonMap("session", session.getId());
   }
 
+  /*
+  
+  curl -H "Content-Type: application/json" -X POST \
+  -d '{"username":"xyz","password":"xyz"}' \
+  http://localhost:8080/api/registration
+  */
   @RequestMapping(value = "/api/registration")
   @PostMapping
   public String registration(@RequestBody Users user) {
