@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Role {
   private Long id;
   private String name;
-  private Set<SpringUserStatic> users;
+  private Set<Users> users;
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,16 +30,16 @@ public class Role {
   }
 
   @ManyToMany(mappedBy = "roles")
-  public Set<SpringUserStatic> getUsers() {
+  public Set<Users> getUsers() {
     if (users == null) {
-      return new HashSet<SpringUserStatic>();
+      return new HashSet<Users>();
     }
     return users;
   }
 
-  public void setUsers(Set<SpringUserStatic> users) {
+  public void setUsers(Set<Users> users) {
     if (users == null || users.isEmpty()) {
-      this.users = new HashSet<SpringUserStatic>();
+      this.users = new HashSet<Users>();
     }
     this.users = users;
   }

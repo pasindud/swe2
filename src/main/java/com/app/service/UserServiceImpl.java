@@ -1,6 +1,6 @@
 package com.app.service;
 
-import com.app.enties.SpringUserStatic;
+import com.app.enties.Users;
 import com.app.repository.RoleRepository;
 import com.app.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public void save(SpringUserStatic user) {
+  public void save(Users user) {
     user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
     //  TODO need to implement the user type /roles
     //user.setRoles(new HashSet<>(roleRepository.findAll()));
@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public SpringUserStatic findByUsername(String username) {
+  public Users findByUsername(String username) {
     // Tesitn gosmething
     return userRepository.findByUsername(username);
   }

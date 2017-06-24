@@ -5,7 +5,7 @@
  */
 package com.app.controller;
 
-import com.app.enties.SpringUserStatic;
+import com.app.enties.Users;
 import com.app.repository.UserRepository;
 import com.app.service.UserService;
 import java.util.Collections;
@@ -34,7 +34,7 @@ public class UserController {
 
   @RequestMapping(value = "/api/registration")
   @PostMapping
-  public String registration(@RequestBody SpringUserStatic user) {
+  public String registration(@RequestBody Users user) {
     userService.save(user);
     return "{'status':'ok'}";
   }

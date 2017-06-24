@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/*
+curl -u xyz:xyz -v http://localhost:8080/api/accounts?id=1
+*/
 /** @author Pasindu */
 @RestController
 public class AccountController {
@@ -18,7 +21,7 @@ public class AccountController {
 
   @RequestMapping("/api/accounts")
   @GetMapping
-  List<Account> getAccounts(@RequestParam("id") int id, HttpSession session) {
+  List<Account> getAccounts(@RequestParam("id") Long id, HttpSession session) {
     Users users = new Users();
     users.setUserId(id);
     return accountRepository.findByUserid(users);
