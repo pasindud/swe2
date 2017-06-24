@@ -7,18 +7,19 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Users")
 public class Users {
- 
+
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Id
   private Integer userId;
 
   private String username;
   private String password;
+
   @ManyToMany
   @JoinTable(
-          name = "user_role",
-          joinColumns = @JoinColumn(name = "user_id"),
-          inverseJoinColumns = @JoinColumn(name = "role_id")
+    name = "user_role",
+    joinColumns = @JoinColumn(name = "user_id"),
+    inverseJoinColumns = @JoinColumn(name = "role_id")
   )
   private Set<Role> roles;
 
@@ -34,7 +35,7 @@ public class Users {
 
   @OneToOne(targetEntity = Merchant.class)
   private Merchant merchant;
-  
+
   public Integer getUserId() {
     return userId;
   }
@@ -66,7 +67,7 @@ public class Users {
   public void setRoles(Set<Role> roles) {
     this.roles = roles;
   }
-  
+
   public String getUserType() {
     return this.userType;
   }

@@ -26,17 +26,17 @@ curl -u xyz:xyz -v http://localhost:8080/api/merchant
 public class MerchantController {
   @Autowired private MerchantRepository merchantRepository;
   @Autowired private MerchantServicesRepository merchantServicesRepository;
-  
+
   @RequestMapping("/api/merchant")
   @GetMapping
   public List<Merchant> findAll() {
     return merchantRepository.findAll();
   }
-  
+
   @RequestMapping("/api/merchant_services")
   public List<MerchantServices> getAllServicesByMerchantId() {
-      Merchant m = new Merchant();
-      m.setMerchantId(1);
-      return merchantServicesRepository.findAllByMerchantuserId(m);
+    Merchant m = new Merchant();
+    m.setMerchantId(1);
+    return merchantServicesRepository.findAllByMerchantuserId(m);
   }
 }

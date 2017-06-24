@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /** @author Pasindu */
@@ -33,7 +32,7 @@ public class UserController {
   }
 
   /*
-  
+
   curl -H "Content-Type: application/json" -X POST \
   -d '{"username":"xyz","password":"xyz"}' \
   http://localhost:8080/api/registration

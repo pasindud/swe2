@@ -7,10 +7,7 @@ import com.app.enties.MerchantServices;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
-/**
- *
- * @author Pasindu
- */
-public interface MerchantServicesRepository  extends CrudRepository<MerchantServices, Long> {
-    List<MerchantServices> findAllByMerchantuserId(Merchant merchant);
+/** @author Pasindu */
+public interface MerchantServicesRepository extends CrudRepository<MerchantServices, Long> {
+  List<MerchantServices> findAllByMerchantuserId(Merchant merchant);
 }

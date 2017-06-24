@@ -1,5 +1,6 @@
 package com.app.enties;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -44,6 +45,7 @@ public class Account {
   @JoinColumn(name = "ACCTYPEID", referencedColumnName = "ACCTYPEID")
   private AccountType accTypeId;
 
+  @JsonIgnore
   @ManyToOne(optional = false, targetEntity = Users.class)
   @JoinColumn(name = "USERID", referencedColumnName = "USERID")
   private Users userid;
@@ -100,6 +102,7 @@ public class Account {
     this.accTypeId = accTypeId;
   }
 
+  @JsonIgnore
   public Users getUserId() {
     return this.userid;
   }
