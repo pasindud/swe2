@@ -10,9 +10,9 @@ import javax.persistence.Table;
 @Table(name = "Merchant")
 public class Merchant {
 
-  @Column(name = "userId", nullable = false)
+  @Column(name = "merchantId", nullable = false)
   @Id
-  private Integer userId;
+  private Integer merchantId;
 
   @Column(name = "OrgName", nullable = false, length = 45)
   @Basic(optional = false)
@@ -30,12 +30,12 @@ public class Merchant {
   @Basic
   private String logoUrl;
 
-  public Integer getUserId() {
-    return this.userId;
+  public Integer getMerchantId() {
+    return this.merchantId;
   }
 
-  public void setUserId(Integer userId) {
-    this.userId = userId;
+  public void setMerchantId(Integer merchantId) {
+    this.merchantId = merchantId;
   }
 
   public String getOrgName() {

@@ -28,7 +28,7 @@ public class MerchantServices {
   private String serviceLogpURL;
 
   @ManyToOne(optional = false, targetEntity = Merchant.class)
-  @JoinColumn(name = "MERCHANT_USERID", referencedColumnName = "USERID")
+  @JoinColumn(name = "MERCHANT_USERID", referencedColumnName = "merchantId")
   private Merchant merchantuserId;
 
   public Integer getServiceId() {
