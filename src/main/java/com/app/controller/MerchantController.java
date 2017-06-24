@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /*
+
 curl -u xyz:xyz -v http://localhost:8080/api/merchant
+
 */
 
 /** @author Pasindu */

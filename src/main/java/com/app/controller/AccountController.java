@@ -21,7 +21,7 @@ public class AccountController {
 
   @RequestMapping("/api/accounts")
   @GetMapping
-  List<Account> getAccounts(@RequestParam("id") Long id, HttpSession session) {
+  List<Account> getAccounts(@RequestParam("id") Integer id, HttpSession session) {
     Users users = new Users();
     users.setUserId(id);
     return accountRepository.findByUserid(users);
