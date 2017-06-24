@@ -3,13 +3,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>de.tdlabs.training</groupId>
-	<artifactId>spring-boot-secure-rest-api-example</artifactId>
+	<artifactId>final-project</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>spring-boot-secure-rest-api-example</name>
-	<description>Demo project for Spring Boot</description>
+	<name>final-project</name>
+	<description>final-project</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

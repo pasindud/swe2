@@ -22,12 +22,10 @@ public class Users {
   )
   private Set<Role> roles;
 
-  @Column(name = "userType", nullable = false, length = 45)
-  @Basic(optional = false)
+  @Column(name = "userType", length = 45)
   private String userType;
 
-  @Column(name = "creationDate", nullable = false)
-  @Basic(optional = false)
+  @Column(name = "creationDate")
   @Temporal(TemporalType.DATE)
   private Date creationDate;
 
