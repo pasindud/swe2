@@ -13,11 +13,14 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 /** @author Pasindu */
+@RestController
 public class UserController {
   @Autowired private UserService userService;
 
@@ -29,7 +32,8 @@ public class UserController {
     return Collections.singletonMap("session", session.getId());
   }
 
-  @RequestMapping(value = "/api/registration", method = RequestMethod.POST)
+  @RequestMapping(value = "/api/registration")
+  @PostMapping
   public String registration(@RequestBody SpringUserStatic user) {
     userService.save(user);
     return "{'status':'ok'}";
