@@ -16,10 +16,14 @@ public class Transaction {
   @Id
   private Integer transactionid;
 
-  @Column(name = "accountid", nullable = false)
+  @Column(name = "toaccountid", nullable = false)
   @Basic(optional = false)
-  private int accountId;
+  private int toaccountId;
 
+  @Column(name = "fromaccountid", nullable = false)
+  @Basic(optional = false)
+  private int fromaccountid;
+  
   @Column(name = "transtype", length = 45)
   @Basic
   private String transtype;
@@ -44,13 +48,23 @@ public class Transaction {
     this.transactionid = transactionId;
   }
 
-  public int getAccountId() {
-    return this.accountId;
+  public int getToaccountid() {
+    return this.toaccountId;
   }
 
-  public void setAccountid(int accountId) {
-    this.accountId = accountId;
+  public void setToaccountid(int accountId) {
+    this.toaccountId = accountId;
   }
+  
+  public int getFromaccountid() {
+    return this.fromaccountid;
+  }
+
+  public void setFromaccountid(int accountId) {
+    this.fromaccountid = accountId;
+  }
+  
+  
 
   public String getTranstype() {
     return this.transtype;
