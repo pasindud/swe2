@@ -83,12 +83,25 @@ angular.module('banking', [
   });
 
 })
-.controller('OverviewController',function ($scope, $http,$rootScope,$location) {
+.controller('OverviewController',function ($scope, $http,$rootScope,$location,AuthService) {
+
+  AuthService.authenticate().then(function (result) {
+      var temp = result.data[0];
+      var authData = {
+        username : temp.Username,
+        accessToken : temp.AccessToken,
+        accessLevel : temp.AccessLevel
+      };
+      $scope.authData = authData;
+  });
+  debugger;
   $scope.title = 'No Name Yet';
+  $scope.selectedLanguage = "EN";
   $scope.setLanguage = function (provider) {
     $http.get('areas/common/localization/'+ provider +'.json')
     .then(function(res){
       $rootScope.labels = res.data[0];
+      $scope.selectedLanguage = provider.toUpperCase();
     });
   };
   $scope.$on('$viewContentLoaded', function(){
