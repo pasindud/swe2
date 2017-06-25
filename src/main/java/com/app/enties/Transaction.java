@@ -12,17 +12,17 @@ import javax.persistence.Table;
 @Table(name = "Transaction")
 public class Transaction {
 
-  @Column(name = "transactionId", nullable = false)
+  @Column(name = "transactionid", nullable = false)
   @Id
-  private Integer transactionId;
+  private Integer transactionid;
 
-  @Column(name = "accountId", nullable = false)
+  @Column(name = "accountid", nullable = false)
   @Basic(optional = false)
   private int accountId;
 
-  @Column(name = "transType", length = 45)
+  @Column(name = "transtype", length = 45)
   @Basic
-  private String transType;
+  private String transtype;
 
   @Column(name = "currency", length = 45)
   @Basic
@@ -36,28 +36,28 @@ public class Transaction {
   @JoinColumn(name = "USERID", referencedColumnName = "USERID")
   private Users userId;
 
-  public Integer getTransactionId() {
-    return this.transactionId;
+  public Integer getTransactionid() {
+    return this.transactionid;
   }
 
-  public void setTransactionId(Integer transactionId) {
-    this.transactionId = transactionId;
+  public void setTransactionid(Integer transactionId) {
+    this.transactionid = transactionId;
   }
 
   public int getAccountId() {
     return this.accountId;
   }
 
-  public void setAccountId(int accountId) {
+  public void setAccountid(int accountId) {
     this.accountId = accountId;
   }
 
-  public String getTransType() {
-    return this.transType;
+  public String getTranstype() {
+    return this.transtype;
   }
 
-  public void setTransType(String transType) {
-    this.transType = transType;
+  public void setTranstype(String transType) {
+    this.transtype = transType;
   }
 
   public String getCurrency() {
