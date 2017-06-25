@@ -11,9 +11,9 @@ import javax.persistence.Table;
 @Table(name = "Customer")
 public class Customer {
 
-  @Column(name = "userId", nullable = false)
+  @Column(name = "customerid", nullable = false)
   @Id
-  private Integer userId;
+  private Integer customerid;
 
   @Column(name = "title", length = 5)
   @Basic
@@ -35,11 +35,11 @@ public class Customer {
   private Users users;
 
   public Integer getUserId() {
-    return this.userId;
+    return this.customerid;
   }
 
   public void setUserId(Integer userId) {
-    this.userId = userId;
+    this.customerid = userId;
   }
 
   public String getTitle() {

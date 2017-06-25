@@ -30,8 +30,9 @@ public class Users {
   @Temporal(TemporalType.DATE)
   private Date creationDate;
 
-  @OneToOne(targetEntity = Customer.class, mappedBy = "users")
-  private Customer customer;
+// Comment to avoid a loop.
+//  @OneToOne(targetEntity = Customer.class, mappedBy = "users")
+//  private Customer customer;
 
   @OneToOne(targetEntity = Merchant.class)
   private Merchant merchant;
@@ -84,13 +85,13 @@ public class Users {
     this.creationDate = creationDate;
   }
 
-  public Customer getCustomer() {
-    return this.customer;
-  }
-
-  public void setCustomer(Customer customer) {
-    this.customer = customer;
-  }
+//  public Customer getCustomer() {
+//    return this.customer;
+//  }
+//
+//  public void setCustomer(Customer customer) {
+//    this.customer = customer;
+//  }
 
   public Merchant getMerchant() {
     return this.merchant;

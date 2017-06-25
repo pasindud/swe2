@@ -18,3 +18,5 @@ INSERT INTO account (accountid, balance, created_date, currency, expire_date, ac
 INSERT INTO `merchant` (`merchant_id`, `logo_url`, `org_name`, `registration_no`, `tax_no`) VALUES (1,'asd','asd','1232','12313');
 
 INSERT INTO `merchant_services` (`service_id`, `merchant_userid`) VALUES (1,1);
+
+INSERT INTO `customer` (`customerid`, `users_user_id`) VALUES (1,1);
