@@ -62,7 +62,7 @@ public class Customer {
   @Column(name = "faxNo", length = 45)
   @Basic
   private String faxNo;
-  
+
   @OneToOne(optional = false, targetEntity = Users.class)
   private Users users;
 

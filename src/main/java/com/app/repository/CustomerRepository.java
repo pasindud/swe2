@@ -6,13 +6,9 @@
 package com.app.repository;
 
 import com.app.enties.Customer;
-import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-/**
- *
- * @author Ishanka Ranatunga
- */
-public interface CustomerRepository extends JpaRepository<Customer, Long>{
-    Customer findByCustomerid(int id);
+/** @author Ishanka Ranatunga */
+public interface CustomerRepository extends JpaRepository<Customer, Long> {
+  Customer findByCustomerid(int id);
 }

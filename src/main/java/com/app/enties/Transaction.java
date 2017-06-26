@@ -23,7 +23,7 @@ public class Transaction {
   @Column(name = "fromaccountid", nullable = false)
   @Basic(optional = false)
   private int fromaccountid;
-  
+
   @Column(name = "transtype", length = 45)
   @Basic
   private String transtype;
@@ -55,7 +55,7 @@ public class Transaction {
   public void setToaccountid(int accountId) {
     this.toaccountId = accountId;
   }
-  
+
   public int getFromaccountid() {
     return this.fromaccountid;
   }
@@ -63,8 +63,6 @@ public class Transaction {
   public void setFromaccountid(int accountId) {
     this.fromaccountid = accountId;
   }
-  
-  
 
   public String getTranstype() {
     return this.transtype;
