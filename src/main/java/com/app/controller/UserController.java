@@ -31,6 +31,7 @@ public class UserController {
   @RequestMapping("/api/auth")
   @GetMapping
   Map<String, Object> getToken(HttpSession session) {
+    String accessLevelID = "1"; //user role Id
     HashMap<String, Object> map = new HashMap<>();
     map.put("session", session.getId());
     
@@ -39,7 +40,8 @@ public class UserController {
     System.out.println(user.getUsername());
 
     Users loggedInUser = userRepository.findByUsername(name);
-    map.put("userid", loggedInUser.getUserId());
+    map.put("userId", loggedInUser.getUserId());
+    map.put("AccessLevel", accessLevelID);
     return map;
   }
 
