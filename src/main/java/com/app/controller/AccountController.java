@@ -1,12 +1,13 @@
 package com.app.controller;
 
 import com.app.enties.Account;
-import com.app.enties.Users;
+import com.app.enties.AccountType;
 import com.app.repository.AccountRepository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,9 @@ class UserRowMapper implements RowMapper {
   public Account mapRow(ResultSet rs, int rowNum) throws SQLException {
     Account user = new Account();
     user.setAccountid(rs.getInt("accountid"));
+    AccountType type = new AccountType();
+    type.setAccName(rs.getString("acc_name"));
+    user.setAccTypeId(type);
     return user;
   }
 }
@@ -36,18 +40,16 @@ public class AccountController {
 
   @Autowired private JdbcTemplate jdbcTemplate;
 
-  Object getOneAccount(@RequestParam("id") Integer id) {
-    return jdbcTemplate.queryForObject(
-        "select * from account where accountid=?", 
-            new Object[] {id}, new UserRowMapper());
-  }
-
-  @RequestMapping("/api/accounts")
+  @RequestMapping(value = "/api/accounts")
   @GetMapping
   Object getAccounts(@RequestParam("id") Integer id, HttpSession session) {
-    Users users = new Users();
-    users.setUserId(id);
-    return accountRepository.findByUserid(users);
+    return jdbcTemplate.queryForObject(
+        "SELECT *\n"
+            + "FROM account \n"
+            + "LEFT JOIN account_type ON account.acctypeid = account_type.acc_type_id\n"
+            + "where account.accountid = ?;",
+        new Object[] {id},
+        new UserRowMapper());
   }
 
   /*
