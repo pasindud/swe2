@@ -31,6 +31,10 @@ public class Customer {
   @Basic
   private String dob;
 
+  @Column(name = "nic", length = 45)
+  @Basic
+  private String nic;
+  
   @Column(name = "addressLine1", length = 45)
   @Basic
   private String addressLine1;
@@ -74,10 +78,18 @@ public class Customer {
     this.customerid = userId;
   }
 
+  public String getNic() {
+      return this.nic;
+  }
+  
+  public void setNic(String nic) {
+      this.nic = nic;
+  }
+  
   public String getTitle() {
     return this.title;
   }
-
+  
   public void setTitle(String title) {
     this.title = title;
   }
