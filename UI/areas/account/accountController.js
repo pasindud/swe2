@@ -2,7 +2,7 @@
 angular.module('banking')
 .controller('AccountController',function ($state,$rootScope,$scope,$http,$filter, AuthService) {
 
-  AuthService.getRequest("/api/accounts_user?userid="+USER_ID, null, function (response) {
+  AuthService.getRequest("/api/accounts?id="+$rootScope.authData.userId, null, function (response) {
     $scope.user_accounts = response.data;
   });
 
