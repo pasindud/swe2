@@ -8,17 +8,22 @@
       </div>
       <div class="input-field col s11 m12 l11 center" style="margin-top:25px">
         <i class="material-icons prefix">account_circle</i>
-        <input id="username" name="username" type="text" class="validate"/>
+        <input id="username" name="username" type="text" class="validate"
+        ng-model="username"
+        />
         <label for="username">{{labels.Username}}</label>
       </div>
       <div class="input-field col s11 m12 l11 center">
         <i class="material-icons prefix">lock</i>
-        <input id="password" name="upass" type="password" class="validate"/>
+        <input id="password" name="upass" type="password" 
+        ng-model="upass"
+        class="validate"/>
         <label for="password">{{labels.Password}}</label>
       </div>
       <center>
         <div class="row">
-          <button class="btn waves-effect waves-light red draken-2" type="submit" name="action">{{labels.Login}}
+          <button class="btn waves-effect waves-light red draken-2" ng-click="loginbtn()"
+          name="action">{{labels.Login}}
             <i class="material-icons left">lock_open</i>
           </button>
         </div>

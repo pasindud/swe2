@@ -94,7 +94,7 @@ angular.module('banking', [
       };
       $scope.authData = authData;
   });
-  debugger;
+
   $scope.title = 'No Name Yet';
   $scope.selectedLanguage = "EN";
   $scope.setLanguage = function (provider) {

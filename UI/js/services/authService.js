@@ -1,7 +1,9 @@
 var nnyApp = angular.module('banking');
+var AUTH_TOKEN = null;
 
 nnyApp.factory('AuthService',['$http','nnyConst',function ($http,nnyConst) {
   var isLoggedin =false;
+  var JAVA_ENDPOINT="http://localhost:8080";
 
   function requestor(username,password)
   {
@@ -13,16 +15,13 @@ nnyApp.factory('AuthService',['$http','nnyConst',function ($http,nnyConst) {
     return result;
   }
 
-  var JAVA_ENDPOINT="http://localhost:8080";
-
-  function getAuthToken(username, password) {
-    var headers = {"Authorization": "Basic " + btoa( username + ":" + password)};
-
-    $http.get(JAVA_ENDPOINT + "/api/accounts?id=1", {headers: headers}).then(function (response) {
-      console.log(response);
-    });
+  function getRequest(url, data) {
+      var headers = {"x-auth-token": AUTH_TOKEN};
+      console.log(headers);
+      $http.get(JAVA_ENDPOINT + url, {headers: headers}).then(function (response) {
+        console.log(response.data);
+      });
   }
-
 
   function getIsLoggedIn() {
     return isLoggedin;
@@ -30,6 +29,14 @@ nnyApp.factory('AuthService',['$http','nnyConst',function ($http,nnyConst) {
   return  {
     authenticate : function () {
       return $http.get('SampleJSON/Auth/auth.json');
+    },
+    getAuthToken : function (username, password) {
+      var headers = {"Authorization": "Basic " + btoa( username + ":" + password)};
+      $http.get(JAVA_ENDPOINT + "/api/auth", {headers: headers}).then(function (response) {
+        console.log(response.data.session);
+        AUTH_TOKEN = response.data.session;
+        getRequest("/api/accounts?id=1")
+      });
     },
     isLoggedin : getIsLoggedIn()
   };
