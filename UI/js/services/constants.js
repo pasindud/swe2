@@ -7,5 +7,6 @@ nnyApp.constant('nnyConst',{
     2: 'CustomerM',
     3: 'Admin'
   },
-  test: "hi"
+  test: "hi",
+  ENDPOINT_URI : "http://localhost:8080"
 });

@@ -9,30 +9,33 @@ angular.module('banking', [
     url:'/login',
     templateUrl:'areas/login/login.html',
     controller:'LoginController',
+    data : {requireLogin : false },
   })
   .state('home',{
     url:'/home',
     templateUrl:'areas/home/home.html',
     controller:'HomeController',
-
-
+    data : {requireLogin : true },
   })
   .state('account',{
     url:'/account',
     templateUrl:'areas/account/account.html',
     controller:'AccountController',
+    data : {requireLogin : true },
 
   })
   .state('payments',{
     url:'/payments',
     templateUrl:'areas/payments/payments.html',
     controller:'PaymentsController',
+    data : {requireLogin : true },
 
   })
   .state('activity',{
     url:'/activity',
     templateUrl:'areas/activity/activity.html',
     controller:'ActivityController',
+    data : {requireLogin : true },
 
   })
   .state('createnew',{
@@ -43,86 +46,109 @@ angular.module('banking', [
   .state('admin',{
     url:'/admin',
     templateUrl:'areas/admin/admin.html',
-    controller:'AdminController'
+    controller:'AdminController',
+    data : {requireLogin : true },
   })
   .state('flags',{
     url:'/admin/flags',
     templateUrl : 'areas/admin/flagged/flags.html',
-    controller: 'FlagsController'
+    controller: 'FlagsController',
+    data : {requireLogin : true },
   })
   .state('flag',{
     url : '/admin/flag/{flagID}',
     templateUrl: 'areas/admin/flagged/flaggedActivity.html',
-    controller: 'FlaggedActivityController'
+    controller: 'FlaggedActivityController',
+    data : {requireLogin : true },
   })
   .state('approvals',{
     url : '/admin/approvals',
     templateUrl: 'areas/admin/approvals/approvals.html',
-    controller: 'ApprovalsController'
+    controller: 'ApprovalsController',
+    data : {requireLogin : true },
   })
   .state('approval',{
     url : '/admin/approval/{approvalID}',
     templateUrl: 'areas/admin/approvals/approvalDetails.html',
-    controller: 'ApprovalDetailsController'
+    controller: 'ApprovalDetailsController',
+    data : {requireLogin : true },
   })
   .state('users',{
     url : '/admin/users',
     templateUrl: 'areas/admin/manageAccounts/ViewAccounts.html',
-    controller: 'ViewAccountsController'
+    controller: 'ViewAccountsController',
+    data : {requireLogin : true },
   })
   .state('user',{
-      url : '/admin/user/{userID}',
-      templateUrl: 'areas/admin/manageAccounts/userAccount.html',
-      controller: 'UserAccountController'
-    })
+    url : '/admin/user/{userID}',
+    templateUrl: 'areas/admin/manageAccounts/userAccount.html',
+    controller: 'UserAccountController',
+    data : {requireLogin : true },
+  })
   .state('DatePickerController',{
-    controller:'DatePickerController'
+    controller:'DatePickerController',
+    data : {requireLogin : false },
   })
   .state('OverviewController',{
-    controller:'OverviewController'
+    controller:'OverviewController',
+    data : {requireLogin : false },
   });
 
 })
 .controller('OverviewController',function ($scope, $http,$rootScope,$location,AuthService) {
 
-  AuthService.authenticate().then(function (result) {
-      var temp = result.data[0];
-      var authData = {
-        username : temp.Username,
-        accessToken : temp.AccessToken,
-        accessLevel : temp.AccessLevel
-      };
-      $scope.authData = authData;
+  $rootScope.$watch('authDate',function (status) {
+    if(status)
+    {
+      $scope.authData = $rootScope.authData;
+    }
   });
 
-  $scope.title = 'No Name Yet';
-  $scope.selectedLanguage = "EN";
-  $scope.setLanguage = function (provider) {
-    $http.get('areas/common/localization/'+ provider +'.json')
-    .then(function(res){
-      $rootScope.labels = res.data[0];
-      $scope.selectedLanguage = provider.toUpperCase();
-    });
-  };
-  $scope.$on('$viewContentLoaded', function(){
-    $http.get('areas/common/localization/en-us.json')
-    .then(function(res){
-      $rootScope.labels = res.data[0];
-    });
-  });
+  /*AuthService.authenticate().then(function (result) {
+  var temp = result.data;
+  console.log(temp);
+  var authData = {
+  accessToken : temp.session,
+  accessLevel : temp.AccessLevel
+};
+$scope.authData = authData;
+});*/
 
-  $scope.getLabels = function () {
-    return $rootScope.labels;
-  };
-  $scope.setPage = function(view) {
-    $location.path(view);
-  };
+$scope.title = 'No Name Yet';
+$scope.selectedLanguage = "EN";
+$scope.setLanguage = function (provider) {
+  $http.get('areas/common/localization/'+ provider +'.json')
+  .then(function(res){
+    $rootScope.labels = res.data[0];
+    $scope.selectedLanguage = provider.toUpperCase();
+  });
+};
+$scope.$on('$viewContentLoaded', function(){
+  $http.get('areas/common/localization/en-us.json')
+  .then(function(res){
+    $rootScope.labels = res.data[0];
+  });
+});
+
+$scope.getLabels = function () {
+  return $rootScope.labels;
+};
+$scope.setPage = function(view) {
+  $location.path(view);
+};
 })
-.run(function ($rootScope,$state, AuthService) {
-    $rootScope.$on('',function (event, toState, toParams, fromState, fromParams, error) {
+.run(function ($rootScope,$state, AuthService,$location) {
+  $rootScope.$on('$stateChangeStart',function (event, toState, toParams, fromState, fromParams, error) {
+    if(toState !== undefined && toState.data.requireLogin && !AuthService.isLoggedin())
+    {
+      $state.go("login");
       event.preventDefault();
-      if (!authRoute($location.url()) && !AuthService.isLoggedin()) {
-        $location.path('/login');
-      }
-    });
+      return;
+    }
+    
+/* if (!AuthService.isAuthRoute($location.url())&&!AuthService.isLoggedin()) {
+      $state.go("login");
+      event.preventDefault();
+    }*/
   });
+});

@@ -2,9 +2,7 @@ var nnyApp = angular.module('banking');
 var AUTH_TOKEN = null;
 var USER_ID = null;
 
-nnyApp.factory('AuthService',['$http','nnyConst',function ($http,nnyConst) {
-  var isLoggedin =false;
-  var JAVA_ENDPOINT="http://localhost:8080";
+nnyApp.factory('AuthService',['$http','nnyConst','$rootScope',function ($http,nnyConst,$rootScope) {
 
   function requestor(username,password)
   {
@@ -17,29 +15,68 @@ nnyApp.factory('AuthService',['$http','nnyConst',function ($http,nnyConst) {
   }
 
   function getIsLoggedIn() {
-    return isLoggedin;
+    if($rootScope.authData !== undefined)
+    {
+      if($rootScope.authData !== "")
+      {
+        return true;
+      }else {
+        return false;
+      }
+    }
+    else {
+      return false;
+    }
+
   }
   return  {
     authenticate : function () {
-      return $http.get('SampleJSON/Auth/auth.json');
+      var url = nnyConst.ENDPOINT_URI +"/api/auth";
+      var authData = btoa("xyz:xyz");
+      console.log(authData);
+      var headers = {
+        "Content-Type": "application/json"
+      };
+      $http.defaults.headers.common['Authorization'] = 'Basic ' + authData;
+      return $http.get(nnyConst.ENDPOINT_URI + "/api/auth", {headers: headers});
     },
     getAuthToken : function (username, password) {
-      var headers = {"Authorization": "Basic " + btoa( username + ":" + password)};
-      $http.get(JAVA_ENDPOINT + "/api/auth", {headers: headers}).then(function (response) {
-        console.log(response.data);
-        AUTH_TOKEN = response.data.session;
-        USER_ID = response.data.userid;
-        // getRequest("/api/accounts?id=1")
+      var url = nnyConst.ENDPOINT_URI +"/api/auth";
+      var authData = btoa(username + ":" + password);
+      console.log(authData);
+      $http.defaults.headers.common['Authorization'] = 'Basic ' + authData;
+      $http.defaults.headers.common['Content-Type'] = 'application/json';
+      $http.get(url).then(function (response) {
+        var temp = response.data;
+        console.log(temp);
+        $rootScope.authData = {
+          accessToken : temp.session,
+          accessLevel : temp.AccessLevel,
+          userId : temp.userId
+        };
+        
       });
     },
     getRequest : function (url, data, cb) {
-        var headers = {"x-auth-token": AUTH_TOKEN};
-        console.log(headers);
-        $http.get(JAVA_ENDPOINT + url, {headers: headers}).then(function (response) {
-          console.log(response.data);
-          cb(response);
-        });
+      var headers = {"x-auth-token": $rootScope.authData.accessToken};
+      console.log(headers);
+      $http.get(nnyConst.ENDPOINT_URI + url, {headers: headers}).then(function (response) {
+        console.log(response.data);
+        cb(response);
+      });
     },
-    isLoggedin : getIsLoggedIn()
+    isLoggedin : function () {
+      return getIsLoggedIn();
+    },
+    isAuthRoute : function(url)
+    {
+      debugger;
+      if(url == "/login"){
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
   };
 }]);
