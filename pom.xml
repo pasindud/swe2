@@ -71,6 +71,12 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
+	 <dependency>
+	  <groupId>com.google.guava</groupId>
+	  <artifactId>guava</artifactId>
+	  <version>14.0.1</version>
+	  <type>jar</type>
+	 </dependency>
 	</dependencies>
 
 	<build>
