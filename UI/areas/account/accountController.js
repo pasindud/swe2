@@ -1,6 +1,11 @@
 'use strict';
 angular.module('banking')
-.controller('AccountController',function ($state,$rootScope,$scope,$http,$filter) {
+.controller('AccountController',function ($state,$rootScope,$scope,$http,$filter, AuthService) {
+
+  AuthService.getRequest("/api/accounts_user?userid="+USER_ID, null, function (response) {
+    $scope.user_accounts = response.data;
+  });
+
   $http.get('SampleJSON/Accounts/Account1.json')
   .then(function(res) {
     $scope.UserID = res.data[0].UserID;

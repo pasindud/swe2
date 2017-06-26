@@ -47,6 +47,14 @@ public class AccountController {
         "select * from account where accountid=?", new Object[] {id}, new UserRowMapper());
   }
 
+  @RequestMapping("/api/accounts_user")
+  @GetMapping
+  Object getAccountsByUserId(@RequestParam("userid") Integer id, HttpSession session) {
+    Users users = new Users();
+    users.setUserId(id);
+    return accountRepository.findByUserid(users);
+  }
+  
   @RequestMapping("/api/accounts")
   @GetMapping
   Object getAccounts(@RequestParam("id") Integer id, HttpSession session) {

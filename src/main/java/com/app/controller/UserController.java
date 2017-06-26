@@ -9,9 +9,12 @@ import com.app.enties.Users;
 import com.app.repository.UserRepository;
 import com.app.service.UserService;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,7 +31,16 @@ public class UserController {
   @RequestMapping("/api/auth")
   @GetMapping
   Map<String, Object> getToken(HttpSession session) {
-    return Collections.singletonMap("session", session.getId());
+    HashMap<String, Object> map = new HashMap<>();
+    map.put("session", session.getId());
+    
+    User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    String name = user.getUsername(); //get logged in username
+    System.out.println(user.getUsername());
+
+    Users loggedInUser = userRepository.findByUsername(name);
+    map.put("userid", loggedInUser.getUserId());
+    return map;
   }
 
   /*
