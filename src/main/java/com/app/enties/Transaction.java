@@ -3,6 +3,8 @@ package com.app.enties;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,6 +16,7 @@ public class Transaction {
 
   @Column(name = "transactionid", nullable = false)
   @Id
+  @GeneratedValue(strategy=GenerationType.AUTO)
   private Integer transactionid;
 
   @Column(name = "toaccountid", nullable = false)
@@ -94,5 +97,17 @@ public class Transaction {
 
   public void setUserId(Users userId) {
     this.userId = userId;
+  }
+  public Transaction(){
+  
+  }
+  public Transaction(Transaction another){
+
+    this.toaccountId= another.toaccountId;
+    this.fromaccountid= another.fromaccountid;
+    this.transtype= another.transtype;
+    this.currency= another.currency;
+    this.amount= another.amount;
+    this.userId= another.userId;
   }
 }

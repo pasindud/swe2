@@ -419,6 +419,7 @@
                 <jpa:bv/>
                 <jpa:kbv/>
                 <jpa:vbv/>
+                <jpa:generated-value strategy="AUTO"/>
                 <jpa:column name="transactionId" unique="false" nullable="false" insertable="true" updatable="true" table="Transaction"/>
             </jpa:id>
         </jpa:attributes>
