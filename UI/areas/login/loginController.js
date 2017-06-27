@@ -5,9 +5,19 @@ angular.module('banking')
    $rootScope.authData="";
    $scope.loginbtn = function () {
    		console.log($scope.upass);
-   		AuthService.getAuthToken($scope.username, $scope.upass);
-   		  $state.go("account");
-
-
+      $('#LoadingModal').modal('open');
+   		AuthService.getAuthToken($scope.username, $scope.upass).then(function () {
+        if(AuthService.isLoggedin())
+        {
+            $state.go("account");
+        }
+        else {
+            $('#username').addClass('invalid');
+            $('#password').addClass('invalid');
+            $('#ErrorModal').modal('open');
+        }
+        $scope.ErrorDialog = $rootScope.ErrorDialog;
+        $('#LoadingModal').modal('close');
+   		});
    }
 });

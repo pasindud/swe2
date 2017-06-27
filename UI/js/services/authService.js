@@ -14,6 +14,25 @@ nnyApp.factory('AuthService',['$http','nnyConst','$rootScope',function ($http,nn
     return result;
   }
 
+  function setErrorDialog(status) {
+    var errorContent = {
+      Title : "",
+      Body : ""
+    }
+    switch(status)
+    {
+      case 401 :
+        errorContent.Title = "Invalid Credentials";
+        errorContent.Body = "Please enter valid Credentials!";
+        break;
+      case -1 :
+        errorContent.Title = "Connection Error";
+        errorContent.Body = "Connection Refused or Invalid Request URI";
+        break;
+    }
+    $rootScope.ErrorDialog = errorContent;
+  }
+
   function getIsLoggedIn() {
     if($rootScope.authData !== undefined)
     {
@@ -46,15 +65,20 @@ nnyApp.factory('AuthService',['$http','nnyConst','$rootScope',function ($http,nn
       console.log(authData);
       $http.defaults.headers.common['Authorization'] = 'Basic ' + authData;
       $http.defaults.headers.common['Content-Type'] = 'application/json';
-      $http.get(url).then(function (response) {
-        var temp = response.data;
-        console.log(temp);
-        $rootScope.authData = {
-          accessToken : temp.session,
-          accessLevel : temp.AccessLevel,
-          userId : temp.userId
-        };
-        
+      return $http.get(url).then(function (response) {
+        console.log(response);
+        if(response.status == 200)
+        {
+          var temp = response.data;
+          console.log(temp);
+          $rootScope.authData = {
+            accessToken : temp.session,
+            accessLevel : temp.AccessLevel,
+            userId : temp.userId
+          };
+        }else {
+          setErrorDialog(response.status);
+        }
       });
     },
     getRequest : function (url, data, cb) {
@@ -79,4 +103,14 @@ nnyApp.factory('AuthService',['$http','nnyConst','$rootScope',function ($http,nn
       }
     }
   };
+}])
+.config(['$httpProvider', function($httpProvider) {
+  $httpProvider.defaults.useXDomain = true;
+  $httpProvider.interceptors.push(['$q', function ($q) {
+    return {
+      'responseError': function (rejection) {
+        return rejection;
+      }
+    }
+  }])
 }]);
