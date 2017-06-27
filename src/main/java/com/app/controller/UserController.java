@@ -6,7 +6,9 @@
 package com.app.controller;
 
 import com.app.Utils;
+import com.app.enties.LoginHistory;
 import com.app.enties.Users;
+import com.app.repository.LoginHistoryRepository;
 import com.app.repository.UserRepository;
 import com.app.request.CreateUserRequest;
 import com.app.service.UserService;
@@ -28,22 +30,31 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class UserController {
-
+    
     private static String ACCESS_LEVEL_ID = "1";
     private static String RESPONSE_SESSION_MAP_KEY = "session";
     private static String RESPONSE_ACCESS_LEVEL_MAP_KEY = "AccessLevel";
     private static String RESPONSE_USERID_MAP_KEY = "userId";
-
+    
     @Autowired
     private UserService userService;
-
+    
     @Autowired
     private UserRepository userRepository;
-
+    
+    @Autowired
+    private LoginHistoryRepository loginHistoryRepository;
+    
     @RequestMapping("/api/auth")
     @GetMapping
     Map<String, Object> getToken(HttpSession session) {
+        
         Users loggedInUser = userRepository.findByUsername(Utils.getCurrentUsers());
+        
+        LoginHistory loginHistory = new LoginHistory();        
+        loginHistory.setUserid(loggedInUser);
+        loginHistoryRepository.save(loginHistory);
+        
         HashMap<String, Object> map = new HashMap<>();
         map.put(RESPONSE_SESSION_MAP_KEY, session.getId());
         map.put(RESPONSE_USERID_MAP_KEY, loggedInUser.getUserId());

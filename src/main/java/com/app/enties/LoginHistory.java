@@ -24,8 +24,8 @@ public class LoginHistory {
 
   @Column(name = "time")
   @Basic
-  @Temporal(TemporalType.DATE)
-  private Date time;
+  @Temporal(TemporalType.TIMESTAMP)
+  private Date time = new Date();
 
   @Column(name = "ipaddress", length = 132)
   @Basic
@@ -34,7 +34,7 @@ public class LoginHistory {
   @ManyToOne(optional = false, targetEntity = Users.class)
   @JoinColumn(name = "USERID", referencedColumnName = "USERID")
   private Users userid;
-
+  
   public Integer getId() {
     return this.id;
   }
