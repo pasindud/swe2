@@ -35,8 +35,9 @@ public class MerchantController {
 
   @RequestMapping("/api/merchant_services")
   public List<MerchantServices> getAllServicesByMerchantId() {
-    Merchant m = new Merchant();
-    m.setMerchantid(1);    
-    return merchantServicesRepository.findAllByMerchantUserid(m);
+      return null;
+//    Merchant m = new Merchant();
+//    m.setMerchantid(1);    
+//    return merchantServicesRepository.findAllByMerchantUserid(m);
   }
 }

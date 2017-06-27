@@ -27,8 +27,8 @@ public class MerchantServices {
     private Integer accountid;
 
    @ManyToOne(optional = false, targetEntity = Merchant.class)
-   @JoinColumn(name = "MERCHANT_ID", referencedColumnName = "merchantid")
-   private Merchant merchantid;
+   @JoinColumn(name = "MERCHANTID", referencedColumnName = "MERCHANTID")
+   private Merchant fkmerchantid;
 
     public Integer getServiceid() {
         return serviceid;
@@ -54,12 +54,12 @@ public class MerchantServices {
         this.accountid = accountid;
     }
 
-   public Merchant getMerchantid() {
-       return merchantid;
+   public Merchant getFkmerchantid() {
+       return fkmerchantid;
    }
 
-   public void setMerchantid(Merchant merchantid) {
-       this.merchantid = merchantid;
+   public void setFkmerchantid(Merchant fkmerchantid) {
+       this.fkmerchantid = fkmerchantid;
    }
 
 }
