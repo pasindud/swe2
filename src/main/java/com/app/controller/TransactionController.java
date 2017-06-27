@@ -4,11 +4,14 @@ package com.app.controller;
 
 import com.app.enties.Transaction;
 import com.app.service.TransactionService;
+import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
+import java.util.Map;
 
 /** @author Pasindu */
 @RestController
@@ -25,9 +28,11 @@ public class TransactionController {
   */
   @RequestMapping("/api/do_transaction")
   @PostMapping
-  private Object doTransaction(@RequestBody Transaction transaction) {
-      
-      return transactionService.do_transactions(transaction);
-
+  private Map<String, List<String>> doTransaction(@RequestBody Transaction transaction) {      
+     List<String> errors =  transactionService.do_transactions(transaction);
+     
+     Map<String, List<String>> response = new HashMap<String, List<String>>();
+     response.put("errors", errors);
+     return response;
   }
 }

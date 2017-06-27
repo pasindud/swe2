@@ -72,6 +72,10 @@ public class TransactionService {
             errors.add("Receiver account number is not valid.");
             return false;
         }
+        if  (transaction.getTranstype() == null) {
+            errors.add("Transaction type is not set.");
+            return false;
+        }
         if (transaction.getTranstype().equalsIgnoreCase("T")||transaction.getTranstype().equalsIgnoreCase("W")) {
             if (transaction.getFromaccountid()== 0) {
                 errors.add("Sender account number is not valid..");
