@@ -10,7 +10,7 @@ nnyApp.factory('AuthService',['$http','nnyConst','$rootScope',function ($http,nn
     .then(function(res) {
       return res.data[0];
     })
-    debugger;
+    // debugger;
     return result;
   }
 
@@ -89,12 +89,20 @@ nnyApp.factory('AuthService',['$http','nnyConst','$rootScope',function ($http,nn
         cb(response);
       });
     },
+    getRequestPost : function (url, data, cb) {
+      // var headers = {"x-auth-token": $rootScope.authData.accessToken};
+      $http({
+          method: 'POST',
+          url: nnyConst.ENDPOINT_URI + url,
+          data: data
+      })
+    },
     isLoggedin : function () {
       return getIsLoggedIn();
     },
     isAuthRoute : function(url)
     {
-      debugger;
+      // debugger;
       if(url == "/login"){
         return true;
       }

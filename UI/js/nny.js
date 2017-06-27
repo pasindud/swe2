@@ -97,7 +97,6 @@ angular.module('banking', [
 })
 .controller('OverviewController',function ($scope, $http,$rootScope,$location,$state,AuthService, nnyConst) {
   $scope.AccessLevels = nnyConst.UserRoles;
-  debugger;
   $rootScope.$watch('authDate',function (status) {
     if(status)
     {
@@ -144,7 +143,7 @@ $scope.setPage = function(view) {
 })
 .run(function ($rootScope,$state, AuthService,$location) {
   $rootScope.$on('$stateChangeStart',function (event, toState, toParams, fromState, fromParams, error) {
-    if(toState !== undefined && toState.data.requireLogin && !AuthService.isLoggedin())
+    if(toState !== undefined && toState.data && toState.data.requireLogin && !AuthService.isLoggedin())
     {
       $state.go("login");
       event.preventDefault();

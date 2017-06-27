@@ -7,15 +7,21 @@ package com.app.request;
 
 import com.app.enties.Customer;
 import com.app.enties.Users;
-import org.springframework.security.core.userdetails.User;
 
 /**
  * Class used to register the user.
  */
 public class CreateUserRequest {
-
     private Users users;
     private Customer customer;
+
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
 
     public Users getUser() {
         return this.users;
