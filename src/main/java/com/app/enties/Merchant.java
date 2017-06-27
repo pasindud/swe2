@@ -9,64 +9,63 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Merchant")
 public class Merchant {
+    @Column(name = "merchantid", nullable = false)
+    @Id
+    private Integer merchantid;
 
-  @Column(name = "merchantId", nullable = false)
-  @Id
-  private Integer merchantId;
+    @Column(name = "orgname", nullable = false, length = 45)
+    @Basic(optional = false)
+    private String orgname;
 
-  @Column(name = "OrgName", nullable = false, length = 45)
-  @Basic(optional = false)
-  private String orgName;
+    @Column(name = "registrationNo", nullable = false, length = 45)
+    @Basic(optional = false)
+    private String registrationno;
 
-  @Column(name = "registrationNo", nullable = false, length = 45)
-  @Basic(optional = false)
-  private String registrationNo;
+    @Column(name = "taxno", nullable = false, length = 45)
+    @Basic(optional = false)
+    private String taxno;
 
-  @Column(name = "taxNo", nullable = false, length = 45)
-  @Basic(optional = false)
-  private String taxNo;
+    @Column(name = "logourl")
+    @Basic
+    private String logourl;
 
-  @Column(name = "logoUrl")
-  @Basic
-  private String logoUrl;
+    public Integer getMerchantid() {
+        return merchantid;
+    }
 
-  public Integer getMerchantId() {
-    return this.merchantId;
-  }
+    public void setMerchantid(Integer merchantid) {
+        this.merchantid = merchantid;
+    }
 
-  public void setMerchantId(Integer merchantId) {
-    this.merchantId = merchantId;
-  }
+    public String getOrgname() {
+        return orgname;
+    }
 
-  public String getOrgName() {
-    return this.orgName;
-  }
+    public void setOrgname(String orgname) {
+        this.orgname = orgname;
+    }
 
-  public void setOrgName(String orgName) {
-    this.orgName = orgName;
-  }
+    public String getRegistrationno() {
+        return registrationno;
+    }
 
-  public String getRegistrationNo() {
-    return this.registrationNo;
-  }
+    public void setRegistrationno(String registrationno) {
+        this.registrationno = registrationno;
+    }
 
-  public void setRegistrationNo(String registrationNo) {
-    this.registrationNo = registrationNo;
-  }
+    public String getTaxno() {
+        return taxno;
+    }
 
-  public String getTaxNo() {
-    return this.taxNo;
-  }
+    public void setTaxno(String taxno) {
+        this.taxno = taxno;
+    }
 
-  public void setTaxNo(String taxNo) {
-    this.taxNo = taxNo;
-  }
+    public String getLogourl() {
+        return logourl;
+    }
 
-  public String getLogoUrl() {
-    return this.logoUrl;
-  }
-
-  public void setLogoUrl(String logoUrl) {
-    this.logoUrl = logoUrl;
-  }
+    public void setLogourl(String logourl) {
+        this.logourl = logourl;
+    }
 }

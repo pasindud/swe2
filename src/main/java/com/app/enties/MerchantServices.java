@@ -8,58 +8,59 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "MerchantServices")
 public class MerchantServices {
+    @Column(name = "serviceid", nullable = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer serviceid;
 
-  @Column(name = "serviceId", nullable = false)
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private Integer serviceId;
+    @Column(name = "description", length = 45)
+    @Basic
+    private String description;
 
-  @Column(name = "descrition", length = 45)
-  @Basic
-  private String descrition;
+    @Column(name = "accountid", length = 45)
+    @OneToOne(optional = false, targetEntity = Account.class)
+    private Integer accountid;
 
-  @Column(name = "serviceLogpURL", length = 45)
-  @Basic
-  private String serviceLogpURL;
+    @ManyToOne(optional = false, targetEntity = Merchant.class)
+    @JoinColumn(name = "MERCHANT_ID", referencedColumnName = "merchantid")
+    private Merchant merchantid;
 
-  @ManyToOne(optional = false, targetEntity = Merchant.class)
-  @JoinColumn(name = "MERCHANT_USERID", referencedColumnName = "merchantId")
-  private Merchant merchantuserId;
+    public Integer getServiceid() {
+        return serviceid;
+    }
 
-  public Integer getServiceId() {
-    return this.serviceId;
-  }
+    public void setServiceid(Integer serviceid) {
+        this.serviceid = serviceid;
+    }
 
-  public void setServiceId(Integer serviceId) {
-    this.serviceId = serviceId;
-  }
+    public String getDescription() {
+        return description;
+    }
 
-  public String getDescrition() {
-    return this.descrition;
-  }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-  public void setDescrition(String descrition) {
-    this.descrition = descrition;
-  }
+    public Integer getAccountid() {
+        return accountid;
+    }
 
-  public String getServiceLogpURL() {
-    return this.serviceLogpURL;
-  }
+    public void setAccountid(Integer accountid) {
+        this.accountid = accountid;
+    }
 
-  public void setServiceLogpURL(String serviceLogpURL) {
-    this.serviceLogpURL = serviceLogpURL;
-  }
+    public Merchant getMerchantid() {
+        return merchantid;
+    }
 
-  public Merchant getMerchantuserId() {
-    return this.merchantuserId;
-  }
+    public void setMerchantid(Merchant merchantid) {
+        this.merchantid = merchantid;
+    }
 
-  public void setMerchantuserId(Merchant merchantuserId) {
-    this.merchantuserId = merchantuserId;
-  }
 }
