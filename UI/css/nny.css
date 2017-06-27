@@ -87,3 +87,8 @@ body{
 .nny-p3{
   font-size: 25pt;
 }
+
+.nny-modal-Loading{
+  background-color:transparent !important;
+  overflow-y:hidden !important;
+}

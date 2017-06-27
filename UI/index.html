@@ -118,6 +118,31 @@
     {{labels.Copyright}}
   </div>
 
+  <!--Loading Modal  -->
+<div id="LoadingModal" class="modal z-depth-0 center nny-modal-Loading" style="">
+  <div class="preloader-wrapper big active">
+    <div class="spinner-layer spinner-blue-only">
+      <div class="circle-clipper left">
+        <div class="circle"></div>
+      </div><div class="gap-patch">
+        <div class="circle"></div>
+      </div><div class="circle-clipper right">
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Error Modal -->
+<div id="ErrorModal" class="modal">
+  <div class="modal-content">
+    <h4>{{ErrorDialog.Title}}</h4>
+    <p>{{ErrorDialog.Body}}</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+  </div>
+</div>
 
 </body>
 </html>
