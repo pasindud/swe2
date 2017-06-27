@@ -1,5 +1,7 @@
 package com.app.enties;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "Transaction")
@@ -27,18 +33,44 @@ public class Transaction {
   @Basic(optional = false)
   private int fromaccountid;
 
-  @Column(name = "transtype", length = 45)
+  @Column(name = "transtype", length = 3)
   @Basic
   private String transtype;
 
-  @Column(name = "currency", length = 45)
+  @Column(name = "fromcurrency", length = 45)
   @Basic
-  private String currency;
+  private String fromcurrency;
+  
+  @Column(name = "tocurrency", length = 45)
+  @Basic
+  private String tocurrency;
 
+  @Column(name = "fromrate", precision = 12)
+  @Basic
+  private Float fromrate;
+
+  @Column(name = "torate", precision = 12)
+  @Basic
+  private Float torate;
+
+  
   @Column(name = "amount", precision = 12)
   @Basic
   private Float amount;
-
+  
+  @Column(name="message", length = 50)
+  @Basic
+  private String message;
+  
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "transactiontime", nullable = false)
+  private Date transactiontime;
+  
+  @PrePersist
+  protected void ontTansactiontime() {
+    transactiontime = new Date();
+  }
+  
   @ManyToOne(optional = false, targetEntity = Users.class)
   @JoinColumn(name = "USERID", referencedColumnName = "USERID")
   private Users userId;
@@ -75,14 +107,6 @@ public class Transaction {
     this.transtype = transType;
   }
 
-  public String getCurrency() {
-    return this.currency;
-  }
-
-  public void setCurrency(String currency) {
-    this.currency = currency;
-  }
-
   public Float getAmount() {
     return this.amount;
   }
@@ -98,16 +122,46 @@ public class Transaction {
   public void setUserId(Users userId) {
     this.userId = userId;
   }
-  public Transaction(){
-  
-  }
-  public Transaction(Transaction another){
 
-    this.toaccountId= another.toaccountId;
-    this.fromaccountid= another.fromaccountid;
-    this.transtype= another.transtype;
-    this.currency= another.currency;
-    this.amount= another.amount;
-    this.userId= another.userId;
-  }
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getFromcurrency() {
+        return fromcurrency;
+    }
+
+    public String getTocurrency() {
+        return tocurrency;
+    }
+
+    public Float getFromrate() {
+        return fromrate;
+    }
+
+    public Float getTorate() {
+        return torate;
+    }
+
+    public void setFromcurrency(String fromcurrency) {
+        this.fromcurrency = fromcurrency;
+    }
+
+    public void setTocurrency(String tocurrency) {
+        this.tocurrency = tocurrency;
+    }
+
+    public void setFromrate(Float fromrate) {
+        this.fromrate = fromrate;
+    }
+
+    public void setTorate(Float torate) {
+        this.torate = torate;
+    }
+    
+    
 }
