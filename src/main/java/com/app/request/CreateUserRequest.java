@@ -5,35 +5,24 @@
  */
 package com.app.request;
 
-/** @author dilsh maps the values of create user http request */
+import com.app.enties.Customer;
+import com.app.enties.Users;
+import org.springframework.security.core.userdetails.User;
+
+/**
+ * Class used to register the user.
+ */
 public class CreateUserRequest {
-  String username;
-  String password;
-  String passwordConfirm;
 
-  public CreateUserRequest() {}
+    private Users users;
+    private Customer customer;
 
-  public void setUsername(String username) {
-    this.username = username;
-  }
+    public Users getUser() {
+        return this.users;
+    }
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
+    public Customer getCustomer() {
+        return this.customer;
+    }
 
-  public void setPasswordConfirm(String passwordConfirm) {
-    this.passwordConfirm = passwordConfirm;
-  }
-
-  public String getUsername() {
-    return username;
-  }
-
-  public String getPassword() {
-    return password;
-  }
-
-  public String getPasswordConfirm() {
-    return passwordConfirm;
-  }
 }
