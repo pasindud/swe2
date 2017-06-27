@@ -43,10 +43,14 @@
   "Male" : "Male",
   "Female" : "Female",
   "Address" : "Address",
+  "Line1" : "Line 1",
+  "Line2" : "Line 2",
+  "Line3" : "Line 3",
   "DateOfBirth":"Date Of Birth",
   "Submit" : "Submit",
   "Contact1" : "Contact #1",
   "Contact2" : "Contact #2",
+  "FaxNo" : "Fax Number",
   "ForgotPassword" : "Forgot Password?",
   "ViewAllAccounts" : "View All Accounts",
   "DeleteAccounts" : "Delete Accounts",
@@ -93,5 +97,7 @@
   "DeleteAccount" : "Delete Account",
   "ViewActivity" : "View Activity",
   "Personal" : "Personal",
-  "Accounts" : "Accounts"
+  "Accounts" : "Accounts",
+  "SignUp" : "Sign Up",
+  "City" : "City"
   }]

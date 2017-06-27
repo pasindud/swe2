@@ -41,7 +41,8 @@ angular.module('banking', [
   .state('createnew',{
     url:'/createnew',
     templateUrl:'areas/account/createNewAccount.html',
-    controller:'CreateNewAccountController'
+    controller:'CreateNewAccountController',
+    data : {requireLogin : false },
   })
   .state('admin',{
     url:'/admin',
@@ -103,7 +104,12 @@ angular.module('banking', [
       $scope.authData = $rootScope.authData;
     }
   });
-
+  $rootScope.$watch('ErrorDialog',function (status) {
+    if(status)
+    {
+      $scope.ErrorDialog = $rootScope.ErrorDialog;
+    }
+  });
   $scope.logout = function () {
     $rootScope.authData = undefined;
     $state.go("login");
