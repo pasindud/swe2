@@ -3,6 +3,7 @@ angular.module('banking')
 .controller('LoginController',function ($state,$rootScope,$scope, AuthService, $location,nnyConst) {
    $scope.title = 'his';
    $rootScope.authData="";
+   
    $scope.loginbtn = function () {
    		console.log($scope.upass);
       $('#LoadingModal').modal('open');
