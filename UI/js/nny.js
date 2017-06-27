@@ -95,8 +95,9 @@ angular.module('banking', [
   });
 
 })
-.controller('OverviewController',function ($scope, $http,$rootScope,$location,AuthService) {
-
+.controller('OverviewController',function ($scope, $http,$rootScope,$location,$state,AuthService, nnyConst) {
+  $scope.AccessLevels = nnyConst.UserRoles;
+  debugger;
   $rootScope.$watch('authDate',function (status) {
     if(status)
     {
@@ -104,6 +105,10 @@ angular.module('banking', [
     }
   });
 
+  $scope.logout = function () {
+    $rootScope.authData = undefined;
+    $state.go("login");
+  }
   /*AuthService.authenticate().then(function (result) {
   var temp = result.data;
   console.log(temp);
@@ -145,7 +150,7 @@ $scope.setPage = function(view) {
       event.preventDefault();
       return;
     }
-    
+
 /* if (!AuthService.isAuthRoute($location.url())&&!AuthService.isLoggedin()) {
       $state.go("login");
       event.preventDefault();

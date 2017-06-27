@@ -1,12 +1,12 @@
 var nnyApp = angular.module('banking');
 
 nnyApp.constant('nnyConst',{
-  UserRoles: {
-    0: 'Stranger',
-    1: 'CustomerP',
-    2: 'CustomerM',
-    3: 'Admin'
-  },
-  test: "hi",
-  ENDPOINT_URI : "http://localhost:8080"
+  test : "hi",
+  ENDPOINT_URI : "http://192.168.1.134:8080",
+  UserRoles : {
+    Admin : '3',
+    CustomerM : '2',
+    CustomerP : '1',
+    Stranger : '0'
+  }
 });
