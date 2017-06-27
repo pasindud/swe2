@@ -24,12 +24,11 @@ public class MerchantServices {
     private String description;
 
     @Column(name = "accountid", length = 45)
-    @OneToOne(optional = false, targetEntity = Account.class)
     private Integer accountid;
 
-    @ManyToOne(optional = false, targetEntity = Merchant.class)
-    @JoinColumn(name = "MERCHANT_ID", referencedColumnName = "merchantid")
-    private Merchant merchantid;
+   @ManyToOne(optional = false, targetEntity = Merchant.class)
+   @JoinColumn(name = "MERCHANT_ID", referencedColumnName = "merchantid")
+   private Merchant merchantid;
 
     public Integer getServiceid() {
         return serviceid;
@@ -55,12 +54,12 @@ public class MerchantServices {
         this.accountid = accountid;
     }
 
-    public Merchant getMerchantid() {
-        return merchantid;
-    }
+   public Merchant getMerchantid() {
+       return merchantid;
+   }
 
-    public void setMerchantid(Merchant merchantid) {
-        this.merchantid = merchantid;
-    }
+   public void setMerchantid(Merchant merchantid) {
+       this.merchantid = merchantid;
+   }
 
 }

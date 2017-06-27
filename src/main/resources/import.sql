@@ -15,8 +15,8 @@ insert into account_type (acc_type_id, acc_interest_rates, acc_name, max_months,
 INSERT INTO account (accountid, balance, created_date, currency, expire_date, acctypeid, branchid, userid) VALUES (1,1,'0001-01-01','11','0001-01-01',1,1,1);
 
 
-INSERT INTO `merchant` (`merchant_id`, `logo_url`, `org_name`, `registration_no`, `tax_no`) VALUES (1,'asd','asd','1232','12313');
+INSERT INTO `merchant` (`merchantid`, `logo_url`, `org_name`, `registration_no`, `tax_no`) VALUES (1,'asd','asd','1232','12313');
 
-INSERT INTO `merchant_services` (`service_id`, `merchant_userid`) VALUES (1,1);
+INSERT INTO `merchant_services` (`serviceid`, `merchant_userid`) VALUES (1,1);
 
 INSERT INTO `customer` (`customerid`, `users_user_id`) VALUES (1,1);

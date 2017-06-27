@@ -9,5 +9,5 @@ import org.springframework.data.repository.CrudRepository;
 
 /** @author Pasindu */
 public interface MerchantServicesRepository extends CrudRepository<MerchantServices, Long> {
-  List<MerchantServices> findAllByMerchantuserId(Merchant merchant);
+  // List<MerchantServices> findAllByMerchantUserid(Merchant merchant);
 }

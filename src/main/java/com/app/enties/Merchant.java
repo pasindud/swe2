@@ -17,7 +17,7 @@ public class Merchant {
     @Basic(optional = false)
     private String orgname;
 
-    @Column(name = "registrationNo", nullable = false, length = 45)
+    @Column(name = "registrationno", nullable = false, length = 45)
     @Basic(optional = false)
     private String registrationno;
 
