@@ -27,13 +27,13 @@ public class LoginHistory {
   @Temporal(TemporalType.DATE)
   private Date time;
 
-  @Column(name = "ipAddress", length = 132)
+  @Column(name = "ipaddress", length = 132)
   @Basic
-  private String ipAddress;
+  private String ipaddress;
 
   @ManyToOne(optional = false, targetEntity = Users.class)
   @JoinColumn(name = "USERID", referencedColumnName = "USERID")
-  private Users userId;
+  private Users userid;
 
   public Integer getId() {
     return this.id;
@@ -51,19 +51,19 @@ public class LoginHistory {
     this.time = time;
   }
 
-  public String getIpAddress() {
-    return this.ipAddress;
+  public String getIpaddress() {
+    return this.ipaddress;
   }
 
-  public void setIpAddress(String ipAddress) {
-    this.ipAddress = ipAddress;
+  public void setIpaddress(String ipaddress) {
+    this.ipaddress = ipaddress;
   }
 
-  public Users getUserId() {
-    return this.userId;
+  public Users getUserid() {
+    return this.userid;
   }
 
-  public void setUserId(Users userId) {
-    this.userId = userId;
+  public void setUserid(Users userid) {
+    this.userid = userid;
   }
 }
