@@ -14,7 +14,7 @@ curl -u xyz:xyz "http://localhost:8080/api/accounts?id=1"
 
 curl -u xyz:xyz  -H "Content-Type: application/json" \
 http://localhost:8080/api/accounts_save \
--d '{"balance":1, "accTypeId": {"accTypeId":1}, "userid": {"userId":1}, "branchId": {"branchId":1, "addressLine1":"TESTING"}}'
+-d '{"accTypeid":1, "currency":"LKR", "branchid":1}'
 
 
 curl -u xyz:xyz -H "Content-Type: application/json" -X POST \
