@@ -64,6 +64,14 @@ public class TransactionService {
             errors.add("Not enough balance");
             return false;
         }
+        if((fromAccount.getAccTypeId().getDailyWithdrawLimit())< (transaction.getAmount())){
+            errors.add("Exceeds daily withdrawal limit");
+            return false;
+        }
+        if((fromAccount.getBalance()-(transaction.getAmount()*transaction.getFromrate()))<fromAccount.getAccTypeId().getMinInitBalance()){
+            errors.add("At least "+fromAccount.getAccTypeId().getMinInitBalance().toString()+" should be left in the account");
+            return false;
+        }
         return true;
     }
 
