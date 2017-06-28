@@ -7,6 +7,8 @@ import com.app.enties.Transaction;
 import com.app.repository.AccountRepository;
 import com.app.repository.TransactionRepository;
 import java.util.*;
+
+import com.app.request.TransactionRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -30,10 +32,25 @@ public class TransactionService {
     public TransactionService() {
 
     }
-
     public List<String> do_transactions(Transaction transaction) throws Exception {
-        errors = new ArrayList<String>();
         this.transaction = transaction;
+        processTransaction();
+        return errors;
+    }
+
+    public List<String> do_transactions(TransactionRequest transactionRequest) throws Exception {
+        errors = new ArrayList<String>();
+        this.transaction = new Transaction();
+        this.transaction.setToaccountid(transactionRequest.getToaccount());
+        this.transaction.setFromaccountid(transactionRequest.getFromaccountid());
+        this.transaction.setAmount(transactionRequest.getAmount());
+        this.transaction.setMessage(transactionRequest.getMessage());
+        // TODO Add currency to transaction object.
+        processTransaction();
+        return errors;
+    }
+
+    private void processTransaction() throws Exception {
         this.fromAccount=accountRepository.findByAccountid(transaction.getFromaccountid());
         this.toAccount=accountRepository.findByAccountid(transaction.getToaccountid());
 
@@ -41,14 +58,12 @@ public class TransactionService {
             saveTransaction();
             updateAccounts();
         }
-
-        return errors;
     }
 
     private boolean validate () throws Exception{
         if(validateRequired()){
             getCurrencyRate();
-            if ( (transaction.getTranstype().equalsIgnoreCase("T")||transaction.getTranstype().equalsIgnoreCase("W")) ) {
+            if ( (getTransactionTypeEqT()||getTransactionTypeEqW()) ) {
                 if(!checkUsersHasMoney())
                     return false;
             }
@@ -83,6 +98,10 @@ public class TransactionService {
         return transaction.getTranstype().equalsIgnoreCase("T");
     }
 
+    private boolean getTransactionTypeEqTOrW() {
+        return getTransactionTypeEqT() || getTransactionTypeEqW();
+    }
+
     /** Check whether the required fields our there.
      * @return  */
     private boolean validateRequired() {
@@ -95,7 +114,7 @@ public class TransactionService {
             return false;
         }
 
-        if (getTransactionTypeEqT()||getTransactionTypeEqW()) {
+        if (getTransactionTypeEqTOrW()) {
             if (transaction.getFromaccountid()== 0) {
                 errors.add("Sender account number is not valid..");
                 return false;
@@ -110,7 +129,8 @@ public class TransactionService {
             errors.add("Receiver account account not found");
             return false;
         }
-        if (getTransactionTypeEqT()||getTransactionTypeEqW()) {
+
+        if (getTransactionTypeEqTOrW()) {
             if (fromAccount == null) {
                 errors.add("Sender account found");
                 return false;
@@ -131,7 +151,7 @@ public class TransactionService {
     }
 
     private void updateAccounts() {
-        if (getTransactionTypeEqT()||getTransactionTypeEqW()) {
+        if (getTransactionTypeEqTOrW()) {
             fromAccount.setBalance(fromAccount.getBalance()-(transaction.getAmount()*transaction.getFromrate()));
             accountRepository.save(fromAccount);
         }
@@ -145,7 +165,7 @@ public class TransactionService {
 
         RestTemplate restTemplate = new RestTemplate();
 
-        if (getTransactionTypeEqT()||getTransactionTypeEqW()) {
+        if (getTransactionTypeEqTOrW()) {
 
             Float temp1= ExchangeRates.getExchangeRate(BANK_DEFAULT_CURRENCY, transaction.getFromcurrency());
             transaction.setFromrate(new Float((Math.round( temp1 * 100.0) / 100.0)));

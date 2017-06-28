@@ -2,14 +2,20 @@
 
 package com.app.controller;
 
+import com.app.Utils;
 import com.app.enties.Transaction;
+import com.app.request.TransactionRequest;
 import com.app.service.TransactionService;
 import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -28,11 +34,14 @@ public class TransactionController {
   */
   @RequestMapping("/api/do_transaction")
   @PostMapping
-  private Map<String, List<String>> doTransaction(@RequestBody Transaction transaction) throws Exception {
-     List<String> errors =  transactionService.do_transactions(transaction);
-     
-     Map<String, List<String>> response = new HashMap<String, List<String>>();
-     response.put("errors", errors);
+  private Map<String, List<String>> doTransaction(@Valid @RequestBody TransactionRequest transactionRequest,
+                                                  Errors requestError) throws Exception {
+      Map<String, List<String>> response = new HashMap<String, List<String>>();
+      if (requestError.hasErrors()){
+          response.put("errors", Utils.getListFromErrors(requestError));
+          return response;
+      }
+     response.put("errors", transactionService.do_transactions(transactionRequest));
      return response;
   }
 }
