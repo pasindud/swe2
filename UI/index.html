@@ -44,6 +44,7 @@
   <script type="text/javascript" src="areas/admin/approvals/approvalDetailsController.js"></script>
   <script type="text/javascript" src="areas/admin/manageAccounts/userAccountController.js"></script>
   <script type="text/javascript" src="areas/admin/manageAccounts/viewAccountsController.js"></script>
+  <script type="text/javascript" src="areas/payments/paymentsController.js"></script>
   <script type="text/javascript" src="js/services/authService.js"></script>
   <script type="text/javascript" src="js/services/validateService.js"></script>
   <script type="text/javascript" src="js/services/constants.js"></script>
@@ -71,7 +72,7 @@
                   <ul class="nny-tabs" ng-if="authData.accessLevel == AccessLevels.CustomerP">
                     <li class="col s4 nny-tab-selected"><a ui-sref="account">{{labels.Account}}</a></li>
                     <li class="col s4 nny-tab"><a ui-sref="activity">{{labels.Activity}}</a></li>
-                    <li class="col s4 nny-tab"><a ui-sref=="payments">{{labels.Payments}}</a></li>
+                    <li class="col s4 nny-tab"><a ui-sref="payments">{{labels.Payments}}</a></li>
                   </ul>
                   <ul class="nny-tabs" ng-if="authData.accessLevel == AccessLevels.Admin">
                     <li class="col s12 nny-tab"><a ui-sref="admin">{{labels.AdminDashboard}}</a></li>

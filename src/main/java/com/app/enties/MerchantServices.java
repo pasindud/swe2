@@ -19,6 +19,10 @@ public class MerchantServices {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer serviceid;
 
+    @Column(name = "servicename", length = 45)
+    @Basic
+    private String servicename;
+    
     @Column(name = "description", length = 45)
     @Basic
     private String description;
@@ -33,7 +37,15 @@ public class MerchantServices {
     public Integer getServiceid() {
         return serviceid;
     }
+    
+    public String getServicename() {
+        return servicename;
+    }
 
+    public void setServicename(String servicename) {
+        this.servicename = servicename;
+    }
+    
     public void setServiceid(Integer serviceid) {
         this.serviceid = serviceid;
     }
