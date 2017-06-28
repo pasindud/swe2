@@ -11,6 +11,15 @@
         </option>
       </select>
     </div>
+    <div class="input-field col s12 m12 l12 xl6">
+      Paying account
+      <select material-select watch ng-model="selectedAccount">
+        <option value="" disabled selected>Choose your account</option>
+        <option ng-repeat="accounts in user_accounts"
+          value={{accounts.accountid}}>{{accounts.accountid}}
+        </option>
+      </select>
+    </div>
     <div class="input-field col s12">
       <input id="bill_reference_number" type="text" length="60" ng-model="bill_reference_number"></input>
       <label for="bill_reference_number">
