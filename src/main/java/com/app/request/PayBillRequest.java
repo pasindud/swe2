@@ -2,55 +2,53 @@
 
 package com.app.request;
 
-import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-/**
- *
- * @author Pasindu
- */
+/** @author Pasindu */
 public class PayBillRequest {
-    @NotNull(message = "Incorrect bill reference number.")
-    private String billReferenceNumber;
-    @Min(value = 1, message = "Incorrect amount.")
-    private float amount = -1;
-    @NotNull(message = "Service id has not been selected.")
-    private Integer selectedServiceId;
-    @NotNull(message = "Account has not been selected.")
-    private Integer selectedAccountId;
+  @NotNull(message = "Incorrect bill reference number.")
+  private String billReferenceNumber;
 
-    public int getSelectedAccountId() {
-        return selectedAccountId;
-    }
+  @Min(value = 1, message = "Incorrect amount.")
+  private float amount = -1;
 
-    public void setSelectedAccountId(int selectedAccountId) {
-        this.selectedAccountId = selectedAccountId;
-    }
+  @NotNull(message = "Service id has not been selected.")
+  private Integer selectedServiceId;
 
-    public float getAmount() {
-        return amount;
-    }
+  @NotNull(message = "Account has not been selected.")
+  private Integer selectedAccountId;
 
-    public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
+  public int getSelectedAccountId() {
+    return selectedAccountId;
+  }
 
-    public String getBillReferenceNumber() {
-        return billReferenceNumber;
-    }
+  public void setSelectedAccountId(int selectedAccountId) {
+    this.selectedAccountId = selectedAccountId;
+  }
 
-    public void setBillReferenceNumber(String billReferenceNumber) {
-        this.billReferenceNumber = billReferenceNumber;
-    }
+  public float getAmount() {
+    return amount;
+  }
 
-    public int getSelectedServiceId() {
-        return selectedServiceId;
-    }
+  public void setAmount(Integer amount) {
+    this.amount = amount;
+  }
 
-    public void setSelectedServiceId(int selectedServiceId) {
-        this.selectedServiceId = selectedServiceId;
-    }
+  public String getBillReferenceNumber() {
+    return billReferenceNumber;
+  }
 
+  public void setBillReferenceNumber(String billReferenceNumber) {
+    this.billReferenceNumber = billReferenceNumber;
+  }
+
+  public int getSelectedServiceId() {
+    return selectedServiceId;
+  }
+
+  public void setSelectedServiceId(int selectedServiceId) {
+    this.selectedServiceId = selectedServiceId;
+  }
 }

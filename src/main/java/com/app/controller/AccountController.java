@@ -4,14 +4,13 @@ import com.app.enties.Account;
 import com.app.enties.Users;
 import com.app.repository.AccountRepository;
 import com.app.repository.UsersRepository;
+import com.app.request.CreateAccountRequest;
+import com.app.service.AccountService;
+import com.google.common.collect.ImmutableMap;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import javax.servlet.http.HttpSession;
-
-import com.app.request.CreateAccountRequest;
-import com.app.service.AccountService;
-import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -58,7 +57,7 @@ public class AccountController {
     users.setUserId(id);
     return accountRepository.findByUserid(users);
   }
-  
+
   @RequestMapping("/api/accounts")
   @GetMapping
   Object getAccounts(@RequestParam("id") Integer id, HttpSession session) {
@@ -82,11 +81,11 @@ public class AccountController {
 
   /*
 
-    curl -u xyz:xyz  -H "Content-Type: application/json" \
-    http://localhost:8080/api/accounts_save \
-    -d '{"accTypeid":1, "currency":"LKR", "branchid":1}'
+     curl -u xyz:xyz  -H "Content-Type: application/json" \
+     http://localhost:8080/api/accounts_save \
+     -d '{"accTypeid":1, "currency":"LKR", "branchid":1}'
 
- */
+  */
   @RequestMapping("/api/accounts_save")
   @PostMapping
   ImmutableMap<String, List<String>> save(@RequestBody CreateAccountRequest createAccountRequest) {

@@ -1,64 +1,57 @@
 package com.app.request;
 
-import org.hibernate.validator.constraints.NotBlank;
 
-import javax.persistence.Column;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-/**
- * Created by Pasindu on 6/29/17.
- */
+/** Created by Pasindu on 6/29/17. */
 public class TransactionRequest {
-    @NotNull
-    private Integer toaccount;
-    @NotNull
-    private Integer fromaccountid;
-    @NotNull
-    private String transtype;
-    @Min(value = 1)
-    private float amount = -1;
-    @NotNull
-    private String message;
+  @NotNull private Integer toaccount;
+  @NotNull private Integer fromaccountid;
+  @NotNull private String transtype;
 
-    public String getMessage() {
-        return message;
-    }
+  @Min(value = 1)
+  private float amount = -1;
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
+  @NotNull private String message;
 
+  public String getMessage() {
+    return message;
+  }
 
-    public int getToaccount() {
-        return toaccount;
-    }
+  public void setMessage(String message) {
+    this.message = message;
+  }
 
-    public void setToaccount(int toaccount) {
-        this.toaccount = toaccount;
-    }
+  public int getToaccount() {
+    return toaccount;
+  }
 
-    public int getFromaccountid() {
-        return fromaccountid;
-    }
+  public void setToaccount(int toaccount) {
+    this.toaccount = toaccount;
+  }
 
-    public void setFromaccountid(int fromaccountid) {
-        this.fromaccountid = fromaccountid;
-    }
+  public int getFromaccountid() {
+    return fromaccountid;
+  }
 
-    public String getTranstype() {
-        return transtype;
-    }
+  public void setFromaccountid(int fromaccountid) {
+    this.fromaccountid = fromaccountid;
+  }
 
-    public void setTranstype(String transtype) {
-        this.transtype = transtype;
-    }
+  public String getTranstype() {
+    return transtype;
+  }
 
-    public float getAmount() {
-        return amount;
-    }
+  public void setTranstype(String transtype) {
+    this.transtype = transtype;
+  }
 
-    public void setAmount(float amount) {
-        this.amount = amount;
-    }
+  public float getAmount() {
+    return amount;
+  }
+
+  public void setAmount(float amount) {
+    this.amount = amount;
+  }
 }

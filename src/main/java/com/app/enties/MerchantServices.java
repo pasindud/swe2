@@ -8,70 +8,68 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "MerchantServices")
 public class MerchantServices {
-    @Column(name = "serviceid", nullable = false)
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer serviceid;
+  @Column(name = "serviceid", nullable = false)
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Integer serviceid;
 
-    @Column(name = "servicename", length = 45)
-    @Basic
-    private String servicename;
-    
-    @Column(name = "description", length = 45)
-    @Basic
-    private String description;
+  @Column(name = "servicename", length = 45)
+  @Basic
+  private String servicename;
 
-    @Column(name = "accountid", length = 45)
-    private Integer accountid;
+  @Column(name = "description", length = 45)
+  @Basic
+  private String description;
 
-   @ManyToOne(optional = false, targetEntity = Merchant.class)
-   @JoinColumn(name = "MERCHANTID", referencedColumnName = "MERCHANTID")
-   private Merchant fkmerchantid;
+  @Column(name = "accountid", length = 45)
+  private Integer accountid;
 
-    public Integer getServiceid() {
-        return serviceid;
-    }
-    
-    public String getServicename() {
-        return servicename;
-    }
+  @ManyToOne(optional = false, targetEntity = Merchant.class)
+  @JoinColumn(name = "MERCHANTID", referencedColumnName = "MERCHANTID")
+  private Merchant fkmerchantid;
 
-    public void setServicename(String servicename) {
-        this.servicename = servicename;
-    }
-    
-    public void setServiceid(Integer serviceid) {
-        this.serviceid = serviceid;
-    }
+  public Integer getServiceid() {
+    return serviceid;
+  }
 
-    public String getDescription() {
-        return description;
-    }
+  public String getServicename() {
+    return servicename;
+  }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+  public void setServicename(String servicename) {
+    this.servicename = servicename;
+  }
 
-    public Integer getAccountid() {
-        return accountid;
-    }
+  public void setServiceid(Integer serviceid) {
+    this.serviceid = serviceid;
+  }
 
-    public void setAccountid(Integer accountid) {
-        this.accountid = accountid;
-    }
+  public String getDescription() {
+    return description;
+  }
 
-   public Merchant getFkmerchantid() {
-       return fkmerchantid;
-   }
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-   public void setFkmerchantid(Merchant fkmerchantid) {
-       this.fkmerchantid = fkmerchantid;
-   }
+  public Integer getAccountid() {
+    return accountid;
+  }
 
+  public void setAccountid(Integer accountid) {
+    this.accountid = accountid;
+  }
+
+  public Merchant getFkmerchantid() {
+    return fkmerchantid;
+  }
+
+  public void setFkmerchantid(Merchant fkmerchantid) {
+    this.fkmerchantid = fkmerchantid;
+  }
 }

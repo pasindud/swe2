@@ -1,7 +1,7 @@
 package com.app.enties;
 
-import javax.persistence.*;
 import java.io.Serializable;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Customer")
@@ -29,7 +29,7 @@ public class Customer implements Serializable {
   @Column(name = "nic", length = 45)
   @Basic
   private String nic;
-  
+
   @Column(name = "addressLine1", length = 45)
   @Basic
   private String addressLine1;
@@ -74,17 +74,17 @@ public class Customer implements Serializable {
   }
 
   public String getNic() {
-      return this.nic;
+    return this.nic;
   }
-  
+
   public void setNic(String nic) {
-      this.nic = nic;
+    this.nic = nic;
   }
-  
+
   public String getTitle() {
     return this.title;
   }
-  
+
   public void setTitle(String title) {
     this.title = title;
   }

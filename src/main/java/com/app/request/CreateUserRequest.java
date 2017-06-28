@@ -8,27 +8,24 @@ package com.app.request;
 import com.app.enties.Customer;
 import com.app.enties.Users;
 
-/**
- * Class used to register the user.
- */
+/** Class used to register the user. */
 public class CreateUserRequest {
-    private Users users;
-    private Customer customer;
+  private Users users;
+  private Customer customer;
 
-    public Users getUsers() {
-        return users;
-    }
+  public Users getUsers() {
+    return users;
+  }
 
-    public void setUsers(Users users) {
-        this.users = users;
-    }
+  public void setUsers(Users users) {
+    this.users = users;
+  }
 
-    public Users getUser() {
-        return this.users;
-    }
+  public Users getUser() {
+    return this.users;
+  }
 
-    public Customer getCustomer() {
-        return this.customer;
-    }
-
+  public Customer getCustomer() {
+    return this.customer;
+  }
 }

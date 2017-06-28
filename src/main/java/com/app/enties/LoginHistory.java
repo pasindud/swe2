@@ -34,7 +34,7 @@ public class LoginHistory {
   @ManyToOne(optional = false, targetEntity = Users.class)
   @JoinColumn(name = "USERID", referencedColumnName = "USERID")
   private Users userid;
-  
+
   public Integer getId() {
     return this.id;
   }

@@ -31,7 +31,7 @@ public class Users {
   private Date creationDate;
 
   // Comment to avoid a loop.
-//  @OneToOne
+  //  @OneToOne
 
   @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   @JoinColumn(name = "customer_id")
@@ -88,13 +88,13 @@ public class Users {
     this.creationDate = creationDate;
   }
 
-    public Customer getCustomer() {
-      return this.customer;
-    }
+  public Customer getCustomer() {
+    return this.customer;
+  }
 
-    public void setCustomer(Customer customer) {
-      this.customer = customer;
-    }
+  public void setCustomer(Customer customer) {
+    this.customer = customer;
+  }
 
   public Merchant getMerchant() {
     return this.merchant;

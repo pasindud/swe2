@@ -41,7 +41,7 @@ public class AccountType {
   @Column(name = "maxOverDraftAmount", precision = 12)
   @Basic
   private Float maxOverDraftAmount;
-  
+
   @Column(name = "dailyWithdrawLimit", precision = 12)
   @Basic
   private Float dailyWithdrawLimit;
@@ -110,12 +110,11 @@ public class AccountType {
     this.maxOverDraftAmount = maxOverDraftAmount;
   }
 
-    public Float getDailyWithdrawLimit() {
-        return dailyWithdrawLimit;
-    }
+  public Float getDailyWithdrawLimit() {
+    return dailyWithdrawLimit;
+  }
 
-    public void setDailyWithdrawLimit(Float dailyWithdrawLimit) {
-        this.dailyWithdrawLimit = dailyWithdrawLimit;
-    }
-  
+  public void setDailyWithdrawLimit(Float dailyWithdrawLimit) {
+    this.dailyWithdrawLimit = dailyWithdrawLimit;
+  }
 }

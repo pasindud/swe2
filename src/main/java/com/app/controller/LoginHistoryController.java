@@ -4,11 +4,6 @@ package com.app.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- *
- * @author Pasindu
- */
+/** @author Pasindu */
 @RestController
-public class LoginHistoryController {
-
-}
+public class LoginHistoryController {}
