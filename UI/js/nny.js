@@ -114,38 +114,29 @@ angular.module('banking', [
     $rootScope.authData = undefined;
     $state.go("login");
   }
-  /*AuthService.authenticate().then(function (result) {
-  var temp = result.data;
-  console.log(temp);
-  var authData = {
-  accessToken : temp.session,
-  accessLevel : temp.AccessLevel
-};
-$scope.authData = authData;
-});*/
 
-$scope.title = 'No Name Yet';
-$scope.selectedLanguage = "EN";
-$scope.setLanguage = function (provider) {
-  $http.get('areas/common/localization/'+ provider +'.json')
-  .then(function(res){
-    $rootScope.labels = res.data[0];
-    $scope.selectedLanguage = provider.toUpperCase();
+  $scope.title = 'No Name Yet';
+  $scope.selectedLanguage = "EN";
+  $scope.setLanguage = function (provider) {
+    $http.get('areas/common/localization/'+ provider +'.json')
+    .then(function(res){
+      $rootScope.labels = res.data[0];
+      $scope.selectedLanguage = provider.toUpperCase();
+    });
+  };
+  $scope.$on('$viewContentLoaded', function(){
+    $http.get('areas/common/localization/en-us.json')
+    .then(function(res){
+      $rootScope.labels = res.data[0];
+    });
   });
-};
-$scope.$on('$viewContentLoaded', function(){
-  $http.get('areas/common/localization/en-us.json')
-  .then(function(res){
-    $rootScope.labels = res.data[0];
-  });
-});
 
-$scope.getLabels = function () {
-  return $rootScope.labels;
-};
-$scope.setPage = function(view) {
-  $location.path(view);
-};
+  $scope.getLabels = function () {
+    return $rootScope.labels;
+  };
+  $scope.setPage = function(view) {
+    $location.path(view);
+  };
 })
 .run(function ($rootScope,$state, AuthService,$location) {
   $rootScope.$on('$stateChangeStart',function (event, toState, toParams, fromState, fromParams, error) {
@@ -156,9 +147,9 @@ $scope.setPage = function(view) {
       return;
     }
 
-/* if (!AuthService.isAuthRoute($location.url())&&!AuthService.isLoggedin()) {
-      $state.go("login");
-      event.preventDefault();
-    }*/
-  });
+    /* if (!AuthService.isAuthRoute($location.url())&&!AuthService.isLoggedin()) {
+    $state.go("login");
+    event.preventDefault();
+  }*/
+});
 });
