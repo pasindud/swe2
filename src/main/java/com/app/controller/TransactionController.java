@@ -28,7 +28,7 @@ public class TransactionController {
   */
   @RequestMapping("/api/do_transaction")
   @PostMapping
-  private Map<String, List<String>> doTransaction(@RequestBody Transaction transaction) {      
+  private Map<String, List<String>> doTransaction(@RequestBody Transaction transaction) throws Exception {
      List<String> errors =  transactionService.do_transactions(transaction);
      
      Map<String, List<String>> response = new HashMap<String, List<String>>();
