@@ -1,39 +1,52 @@
 package com.app.service;
 
+import com.app.Utils;
+import com.app.enties.LoginHistory;
 import com.app.enties.Users;
+import com.app.repository.LoginHistoryRepository;
 import com.app.repository.RoleRepository;
-import com.app.repository.UserRepository;
+import com.app.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl implements UserService {
-  @Autowired private UserRepository userRepository;
+public class UserServiceImpl {
+  @Autowired private SecurityServiceImpl securityService;
+  @Autowired private UsersRepository usersRepository;
   @Autowired private RoleRepository roleRepository;
+  @Autowired private LoginHistoryRepository loginHistoryRepository;
   @Autowired private BCryptPasswordEncoder bCryptPasswordEncoder;
 
   public UserServiceImpl() {
     bCryptPasswordEncoder = new BCryptPasswordEncoder();
   }
 
-  public UserServiceImpl(UserRepository userRepository) {
-    this();
-    this.userRepository = userRepository;
+  public int getLoggedInUserId() {
+    return usersRepository.findByUsername(Utils.getCurrentUsers()).getUserId();
   }
 
-  @Override
+  public UserServiceImpl(UsersRepository usersRepository) {
+    this();
+    this.usersRepository = usersRepository;
+  }
+
   public void save(Users user) {
     user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-    //  TODO need to implement the user type /roles
-    //user.setRoles(new HashSet<>(roleRepository.findAll()));
-
-    userRepository.save(user);
+    usersRepository.save(user);
   }
 
-  @Override
+  public void userLoggedIn() {
+    Users users = new Users();
+    users.setUserId(getLoggedInUserId());
+    LoginHistory loginHistory = new LoginHistory();
+    loginHistory.setUserid(users);
+    loginHistoryRepository.save(loginHistory);
+
+  }
+
   public Users findByUsername(String username) {
-    // Tesitn gosmething
-    return userRepository.findByUsername(username);
+    return usersRepository.findByUsername(username);
   }
 }

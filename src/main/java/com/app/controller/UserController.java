@@ -5,20 +5,16 @@
  */
 package com.app.controller;
 
-import com.app.Utils;
-import com.app.enties.LoginHistory;
-import com.app.enties.Users;
 import com.app.repository.LoginHistoryRepository;
-import com.app.repository.UserRepository;
+import com.app.repository.UsersRepository;
 import com.app.request.CreateUserRequest;
-import com.app.service.UserService;
-import java.util.Collections;
+
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
+
+import com.app.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,10 +33,10 @@ public class UserController {
     private static String RESPONSE_USERID_MAP_KEY = "userId";
     
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
     
     @Autowired
-    private UserRepository userRepository;
+    private UsersRepository usersRepository;
     
     @Autowired
     private LoginHistoryRepository loginHistoryRepository;
@@ -48,16 +44,10 @@ public class UserController {
     @RequestMapping("/api/auth")
     @GetMapping
     Map<String, Object> getToken(HttpSession session) {
-        
-        Users loggedInUser = userRepository.findByUsername(Utils.getCurrentUsers());
-        
-        LoginHistory loginHistory = new LoginHistory();        
-        loginHistory.setUserid(loggedInUser);
-        loginHistoryRepository.save(loginHistory);
-        
+        userService.userLoggedIn();
         HashMap<String, Object> map = new HashMap<>();
         map.put(RESPONSE_SESSION_MAP_KEY, session.getId());
-        map.put(RESPONSE_USERID_MAP_KEY, loggedInUser.getUserId());
+        map.put(RESPONSE_USERID_MAP_KEY, userService.getLoggedInUserId());
         map.put(RESPONSE_ACCESS_LEVEL_MAP_KEY, ACCESS_LEVEL_ID);
         return map;
     }
@@ -65,7 +55,7 @@ public class UserController {
     /*
 
   curl -H "Content-Type: application/json" -X POST \
-  -d '{"username":"xyz","password":"xyz"}' \
+  -d '{"username":"xyz","password":"xyz"}¡¡™' \
   http://localhost:8080/api/registration
      */
     @RequestMapping(value = "/api/registration")

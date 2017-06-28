@@ -2,7 +2,7 @@ package com.app.service;
 
 import com.app.enties.Role;
 import com.app.enties.Users;
-import com.app.repository.UserRepository;
+import com.app.repository.UsersRepository;
 import java.util.HashSet;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +16,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-  @Autowired private UserRepository userRepository;
+  @Autowired private UsersRepository usersRepository;
 
   @Override
   @Transactional(readOnly = true)
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    Users user = userRepository.findByUsername(username);
+    Users user = usersRepository.findByUsername(username);
 
     Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
     for (Role role : user.getRoles()) {

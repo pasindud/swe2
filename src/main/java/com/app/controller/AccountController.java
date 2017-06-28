@@ -3,7 +3,7 @@ package com.app.controller;
 import com.app.enties.Account;
 import com.app.enties.Users;
 import com.app.repository.AccountRepository;
-import com.app.repository.UserRepository;
+import com.app.repository.UsersRepository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -38,7 +38,7 @@ curl -u xyz:xyz -v http://localhost:8080/api/accounts?id=1
 public class AccountController {
   @Autowired private AccountRepository accountRepository;
 
-  @Autowired private UserRepository userRepository;
+  @Autowired private UsersRepository usersRepository;
 
   @Autowired private JdbcTemplate jdbcTemplate;
 
@@ -65,7 +65,7 @@ public class AccountController {
     String name = user.getUsername(); //get logged in username
     System.out.println(user.getUsername());
 
-    Users loggedInUser = userRepository.findByUsername(name);
+    Users loggedInUser = usersRepository.findByUsername(name);
 
     List<Account> accounts = accountRepository.findByUserid(users);
     for (int i = 0; i < accounts.size(); i++) {
