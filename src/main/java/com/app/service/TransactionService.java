@@ -75,6 +75,14 @@ public class TransactionService {
         return true;
     }
 
+    private boolean getTransactionTypeEqW() {
+        return transaction.getTranstype().equalsIgnoreCase("W");
+    }
+
+    private boolean getTransactionTypeEqT() {
+        return transaction.getTranstype().equalsIgnoreCase("T");
+    }
+
     /** Check whether the required fields our there.
      * @return  */
     private boolean validateRequired() {
@@ -82,12 +90,12 @@ public class TransactionService {
             errors.add("Transaction type is not set.");
             return false;
         }
-        if (transaction.getToaccountid() == 0 && !transaction.getTranstype().equalsIgnoreCase("W")) {
+        if (transaction.getToaccountid() == 0 && !getTransactionTypeEqW()) {
             errors.add("Receiver account number is not valid.");
             return false;
         }
 
-        if (transaction.getTranstype().equalsIgnoreCase("T")||transaction.getTranstype().equalsIgnoreCase("W")) {
+        if (getTransactionTypeEqT()||getTransactionTypeEqW()) {
             if (transaction.getFromaccountid()== 0) {
                 errors.add("Sender account number is not valid..");
                 return false;
@@ -98,11 +106,11 @@ public class TransactionService {
             errors.add("Transfer amount is not valid..");
             return false;
         }
-        if (toAccount == null && !transaction.getTranstype().equalsIgnoreCase("W")) {
+        if (toAccount == null && !getTransactionTypeEqW()) {
             errors.add("Receiver account account not found");
             return false;
         }
-        if (transaction.getTranstype().equalsIgnoreCase("T")||transaction.getTranstype().equalsIgnoreCase("W")) {
+        if (getTransactionTypeEqT()||getTransactionTypeEqW()) {
             if (fromAccount == null) {
                 errors.add("Sender account found");
                 return false;
@@ -111,7 +119,7 @@ public class TransactionService {
                 transaction.setFromcurrency(fromAccount.getCurrency());
             }
         }
-        if(transaction.getTocurrency()==null && !transaction.getTranstype().equalsIgnoreCase("W")){
+        if(transaction.getTocurrency()==null && !getTransactionTypeEqW()){
             transaction.setTocurrency(toAccount.getCurrency());
         }
         
@@ -123,11 +131,11 @@ public class TransactionService {
     }
 
     private void updateAccounts() {
-        if (transaction.getTranstype().equalsIgnoreCase("T")||transaction.getTranstype().equalsIgnoreCase("W")) {
+        if (getTransactionTypeEqT()||getTransactionTypeEqW()) {
             fromAccount.setBalance(fromAccount.getBalance()-(transaction.getAmount()*transaction.getFromrate()));
             accountRepository.save(fromAccount);
         }
-        if (transaction.getTranstype().equalsIgnoreCase("T")||transaction.getTranstype().equalsIgnoreCase("D")) {
+        if (getTransactionTypeEqT()||transaction.getTranstype().equalsIgnoreCase("D")) {
             toAccount.setBalance(toAccount.getBalance() + (transaction.getAmount() * transaction.getTorate()));
             accountRepository.save(toAccount);
         }
@@ -137,14 +145,14 @@ public class TransactionService {
 
         RestTemplate restTemplate = new RestTemplate();
 
-        if (transaction.getTranstype().equalsIgnoreCase("T")||transaction.getTranstype().equalsIgnoreCase("W")) {
+        if (getTransactionTypeEqT()||getTransactionTypeEqW()) {
 
             Float temp1= ExchangeRates.getExchangeRate(BANK_DEFAULT_CURRENCY, transaction.getFromcurrency());
             transaction.setFromrate(new Float((Math.round( temp1 * 100.0) / 100.0)));
 
             transaction.setAmount(transaction.getAmount()/transaction.getFromrate());
         }
-        if (transaction.getTranstype().equalsIgnoreCase("T")||transaction.getTranstype().equalsIgnoreCase("D")) {
+        if (getTransactionTypeEqT()||transaction.getTranstype().equalsIgnoreCase("D")) {
             Float temp2=ExchangeRates.getExchangeRate(BANK_DEFAULT_CURRENCY, transaction.getTocurrency());
             transaction.setTorate(new Float((Math.round( temp2 * 100.0) / 100.0)));
             
