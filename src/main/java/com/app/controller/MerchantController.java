@@ -13,16 +13,26 @@ import com.app.repository.MerchantRepository;
 import com.app.repository.MerchantServicesRepository;
 import com.app.request.PayBillRequest;
 import com.app.service.TransactionService;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
+import java.util.stream.Collectors;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import javax.validation.Valid;
 
 /*
 
@@ -74,13 +84,21 @@ public class MerchantController {
      */
     @RequestMapping("/api/merchant_services_pay_bill")
     @PostMapping
-    public Map<String, List<String>> payBill(@RequestBody PayBillRequest payBillRequest) throws Exception {
+    public Map<String, List<String>> payBill(@Valid @RequestBody PayBillRequest payBillRequest, Errors requestError) throws Exception {
+        Map<String, List<String>> response = new HashMap<String, List<String>>();
+
+        if (requestError.hasErrors()){
+            response.put("errors", Utils.getListFromErrors(requestError));
+            return response;
+        }
+
         Transaction transaction = new Transaction();
         MerchantServices service
                 = merchantServicesRepository.findByServiceid(payBillRequest.getSelectedServiceId());
 
         if (service == null) {
         }
+        // TODO: Add transaction type.
         // Validate the code here.
         transaction.setFromaccountid(payBillRequest.getSelectedAccountId());
         transaction.setToaccountid(service.getAccountid());
@@ -89,7 +107,6 @@ public class MerchantController {
 
         List<String> errors = transactionService.do_transactions(transaction);
 
-        Map<String, List<String>> response = new HashMap<String, List<String>>();
         response.put("errors", errors);
         return response;
     }

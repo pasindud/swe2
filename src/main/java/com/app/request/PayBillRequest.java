@@ -2,15 +2,24 @@
 
 package com.app.request;
 
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 /**
  *
  * @author Pasindu
  */
 public class PayBillRequest {
-    private float amount = -1;
+    @NotNull(message = "Incorrect bill reference number.")
     private String billReferenceNumber;
-    private int selectedServiceId ;
-    private int selectedAccountId;
+    @Min(value = 1, message = "Incorrect amount.")
+    private float amount = -1;
+    @NotNull(message = "Service id has not been selected.")
+    private Integer selectedServiceId;
+    @NotNull(message = "Account has not been selected.")
+    private Integer selectedAccountId;
 
     public int getSelectedAccountId() {
         return selectedAccountId;
