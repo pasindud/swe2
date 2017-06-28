@@ -34,9 +34,10 @@ public class AccountService {
     private String currency;
     private int accTypeid;
     private int branchid;
-    private List<String> errors = new ArrayList<String>();
+    private List<String> errors;
 
     public List<String> createAccount(CreateAccountRequest createAccountRequest) {
+        errors = new ArrayList<String>();
         this.accTypeid = createAccountRequest.getAccTypeid();
         this.branchid = createAccountRequest.getBranchid();
         validateIds();

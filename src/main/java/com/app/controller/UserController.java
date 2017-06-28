@@ -10,10 +10,13 @@ import com.app.repository.UsersRepository;
 import com.app.request.CreateUserRequest;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 
+import com.app.service.UserRegistration;
 import com.app.service.UserServiceImpl;
+import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,7 +43,10 @@ public class UserController {
     
     @Autowired
     private LoginHistoryRepository loginHistoryRepository;
-    
+
+    @Autowired
+    private UserRegistration userRegistration;
+
     @RequestMapping("/api/auth")
     @GetMapping
     Map<String, Object> getToken(HttpSession session) {
@@ -60,8 +66,7 @@ public class UserController {
      */
     @RequestMapping(value = "/api/registration")
     @PostMapping
-    public String registration(@RequestBody CreateUserRequest createUserRequest) {
-        userService.save(createUserRequest.getUser());
-        return "{'status':'ok'}";
+    public ImmutableMap<String, List<String>> registration(@RequestBody CreateUserRequest createUserRequest) {
+        return ImmutableMap.of("errors", userRegistration.registerUser(createUserRequest));
     }
 }

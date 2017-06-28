@@ -31,8 +31,11 @@ public class Users {
   private Date creationDate;
 
   // Comment to avoid a loop.
-  //  @OneToOne(targetEntity = Customer.class, mappedBy = "users")
-  //  private Customer customer;
+//  @OneToOne
+
+  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @JoinColumn(name = "customer_id")
+  private Customer customer;
 
   @OneToOne(targetEntity = Merchant.class)
   private Merchant merchant;
@@ -85,13 +88,13 @@ public class Users {
     this.creationDate = creationDate;
   }
 
-  //  public Customer getCustomer() {
-  //    return this.customer;
-  //  }
-  //
-  //  public void setCustomer(Customer customer) {
-  //    this.customer = customer;
-  //  }
+    public Customer getCustomer() {
+      return this.customer;
+    }
+
+    public void setCustomer(Customer customer) {
+      this.customer = customer;
+    }
 
   public Merchant getMerchant() {
     return this.merchant;

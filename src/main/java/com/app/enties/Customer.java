@@ -1,18 +1,13 @@
 package com.app.enties;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "Customer")
-public class Customer {
-
-  @Column(name = "customerid", nullable = false)
+public class Customer implements Serializable {
   @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer customerid;
 
   @Column(name = "title", length = 5)
@@ -67,7 +62,7 @@ public class Customer {
   @Basic
   private String faxNo;
 
-  @OneToOne(optional = false, targetEntity = Users.class)
+  @OneToOne(mappedBy = "customer")
   private Users users;
 
   public Integer getUserId() {
