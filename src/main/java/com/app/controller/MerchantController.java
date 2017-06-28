@@ -74,7 +74,7 @@ public class MerchantController {
      */
     @RequestMapping("/api/merchant_services_pay_bill")
     @PostMapping
-    public Map<String, List<String>> payBill(@RequestBody PayBillRequest payBillRequest) {
+    public Map<String, List<String>> payBill(@RequestBody PayBillRequest payBillRequest) throws Exception {
         Transaction transaction = new Transaction();
         MerchantServices service
                 = merchantServicesRepository.findByServiceid(payBillRequest.getSelectedServiceId());
