@@ -39,3 +39,7 @@ http://localhost:8080/api/registration
 curl -u xyz:xyz -H "Content-Type: application/json" -X POST http://localhost:8080/api/merchant_services_pay_bill -d '{"amount":1, "selectedServiceId": 1  }'
 
 curl -u xyz:xyz -H "Content-Type: application/json" -X POST http://localhost:8080/api/merchant_services_pay_bill -d '{"amount":-21, "selectedServiceId": 1  }'
+
+
+curl -u xyz:xyz  "http://localhost:8080/api/admin/change_user_status?user_id=1&activate=true"
+curl -u ADMIN:xyz "http://localhost:8080/api/admin/change_user_status?user_id=1&activate=true"
