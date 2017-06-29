@@ -3,6 +3,9 @@
 package com.app.request;
 
 
+import com.app.annotation.Checkdb;
+import com.app.enties.MerchantServices;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -14,9 +17,11 @@ public class PayBillRequest {
   @Min(value = 1, message = "Incorrect amount.")
   private float amount = -1;
 
+  @Checkdb(message = "Invalid service selected", entityClass = MerchantServices.class)
   @NotNull(message = "Service id has not been selected.")
   private Integer selectedServiceId;
 
+  @Checkdb(message = "Invalid account selected", userCheck = true)
   @NotNull(message = "Account has not been selected.")
   private Integer selectedAccountId;
 
