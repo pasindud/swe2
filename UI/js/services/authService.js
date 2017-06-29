@@ -1,7 +1,5 @@
+/* Author : Dushan Galappaththi */
 var nnyApp = angular.module('banking');
-var AUTH_TOKEN = null;
-var USER_ID = null;
-
 nnyApp.factory('AuthService',['$http','nnyConst','$rootScope',function ($http,nnyConst,$rootScope) {
 
   function requestor(username,password)

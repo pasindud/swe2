@@ -138,7 +138,9 @@
 <div id="ErrorModal" class="modal">
   <div class="modal-content">
     <h4>{{ErrorDialog.Title}}</h4>
-    <p>{{ErrorDialog.Body}}</p>
+    <ul ng-repeat="error in ErrorDialog.Body">
+      <li>{{error}}</li>
+    </ul>
   </div>
   <div class="modal-footer">
     <a class="modal-action modal-close waves-effect waves-green btn-flat">OK</a>
