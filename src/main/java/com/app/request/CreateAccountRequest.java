@@ -1,7 +1,5 @@
 package com.app.request;
 
-
-
 /** Created by Pasindu on 6/29/17. */
 public class CreateAccountRequest {
   private String currency;

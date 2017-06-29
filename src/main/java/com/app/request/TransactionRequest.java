@@ -1,6 +1,5 @@
 package com.app.request;
 
-
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
