@@ -33,15 +33,16 @@ public class UserRegistration {
         save();
       }
     } catch (Exception e) {
-      errors.add("Unkown error occured");
-      logger.error("Error occured while registering user", e);
+      errors.add("Unknown error occured");
+      logger.error("Error occurred while registering user", e);
     }
     return errors;
   }
 
   private void save() {
     users.setCustomer(customer);
-    Users newUser = usersRepository.save(users);
+//    Users newUser = usersRepository.save(users);
+    Users newUser = userService.save(users);
     if (newUser == null) {
       errors.add("Cannot create users");
     }

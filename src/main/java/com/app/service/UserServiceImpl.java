@@ -31,9 +31,9 @@ public class UserServiceImpl {
     this.usersRepository = usersRepository;
   }
 
-  public void save(Users user) {
+  public Users save(Users user) {
     user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-    usersRepository.save(user);
+    return usersRepository.save(user);
   }
 
   public void userLoggedIn() {
