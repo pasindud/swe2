@@ -2,7 +2,7 @@
   <div class="col s12">
     <h5 class="truncate center-align " style="font-weight:bold" >{{labels.CreateNewAccount}}</h5>
   </div>
-
+  <input type="hidden" ng-model="FormData.init" ng-value="init">
   <div class="section col s12">
     <h5>{{labels.ProfileCredentials}}</h5>
     <div class="divider col s12"></div>
@@ -26,16 +26,16 @@
     <h5>{{labels.PersonalInformation}}</h5>
     <div class="divider col s12"></div>
     <div  class="input-field col s12 m12 16 xl6">
-      <input ng-model="FormData.first_name" id="first_name" type="text" length="150">
+      <input id="first_name" type="text" length="150" ng-model="FormData.first_name">
       <label for="first_name">{{labels.FirstName}}</label>
     </div>
     <div   class="input-field col s12 m12 16 xl6">
-      <input ng-model="FormData.last_name" id="last_name" type="text" length="150">
+      <input id="last_name" type="text" length="150" ng-model="FormData.last_name">
       <label for="last_name">{{labels.LastName}}</label>
     </div>
     <div class="col s12 m12 16 xl6" ng-controller="DatePickerController">
       <label for="dob">{{labels.DateOfBirth}}</label>
-      <input input-date type="text" name="dob"  id="dob"  ng-model="currentTime" container="" format="dd/mm/yyyy"
+      <input input-date type="text" name="dob"  id="dob"  ng-model="FormData.dob" container="" format="dd/mm/yyyy"
       months-full="{{ month }}" months-short="{{ monthShort }}" weekdays-full="{{ weekdaysFull }}" weekdays-short="{{ weekdaysShort }}"
       weekdays-letter="{{ weekdaysLetter }}" disable="disable"  min="{{ minDate }}" max="{{ maxDateToday }}" today="today" first-day="1"
       clear="clear" close="close" select-years="15" on-start="onStart()" on-render="onRender()" on-open="onOpen()" on-close="onClose()"
@@ -44,46 +44,46 @@
     <div class="col s12 m12 16 xl6">
       <p class="col s12 center">
         {{labels.Gender}} :
-        <input name="gender" type="radio" id="male" />
+        <input name="gender" type="radio" id="male" ng-model="FormData.gender" ng-value="male"/>
         <label for="male">{{labels.Male}}</label>
-        <input name="gender" type="radio" id="female" />
+        <input name="gender" type="radio" id="female" ng-model="FormData.gender" ng-value="female"/>
         <label for="female">{{labels.Female}}</label>
       </p>
     </div>
     <div class="input-field col s12">
-      <input id="NIC" type="text">
+      <input id="NIC" type="text" ng-model="FormData.nic">
       <label for="NIC">{{labels.NationalIdentityCard}}</label>
     </div>
     <div class="input-field col s12">
-      <input id="email_address" type="email" class="validate">
+      <input id="email_address" type="email" class="validate" ng-model="FormData.email">
       <label>{{labels.EmailAddress}}</label>
     </div>
     <div class="input-field col s6 m6 l6 xl6">
-      <input id="contact1" type="text" class="validate">
+      <input id="contact1" type="text" class="validate" ng-model="FormData.contact1">
       <label for="contact1">{{labels.Contact1}}</label>
     </div>
     <div   class="input-field col s6 m6 l6 xl6">
-      <input id="contact2" type="text" class="validate">
+      <input id="contact2" type="text" class="validate" ng-model="FormData.contact2">
       <label for="contact2">{{labels.Contact2}}</label>
     </div>
     <div   class="input-field col s6 m6 l6 xl6">
-      <input id="faxNo" type="text" class="validate">
+      <input id="faxNo" type="text" class="validate" ng-model="FormData.faxNo">
       <label for="faxNo">{{labels.FaxNo}}</label>
     </div>
     <div   class="input-field col s12">
-      <input id="addressL1" type="text" length="150">
+      <input id="addressL1" type="text" length="150" ng-model="FormData.addressL1">
       <label for="addressL1">{{labels.Address}} {{labels.Line1}}</label>
     </div>
     <div   class="input-field col s12">
-      <input id="addressL2" type="text" length="150">
+      <input id="addressL2" type="text" length="150" ng-model="FormData.addressL2">
       <label for="addressL2">{{labels.Address}} {{labels.Line2}}</label>
     </div>
     <div   class="input-field col s12">
-      <input id="addressL3" type="text" length="150">
+      <input id="addressL3" type="text" length="150" ng-model="FormData.addressL3">
       <label for="addressL3">{{labels.Address}} {{labels.Line3}}</label>
     </div>
     <div   class="input-field col s6 m6 l6 xl6">
-      <input id="city" type="text">
+      <input id="city" type="text" ng-model="FormData.city">
       <label for="city">{{labels.City}}</label>
     </div>
   </div>
@@ -91,24 +91,24 @@
     <h5>{{labels.BankAccountInformation}}</h5>
     <div class="divider col s12"></div>
     <div   class="input-field col s12 m12 l6 xl6">
-      <input id="account_number" type="text" length="150">
+      <input id="account_number" type="text" length="150" ng-model="FormData.account_number">
       <label for="account_number">{{labels.AccountNumber}}</label>
     </div>
     <div   class="input-field col s12 m12 l6 xl6">
-      <input id="branch" type="text" length="150">
+      <input id="branch" type="text" length="150" ng-model="FormData.branch">
       <label for="branch">{{labels.Branch}}</label>
     </div>
     <div   class="input-field col s12">
-      <input id="account_barrier" type="text" length="150">
+      <input id="account_barrier" type="text" length="150" ng-model="FormData.account_barrier">
       <label for="account_barrier">{{labels.AccountBarriersName}}</label>
     </div>
     <div   class="input-field col s12 m12 l6 xl6">
-      <input id="account_type" type="text" length="150">
+      <input id="account_type" type="text" length="150" ng-model="FormData.account_type">
       <label for="account_type">{{labels.AccountType}}</label>
     </div>
     <div class="col s12 m12 16 xl6" ng-controller="DatePickerController">
       <label for="account_open_date">{{labels.AccountOpenDate}}</label>
-      <input input-date type="text" name="account_open_date"  id="account_open_date"  ng-model="currentTime" container="" format="dd/mm/yyyy"
+      <input input-date type="text" name="account_open_date"  id="account_open_date"  ng-model="FormData.account_open_date" container="" format="dd/mm/yyyy"
       months-full="{{ month }}" months-short="{{ monthShort }}" weekdays-full="{{ weekdaysFull }}" weekdays-short="{{ weekdaysShort }}"
       weekdays-letter="{{ weekdaysLetter }}" disable="disable"  min="{{ minDate }}" max="{{ maxDateToday }}" today="today" first-day="1"
       clear="clear" close="close" select-years="15" on-start="onStart()" on-render="onRender()" on-open="onOpen()" on-close="onClose()"
@@ -119,7 +119,7 @@
     <h5>{{labels.TermsAndConditions}}</h5>
     <div class="divider col s12"></div>
     <div class="col s12 center" style="margin-top:50px;">
-      <input type="checkbox" class="filled-in" id="agree_terms" />
+      <input type="checkbox" class="filled-in" id="agree_terms" ng-model="FormData.agree_terms"/>
       <label for="agree_terms">{{labels.AgreeToTnC}}</label>
     </div>
 

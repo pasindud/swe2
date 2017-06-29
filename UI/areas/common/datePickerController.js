@@ -1,7 +1,14 @@
 'use strict';
 angular.module('banking')
-.controller('DatePickerController',function ($scope) {
+.controller('DatePickerController',function ($scope,$rootScope) {
   var currentTime = new Date();
+  $scope.onSet = function () {
+    if($scope.FormData !== undefined){
+      $rootScope.ca_formData_DOB = $scope.FormData.dob;
+      $rootScope.ca_formData_AOD = $scope.FormData.account_open_date;
+    }
+  }
+
   $scope.currentTime = currentTime;
   $scope.month = $scope.labels.MonthLong,
   $scope.monthShort = $scope.labels.MonthShort;

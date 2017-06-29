@@ -16,8 +16,8 @@ $('#ErrorModal').modal({
         opacity: .7,
         inDuration: 300,
         outDuration: 200,
-        startingTop: '0%',
-        endingTop: '40%',
+        startingTop: '10%',
+        endingTop: '20%',
       }
   );
 
