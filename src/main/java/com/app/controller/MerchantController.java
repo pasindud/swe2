@@ -5,7 +5,7 @@
  */
 package com.app.controller;
 
-import com.app.*;
+import com.app.Utils;
 import com.app.enties.Merchant;
 import com.app.enties.MerchantServices;
 import com.app.enties.Transaction;
@@ -13,6 +13,8 @@ import com.app.repository.MerchantRepository;
 import com.app.repository.MerchantServicesRepository;
 import com.app.request.PayBillRequest;
 import com.app.service.TransactionService;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,50 +28,74 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/*
-
-curl -u xyz:xyz -v http://localhost:8080/api/merchant
-
+/**
+ * The class for merchant API endpoints.
  */
-
-/** @author Pasindu */
 @RestController
 public class MerchantController {
-
+  /** Query to get list of merchant services. */
   private String GET_ALL_MERCHANT_SERVICES_SQL_QUERY =
       "select merchant_services.serviceid, \n"
           + "merchant_services.description,\n"
           + "merchant_services.servicename,\n"
           + "merchant.orgname\n"
           + "from merchant_services left join `merchant` on `merchant`.`merchantid` = merchant_services.`merchantid`";
-
+  /** Class used to query data. */
   @Autowired private JdbcTemplate jdbcTemplate;
-
+  /** Repository to access merchant data. */
   @Autowired private MerchantRepository merchantRepository;
+  /** Repository to access merchant service data. */
   @Autowired private MerchantServicesRepository merchantServicesRepository;
-
+  /** Service to operate on transaction data. */
   @Autowired private TransactionService transactionService;
 
+  /**
+   * API to get all the merchants.
+   * @return list of merchants.
+   */
   @RequestMapping("/api/merchant")
   @GetMapping
   public List<Merchant> findAll() {
     return merchantRepository.findAll();
   }
 
+  /**
+   * API to get all the merchants and thier services.
+   * @return list of merchants services.
+   */
   @RequestMapping("/api/merchant_services")
   public List<Map<String, Object>> getAllServicesByMerchantId() {
     return jdbcTemplate.queryForList(GET_ALL_MERCHANT_SERVICES_SQL_QUERY);
   }
 
   /**
-   * curl -u xyz:xyz -H "Content-Type: application/json" -X POST \
-   * http://localhost:8080/api/merchant_services_pay_bill \ -d '{"amount":1, "selectedServiceId": 1,
-   * "selectedAccountId":1, "billReferenceNumber": 1}'
+   * API endpoint to create a new merchant.
+   * @return the newly create merchant.
+   */
+  @RequestMapping("/api/create_merchant")
+  public Object createMerchant() {
+    return null;
+  }
+
+  /**
+   * API endpoint to create a new merchant service.
+   * @return the newly create merchant service.
+   */
+  @RequestMapping("/api/create_merchant_service")
+  public Object createMerchantService() {
+    return null;
+  }
+
+  /**
+   * API endpoint to pay bills.
+   * @param payBillRequest the API request contain details required data for the operation.
+   * @param requestError errors in the API request.
+   * @return if returned error map is empty then the operation was successful else errors can be found in the map.
    */
   @RequestMapping("/api/merchant_services_pay_bill")
   @PostMapping
   public Map<String, List<String>> payBill(
-      @Valid @RequestBody PayBillRequest payBillRequest, Errors requestError) throws Exception {
+      @Valid @RequestBody PayBillRequest payBillRequest, Errors requestError) {
     Map<String, List<String>> response = new HashMap<String, List<String>>();
 
     if (requestError.hasErrors()) {
@@ -89,7 +115,13 @@ public class MerchantController {
     System.out.println("payBillRequest.getAmount() " + payBillRequest.getAmount());
     transaction.setAmount(payBillRequest.getAmount());
 
-    List<String> errors = transactionService.do_transactions(transaction);
+    List<String> errors = new ArrayList <>();
+    try {
+      errors = transactionService.do_transactions(transaction);
+    } catch (Exception e) {
+      e.printStackTrace();
+      errors.add("Error occured while trying to pay the bills.");
+    }
 
     response.put("errors", errors);
     return response;
