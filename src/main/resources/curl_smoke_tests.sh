@@ -4,6 +4,8 @@ set -v
 
 curl -u xyz:xyz "http://localhost:8080/api/auth"
 
+curl -u ADMIN:xyz "http://localhost:8080/api/auth"
+
 curl -u xyz:xyz "http://localhost:8080/api/merchant_services"
 
 curl -u xyz:xyz "http://localhost:8080/api/merchant"

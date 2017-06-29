@@ -5,7 +5,7 @@ insert into role (id, name) values (1,'USER');
 insert into role (id, name) values (2,'ADMIN');
 
 insert into users(user_id, password, username, customer_id) values (1,'$2a$10$sLDnONOzHvBR04Xy5aiT2uAyZf3VUKDOKVFAQqNA2/bUsxC0Z0fOm','xyz',1);
-insert into users(user_id, password, username) values (2,'$2a$10$kbgMM6IXQJcqAMUAUiOD8OII8pEwlrGuWhPyhGz0SFxC7V9kQuY0G','ADMINA');
+insert into users(user_id, password, username) values (2,'$2a$10$sLDnONOzHvBR04Xy5aiT2uAyZf3VUKDOKVFAQqNA2/bUsxC0Z0fOm','ADMIN');
 
 insert into user_role(user_id, role_id) values(1,1)
 insert into user_role(user_id, role_id) values(2,2)
