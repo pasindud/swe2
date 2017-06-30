@@ -40,6 +40,9 @@ public class Users {
   @OneToOne(targetEntity = Merchant.class)
   private Merchant merchant;
 
+  private boolean activate = true;
+  private boolean timeLocked = true;
+
   public Integer getUserId() {
     return userId;
   }
