@@ -4,6 +4,7 @@ angular.module('banking')
 
   AuthService.getRequest("/api/accounts?id="+$rootScope.authData.userId, null, function (response) {
     $scope.user_accounts = response.data;
+    console.log(response.data);
   });
 
   $http.get('SampleJSON/Accounts/Account1.json')
@@ -12,23 +13,18 @@ angular.module('banking')
     $scope.PersonalInformation = res.data[0].PersonalInformation;
     $scope.Accounts = res.data[0].Accounts;
     var selectedAccountDetails = {
-      branch : "N/A",
-      openDate : "N/A",
-      accountType : "N/A",
+      branchId : {branchName:"N/A"},
+      accTypeId : { accName:"N/A", accInterestRates:"N/A"},
+      createdDate : "N/A",
       balance : "N/A",
       loan : "N/A",
       Interest : "N/A"
     }
     $scope.selectedAccountDetails = selectedAccountDetails;
     $scope.setAccountDetails = function () {
-      var details = $filter('filter')($scope.Accounts,{AccountNumber : $scope.selectedAccount},true)[0];
-      $scope.selectedAccountDetails.branch = details.Branch;
-      $scope.selectedAccountDetails.openDate = details.OpenDate;
-      $scope.selectedAccountDetails.accountType = details.AcccountType;
-      $scope.selectedAccountDetails.balance = details.Balance;
-      $scope.selectedAccountDetails.loan = details.loan;
-      $scope.selectedAccountDetails.Interest = details.Interest;
-
+      var details = $filter('filter')($scope.user_accounts,{accountid : $scope.selectedAccount})[0];
+      console.log(details);
+      $scope.selectedAccountDetails = details;
     }
   })
 });

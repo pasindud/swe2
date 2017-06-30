@@ -3,18 +3,18 @@
     <h5>{{labels.BankAccountInformation}}</h5>
     <div class="divider col s12"></div>
     <div class="input-field col s12 m12 l12 xl6">
-      {{labels.AccountNumber}}
+      {{labels.accountid}}
       <select material-select watch  ng-change="setAccountDetails()" ng-model="selectedAccount">
         <option value="" disabled selected>Choose your Account</option>
-        <option ng-repeat="account in Accounts" value={{account.AccountNumber}}>{{account.AccountNumber}}</option>
+        <option ng-repeat="account in user_accounts" value={{account.accountid}}>{{account.accountid}}</option>
       </select>
       <div class="col s12">
         <div class="col s6">
-          <p><b>{{labels.Branch}} : </b> {{selectedAccountDetails.branch}}</p>
-          <p><b>{{labels.AccountType}} : </b> {{selectedAccountDetails.accountType}}</p>
+          <p><b>{{labels.Branch}} : </b> {{selectedAccountDetails.branchId.branchName}}</p>
+          <p><b>{{labels.AccountType}} : </b> {{selectedAccountDetails.accTypeId.accName}}</p>
         </div>
         <div class="col s6">
-          <p><b>{{labels.AccountOpenDate}} : </b> {{selectedAccountDetails.openDate}}</p>
+          <p><b>{{labels.AccountOpenDate}} : </b> {{selectedAccountDetails.createdDate}}</p>
         </div>
       </div>
     </div>
@@ -25,7 +25,8 @@
           <p class="nny-p1">{{labels.Loan}} : {{selectedAccountDetails.loan}}</p>
         </div>
         <div class="col s6">
-          <p style="font-size:15pt">{{labels.InterestRate}} : {{selectedAccountDetails.Interest}}</p>
+          <p style="font-size:15pt">{{labels.InterestRate}} : 
+            {{selectedAccountDetails.accTypeId.accInterestRates}}</p>
         </div>
       </div>
     </div>
