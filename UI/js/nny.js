@@ -17,6 +17,12 @@ angular.module('banking', [
     controller:'HomeController',
     data : {requireLogin : true },
   })
+  .state('userprofile',{
+    url:'/userprofile',
+    templateUrl:'areas/userprofile/userprofile.html',
+    controller:'UserProfileController',
+    data : {requireLogin : true },
+  })
   .state('account',{
     url:'/account',
     templateUrl:'areas/account/account.html',
