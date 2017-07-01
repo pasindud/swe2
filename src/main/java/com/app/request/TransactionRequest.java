@@ -1,18 +1,28 @@
 package com.app.request;
 
+import com.app.annotation.Checkdb;
+import com.app.enties.Account;
+import com.app.enties.Users;
+
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 
 /** Created by Pasindu on 6/29/17. */
 public class TransactionRequest {
-  @NotNull private Integer toaccount;
+  @NotNull private Integer toaccountid;
   @NotNull private Integer fromaccountid;
-  @NotNull private String transtype;
+
+  @Enumerated(EnumType.STRING)
+  private String transtype;
 
   @Min(value = 1)
   private float amount = -1;
 
   @NotNull private String message;
+  @NotNull private Users userId;
 
   public String getMessage() {
     return message;
@@ -22,12 +32,12 @@ public class TransactionRequest {
     this.message = message;
   }
 
-  public int getToaccount() {
-    return toaccount;
+  public int getToaccountid() {
+    return toaccountid;
   }
 
-  public void setToaccount(int toaccount) {
-    this.toaccount = toaccount;
+  public void setToaccountid(int toaccount) {
+    this.toaccountid = toaccount;
   }
 
   public int getFromaccountid() {
@@ -53,4 +63,13 @@ public class TransactionRequest {
   public void setAmount(float amount) {
     this.amount = amount;
   }
+
+  public Users getUserId() {
+    return userId;
+  }
+
+  public void setUserId(Users userId) {
+    this.userId = userId;
+  }
+
 }

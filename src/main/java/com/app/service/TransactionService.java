@@ -7,6 +7,7 @@ import com.app.enties.Transaction;
 import com.app.enties.Users;
 import com.app.repository.AccountRepository;
 import com.app.repository.TransactionRepository;
+import com.app.repository.UsersRepository;
 import com.app.request.TransactionRequest;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.client.RestTemplate;
 public class TransactionService {
   @Autowired private AccountRepository accountRepository;
   @Autowired private TransactionRepository transactionRepository;
+  @Autowired private UsersRepository usersRepository;
 
   private Transaction transaction;
   private List<String> errors = new ArrayList<String>();
@@ -37,10 +39,12 @@ public class TransactionService {
   public List<String> do_transactions(TransactionRequest transactionRequest) throws Exception {
     errors = new ArrayList<String>();
     this.transaction = new Transaction();
-    this.transaction.setToaccountid(transactionRequest.getToaccount());
+    this.transaction.setToaccountid(transactionRequest.getToaccountid());
     this.transaction.setFromaccountid(transactionRequest.getFromaccountid());
     this.transaction.setAmount(transactionRequest.getAmount());
     this.transaction.setMessage(transactionRequest.getMessage());
+    this.transaction.setTranstype(transactionRequest.getTranstype().toString());
+    this.transaction.setUserId(usersRepository.findByUserId(transactionRequest.getUserId().getUserId()));
     // TODO Add currency to transaction object.
     processTransaction();
     return errors;
@@ -73,18 +77,20 @@ public class TransactionService {
       errors.add("Not enough balance");
       return false;
     }
+    if(fromAccount.getAccTypeId().getDailyWithdrawLimit()!=null){
     if ((fromAccount.getAccTypeId().getDailyWithdrawLimit()) < (transaction.getAmount())) {
       errors.add("Exceeds daily withdrawal limit");
       return false;
-    }
+    }}
+    if( fromAccount.getAccTypeId().getMinAvgBalance()!=null){
     if ((fromAccount.getBalance() - getTransactionAmoutFromRate())
-        < fromAccount.getAccTypeId().getMinInitBalance()) {
+        < fromAccount.getAccTypeId().getMinAvgBalance()) {
       errors.add(
           "At least "
-              + fromAccount.getAccTypeId().getMinInitBalance().toString()
+              + fromAccount.getAccTypeId().getMinAvgBalance().toString()
               + " should be left in the account");
       return false;
-    }
+    }}
     return true;
   }
 
@@ -120,6 +126,10 @@ public class TransactionService {
     if (transaction.getTranstype() == null) {
       errors.add("Transaction type is not set.");
       return false;
+    }
+    if (!validateTransactionType()){
+      errors.add("Transaction type is Invalid.");
+      return false;    
     }
     if (transaction.getToaccountid() == 0 && !getTransactionTypeEqW()) {
       errors.add("Receiver account number is not valid.");
@@ -157,6 +167,9 @@ public class TransactionService {
     return true;
   }
 
+  private boolean validateTransactionType(){
+      return(transaction.getTranstype().equalsIgnoreCase("W")||transaction.getTranstype().equalsIgnoreCase("D")||transaction.getTranstype().equalsIgnoreCase("T"));
+  }
   private void saveTransaction() {
     transactionRepository.save(transaction);
   }
