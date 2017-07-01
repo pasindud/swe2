@@ -17,6 +17,13 @@
           <p><b>{{labels.AccountOpenDate}} : </b> {{selectedAccountDetails.createdDate}}</p>
         </div>
       </div>
+    <div class="col s12 center" style="margin-top:50px;margin-bottom:30px;">
+      <button class="btn waves-effect waves-light" name="action" 
+        ui-sref="activity({transactionId: selectedAccountDetails.accountid})">
+      {{labels.Activity}}
+      <i class="material-icons right"></i>
+      </button>
+    </div>
     </div>
     <div class="col s12 m12 l12 xl6">
       <div class="col s12 nny-rounded-flat-card">
