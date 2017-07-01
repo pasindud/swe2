@@ -1,10 +1,12 @@
 /* Author : Dushan Galappaththi */
 'use strict';
 angular.module('banking')
-.controller('SettingsController',function ($state,$rootScope,$scope, AuthService, $location,nnyConst, ValidateService) {
+.controller('SettingsController',function ($http,$state,$rootScope,$scope, AuthService, $location,nnyConst, ValidateService) {
   var UpdatePasswordData="";
   var errors = [""];
   var isInvalidForm = false;
+  $scope.languages = [{id: "en-us",name : "English"},{id: "fr",name : "French"},{id: "ie",name : "Irish"}];
+  $scope.currencies = [{id: "USD",name : "US Dollar"},{id: "EUR",name : "Pounds"},{id: "LKR",name : "Rupees"}];
   function formValidate(field) {
     if(!field.status)
     {
@@ -58,5 +60,20 @@ angular.module('banking')
       $rootScope.ErrorDialog= errorContent;
     }
   }
+
+  $scope.setLanguage = function () {
+    var lang = $scope.UpdatePreference.language;
+    if(lang === undefined || lang === null){
+      lang = "en-us";
+    }
+    $http.get('areas/common/localization/'+ lang +'.json')
+    .then(function(res){
+      $rootScope.labels = res.data[0];
+      $scope.selectedLanguage = lang.toUpperCase();
+    })
+  };
+  $scope.setCurrency = function () {
+    //TODO
+  };
 
 });

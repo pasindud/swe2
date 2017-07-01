@@ -9,6 +9,7 @@ import com.app.Utils;
 import com.app.enties.Merchant;
 import com.app.enties.MerchantServices;
 import com.app.enties.Transaction;
+import com.app.enties.TransactionType;
 import com.app.repository.MerchantRepository;
 import com.app.repository.MerchantServicesRepository;
 import com.app.request.PayBillRequest;
@@ -108,7 +109,7 @@ public class MerchantController {
         merchantServicesRepository.findByServiceid(payBillRequest.getSelectedServiceId());
 
     if (service == null) {}
-    // TODO: Add transaction type.
+    transaction.setTranstype(TransactionType.T);
     // Validate the code here.
     transaction.setFromaccountid(payBillRequest.getSelectedAccountId());
     transaction.setToaccountid(service.getAccountid());

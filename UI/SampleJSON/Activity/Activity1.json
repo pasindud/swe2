@@ -1,11 +1,23 @@
 [{
   "UserID" : "0001",
   "Transactions":[
-    {"id": "3785", "Date":"21/03/2017","Name" : "Steam", "Type" : "Payment", "Amount" : "5", "Balance" : "100"},
-    {"id": "3789", "Date":"21/03/2017","Name" : "Steam", "Type" : "Payment", "Amount" : "5", "Balance" : "95"},
-    {"id": "3790", "Date":"21/03/2017","Name" : "Steam", "Type" : "Deposit", "Amount" : "5", "Balance" : "100"},
-    {"id": "3815", "Date":"21/03/2017","Name" : "Steam", "Type" : "Deposit", "Amount" : "10", "Balance" : "110"},
-    {"id": "3851", "Date":"21/03/2017","Name" : "Steam", "Type" : "Payment", "Amount" : "5", "Balance" : "105"},
-    {"id": "3983", "Date":"21/03/2017","Name" : "Steam", "Type" : "Deposit", "Amount" : "50", "Balance" : "155"}
+    {"id": "1", "Date":"21/03/2017","Name" : "Uplay", "Type" : "Payment", "Amount" : 5, "Balance" : 100},
+    {"id": "2", "Date":"21/03/2017","Name" : "Steam", "Type" : "Payment", "Amount" : 5, "Balance" : 95},
+    {"id": "3", "Date":"21/03/2017","Name" : "Ebay", "Type" : "Deposit", "Amount" : 5, "Balance" : 100},
+    {"id": "4", "Date":"21/03/2017","Name" : "Steam", "Type" : "Deposit", "Amount" : 10, "Balance" : 110},
+    {"id": "5", "Date":"21/05/2017","Name" : "TT", "Type" : "Payment", "Amount" : 5, "Balance" : 105},
+    {"id": "6", "Date":"21/03/2017","Name" : "Comply", "Type" : "Deposit", "Amount" : 50, "Balance" : 155},
+    {"id": "7", "Date":"21/03/2017","Name" : "Steam", "Type" : "Payment", "Amount" : 5, "Balance" : 100},
+    {"id": "8", "Date":"21/03/2017","Name" : "Steam", "Type" : "Payment", "Amount" : 5, "Balance" : 95},
+    {"id": "9", "Date":"21/03/2017","Name" : "Steam", "Type" : "Deposit", "Amount" : 5, "Balance" : 100},
+    {"id": "10", "Date":"21/03/2017","Name" : "Steam", "Type" : "Deposit", "Amount" : 10, "Balance" : 110},
+    {"id": "11", "Date":"21/07/2017","Name" : "Steam", "Type" : "Payment", "Amount" : 5, "Balance" : 105},
+    {"id": "12", "Date":"21/03/2017","Name" : "Steam", "Type" : "Deposit", "Amount" : 50, "Balance" : 155},
+    {"id": "13", "Date":"21/03/2017","Name" : "GOG", "Type" : "Payment", "Amount" : 5, "Balance" : 100},
+    {"id": "14", "Date":"21/03/2017","Name" : "Kinguin", "Type" : "Payment", "Amount" : 5, "Balance" : 95},
+    {"id": "15", "Date":"21/03/2017","Name" : "FB", "Type" : "Deposit", "Amount" : 5, "Balance" : 100},
+    {"id": "16", "Date":"21/03/2017","Name" : "Seylan", "Type" : "Deposit", "Amount" : 10, "Balance" : 110},
+    {"id": "17", "Date":"21/03/2017","Name" : "Root", "Type" : "Payment", "Amount" : 5, "Balance" : 105},
+    {"id": "18", "Date":"21/03/2017","Name" : "DJ", "Type" : "Deposit", "Amount" : 50, "Balance" : 155}
   ]
   }]

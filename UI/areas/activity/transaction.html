@@ -1,0 +1,30 @@
+<div id="transaction" class="col s12 m12 l8 xl8">
+  <div class="col s12 m12 l12 xl12">
+    <div class="col s12 card-panel grey lighten-4">
+      <h5>{{labels.Transaction}}</h5>
+      <div class="divider col s12"></div>
+    </br>
+    <div class="col s12">
+      <p><b>{{labels.TransactionId}} : </b> {{TransactionDetails.id}}</p>
+      <p><b>{{labels.TransactionType}} : </b> {{TransactionDetails.type}}</p>
+      <p><b>{{labels.Amount}} : </b> {{TransactionDetails.amount}}</p>
+      <p><b>{{labels.FromAccount}} : </b> {{TransactionDetails.fromAccount}}</p>
+      <p><b>{{labels.FromCurrency}} : </b> {{TransactionDetails.fromCurrency}}</p>
+      <p><b>{{labels.FromRate}} : </b> {{TransactionDetails.fromRate}}</p>
+      <p><b>{{labels.ToAccount}} : </b> {{TransactionDetails.toAccount}}</p>
+      <p><b>{{labels.ToCurrency}} : </b> {{TransactionDetails.toCurrency}}</p>
+      <p><b>{{labels.ToRate}} : </b> {{TransactionDetails.toRate}}</p>
+      <p><b>{{labels.TransactionTime}} : </b> {{TransactionDetails.TransactionTime}}</p>
+      <p><b>{{labels.Message}} : </b> {{TransactionDetails.message}}</p>
+    </div>
+    <div class="col s12 center" style="margin-top:50px;margin-bottom:30px;">
+      <button class="btn waves-effect waves-light" name="action"
+        ui-sref="activity">
+      {{labels.Back}}
+      <i class="material-icons right"></i>
+      </button>
+    </div>
+    </div>
+  </div>
+</div>
+<div class="col s12" style="margin-bottom:30px;"></div>

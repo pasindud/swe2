@@ -38,9 +38,16 @@ angular.module('banking', [
 
   })
   .state('activity',{
-    url:'/activity/{transactionId}',
+    url:'/activity',
     templateUrl:'areas/activity/activity.html',
     controller:'ActivityController',
+    data : {requireLogin : true },
+
+  })
+  .state('transaction',{
+    url:'/activity/{transactionId}',
+    templateUrl:'areas/activity/transaction.html',
+    controller:'TransactionController',
     data : {requireLogin : true },
 
   })
@@ -97,6 +104,12 @@ angular.module('banking', [
     controller:'SettingsController',
     templateUrl : 'areas/settings/settings.html',
     data : {requireLogin : true}
+  })
+  .state('recover',{
+    url : '/recover',
+    controller:'RecoverAccountController',
+    templateUrl : 'areas/login/recoverAccount.html',
+    data : {requireLogin : false}
   })
   .state('DatePickerController',{
     controller:'DatePickerController',

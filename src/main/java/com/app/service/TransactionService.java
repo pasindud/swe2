@@ -4,6 +4,7 @@ package com.app.service;
 
 import com.app.enties.Account;
 import com.app.enties.Transaction;
+import com.app.enties.TransactionType;
 import com.app.enties.Users;
 import com.app.repository.AccountRepository;
 import com.app.repository.TransactionRepository;
@@ -43,7 +44,7 @@ public class TransactionService {
     this.transaction.setFromaccountid(transactionRequest.getFromaccountid());
     this.transaction.setAmount(transactionRequest.getAmount());
     this.transaction.setMessage(transactionRequest.getMessage());
-    this.transaction.setTranstype(transactionRequest.getTranstype().toString());
+    this.transaction.setTranstype(transactionRequest.getTranstype());
     this.transaction.setUserId(usersRepository.findByUserId(transactionRequest.getUserId().getUserId()));
     // TODO Add currency to transaction object.
     processTransaction();
@@ -95,15 +96,15 @@ public class TransactionService {
   }
 
   private boolean getTransactionTypeEqW() {
-    return transaction.getTranstype().equalsIgnoreCase("W");
+    return transaction.getTranstype()== TransactionType.W || transaction.getTranstype()== TransactionType.w;
   }
 
   private boolean getTransactionTypeEqT() {
-    return transaction.getTranstype().equalsIgnoreCase("T");
+    return transaction.getTranstype()== TransactionType.T || transaction.getTranstype()== TransactionType.t;
   }
   
   private boolean getTransactionTypeEqD() {
-    return transaction.getTranstype().equalsIgnoreCase("D");
+    return transaction.getTranstype()== TransactionType.D || transaction.getTranstype()== TransactionType.d;
   }
   
   private boolean getTransactionTypeEqTOrW() {
@@ -127,10 +128,10 @@ public class TransactionService {
       errors.add("Transaction type is not set.");
       return false;
     }
-    if (!validateTransactionType()){
-      errors.add("Transaction type is Invalid.");
-      return false;    
-    }
+   // if (!validateTransactionType()){
+   //   errors.add("Transaction type is Invalid.");
+   //   return false;    
+   // }
     if (transaction.getToaccountid() == 0 && !getTransactionTypeEqW()) {
       errors.add("Receiver account number is not valid.");
       return false;
@@ -167,9 +168,10 @@ public class TransactionService {
     return true;
   }
 
-  private boolean validateTransactionType(){
-      return(transaction.getTranstype().equalsIgnoreCase("W")||transaction.getTranstype().equalsIgnoreCase("D")||transaction.getTranstype().equalsIgnoreCase("T"));
-  }
+  //private boolean validateTransactionType(){
+ //     String check = transaction.getTranstype().toString().toUpperCase();
+ //     return(check == TransactionType.T.toString()||check == TransactionType.D.toString()||check == TransactionType.W.toString());
+ // }
   private void saveTransaction() {
     transactionRepository.save(transaction);
   }

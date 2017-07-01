@@ -8,6 +8,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,9 +37,10 @@ public class Transaction {
   @Basic(optional = false)
   private int fromaccountid;
 
-  @Column(name = "transtype", length = 3)
+  @Column(name = "transtype", length = 1)
   @Basic
-  private String transtype;
+  @Enumerated(EnumType.STRING)
+  private TransactionType transtype;
 
   @Column(name = "fromcurrency", length = 45)
   @Basic
@@ -107,11 +110,11 @@ public class Transaction {
     this.fromaccountid = accountId;
   }
 
-  public String getTranstype() {
+  public TransactionType getTranstype() {
     return this.transtype;
   }
 
-  public void setTranstype(String transType) {
+  public void setTranstype(TransactionType transType) {
     this.transtype = transType;
   }
 

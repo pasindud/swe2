@@ -35,6 +35,7 @@
   <script type="text/javascript" src="areas/login/loginController.js"></script>
   <script type="text/javascript" src="areas/account/accountController.js"></script>
   <script type="text/javascript" src="areas/activity/activityController.js"></script>
+  <script type="text/javascript" src="areas/activity/transactionController.js"></script>
   <script type="text/javascript" src="areas/common/datePickerController.js"></script>
   <script type="text/javascript" src="areas/account/CreateNewAccountController.js"></script>
   <script type="text/javascript" src="areas/admin/adminController.js"></script>
@@ -46,10 +47,14 @@
   <script type="text/javascript" src="areas/admin/manageAccounts/viewAccountsController.js"></script>
   <script type="text/javascript" src="areas/settings/settingsController.js"></script>
   <script type="text/javascript" src="areas/userprofile/userprofileController.js"></script>
-
   <script type="text/javascript" src="areas/payments/paymentsController.js"></script>
+  <script type="text/javascript" src="areas/login/recoverAccountController.js"></script>
+
+  <!--Import Services-->
   <script type="text/javascript" src="js/services/authService.js"></script>
   <script type="text/javascript" src="js/services/validateService.js"></script>
+  <script type="text/javascript" src="js/services/paginationService.js"></script>
+  <script type="text/javascript" src="js/services/sortingService.js"></script>
   <script type="text/javascript" src="js/services/constants.js"></script>
 
 
@@ -99,7 +104,7 @@
               <li><a ui-sref="activity">{{labels.Activity}}</a></li>
               <li><a ui-sref="payments">{{labels.Payments}}</a></li>
               <li><a ui-sref="settings">{{labels.Settings}}</a></li>
-              <li><a ui-sref="logout">{{labels.Logout}}</a></li>
+              <li><a ng-click="logout()">{{labels.Logout}}</a></li>
               <li><a ui-sref="Help">{{labels.Help}}</a></li>
               <li><a ui-sref="contact">{{labels.Contact}}</a></li>
             </ul>
