@@ -17,15 +17,20 @@ nnyApp.factory('AuthService',['$http','nnyConst','$rootScope',function ($http,nn
       Title : "",
       Body : ""
     }
+
     switch(status)
     {
       case 401 :
+        var error = [""];
+        error.push("Please enter valid Credentials!");
         errorContent.Title = "Invalid Credentials";
-        errorContent.Body = "Please enter valid Credentials!";
+        errorContent.Body = error;
         break;
       case -1 :
+        var error = [""];
+        error.push("Connection Refused or Invalid Request URI");
         errorContent.Title = "Connection Error";
-        errorContent.Body = "Connection Refused or Invalid Request URI";
+        errorContent.Body = error;
         break;
     }
     $rootScope.ErrorDialog = errorContent;
