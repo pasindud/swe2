@@ -25,6 +25,9 @@ public class UserServiceImpl {
   public int getLoggedInUserId() {
     return usersRepository.findByUsername(Utils.getCurrentUsers()).getUserId();
   }
+  public Users getLoggedInUser() {
+    return usersRepository.findByUsername(Utils.getCurrentUsers());
+  }
 
   public UserServiceImpl(UsersRepository usersRepository) {
     this();

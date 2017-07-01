@@ -1,5 +1,7 @@
 package com.app.enties;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -18,9 +20,17 @@ public class Customer implements Serializable {
   @Basic
   private String firstName;
 
-  @Column(name = "lostName", length = 45)
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+  @Column(name = "lastName", length = 45)
   @Basic
-  private String lostName;
+  private String lastName;
 
   @Column(name = "dob", length = 45)
   @Basic
@@ -33,6 +43,20 @@ public class Customer implements Serializable {
   @Column(name = "addressLine1", length = 45)
   @Basic
   private String addressLine1;
+
+
+  public String getGender() {
+    return gender;
+  }
+
+  public void setGender(String gender) {
+    this.gender = gender;
+  }
+
+  @Column(name = "gender", length = 45)
+  @Basic
+  private String gender;
+
 
   @Column(name = "addressLine2", length = 45)
   @Basic
@@ -62,6 +86,7 @@ public class Customer implements Serializable {
   @Basic
   private String faxNo;
 
+  @JsonIgnore
   @OneToOne(mappedBy = "customer")
   private Users users;
 
@@ -95,14 +120,6 @@ public class Customer implements Serializable {
 
   public void setFirstName(String firstName) {
     this.firstName = firstName;
-  }
-
-  public String getLostName() {
-    return this.lostName;
-  }
-
-  public void setLostName(String lostName) {
-    this.lostName = lostName;
   }
 
   public String getDob() {

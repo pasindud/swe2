@@ -7,6 +7,11 @@ angular.module('banking')
     console.log(response.data);
   });
 
+  AuthService.getRequest("/api/customer", null, function (response) {
+    $scope.PersonalInformation = response.data;
+    console.log(response.data);
+  });
+
   $http.get('SampleJSON/Accounts/Account1.json')
   .then(function(res) {
     $scope.UserID = res.data[0].UserID;
