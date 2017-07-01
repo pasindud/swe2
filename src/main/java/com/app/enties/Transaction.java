@@ -1,5 +1,7 @@
 package com.app.enties;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -68,6 +70,7 @@ public class Transaction {
     transactiontime = new Date();
   }
 
+  @JsonIgnore
   @ManyToOne(optional = false, targetEntity = Users.class)
   @JoinColumn(name = "USERID", referencedColumnName = "USERID")
   private Users userId;
