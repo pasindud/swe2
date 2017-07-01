@@ -4,7 +4,7 @@ angular.module('banking')
 	var transactionId = $stateParams.transactionId;
     
 	AuthService.getRequest("/api/transactions?id=" + transactionId, null, function (response) {
-		console.log(response);
+		$scope.Transactions = response.data;
 	});
 
 });

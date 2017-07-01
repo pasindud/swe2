@@ -1,6 +1,8 @@
 package com.app.enties;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
 import javax.persistence.Basic;
@@ -61,14 +63,20 @@ public class Transaction {
   @Basic
   private String message;
 
-  @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "transactiontime", nullable = false)
-  private Date transactiontime;
 
-  @PrePersist
-  protected void ontTansactiontime() {
-    transactiontime = new Date();
+  public Date getTransactiontime() {
+    return transactiontime;
   }
+
+  public void setTransactiontime(Date transactiontime) {
+    this.transactiontime = transactiontime;
+  }
+
+  @CreationTimestamp
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "transactiontime")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:MM")
+  private Date transactiontime;
 
   @JsonIgnore
   @ManyToOne(optional = false, targetEntity = Users.class)

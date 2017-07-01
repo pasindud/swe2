@@ -35,19 +35,17 @@
         <thead>
           <tr>
             <th>{{labels.Date}}</th>
-            <th>{{labels.Name}}</th>
+            <th>From Account</th>
             <th>{{labels.Type}}</th>
             <th>{{labels.Amount}}</th>
-            <th>{{labels.Balance}}</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat = "transaction in Transactions">
-            <td>{{transaction.Date}}</td>
-            <td>{{transaction.Name}}</td>
-            <td>{{transaction.Type}}</td>
-            <td>{{transaction.Amount}}</td>
-            <td>{{transaction.Balance}}</td>
+            <td>{{transaction.transactiontime}}</td>
+            <td>{{transaction.fromaccountid}}</td>
+            <td>{{transaction.transtype}}</td>
+            <td>{{transaction.amount}}</td>
           </tr>
         </tbody>
       </table>
