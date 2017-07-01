@@ -95,7 +95,11 @@ public class TransactionService {
   private boolean getTransactionTypeEqT() {
     return transaction.getTranstype().equalsIgnoreCase("T");
   }
-
+  
+  private boolean getTransactionTypeEqD() {
+    return transaction.getTranstype().equalsIgnoreCase("D");
+  }
+  
   private boolean getTransactionTypeEqTOrW() {
     return getTransactionTypeEqT() || getTransactionTypeEqW();
   }
@@ -175,12 +179,12 @@ public class TransactionService {
 
       transaction.setAmount(transaction.getAmount() / transaction.getFromrate());
     }
-    if (getTransactionTypeEqT() || transaction.getTranstype().equalsIgnoreCase("D")) {
+    if (getTransactionTypeEqT() || getTransactionTypeEqD()) {
       Float temp2 =
           ExchangeRates.getExchangeRate(BANK_DEFAULT_CURRENCY, transaction.getTocurrency());
       transaction.setTorate(new Float((Math.round(temp2 * 100.0) / 100.0)));
 
-      if (transaction.getTranstype().equalsIgnoreCase("D"))
+      if (getTransactionTypeEqD())
         transaction.setAmount(transaction.getAmount() / transaction.getTorate());
     }
   }
