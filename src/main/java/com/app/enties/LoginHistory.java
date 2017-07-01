@@ -1,5 +1,7 @@
 package com.app.enties;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -22,18 +24,52 @@ public class LoginHistory {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
 
-  @Column(name = "time")
+  public Date getCreatedtime() {
+    return createdtime;
+  }
+
+  public void setCreatedtime(Date createdtime) {
+    this.createdtime = createdtime;
+  }
+
+  @Column(name = "createdtime")
   @Basic
+  @CreationTimestamp
   @Temporal(TemporalType.TIMESTAMP)
-  private Date time = new Date();
+  private Date createdtime = new Date();
 
   @Column(name = "ipaddress", length = 132)
   @Basic
   private String ipaddress;
 
-  @ManyToOne(optional = false, targetEntity = Users.class)
-  @JoinColumn(name = "USERID", referencedColumnName = "USERID")
-  private Users userid;
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
+  @Column(name = "username", length = 132)
+  @Basic
+  private String username;
+
+
+  public int getAuthorized() {
+    return authorized;
+  }
+
+  public void setAuthorized(int authorized) {
+    this.authorized = authorized;
+  }
+
+  private int authorized;
+
+//  @ManyToOne(optional = false, targetEntity = Users.class)
+//  @JoinColumn(name = "USERID", referencedColumnName = "USERID", nullable = true)
+//  private Users userid;
+
+//  private int userid;
 
   public Integer getId() {
     return this.id;
@@ -43,13 +79,6 @@ public class LoginHistory {
     this.id = id;
   }
 
-  public Date getTime() {
-    return this.time;
-  }
-
-  public void setTime(Date time) {
-    this.time = time;
-  }
 
   public String getIpaddress() {
     return this.ipaddress;
@@ -59,11 +88,12 @@ public class LoginHistory {
     this.ipaddress = ipaddress;
   }
 
-  public Users getUserid() {
-    return this.userid;
-  }
-
-  public void setUserid(Users userid) {
-    this.userid = userid;
-  }
+//
+//  public Users getUserid() {
+//    return this.userid;
+//  }
+//
+//  public void setUserid(Users userid) {
+//    this.userid = userid;
+//  }
 }

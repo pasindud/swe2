@@ -39,13 +39,6 @@ public class UserServiceImpl {
     return usersRepository.save(user);
   }
 
-  public void userLoggedIn() {
-    Users users = new Users();
-    users.setUserId(getLoggedInUserId());
-    LoginHistory loginHistory = new LoginHistory();
-    loginHistory.setUserid(users);
-    loginHistoryRepository.save(loginHistory);
-  }
 
   public Users findByUsername(String username) {
     return usersRepository.findByUsername(username);
