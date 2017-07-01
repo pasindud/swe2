@@ -124,5 +124,7 @@
   "Message" : "Message",
   "Back" : "Back",
   "AccountRecovery" : "Account Recovery",
-  "Recover" : "Recover"
+  "Recover" : "Recover",
+  "AddBankAccount": "Add Bank Account",
+  "SubmitForVerification" : "Submit For Verification"
   }]

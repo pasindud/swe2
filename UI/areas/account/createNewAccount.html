@@ -88,34 +88,6 @@
     </div>
   </div>
   <div class="section col s12">
-    <h5>{{labels.BankAccountInformation}}</h5>
-    <div class="divider col s12"></div>
-    <div   class="input-field col s12 m12 l6 xl6">
-      <input id="account_number" type="text" length="150" ng-model="FormData.account_number">
-      <label for="account_number">{{labels.AccountNumber}}</label>
-    </div>
-    <div   class="input-field col s12 m12 l6 xl6">
-      <input id="branch" type="text" length="150" ng-model="FormData.branch">
-      <label for="branch">{{labels.Branch}}</label>
-    </div>
-    <div   class="input-field col s12">
-      <input id="account_barrier" type="text" length="150" ng-model="FormData.account_barrier">
-      <label for="account_barrier">{{labels.AccountBarriersName}}</label>
-    </div>
-    <div   class="input-field col s12 m12 l6 xl6">
-      <input id="account_type" type="text" length="150" ng-model="FormData.account_type">
-      <label for="account_type">{{labels.AccountType}}</label>
-    </div>
-    <div class="col s12 m12 16 xl6" ng-controller="DatePickerController">
-      <label for="account_open_date">{{labels.AccountOpenDate}}</label>
-      <input input-date type="text" name="account_open_date"  id="account_open_date"  ng-model="FormData.account_open_date" container="" format="dd/mm/yyyy"
-      months-full="{{ month }}" months-short="{{ monthShort }}" weekdays-full="{{ weekdaysFull }}" weekdays-short="{{ weekdaysShort }}"
-      weekdays-letter="{{ weekdaysLetter }}" disable="disable"  min="{{ minDate }}" max="{{ maxDateToday }}" today="today" first-day="1"
-      clear="clear" close="close" select-years="15" on-start="onStart()" on-render="onRender()" on-open="onOpen()" on-close="onClose()"
-      on-set="onSet()" on-stop="onStop()" />
-    </div>
-  </div>
-  <div class="section col s12">
     <h5>{{labels.TermsAndConditions}}</h5>
     <div class="divider col s12"></div>
     <div class="col s12 center" style="margin-top:50px;">

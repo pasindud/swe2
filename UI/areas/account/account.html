@@ -9,34 +9,37 @@
         <option ng-repeat="account in user_accounts" value={{account.accountid}}>{{account.accountid}}</option>
       </select>
       <div class="col s12">
-        <div class="col s6">
+        <div class="col s12 m6">
           <p><b>{{labels.Branch}} : </b> {{selectedAccountDetails.branchId.branchName}}</p>
           <p><b>{{labels.AccountType}} : </b> {{selectedAccountDetails.accTypeId.accName}}</p>
         </div>
-        <div class="col s6">
+        <div class="col s12 m6">
           <p><b>{{labels.AccountOpenDate}} : </b> {{selectedAccountDetails.createdDate}}</p>
         </div>
       </div>
-    <div class="col s12 center" style="margin-top:50px;margin-bottom:30px;">
-      <button class="btn waves-effect waves-light" name="action" 
-        ui-sref="activity({transactionId: selectedAccountDetails.accountid})">
-      {{labels.Activity}}
-      <i class="material-icons right"></i>
-      </button>
-    </div>
     </div>
     <div class="col s12 m12 l12 xl6">
       <div class="col s12 nny-rounded-flat-card">
-        <div class="col s6">
+        <div class="col s12 m3">
           <p class="nny-p1">{{labels.Balance}} : {{selectedAccountDetails.balance}}</p>
-          <p class="nny-p1">{{labels.Loan}} : {{selectedAccountDetails.loan}}</p>
         </div>
-        <div class="col s6">
-          <p style="font-size:15pt">{{labels.InterestRate}} : 
+        <div class="col s12 m3"><p class="nny-p1">{{labels.Loan}} : {{selectedAccountDetails.loan}}</p></div>
+        <div class="col s12 m6">
+          <p style="font-size:15pt">{{labels.InterestRate}} :
             {{selectedAccountDetails.accTypeId.accInterestRates}}</p>
+          </div>
         </div>
+      </div>
+      <div class="col s12 center" style="margin-top:50px;margin-bottom:30px;">
+        <div class="col m3 hide-on-small-only"></div>
+        <div class="col s12 m3">
+          <button class="btn waves-effect waves-light" ui-sref="activity">{{labels.ViewActivity}}</button>
+        </div>
+        <div class="col s12 m3" style="margin-top:10px">
+          <button class="btn waves-effect waves-light" ui-sref="addbankaccount">{{labels.AddBankAccount}}</button>
+        </div>
+        <div class="col m3 hide-on-small-only"></div>
       </div>
     </div>
   </div>
-</div>
-<div class="col s12" style="margin-bottom:30px;"></div>
+  <div class="col s12" style="margin-bottom:30px;"></div>
