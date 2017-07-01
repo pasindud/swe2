@@ -69,7 +69,7 @@ public class TransactionService {
   }
 
   private boolean checkUsersHasMoney() {
-    if (fromAccount.getBalance() <= (transaction.getAmount() * transaction.getFromrate())) {
+    if (fromAccount.getBalance() <= getTransactionAmoutFromRate()) {
       errors.add("Not enough balance");
       return false;
     }
@@ -77,7 +77,7 @@ public class TransactionService {
       errors.add("Exceeds daily withdrawal limit");
       return false;
     }
-    if ((fromAccount.getBalance() - (transaction.getAmount() * transaction.getFromrate()))
+    if ((fromAccount.getBalance() - getTransactionAmoutFromRate())
         < fromAccount.getAccTypeId().getMinInitBalance()) {
       errors.add(
           "At least "
@@ -103,7 +103,14 @@ public class TransactionService {
   private boolean getTransactionTypeEqTOrW() {
     return getTransactionTypeEqT() || getTransactionTypeEqW();
   }
+  
+  private Float getTransactionAmoutFromRate(){
+      return this.transaction.getAmount() * this.transaction.getFromrate();
+  }
 
+  private Float getTransactionAmoutToRate(){
+      return this.transaction.getAmount() * this.transaction.getTorate();
+  }
   /**
    * Check whether the required fields our there.
    *
@@ -157,12 +164,12 @@ public class TransactionService {
   private void updateAccounts() {
     if (getTransactionTypeEqTOrW()) {
       fromAccount.setBalance(
-          fromAccount.getBalance() - (transaction.getAmount() * transaction.getFromrate()));
+          fromAccount.getBalance() - getTransactionAmoutFromRate());
       accountRepository.save(fromAccount);
     }
-    if (getTransactionTypeEqT() || transaction.getTranstype().equalsIgnoreCase("D")) {
+    if (getTransactionTypeEqT() || getTransactionTypeEqD()) {
       toAccount.setBalance(
-          toAccount.getBalance() + (transaction.getAmount() * transaction.getTorate()));
+          toAccount.getBalance() + getTransactionAmoutToRate());
       accountRepository.save(toAccount);
     }
   }
