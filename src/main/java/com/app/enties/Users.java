@@ -3,6 +3,7 @@ package com.app.enties;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.function.BinaryOperator;
 import javax.persistence.*;
 
 @Entity
@@ -41,8 +42,28 @@ public class Users {
   @OneToOne(targetEntity = Merchant.class)
   private Merchant merchant;
 
-  private boolean activate = true;
-  private boolean timeLocked = true;
+
+
+  public Boolean getTimeLocked() {
+    return timeLocked;
+  }
+
+  public void setTimeLocked(Boolean timeLocked) {
+    this.timeLocked = timeLocked;
+  }
+
+  public Boolean getActivate() {
+    return activate;
+  }
+
+  public void setActivate(Boolean activate) {
+    this.activate = activate;
+  }
+
+  @Column(name="activate", columnDefinition = "boolean default true", nullable = false)
+  private Boolean activate = true;
+  @Column(name="timeLocked", columnDefinition = "boolean default false", nullable = false)
+  private Boolean timeLocked = false;
 
   public Integer getUserId() {
     return userId;
