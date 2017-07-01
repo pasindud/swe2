@@ -109,5 +109,18 @@
   "PreferedCurrency" : "Preferred Currency",
   "SavePreferences" : "Save Preferences",
   "SavePassword":"Save Password",
-  "ViewMore" : "View More"
+  "ViewMore" : "View More",
+  "Transaction" : "Transaction",
+  "TransactionId" : "Transaction ID",
+  "TransactionType" : "Transaction Type",
+  "FromAccount" : "From Account",
+  "FromCurrency" : "From Currency",
+  "ToCurrency" : "To Currency",
+  "FromRate" : "From Rate",
+  "ToAccount" : "To Account",
+  "ToCurrency" :"To Currency",
+  "ToRate" : "To Rate",
+  "TransactionTime" : "Transaction Time",
+  "Message" : "Message",
+  "Back" : "Back"
   }]
