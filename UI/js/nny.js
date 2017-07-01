@@ -120,6 +120,13 @@ angular.module('banking', [
       requireLogin : true,
       authorizedRoles : [nnyConst.UserRoles.Admin,nnyConst.UserRoles.CustomerP]}
   })
+  .state('addbankaccount',{
+    url : '/addbankaccount',
+    controller:'AddBankAccountController',
+    templateUrl : 'areas/account/addBankAccount.html',
+    data : {requireLogin : true,
+      authorizedRoles : [nnyConst.UserRoles.Admin,nnyConst.UserRoles.CustomerP]}
+  })
   .state('recover',{
     url : '/recover',
     controller:'RecoverAccountController',
