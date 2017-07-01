@@ -5,6 +5,8 @@
  */
 package com.app.controller;
 
+import com.app.enties.Role;
+import com.app.enties.Users;
 import com.app.repository.LoginHistoryRepository;
 import com.app.repository.UsersRepository;
 import com.app.request.CreateUserRequest;
@@ -26,7 +28,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController {
 
-  private static String ACCESS_LEVEL_ID = "1";
+  private static String CUSTOMER_ACCESS_LEVEL_ID = "1";
+  private static String ADMIN_ACCESS_LEVEL_ID = "3";
   private static String RESPONSE_SESSION_MAP_KEY = "session";
   private static String RESPONSE_ACCESS_LEVEL_MAP_KEY = "AccessLevel";
   private static String RESPONSE_USERID_MAP_KEY = "userId";
@@ -42,11 +45,15 @@ public class UserController {
   @RequestMapping("/api/auth")
   @GetMapping
   Map<String, Object> getToken(HttpSession session) {
-    userService.userLoggedIn();
+    Users user = userService.getLoggedInUser();
     HashMap<String, Object> map = new HashMap<>();
     map.put(RESPONSE_SESSION_MAP_KEY, session.getId());
     map.put(RESPONSE_USERID_MAP_KEY, userService.getLoggedInUserId());
-    map.put(RESPONSE_ACCESS_LEVEL_MAP_KEY, ACCESS_LEVEL_ID);
+    if (user.getRoles().get(0).getName().equals("ROLE_ADMIN")) {
+      map.put(RESPONSE_ACCESS_LEVEL_MAP_KEY, ADMIN_ACCESS_LEVEL_ID);
+    } else {
+      map.put(RESPONSE_ACCESS_LEVEL_MAP_KEY, CUSTOMER_ACCESS_LEVEL_ID);
+    }
     return map;
   }
 

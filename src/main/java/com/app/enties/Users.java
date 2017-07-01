@@ -1,6 +1,7 @@
 package com.app.enties;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.*;
 
@@ -21,7 +22,7 @@ public class Users {
     joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns = @JoinColumn(name = "role_id")
   )
-  private Set<Role> roles;
+  private List<Role> roles;
 
   @Column(name = "userType", length = 45)
   private String userType;
@@ -67,11 +68,11 @@ public class Users {
     this.password = password;
   }
 
-  public Set<Role> getRoles() {
+  public List<Role> getRoles() {
     return roles;
   }
 
-  public void setRoles(Set<Role> roles) {
+  public void setRoles(List<Role> roles) {
     this.roles = roles;
   }
 
