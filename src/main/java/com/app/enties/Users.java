@@ -42,7 +42,17 @@ public class Users {
   @OneToOne(targetEntity = Merchant.class)
   private Merchant merchant;
 
+  public List <SecurityAnswers> getSecurityAnswers() {
+    return securityAnswers;
+  }
 
+  public void setSecurityAnswers(List <SecurityAnswers> securityAnswers) {
+    this.securityAnswers = securityAnswers;
+  }
+
+  @OneToMany(targetEntity = SecurityAnswers.class)
+  @JoinColumn(referencedColumnName = "userId")
+  private List<SecurityAnswers> securityAnswers;
 
   public Boolean getTimeLocked() {
     return timeLocked;

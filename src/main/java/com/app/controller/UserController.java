@@ -6,8 +6,10 @@
 package com.app.controller;
 
 import com.app.enties.Role;
+import com.app.enties.SecurityAnswers;
 import com.app.enties.Users;
 import com.app.repository.LoginHistoryRepository;
+import com.app.repository.SecurityAnswersRepository;
 import com.app.repository.UsersRepository;
 import com.app.request.CreateUserRequest;
 import com.app.service.UserRegistration;
@@ -40,6 +42,8 @@ public class UserController {
 
   @Autowired private LoginHistoryRepository loginHistoryRepository;
 
+  @Autowired private SecurityAnswersRepository securityAnswersRepository;
+
   @Autowired private UserRegistration userRegistration;
 
   @RequestMapping("/api/auth")
@@ -59,6 +63,17 @@ public class UserController {
 
   /*
 
+  curl -u xyz:xzy "http://localhost:8080/api/user_questions"
+
+  * */
+  @RequestMapping("/api/user_questions")
+  @GetMapping
+  public List<SecurityAnswers> getSecurityQuestions() {
+    return securityAnswersRepository.findByUserId(userService.getLoggedInUser().getUserId());
+  }
+
+  /*
+
   curl -H "Content-Type: application/json" -X POST \
   -d '{"username":"xyz","password":"xyz"}¡¡™' \
   http://localhost:8080/api/registration
@@ -67,6 +82,7 @@ public class UserController {
   @PostMapping
   public ImmutableMap<String, List<String>> registration(
       @RequestBody CreateUserRequest createUserRequest) {
+
     return ImmutableMap.of("errors", userRegistration.registerUser(createUserRequest));
   }
 }

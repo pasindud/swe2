@@ -1,8 +1,11 @@
 package com.app.service;
 
 import com.app.enties.Customer;
+import com.app.enties.SecurityAnswers;
+import com.app.enties.SecurityQuestions;
 import com.app.enties.Users;
 import com.app.repository.CustomerRepository;
+import com.app.repository.SecurityAnswersRepository;
 import com.app.repository.UsersRepository;
 import com.app.request.CreateUserRequest;
 import java.util.ArrayList;
@@ -19,6 +22,8 @@ public class UserRegistration {
   @Autowired UserServiceImpl userService;
   @Autowired UsersRepository usersRepository;
   @Autowired CustomerRepository customerRepository;
+  @Autowired
+  SecurityAnswersRepository securityAnswersRepository;
   private Users users;
   private Customer customer;
   private List<String> errors;
@@ -28,6 +33,22 @@ public class UserRegistration {
     try {
       this.users = createUserRequest.getUsers();
       this.customer = createUserRequest.getCustomer();
+
+      SecurityAnswers securityAnswers = new SecurityAnswers();
+
+
+      SecurityQuestions securityQuestions = new SecurityQuestions();
+      securityQuestions.setId(1);
+      securityAnswers.setSecurityQuestions(securityQuestions);
+
+      Users securityUser = new Users();
+      securityUser.setUserId(1);
+      securityAnswers.setUserId(1);
+      securityAnswersRepository.save(securityAnswers);
+//      List<SecurityAnswers> a = new ArrayList  <SecurityAnswers>();
+//      a.add(securityAnswers);
+//      this.users.setSecurityAnswers(a);
+
       validateUserRegistration();
       if (errors.isEmpty()) {
         save();
