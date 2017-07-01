@@ -10,6 +10,8 @@ curl -u xyz:xyz "http://localhost:8080/api/merchant_services"
 
 curl -u xyz:xyz "http://localhost:8080/api/merchant"
 
+curl -u xyz:xyz "http://localhost:8080/api/customer"
+
 curl -u xyz:xyz "http://localhost:8080/api/accounts_user?userid=1"
 
 curl -u xyz:xyz "http://localhost:8080/api/accounts?id=1"
