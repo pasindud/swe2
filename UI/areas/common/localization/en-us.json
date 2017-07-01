@@ -99,5 +99,14 @@
   "Personal" : "Personal",
   "Accounts" : "Accounts",
   "SignUp" : "Sign Up",
-  "City" : "City"
+  "City" : "City",
+  "ProfileSettings" : "Profile Settings",
+  "Preferences" : "Preferences",
+  "ChangePassword" : "Change Password",
+  "OldPassword" : "Old Password",
+  "NewPassword" : "New Password",
+  "PreferedLanguage" : "Prefered Language",
+  "PreferedCurrency" : "Preferred Currency",
+  "SavePreferences" : "Save Preferences",
+  "SavePassword":"Save Password"
   }]
