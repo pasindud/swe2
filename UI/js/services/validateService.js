@@ -82,6 +82,10 @@ nnyApp.factory('ValidateService',['$http','nnyConst','$rootScope',function ($htt
     return false;
   }
 
+  function isPasswordWrong(password) {
+    //TODO
+    return false;
+  }
 
 //Common Functions reigon end ---------------------------------------
 
@@ -92,6 +96,18 @@ nnyApp.factory('ValidateService',['$http','nnyConst','$rootScope',function ($htt
       return getValidateResult(false,"Username can only contain 'A to Z','a to z' or '0 to 9'");
     }else if (isUsernameTaken(username)) {
       return getValidateResult(false,"Username is already taken");
+    }else {
+      return getValidateResult(true,"");
+    }
+  }
+
+  function verifyPassword(password) {
+    if(isNull(password)){
+      return getValidateResult(false,"Please Enter Old Password");
+    }else if (!isAlphanumeric) {
+      return getValidateResult(false,"Password can only contain 'A to Z','a to z' or '0 to 9'");
+    }else if (isPasswordWrong(password)) {
+      return getValidateResult(false,"Invalid Password");
     }else {
       return getValidateResult(true,"");
     }
@@ -214,6 +230,9 @@ nnyApp.factory('ValidateService',['$http','nnyConst','$rootScope',function ($htt
     },
       ValidateCity : function (city) {
         return cityCheck(city);
+    },
+      VerifyPassword : function (password) {
+        return verifyPassword(password);
     }
   }
 }]);
