@@ -105,6 +105,12 @@ angular.module('banking', [
     templateUrl : 'areas/settings/settings.html',
     data : {requireLogin : true}
   })
+  .state('recover',{
+    url : '/recover',
+    controller:'RecoverAccountController',
+    templateUrl : 'areas/login/recoverAccount.html',
+    data : {requireLogin : false}
+  })
   .state('DatePickerController',{
     controller:'DatePickerController',
     data : {requireLogin : false },

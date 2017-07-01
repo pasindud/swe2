@@ -122,5 +122,7 @@
   "ToRate" : "To Rate",
   "TransactionTime" : "Transaction Time",
   "Message" : "Message",
-  "Back" : "Back"
+  "Back" : "Back",
+  "AccountRecovery" : "Account Recovery",
+  "Recover" : "Recover"
   }]

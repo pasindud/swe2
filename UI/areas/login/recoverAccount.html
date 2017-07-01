@@ -1,0 +1,30 @@
+<div id="recover" class="col s12 m12 l8 xl8">
+  <div class="col s12 m12 l12 xl12">
+    <div class="col s12 card-panel grey lighten-4">
+      <h5>{{labels.AccountRecovery}}</h5>
+      <div class="divider col s12"></div>
+      <p>Enter your username to recieve an account recovery link</p>
+      <p>Please Note that you may not recieve an email for the following reasons<p>
+        <ol style="list-style-type:square">
+          <li>Username is invalid</li>
+          <li>User Profile has been locked out</li>
+          <li>User Profile has been deactivated</li>
+        </ol>
+        <div class="input-field col s4" style="margin-top:25px">
+          <i class="material-icons prefix">account_circle</i>
+          <input id="username" name="username" type="text" class="validate"
+          ng-model="username"
+          />
+          <label for="username">{{labels.Username}}</label>
+        </div>
+        <div class="col s12">
+          <button class="btn waves-effect waves-light green draken-2" ng-click="recoverbtn()"
+          name="action">{{labels.Recover}}
+            <i class="material-icons left">lock_open</i>
+          </button>
+        </div>
+        <div class="col s12" style="margin-bottom:20px;"></div>
+    </div>
+  </div>
+</div>
+<div class="col s12" style="margin-bottom:30px;"></div>
