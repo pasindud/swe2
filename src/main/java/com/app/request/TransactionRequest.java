@@ -2,7 +2,9 @@ package com.app.request;
 
 import com.app.annotation.Checkdb;
 import com.app.enties.Account;
+import com.app.enties.TransactionType;
 import com.app.enties.Users;
+import javax.persistence.Column;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -15,8 +17,9 @@ public class TransactionRequest {
   @NotNull private Integer toaccountid;
   @NotNull private Integer fromaccountid;
 
+  @Column(nullable=false, length=1)
   @Enumerated(EnumType.STRING)
-  private String transtype;
+  private TransactionType transtype;
 
   @Min(value = 1)
   private float amount = -1;
@@ -48,11 +51,11 @@ public class TransactionRequest {
     this.fromaccountid = fromaccountid;
   }
 
-  public String getTranstype() {
+  public TransactionType getTranstype() {
     return transtype;
   }
 
-  public void setTranstype(String transtype) {
+  public void setTranstype(TransactionType transtype) {
     this.transtype = transtype;
   }
 
