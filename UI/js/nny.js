@@ -96,7 +96,7 @@ angular.module('banking', [
     url : '/settings',
     controller:'SettingsController',
     templateUrl : 'areas/settings/settings.html',
-    data : {requireLogin : false}
+    data : {requireLogin : true}
   })
   .state('DatePickerController',{
     controller:'DatePickerController',
