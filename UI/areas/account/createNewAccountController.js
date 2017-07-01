@@ -23,6 +23,7 @@ angular.module('banking')
   }
 
   $scope.submitBtn = function () {
+    $('#LoadingModal').modal('open');
     if($scope.FormData !== undefined){
       var FormData = $scope.FormData;
       FormData.dob = $rootScope.ca_formData_DOB;
@@ -67,7 +68,7 @@ angular.module('banking')
       inputFieldAnimate("contact2",contact2Val.status);
       inputFieldAnimate("addressL1",addressL1Val.status);
       inputFieldAnimate("city",cityVal.status);
-
+      $('#LoadingModal').modal('close');
       if(isInvalidForm)
       {
         var errorContent = {

@@ -29,18 +29,22 @@ $http.get('SampleJSON/Activity/Activity1.json')
 
 //Sorting Button
 $scope.sortBtn = function (field,ascending) {
+	$('#LoadingModal').modal('open');
 	var recordSet = $scope.TransactionsOriginal;
 	var sortedRecordSet = SortingService.sortObjBy(recordSet, field);
 	handlePagination(sortedRecordSet);
+	$('#LoadingModal').modal('close');
 }
 
 //Pagination button
 $scope.pageBtn = function (toPage, fromPage) {
+	$('#LoadingModal').modal('open');
 	pageNumbers[fromPage].isCurrent = false;
 	pageNumbers[toPage].isCurrent = true;
 	$scope.CurrentPage = toPage;
 	$scope.PageNumbers = pageNumbers;
 	$scope.Transactions = paginationObj.pages[toPage];
+	$('#LoadingModal').modal('close');
 }
 
 //View more
