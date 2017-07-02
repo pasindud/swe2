@@ -126,5 +126,10 @@
   "AccountRecovery" : "Account Recovery",
   "Recover" : "Recover",
   "AddBankAccount": "Add Bank Account",
-  "SubmitForVerification" : "Submit For Verification"
+  "SubmitForVerification" : "Submit",
+  "OrgName" : "Organization Name",
+  "AddMerchantAccount" : "Add Merchant Account",
+  "RegNo" : "Registration No",
+  "TaxNo": "Tax No",
+  "ServiceName" : "Service Name"
   }]
