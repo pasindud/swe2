@@ -9,6 +9,15 @@ h6{
   font-size: 14pt;
   font-weight: bold;
 }
+h7{
+  font-size: 12pt;
+}
+.nny-margin-fix{
+  margin-top: 0px !important;
+}
+.nny-margin-add{
+  margin-top: 4px !important;
+}
 .nny-theme{
   background-color: 0d47a1;
 }

@@ -81,9 +81,9 @@
               <div class="center col s4">
                 <center>
                   <ul class="nny-tabs" ng-if="authData.accessLevel == AccessLevels.CustomerP">
-                    <li id="accountTab" class="col s3 nny-tab-selected"><a ui-sref="account" ng-click="tabBtn(1)">{{labels.Account}}</a></li>
-                    <li id="paymentsTab" class="col s3 nny-tab"><a ui-sref="payments" ng-click="tabBtn(2)">{{labels.Payments}}</a></li>
-                    <li id="profileTab" class="col s3 nny-tab"><a ui-sref="userprofile" ng-click="tabBtn(3)"> Profile </a></li>
+                    <li id="accountTab" class="col s4 nny-tab-selected"><a ui-sref="account" ng-click="tabBtn(1)">{{labels.Account}}</a></li>
+                    <li id="paymentsTab" class="col s4 nny-tab"><a ui-sref="payments" ng-click="tabBtn(2)">{{labels.Payments}}</a></li>
+                    <li id="profileTab" class="col s4 nny-tab"><a ui-sref="userprofile" ng-click="tabBtn(3)"> Profile </a></li>
                   </ul>
                   <ul class="nny-tabs" ng-if="authData.accessLevel == AccessLevels.Admin">
                     <li class="col s12 nny-tab"><a ui-sref="admin">{{labels.AdminDashboard}}</a></li>

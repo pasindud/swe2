@@ -24,7 +24,8 @@ angular.module('banking')
 
   $scope.submitBtn = function () {
     $('#LoadingModal').modal('open');
-    if($scope.FormData !== undefined){
+    if($scope.FormData !== undefined)
+    {
       var FormData = $scope.FormData;
       FormData.dob = $rootScope.ca_formData_DOB;
       FormData.aod = $rootScope.ca_formData_AOD;
@@ -92,7 +93,7 @@ angular.module('banking')
           })
         }
         $scope.FormData = FormData;
-      }else {
+    }else {
         $('#ErrorModal').modal('open');
         errors.push("Missing Values"," ");
         var errorContent = {
