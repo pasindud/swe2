@@ -1,8 +1,10 @@
 package com.app.controller;
 
 import com.app.enties.Account;
+import com.app.enties.Merchant;
 import com.app.enties.Users;
 import com.app.repository.AccountRepository;
+import com.app.repository.MerchantRepository;
 import com.app.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -25,9 +27,8 @@ import java.util.List;
 public class AdminController {
   /** Repository for accessing user data. */
   @Autowired UsersRepository usersRepository;
-
-  @Autowired
-  AccountRepository accountRepository;
+  @Autowired AccountRepository accountRepository;
+  @Autowired MerchantRepository merchantRepository;
 
   /**
    * Activate and deactivate users.
@@ -41,13 +42,30 @@ public class AdminController {
     return false;
   }
 
+  /**
+   * Get all all the accounts.
+   * @return
+   */
   @RequestMapping("/api/admin/all_acounts")
   public List<Account> getAccounts(){
     return accountRepository.findAll();
   }
 
+  /**
+   * Get all the users.
+   * @return
+   */
   @RequestMapping("/api/admin/all_users")
   public List<Users> getUsers() {
     return usersRepository.findAll();
+  }
+
+  /**
+   * Get all the merchants.
+   * @return
+   */
+  @RequestMapping("/api/admin/all_merchants")
+  public List<Merchant> getMerchants() {
+    return merchantRepository.findAll();
   }
 }
