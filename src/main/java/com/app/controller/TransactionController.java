@@ -4,11 +4,12 @@ package com.app.controller;
 
 import com.app.Utils;
 import com.app.annotation.Checkdb;
-import com.app.enties.Account;
-import com.app.enties.Transaction;
 import com.app.repository.TransactionRepository;
 import com.app.request.TransactionRequest;
+import com.app.service.AccountService;
 import com.app.service.TransactionService;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +18,6 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /** @author Pasindu */
@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
 public class TransactionController {
   @Autowired private TransactionRepository transactionRepository;
   @Autowired private TransactionService transactionService;
-
+  @Autowired private AccountService accountService;
   private static class SimpleRequest{
     @NotNull
     @Checkdb(userCheck = true)
@@ -33,7 +33,11 @@ public class TransactionController {
   }
 
   @GetMapping("/api/transactions")
-  private List<?> getTransactions(@RequestParam("id") int accountId) {
+  private Object getTransactions(@RequestParam("id") int accountId) {
+    Map<String, String> response = new HashMap<>();
+    if (!accountService.checkUserHasPermissions(accountId, true)) {
+      return response.put("errors", "Access denied");
+    }
     return transactionRepository.getAccountTransactions(accountId);
   }
   /*
@@ -49,6 +53,7 @@ public class TransactionController {
       @Valid @RequestBody TransactionRequest transactionRequest, Errors requestError)
       throws Exception {
     Map<String, List<String>> response = new HashMap<String, List<String>>();
+
     if (requestError.hasErrors()) {
       response.put("errors", Utils.getListFromErrors(requestError));
       return response;

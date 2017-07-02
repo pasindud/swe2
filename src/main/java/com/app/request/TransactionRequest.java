@@ -15,6 +15,7 @@ import javax.validation.constraints.Null;
 /** Created by Pasindu on 6/29/17. */
 public class TransactionRequest {
   @NotNull private Integer toaccountid;
+  @Checkdb(userCheck = true)
   @NotNull private Integer fromaccountid;
 
   @Column(nullable=false, length=1)
