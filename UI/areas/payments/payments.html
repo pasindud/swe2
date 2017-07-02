@@ -1,4 +1,45 @@
 <div class="col s12 m12 l8 xl8">
+    <div class="section col s12 card-panel grey lighten-4">
+      <h5>Bank Transfer</h5>
+      <div class="divider col s12"></div>
+      <form>
+      <div class="input-field col s12">
+        Paying account
+        <select material-select watch ng-model="selectedTransfereAccount">
+          <option value="" disabled selected>Choose your account</option>
+          <option required ng-repeat="transfere_accounts in user_accounts"
+            value={{transfere_accounts.accountid}}>{{transfere_accounts.accountid}}
+          </option>
+        </select>
+      </div>
+      <div class="input-field col s12 m12 l12 xl6">
+        <input id="toaccountid" type="number" length="60" ng-model="transfere_toaccountid" required></input>
+        <label for="toaccountid">
+          <!-- TODO add to labels -->
+          Recipient's Account Number
+        </label>
+      </div>
+      <div class="input-field col s12 m12 l12 xl6">
+        <input id="message" type="text" length="60" ng-model="transfere_message"></input>
+        <label for="message">
+          <!-- TODO add to labels -->
+          Message
+        </label>
+      </div>
+      <div class="input-field col s12">
+        <input id="amount" type="number"  min="1" max="10000" length="60" ng-model="transfere_amount" required></input>
+        <label for="amount">
+          Amount
+        </label>
+      </div>
+      <div class="col s12 center" style="margin-top:50px;margin-bottom:30px;">
+        <button class="btn waves-effect waves-light" type="submit" name="action" ng-click="transfer()">
+        Transfer
+        <i class="material-icons right"></i>
+        </button>
+      </div>
+      </form>
+    </div>
   <div class="section col s12 card-panel grey lighten-4">
     <h5>Pay Bills</h5>
     <div class="divider col s12"></div>
@@ -27,7 +68,7 @@
       </label>
     </div>
     <div class="input-field col s12">
-      <input id="amount" type="text" length="60" ng-model="amount"></input>
+      <input id="amount" type="number" length="60" ng-model="amount"></input>
       <label for="amount">
         Amount
       </label>

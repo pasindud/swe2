@@ -26,4 +26,21 @@ angular.module('banking')
 		});
 
 	}
+
+
+	$scope.transfer = function () {
+		var data = {
+			amount : $scope.transfere_amount,
+			toaccountid : $scope.transfere_toaccountid,
+			fromaccountid : $scope.selectedTransfereAccount,
+			message : $scope.transfere_message
+		}
+		console.log(data);
+
+		AuthService.getRequestPost("/api/do_transaction", data, function (response) {
+			return response
+		});
+
+	}
+
 });
