@@ -1,27 +1,30 @@
 package com.app.service;
 
-import com.app.enties.Account;
-import com.app.enties.AccountType;
-import com.app.enties.Branch;
-import com.app.enties.Users;
-import com.app.repository.AccountRepository;
-import com.app.repository.AccountTypeRepository;
-import com.app.repository.BranchRepository;
-import com.app.repository.UsersRepository;
+import com.app.annotation.CheckdbValidator;
+import com.app.enties.*;
+import com.app.repository.*;
 import com.app.request.CreateAccountRequest;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.validation.ConstraintValidatorContext;
 
 /** Created by Pasindu on 6/29/17. */
 @Service
 public class AccountService {
+  private static final Logger logger = LoggerFactory.getLogger(CheckdbValidator.class);
   @Autowired BranchRepository branchRepository;
   @Autowired AccountTypeRepository accountTypeRepository;
   @Autowired UsersRepository usersRepository;
   @Autowired AccountRepository accountRepository;
   @Autowired UserServiceImpl userService;
+  @Autowired
+  MerchantRepository merchantRepository;
   private String currency;
   private int accTypeid;
   private int branchid;
@@ -36,6 +39,24 @@ public class AccountService {
       save();
     }
     return errors;
+  }
+
+  public boolean checkUserHasPermissions(Integer accountId, boolean userCheck) {
+      if (accountId == null) {
+       return false;
+      }
+
+      logger.info(String.format("Validating account id - %s", accountId));
+      Account account = accountRepository.findByAccountid(accountId);
+      if (account == null) {
+        return false;
+      } else if (userCheck == false) {
+        return true;
+      } else if (account.getUserId().getUserId() == userService.getLoggedInUserId()) {
+        return true;
+      } else {
+        return false;
+      }
   }
 
   private void save() {

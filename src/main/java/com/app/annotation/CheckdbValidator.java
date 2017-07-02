@@ -4,6 +4,7 @@ import com.app.enties.Account;
 import com.app.enties.MerchantServices;
 import com.app.repository.AccountRepository;
 import com.app.repository.MerchantServicesRepository;
+import com.app.service.AccountService;
 import com.app.service.UserServiceImpl;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -23,6 +24,9 @@ public class CheckdbValidator implements ConstraintValidator<Checkdb, Integer> {
   @Autowired MerchantServicesRepository merchantServicesRepository;
   /** Class used for user operations. */
   @Autowired UserServiceImpl userService;
+  /** */
+  @Autowired
+  AccountService accountService;
   /** Class type of the id to be validated. */
   Class<?> entityClass;
   /** Whether the users relationship with the id should be validated. */
@@ -45,17 +49,7 @@ public class CheckdbValidator implements ConstraintValidator<Checkdb, Integer> {
       return false;
     }
     if (entityClass == Account.class) {
-      logger.info(String.format("Validating account id - %s", id));
-      Account account = accountRepository.findByAccountid(id);
-      if (account == null) {
-        return false;
-      } else if (userCheck == false) {
-        return true;
-      } else if (account.getUserId().getUserId() == userService.getLoggedInUserId()) {
-        return true;
-      } else {
-        return false;
-      }
+      accountService.checkUserHasPermissions(id, userCheck);
     } else if (MerchantServices.class == entityClass
         && merchantServicesRepository.findByServiceid(id) != null) {
       return true;
