@@ -33,12 +33,19 @@ public class TransactionController {
   }
 
   @GetMapping("/api/transactions")
-  private Object getTransactions(@RequestParam("id") int accountId) {
-    Map<String, String> response = new HashMap<>();
+  private List<Map<String, Object>> getTransactions(@RequestParam("id") int accountId) {
+     //private Object getTransactions(@RequestParam("id") int accountId) {
+    // Map<String, String> response = new HashMap<>();
+    List<Map<String, Object>> response = new ArrayList<Map<String, Object>>();
+    Map<String, Object> map = new HashMap<String, Object>();
+    
     if (!accountService.checkUserHasPermissions(accountId, true)) {
-      return response.put("errors", "Access denied");
+        map.put("errors", "Access denied");
+        response.add(map);
+     // return response.put("errors", "Access denied");
     }
-    return transactionRepository.getAccountTransactions(accountId);
+   // return transactionRepository.getAccountTransactions(accountId);
+   return transactionService.getTransactionsPerAccount(accountId);
   }
   /*
 

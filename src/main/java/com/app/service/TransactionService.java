@@ -12,6 +12,7 @@ import com.app.repository.UsersRepository;
 import com.app.request.TransactionRequest;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,7 +22,8 @@ public class TransactionService {
   @Autowired private AccountRepository accountRepository;
   @Autowired private TransactionRepository transactionRepository;
   @Autowired private UsersRepository usersRepository;
-
+  @Autowired private JdbcTemplate jdbcTemplate;
+  
   private Transaction transaction;
   private List<String> errors = new ArrayList<String>();
   private Account fromAccount;
@@ -35,6 +37,17 @@ public class TransactionService {
     this.transaction = transaction;
     processTransaction();
     return errors;
+  }
+  
+  public List<Map<String, Object>> getTransactionsPerAccount(int accountid){
+      
+  String GET_ALL_Transactions_Account_SQL_QUERY =
+          "SELECT `transactionid` 'Id', -(`amount`*`fromrate`) 'Amount','transtype' 'Type', `fromcurrency` 'Currency', `Message`, `transactiontime` 'Timestamp', (select username from users where user_id=userid) 'By' FROM `transaction` where upper(`transtype`)= 'W' and `fromaccountid` ="+accountid+" union "
+        + "SELECT `transactionid` 'Id', +(`amount`*`torate`) 'Amount','transtype' 'Type', `tocurrency` 'Currency', `Message`, `transactiontime` 'Timestamp', (select username from users where user_id=userid) 'By' FROM `transaction` where upper(`transtype`)= 'D' and `toaccountid` ="+accountid+" union "
+        + "SELECT `transactionid` 'Id', +(`amount`*`torate`) 'Amount','transtype' 'Type', `tocurrency` 'Currency', `Message`, `transactiontime` 'Timestamp', (select username from users where user_id=userid) 'By' FROM `transaction` where upper(`transtype`)= 'T' and `toaccountid` ="+accountid+" union "
+        + "SELECT `transactionid` 'Id', -(`amount`*`fromrate`) 'Amount','transtype' 'Type', `fromcurrency` 'Currency', `Message`, `transactiontime` 'Timestamp', (select username from users where user_id=userid) 'By' FROM `transaction` where upper(`transtype`)= 'T' and `fromaccountid` ="+accountid+" order by Id ";
+  return jdbcTemplate.queryForList(GET_ALL_Transactions_Account_SQL_QUERY);
+  
   }
 
   public List<String> do_transactions(TransactionRequest transactionRequest) throws Exception {
