@@ -142,8 +142,8 @@ angular.module('banking', [
           authorizedRoles: [nnyConst.UserRoles.Admin]
         }
       })
-      .state('user', {
-        url: '/admin/user/{userID}',
+      .state('account_view', {
+        url: '/admin/user/{accountid}',
         templateUrl: 'areas/admin/manageAccounts/userAccount.html',
         controller: 'UserAccountController',
         data: {

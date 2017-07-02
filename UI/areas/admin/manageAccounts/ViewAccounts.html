@@ -38,7 +38,7 @@
             <td>{{account.currency}}</td>
             <td>{{account.expireDate}}</td>
             <td>{{account.locked}}</td>
-            <td>{{user.Actions}}<a ui-sref="user({account_list: account})">View</a></td>
+            <td><a ui-sref="account_view({accountid: account.accountid})">View</a></td>
           </tr>
         </tbody>
       </table>
