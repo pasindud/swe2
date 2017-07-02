@@ -10,10 +10,10 @@ package com.app.enties;
  * @author dilsh
  */
 public enum TransactionType {
-    T,
-    D,
-    W,
-    t,
-    d,
-    w
+    T,//Transaction Type for : Transaction
+    D,//Transaction Type for : Deposit
+    W,//Transaction Type for : Withdrawal
+    t,//Transaction Type for : Transaction
+    d,//Transaction Type for : Deposit
+    w //Transaction Type for : Withdrawal
 }

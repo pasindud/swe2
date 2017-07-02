@@ -34,7 +34,8 @@ public class Users {
   private Set<Role> roles;
 
   @Column(name = "userType", length = 45)
-  private String userType;
+  @Enumerated(EnumType.STRING)
+  private UserType userType;
 
   @Column(name = "creationDate")
   @Temporal(TemporalType.DATE)
@@ -108,11 +109,11 @@ public class Users {
   }
 
 
-  public String getUserType() {
+  public UserType getUserType() {
     return this.userType;
   }
 
-  public void setUserType(String userType) {
+  public void setUserType(UserType userType) {
     this.userType = userType;
   }
 
