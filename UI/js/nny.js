@@ -57,8 +57,8 @@ angular.module('banking', [
 
   })
   .state('createnew',{
-    url:'/createnew',
-    templateUrl:'areas/account/createNewAccount.html',
+    url:'/signup/createnew',
+    templateUrl:'areas/signup/createNewAccount.html',
     controller:'CreateNewAccountController',
     data : {requireLogin : false },
 
@@ -128,16 +128,21 @@ angular.module('banking', [
       authorizedRoles : [nnyConst.UserRoles.Admin,nnyConst.UserRoles.CustomerP]}
   })
   .state('addmerchantaccount',{
-    url : '/addmerchantaccount',
+    url : '/signup/addmerchantaccount',
     controller:'AddMerchantAccountController',
-    templateUrl : 'areas/account/addMerchantAccount.html',
-    data : {requireLogin : true,
-      authorizedRoles : [nnyConst.UserRoles.Admin,nnyConst.UserRoles.CustomerP]}
+    templateUrl : 'areas/signup/addMerchantAccount.html',
+    data : {requireLogin : false}
   })
   .state('recover',{
     url : '/recover',
     controller:'RecoverAccountController',
     templateUrl : 'areas/login/recoverAccount.html',
+    data : {requireLogin : false}
+  })
+  .state('chooseprofile',{
+    url : '/signup',
+    controller:'ChooseProfileTypeController',
+    templateUrl : 'areas/signup/chooseProfileType.html',
     data : {requireLogin : false}
   })
   .state('DatePickerController',{
