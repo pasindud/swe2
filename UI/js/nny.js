@@ -121,7 +121,7 @@ angular.module('banking', [
       authorizedRoles : [nnyConst.UserRoles.Admin,nnyConst.UserRoles.CustomerP]}
   })
   .state('addbankaccount',{
-    url : '/addbankaccount',
+    url : '/account/addbankaccount',
     controller:'AddBankAccountController',
     templateUrl : 'areas/account/addBankAccount.html',
     data : {requireLogin : true,

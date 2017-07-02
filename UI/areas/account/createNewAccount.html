@@ -25,6 +25,12 @@
   <div class="section col s12">
     <h5>{{labels.PersonalInformation}}</h5>
     <div class="divider col s12"></div>
+    <div  class="col s12 m12 112 xl12">
+      <div class="input-field col s12 m5 15 xl5">
+        <input id="utitle" type="text" length="5" ng-model="FormData.title">
+        <label for="utitle">{{labels.Title}}</label>
+      </div>
+    </div>
     <div  class="input-field col s12 m12 16 xl6">
       <input id="first_name" type="text" length="150" ng-model="FormData.first_name">
       <label for="first_name">{{labels.FirstName}}</label>
