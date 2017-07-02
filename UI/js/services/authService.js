@@ -38,8 +38,10 @@ nnyApp.factory('AuthService',['$http','nnyConst','$rootScope',function ($http,nn
 
   function getIsLoggedIn() {
     var authDataLocalStorage = localStorage.getItem("accessToken");
+    console.log(authDataLocalStorage);
     if (authDataLocalStorage) {
       $rootScope.authData = JSON.parse(authDataLocalStorage);
+      $http.defaults.headers.common['x-auth-token'] = $rootScope.authData.accessToken;
       return true;
     } else {
       return false;
@@ -56,44 +58,53 @@ nnyApp.factory('AuthService',['$http','nnyConst','$rootScope',function ($http,nn
       $http.defaults.headers.common['Authorization'] = 'Basic ' + authData;
       return $http.get(nnyConst.ENDPOINT_URI + "/api/auth", {headers: headers});
     },
-    getAuthToken : function (username, password) {
+    getAuthToken : function (username, password, cb) {
       var url = nnyConst.ENDPOINT_URI +"/api/auth";
-      var authData = btoa(username + ":" + password);
-      console.log(authData);
-      $http.defaults.headers.common['Authorization'] = 'Basic ' + authData;
       $http.defaults.headers.common['Content-Type'] = 'application/json';
-      return $http.get(url).then(function (response) {
-        console.log(response);
-        if(response.status == 200)
-        {
+      
+      $http({method: 'GET', url: url, headers: {
+        'Authorization': 'Basic ' + btoa(username + ":" + password)}
+      }).then(function (response) {
+        console.log("REPONSE");
+        console.log(response.status);
+        if(response.status == 200) {
           var temp = response.data;
           $rootScope.authData = {
             accessToken : temp.session,
             accessLevel : temp.AccessLevel,
             userId : temp.userId
           };
+          console.log("Storing Credentials");
           localStorage.setItem("accessToken", JSON.stringify($rootScope.authData))
-          console.log(temp);
-        }else {
+          // Set the x-auth-token globally.
+          $http.defaults.headers.common['x-auth-token'] = temp.session;
+          cb(response);
+        } else {
           setErrorDialog(response.status);
+          cb(response);
         }
       });
     },
     getRequest : function (url, data, cb) {
-      var headers = {"x-auth-token": $rootScope.authData.accessToken};
-      console.log(headers);
-      $http.get(nnyConst.ENDPOINT_URI + url, {headers: headers}).then(function (response) {
+      // var headers = {"x-auth-token": $rootScope.authData.accessToken};
+      // console.log(headers);
+
+      if (!getIsLoggedIn()) {
+        cb({error:"User not logged in."})
+        return;
+      };
+      var config = {url : nnyConst.ENDPOINT_URI + url};
+      if (data != null) {
+        config.method = "POST";
+        config.data = data;
+      } else {
+        config.method = "GET";
+      }
+
+      $http(config).then(function (response) {
         console.log(response.data);
         cb(response);
       });
-    },
-    getRequestPost : function (url, data, cb) {
-      // var headers = {"x-auth-token": $rootScope.authData.accessToken};
-      $http({
-          method: 'POST',
-          url: nnyConst.ENDPOINT_URI + url,
-          data: data
-      })
     },
     isLoggedin : function () {
       return getIsLoggedIn();

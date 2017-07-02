@@ -17,24 +17,21 @@ angular.module('banking')
    $scope.loginbtn = function () {
    		console.log($scope.upass);
       $('#LoadingModal').modal('open');
-   		AuthService.getAuthToken($scope.username, $scope.upass).then(function () {
-        if(AuthService.isLoggedin())
-        {
-          if($rootScope.authData.accessLevel == nnyConst.UserRoles.Admin)
-          {
+   		AuthService.getAuthToken($scope.username, $scope.upass, function  (response) {
+        console.log("Check logging");
+        if(AuthService.isLoggedin()) {
+          if($rootScope.authData.accessLevel == nnyConst.UserRoles.Admin) {
             $state.go("admin");
+          } else {
+            $state.go("account");
           }
-          else {
-              $state.go("account");
-          }
-        }
-        else {
+        } else {
             $('#username').addClass('invalid');
             $('#password').addClass('invalid');
             $('#ErrorModal').modal('open');
         }
         $scope.ErrorDialog = $rootScope.ErrorDialog;
         $('#LoadingModal').modal('close');
-   		});
+      })
    }
 });

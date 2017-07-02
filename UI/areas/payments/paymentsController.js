@@ -21,7 +21,7 @@ angular.module('banking')
 		}
 
 		// TODO(pasindu): To be implmented.
-		AuthService.getRequestPost("/api/merchant_services_pay_bill", data, function (response) {
+		AuthService.getRequest("/api/merchant_services_pay_bill", data, function (response) {
 			return response
 		});
 
@@ -37,7 +37,7 @@ angular.module('banking')
 		}
 		console.log(data);
 
-		AuthService.getRequestPost("/api/do_transaction", data, function (response) {
+		AuthService.getRequest("/api/do_transaction", data, function (response) {
 			return response
 		});
 

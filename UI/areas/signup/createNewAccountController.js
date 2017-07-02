@@ -81,7 +81,7 @@ angular.module('banking')
       }
       else
       {
-        AuthService.getRequestPost("/api/registration", {
+        AuthService.getRequest("/api/registration", {
           users:{
             username : $scope.username,
             password : $scope.password
