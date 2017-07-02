@@ -4,6 +4,75 @@ angular.module('banking')
 .controller('CreateNewAccountController',function ($state,$rootScope,$scope, ValidateService, AuthService) {
   var isInvalidForm = false;
   var errors = [""];
+  var userObj = {
+    username : "",
+    password : "",
+    roles : {
+      id : "1"
+    }
+  };
+
+  var customerObj = {
+    title : "",
+    firstname : "",
+    lastname : "",
+    dob : "",
+    nic : "",
+    addressLine1 : "",
+    addressLine2 : "",
+    addressLine3 : "",
+    city : "",
+    mobileNo : "",
+    email : "",
+    faxNo : ""
+  };
+
+  var answer = {
+    answer : "",
+    securityQuestions : {
+      id : ""
+    }
+  };
+
+  var signupObj = {
+    users : "",
+    customer : "",
+    answers : []
+  };
+
+  function getMappedData(data) {
+    userObj.username = data.username;
+    userObj.password = data.password;
+
+    customerObj.title = data.title;
+    customerObj.firstname = data.first_name;
+    customerObj.lastname = data.last_name;
+    customerObj.dob = data.dob;
+    customerObj.nic = data.nic;
+    customerObj.email = data.email;
+    customerObj.faxNo = data.faxNo;
+    customerObj.mobileNo = data.contact1;
+    customerObj.city = data.city;
+    customerObj.addressLine1 = data.addressL1;
+    customerObj.addressLine2 = data.addressL2;
+    customerObj.addressLine3 = data.addressL3;
+
+    var answer1 = answer;
+    var answer2 = answer;
+
+    answer1.answer = data.answer1;
+    answer1.securityQuestions.id = data.question1;
+    answer2.answer = data.answer2;
+    answer2.securityQuestions.id = data.question2;
+
+    signupObj.users = userObj;
+    signupObj.customer = customerObj;
+    signupObj.answers = [answer1,answer2];
+
+    console.log(signupObj);
+    return signupObj;
+  }
+
   function inputFieldAnimate(id,status) {
     if(status){
       $("#"+id).addClass('valid');
@@ -81,6 +150,7 @@ angular.module('banking')
       }
       else
       {
+        var data = getMappedData(FormData);
         AuthService.getRequestPost("/api/registration", {
           users:{
             username : $scope.username,
