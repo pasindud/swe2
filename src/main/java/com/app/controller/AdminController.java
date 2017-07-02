@@ -1,6 +1,8 @@
 package com.app.controller;
 
+import com.app.enties.Account;
 import com.app.enties.Users;
+import com.app.repository.AccountRepository;
 import com.app.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.security.RolesAllowed;
 import java.security.Principal;
+import java.util.List;
 
 /**
  * Class used for API endpoints for admin operations.
@@ -22,6 +25,12 @@ import java.security.Principal;
 public class AdminController {
   /** Repository for accessing user data. */
   @Autowired UsersRepository usersRepository;
+
+  @Autowired
+  AccountRepository accountRepository;
+
+  @Autowired
+  UsersRepository usersRepository;
 
   /**
    * Activate and deactivate users.
@@ -33,5 +42,15 @@ public class AdminController {
   public boolean changeUserStatus(@RequestParam("user_id") int userId, @RequestParam("activate") boolean activate) {
     usersRepository.updateActivate(activate, userId);
     return false;
+  }
+
+  @RequestMapping("/api/admin/all_acounts")
+  public List<Account> getAccounts(){
+    return accountRepository.findAll();
+  }
+
+  @RequestMapping("/api/admin/all_users")
+  public List<Users> getUsers() {
+    return usersRepository.findAll();
   }
 }
