@@ -9,33 +9,38 @@
         <option ng-repeat="account in user_accounts" value={{account.accountid}}>{{account.accountid}}</option>
       </select>
       <div class="col s12">
-        <div class="col s12 m6">
+        <div class="col s12">
           <p><b>{{labels.Branch}} : </b> {{selectedAccountDetails.branchId.branchName}}</p>
+        </div>
+
+        <div class="col s12">
           <p><b>{{labels.AccountType}} : </b> {{selectedAccountDetails.accTypeId.accName}}</p>
         </div>
-        <div class="col s12 m6">
+
+        <div class="col s12">
+          <p>
+            <b>{{labels.InterestRate}} : 
+            </b> {{selectedAccountDetails.accTypeId.accInterestRatesaccName}}
+          </p>
+        </div>
+
+        <div class="col s12">
+          <p><b>{{labels.Balance}} : </b> {{selectedAccountDetails.balanceaccName}}</p>
+        </div>
+
+        <div class="col s12">
           <p><b>{{labels.AccountOpenDate}} : </b> {{selectedAccountDetails.createdDate}}</p>
         </div>
       </div>
     </div>
-    <div class="col s12 m12 l12 xl6">
-      <div class="col s12 nny-rounded-flat-card">
-        <div class="col s12 m3">
-          <p class="nny-p1">{{labels.Balance}} : {{selectedAccountDetails.balance}}</p>
-        </div>
-        <div class="col s12 m3"><p class="nny-p1">{{labels.Loan}} : {{selectedAccountDetails.loan}}</p></div>
-        <div class="col s12 m6">
-          <p style="font-size:15pt">{{labels.InterestRate}} :
-            {{selectedAccountDetails.accTypeId.accInterestRates}}</p>
-          </div>
-        </div>
-      </div>
       <div class="col s12 center" style="margin-top:50px;margin-bottom:30px;">
         <div class="col s12 m6">
           <button class="btn waves-effect waves-light" ui-sref="activity({transactionId: selectedAccountDetails.accountid})">{{labels.ViewActivity}}</button>
         </div>
         <div class="col s12 m6">
-          <button class="btn waves-effect waves-light" ui-sref="addbankaccount">{{labels.AddBankAccount}}</button>
+          <button class="btn waves-effect waves-light" 
+          ui-sref="addbankaccount">{{labels.AddBankAccount}}
+          </button>
         </div>
       </div>
     </div>
