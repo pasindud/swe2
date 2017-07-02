@@ -41,6 +41,17 @@ public class Account {
   @Basic
   private String currency;
 
+  public Boolean getLocked() {
+    return locked;
+  }
+
+  public void setLocked(Boolean locked) {
+    this.locked = locked;
+  }
+
+  @Column(name="locked", columnDefinition = "boolean default false", nullable = false)
+  private Boolean locked = false;
+
   @ManyToOne(optional = false, targetEntity = AccountType.class)
   @JoinColumn(name = "ACCTYPEID", referencedColumnName = "ACCTYPEID")
   private AccountType accTypeId;

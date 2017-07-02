@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.security.RolesAllowed;
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Class used for API endpoints for admin operations.
@@ -43,7 +45,33 @@ public class AdminController {
   }
 
   /**
-   * Get all all the accounts.
+   * API endpoint to lock accounts.
+   * <p>
+   *   curl -u ADMIN:xyz "http://localhost:8080/api/admin/lock_account?accountid=1&lock=true"
+   * <p/>
+   * @param accountid the id of the account to be locked or unlocked.
+   * @param lock whether to lock or unlock the account.
+   * @return the updated state of account.
+   */
+  @RequestMapping("/api/admin/lock_account")
+  public Map<String, String> lockAccount(@RequestParam("accountid") int accountid, @RequestParam("lock") boolean lock) {
+//    return accountRepository.updateAccountLock(lock, accountid);
+    Map<String, String> response = new HashMap<>();
+    if (accountRepository.updateAccountLock(lock, accountid) == 1) {
+      if (lock) {
+        response.put("data", "Account locked");
+      } else {
+        response.put("data", "Account unlocked");
+      }
+      return response;
+    } else {
+      response.put("errors", "Error toggling acount lock");
+      return response;
+    }
+  }
+
+  /**
+   * API endpoint to get all the accounts.
    * @return
    */
   @RequestMapping("/api/admin/all_acounts")
@@ -52,7 +80,7 @@ public class AdminController {
   }
 
   /**
-   * Get all the users.
+   * API endpoint get all the users.
    * @return
    */
   @RequestMapping("/api/admin/all_users")
@@ -61,7 +89,7 @@ public class AdminController {
   }
 
   /**
-   * Get all the merchants.
+   * API endpoint to get all the merchants.
    * @return
    */
   @RequestMapping("/api/admin/all_merchants")
