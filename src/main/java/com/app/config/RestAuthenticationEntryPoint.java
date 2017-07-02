@@ -37,7 +37,7 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
     if (loginHistories.size() >= 3) {
-      response.getOutputStream().println("{ \"error\": \"Account Locked\" }");
+      response.getOutputStream().println("{ \"error\": \"Account temporary locked due to multiple incorrect attempts.\" }");
     } else {
       loginHistoryService.logUserLogginHistory(0, username);
       response.getOutputStream().println("{ \"error\": \"" + authenticationException.getMessage() + "\" }");

@@ -17,13 +17,21 @@ public class Users {
   private String username;
   private String password;
 
+  public Set <Role> getRoles() {
+    return roles;
+  }
+
+  public void setRoles(Set <Role> roles) {
+    this.roles = roles;
+  }
+
   @ManyToMany
   @JoinTable(
     name = "user_role",
     joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns = @JoinColumn(name = "role_id")
   )
-  private List<Role> roles;
+  private Set<Role> roles;
 
   @Column(name = "userType", length = 45)
   private String userType;
@@ -99,13 +107,6 @@ public class Users {
     this.password = password;
   }
 
-  public List<Role> getRoles() {
-    return roles;
-  }
-
-  public void setRoles(List<Role> roles) {
-    this.roles = roles;
-  }
 
   public String getUserType() {
     return this.userType;

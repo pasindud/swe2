@@ -15,6 +15,8 @@ import com.app.request.CreateUserRequest;
 import com.app.service.UserRegistration;
 import com.app.service.UserServiceImpl;
 import com.google.common.collect.ImmutableMap;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,7 +55,10 @@ public class UserController {
     HashMap<String, Object> map = new HashMap<>();
     map.put(RESPONSE_SESSION_MAP_KEY, session.getId());
     map.put(RESPONSE_USERID_MAP_KEY, userService.getLoggedInUserId());
-    if (user.getRoles().get(0).getName().equals("ROLE_ADMIN")) {
+
+    List<Role> list = new ArrayList<Role>(user.getRoles());
+    
+    if (list.get(0).getName().equals("ADMIN")) {
       map.put(RESPONSE_ACCESS_LEVEL_MAP_KEY, ADMIN_ACCESS_LEVEL_ID);
     } else {
       map.put(RESPONSE_ACCESS_LEVEL_MAP_KEY, CUSTOMER_ACCESS_LEVEL_ID);

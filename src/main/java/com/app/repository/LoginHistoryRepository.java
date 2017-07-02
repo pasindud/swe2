@@ -12,7 +12,7 @@ import java.util.List;
 public interface LoginHistoryRepository extends CrudRepository<LoginHistory, Long> {
 
   @Query(
-          value = "select * from login_history where createdtime >= DATE_SUB(NOW(), INTERVAL 10 MINUTE) and username = ?1",
+          value = "select * from login_history where createdtime >= DATE_SUB(NOW(), INTERVAL 10 MINUTE) and username = ?1 and authorized=0",
           nativeQuery = true
   )
   List<LoginHistory> getLast10MinsLoginHistoryByUsername(String username);
