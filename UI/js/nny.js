@@ -189,33 +189,29 @@ angular.module('banking', [
 .run(function ($rootScope,$state, AuthService,$location) {
   $rootScope.$on('$stateChangeStart',function (event, toState, toParams, fromState, fromParams, error) {
     console.log("asd");
-    // if(toState !== undefined && toState.data && toState.data.requireLogin && !AuthService.isLoggedin())
-    // {
-    //   $state.go("login");
-    //   event.preventDefault();
-    //   return;
-    // } else if (toState.data.authorizedRoles === undefined) {
-    //   return;
-    // }
-    // else if(toState.data.authorizedRoles.indexOf($rootScope.authData.accessLevel) == -1) {
-    //   console.log("1111");
-    //   $state.go("login");
-    //   event.preventDefault();
-    //   return;
-    // }
-    // else {
-    //   console.log("asds");
-    //   return;
-    // }
+    if(toState !== undefined && toState.data && toState.data.requireLogin && !AuthService.isLoggedin())
+    {
+      $state.go("login");
+      event.preventDefault();
+      return;
+    } else if (toState.data.authorizedRoles === undefined) {
+      return;
+    }
+    else if(toState.data.authorizedRoles.indexOf($rootScope.authData.accessLevel) == -1) {
+      console.log("1111");
+      $state.go("login");
+      event.preventDefault();
+      return;
+    }
+    else {
+      console.log("asds");
+      return;
+    }
     if (!AuthService.isLoggedin()) {
       if (toState.name != "login") {
-        $state.go("login");  
+        $state.go("login");
         event.preventDefault();
-      }; 
+      };
     };
-     // if (!AuthService.isAuthRoute($location.url())&&!AuthService.isLoggedin()) {
-    // $state.go("login");
-    // event.preventDefault();
-    // }
 });
 });
