@@ -179,6 +179,14 @@ angular.module('banking', [
     });
   });
 
+  $scope.tabBtn = function (tabId) {
+    $("#accountTab").removeClass("nny-tab-selected");
+    $("#paymentsTab").removeClass("nny-tab-selected");
+    $("#profileTab").removeClass("nny-tab-selected");
+
+    $("#"+tabId).addClass("nny-tab-selected");
+  }
+
   $scope.getLabels = function () {
     return $rootScope.labels;
   };
@@ -209,9 +217,9 @@ angular.module('banking', [
     // }
     if (!AuthService.isLoggedin()) {
       if (toState.name != "login") {
-        $state.go("login");  
+        $state.go("login");
         event.preventDefault();
-      }; 
+      };
     };
      // if (!AuthService.isAuthRoute($location.url())&&!AuthService.isLoggedin()) {
     // $state.go("login");
