@@ -137,5 +137,6 @@
   "SecurityQuestions" : "Security Questions",
   "Question" : "Question",
   "Answer" : "Answer",
-  "SelectProfileType": "Select Profile Type"
+  "SelectProfileType": "Select Profile Type",
+  "MerchantInformation" : "Merchant Information"
   }]
