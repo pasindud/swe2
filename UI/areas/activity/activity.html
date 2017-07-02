@@ -35,20 +35,21 @@
       <thead>
         <tr>
           <th>{{labels.Date}} <a class="waves-effect" ng-click="sortBtn('Date',true)"><i class="tiny material-icons">swap_vert</i></a></th>
-          <th>{{labels.Name}} <a class="waves-effect" ng-click="sortBtn('Name',true)"><i class="tiny material-icons">swap_vert</i></a></th>
-          <th>{{labels.Type}} <a class="waves-effect" ng-click="sortBtn('Type',true)"><i class="tiny material-icons">swap_vert</i></a></th>
+          <!-- Add to the labels -->
+          <th> From Id <a class="waves-effect" ng-click="sortBtn('Name',true)"><i class="tiny material-icons">swap_vert</i></a></th>
+          <th> {{labels.Type}} <a class="waves-effect" ng-click="sortBtn('Type',true)"><i class="tiny material-icons">swap_vert</i></a></th>
           <th>{{labels.Amount}} <a class="waves-effect" ng-click="sortBtn('Amount',true)"><i class="tiny material-icons">swap_vert</i></a></th>
-          <th>{{labels.Balance}} <a class="waves-effect" ng-click="sortBtn('Balance',true)"><i class="tiny material-icons">swap_vert</i></a></th>
+          <th>{{labels.Message}} <a class="waves-effect" ng-click="sortBtn('Amount',true)"><i class="tiny material-icons">swap_vert</i></a></th>
           <th>{{labels.Actions}}</th>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat = "transaction in Transactions">
-          <td>{{transaction.Date}}</td>
-          <td>{{transaction.Name}}</td>
-          <td>{{transaction.Type}}</td>
-          <td>{{transaction.Amount}}</td>
-          <td>{{transaction.Balance}}</td>
+          <td>{{transaction.transactiontime}}</td>
+          <td>{{transaction.fromaccountid}}</td>
+          <td>{{transaction.transtype}}</td>
+          <td>{{transaction.amount}}</td>
+          <td>{{transaction.message}}</td>
           <td><a class="waves-effect" ng-click="viewDetailsBtn(transaction.id)">{{labels.ViewMore}}</a></td>
         </tr>
       </tr>

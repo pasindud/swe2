@@ -41,7 +41,7 @@ angular.module('banking', [
 
   })
   .state('activity',{
-    url:'/activity',
+    url:'/activity/{transactionId}',
     templateUrl:'areas/activity/activity.html',
     controller:'ActivityController',
     data : {requireLogin : true,

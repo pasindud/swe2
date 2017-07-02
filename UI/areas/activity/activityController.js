@@ -2,11 +2,17 @@
 'use strict';
 angular.module('banking')
 .controller('ActivityController',function ($state,$rootScope,$scope,$http, $stateParams, AuthService, PaginationService, SortingService) {
-	/*var transactionId = $stateParams.transactionId;
 
+	
+	var transactionId = $stateParams.transactionId;
+	if (!transactionId) {
+		$state.go("account");	
+		return;
+	};
 	AuthService.getRequest("/api/transactions?id=" + transactionId, null, function (response) {
-	$scope.Transactions = response.data;
-});*/
+		$scope.Transactions = response.data;
+	});
+
 var paginationObj = "";
 var pageNumbers = "";
 $scope.CurrentPage = 1;
@@ -20,12 +26,12 @@ function handlePagination(recordSet)
 }
 //sample data
 //TODO replace this
-$http.get('SampleJSON/Activity/Activity1.json')
-.then(function(res) {
-	$scope.UserID = res.data[0].UserID;
-	$scope.TransactionsOriginal = res.data[0].Transactions;
-	handlePagination($scope.TransactionsOriginal);
-});
+// $http.get('SampleJSON/Activity/Activity1.json')
+// .then(function(res) {
+// 	$scope.UserID = res.data[0].UserID;
+// 	$scope.TransactionsOriginal = res.data[0].Transactions;
+// 	handlePagination($scope.TransactionsOriginal);
+// });
 
 //Sorting Button
 $scope.sortBtn = function (field,ascending) {
