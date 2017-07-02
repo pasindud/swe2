@@ -68,7 +68,7 @@ public class TransactionService {
     this.transaction.setAmount(transactionRequest.getAmount());
     this.transaction.setMessage(transactionRequest.getMessage());
     this.transaction.setTranstype(transactionRequest.getTranstype());
-    this.transaction.setUserId(usersRepository.findByUserId(transactionRequest.getUserId().getUserId()));
+    this.transaction.setUserId(usersRepository.findByUserId(userService.getLoggedInUserId()));
     // TODO Add currency to transaction object.
     processTransaction();
     return errors;
