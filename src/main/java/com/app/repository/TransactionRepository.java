@@ -20,4 +20,5 @@ public interface TransactionRepository extends CrudRepository<Transaction, Long>
           nativeQuery = true
   )
   public List<Transaction> getAccountTransactions(int accountid);
+  public Transaction findByTransactionid(int transactionid);
 }

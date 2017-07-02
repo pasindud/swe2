@@ -40,6 +40,12 @@ public class TransactionController {
     }
     return transactionRepository.getAccountTransactions(accountId);
   }
+
+  @GetMapping("/api/transaction_by_id")
+  private Object getTransactionById(@RequestParam("id") int transactionId) {
+    return transactionRepository.findByTransactionid(transactionId);
+  }
+
   /*
 
     curl -u xyz:xyz  -H "Content-Type: application/json" -X POST \
