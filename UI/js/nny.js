@@ -24,12 +24,19 @@ angular.module('banking', [
     data : {requireLogin : true ,
     authorizedRoles : [nnyConst.UserRoles.Admin,nnyConst.UserRoles.CustomerP]}
   })
+  .state('merchantprofile',{
+    url:'/merchantprofile',
+    templateUrl:'areas/userprofile/merchantProfile.html',
+    controller:'MerchantProfileController',
+    data : {requireLogin : true ,
+    authorizedRoles : [nnyConst.UserRoles.Admin,nnyConst.UserRoles.CustomerM]}
+  })
   .state('account',{
     url:'/account',
     templateUrl:'areas/account/account.html',
     controller:'AccountController',
     data : {requireLogin : true,
-    authorizedRoles : [nnyConst.UserRoles.CustomerP]}
+    authorizedRoles : [nnyConst.UserRoles.CustomerP,nnyConst.UserRoles.CustomerM]}
 
   })
   .state('payments',{
@@ -37,7 +44,7 @@ angular.module('banking', [
     templateUrl:'areas/payments/payments.html',
     controller:'PaymentsController',
     data : {requireLogin : true,
-    authorizedRoles : [nnyConst.UserRoles.CustomerP]}
+    authorizedRoles : [nnyConst.UserRoles.CustomerP,nnyConst.UserRoles.CustomerM]}
 
   })
   .state('activity',{
@@ -45,7 +52,7 @@ angular.module('banking', [
     templateUrl:'areas/activity/activity.html',
     controller:'ActivityController',
     data : {requireLogin : true,
-    authorizedRoles : [nnyConst.UserRoles.Admin,nnyConst.UserRoles.CustomerP]}
+    authorizedRoles : [nnyConst.UserRoles.Admin,nnyConst.UserRoles.CustomerP,nnyConst.UserRoles.CustomerM]}
 
   })
   .state('transaction',{
@@ -53,7 +60,7 @@ angular.module('banking', [
     templateUrl:'areas/activity/transaction.html',
     controller:'TransactionController',
     data : {requireLogin : true,
-    authorizedRoles : [nnyConst.UserRoles.Admin,nnyConst.UserRoles.CustomerP]}
+    authorizedRoles : [nnyConst.UserRoles.Admin,nnyConst.UserRoles.CustomerP,nnyConst.UserRoles.CustomerM]}
 
   })
   .state('createnew',{
@@ -118,14 +125,14 @@ angular.module('banking', [
     templateUrl : 'areas/settings/settings.html',
     data : {
       requireLogin : true,
-      authorizedRoles : [nnyConst.UserRoles.Admin,nnyConst.UserRoles.CustomerP]}
+      authorizedRoles : [nnyConst.UserRoles.Admin,nnyConst.UserRoles.CustomerP,nnyConst.UserRoles.CustomerM]}
   })
   .state('addbankaccount',{
     url : '/account/addbankaccount',
     controller:'AddBankAccountController',
     templateUrl : 'areas/account/addBankAccount.html',
     data : {requireLogin : true,
-      authorizedRoles : [nnyConst.UserRoles.Admin,nnyConst.UserRoles.CustomerP]}
+      authorizedRoles : [nnyConst.UserRoles.Admin,nnyConst.UserRoles.CustomerP,nnyConst.UserRoles.CustomerM]}
   })
   .state('addmerchantaccount',{
     url : '/signup/addmerchantaccount',

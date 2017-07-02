@@ -53,6 +53,7 @@
   <script type="text/javascript" src="areas/signup/addMerchantAccountController.js"></script>
   <script type="text/javascript" src="areas/common/overviewController.js"></script>
   <script type="text/javascript" src="areas/signup/chooseProfileTypeController.js"></script>
+  <script type="text/javascript" src="areas/userprofile/merchantProfileController.js"></script>
 
   <!--Import Services-->
   <script type="text/javascript" src="js/services/authService.js"></script>
@@ -85,6 +86,11 @@
                     <li id="accountTab" class="col s4 nny-tab-selected"><a ui-sref="account" ng-click="tabBtn(1)">{{labels.Account}}</a></li>
                     <li id="paymentsTab" class="col s4 nny-tab"><a ui-sref="payments" ng-click="tabBtn(2)">{{labels.Payments}}</a></li>
                     <li id="profileTab" class="col s4 nny-tab"><a ui-sref="userprofile" ng-click="tabBtn(3)"> Profile </a></li>
+                  </ul>
+                  <ul class="nny-tabs" ng-if="authData.accessLevel == AccessLevels.CustomerM">
+                    <li id="accountTab" class="col s4 nny-tab-selected"><a ui-sref="account" ng-click="tabBtn(1)">{{labels.Account}}</a></li>
+                    <li id="paymentsTab" class="col s4 nny-tab"><a ui-sref="payments" ng-click="tabBtn(2)">{{labels.Payments}}</a></li>
+                    <li id="profileTab" class="col s4 nny-tab"><a ui-sref="merchantprofile" ng-click="tabBtn(3)"> Profile </a></li>
                   </ul>
                   <ul class="nny-tabs" ng-if="authData.accessLevel == AccessLevels.Admin">
                     <li class="col s12 nny-tab"><a ui-sref="admin">{{labels.AdminDashboard}}</a></li>
