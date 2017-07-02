@@ -50,6 +50,8 @@
   <script type="text/javascript" src="areas/payments/paymentsController.js"></script>
   <script type="text/javascript" src="areas/login/recoverAccountController.js"></script>
   <script type="text/javascript" src="areas/account/addBankAccountController.js"></script>
+  <script type="text/javascript" src="areas/account/addMerchantAccountController.js"></script>
+  <script type="text/javascript" src="areas/common/overviewController.js"></script>
 
   <!--Import Services-->
   <script type="text/javascript" src="js/services/authService.js"></script>
@@ -79,9 +81,9 @@
               <div class="center col s4">
                 <center>
                   <ul class="nny-tabs" ng-if="authData.accessLevel == AccessLevels.CustomerP">
-                    <li class="col s3 nny-tab-selected"><a ui-sref="account">{{labels.Account}}</a></li>
-                    <li class="col s3 nny-tab"><a ui-sref="payments">{{labels.Payments}}</a></li>
-                    <li class="col s3 nny-tab"><a ui-sref="userprofile"> Profile </a></li>
+                    <li id="accountTab" class="col s3 nny-tab-selected"><a ui-sref="account" ng-click="tabBtn(1)">{{labels.Account}}</a></li>
+                    <li id="paymentsTab" class="col s3 nny-tab"><a ui-sref="payments" ng-click="tabBtn(2)">{{labels.Payments}}</a></li>
+                    <li id="profileTab" class="col s3 nny-tab"><a ui-sref="userprofile" ng-click="tabBtn(3)"> Profile </a></li>
                   </ul>
                   <ul class="nny-tabs" ng-if="authData.accessLevel == AccessLevels.Admin">
                     <li class="col s12 nny-tab"><a ui-sref="admin">{{labels.AdminDashboard}}</a></li>
@@ -101,7 +103,7 @@
               </div>
             </div>
             <ul class="side-nav" id="mobile-demo">
-              <li><a ui-sref="account">{{labels.Account}}</a></li>
+              <li><a  ui-sref="account">{{labels.Account}}</a></li>
               <li><a ui-sref="activity">{{labels.Activity}}</a></li>
               <li><a ui-sref="payments">{{labels.Payments}}</a></li>
               <li><a ui-sref="settings">{{labels.Settings}}</a></li>
