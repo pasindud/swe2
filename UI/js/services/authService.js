@@ -37,19 +37,13 @@ nnyApp.factory('AuthService',['$http','nnyConst','$rootScope',function ($http,nn
   }
 
   function getIsLoggedIn() {
-    if($rootScope.authData !== undefined)
-    {
-      if($rootScope.authData !== "")
-      {
-        return true;
-      }else {
-        return false;
-      }
-    }
-    else {
+    var authDataLocalStorage = localStorage.getItem("accessToken");
+    if (authDataLocalStorage) {
+      $rootScope.authData = JSON.parse(authDataLocalStorage);
+      return true;
+    } else {
       return false;
     }
-
   }
   return  {
     authenticate : function () {
@@ -73,12 +67,13 @@ nnyApp.factory('AuthService',['$http','nnyConst','$rootScope',function ($http,nn
         if(response.status == 200)
         {
           var temp = response.data;
-          console.log(temp);
           $rootScope.authData = {
             accessToken : temp.session,
             accessLevel : temp.AccessLevel,
             userId : temp.userId
           };
+          localStorage.setItem("accessToken", JSON.stringify($rootScope.authData))
+          console.log(temp);
         }else {
           setErrorDialog(response.status);
         }

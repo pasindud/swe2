@@ -4,6 +4,16 @@ angular.module('banking')
    $scope.title = 'his';
    $rootScope.authData="";
    
+  if(AuthService.isLoggedin()) {
+      console.log($rootScope.authData);
+      if($rootScope.authData.accessLevel == nnyConst.UserRoles.Admin) {
+        $state.go("admin");
+      } else {
+        $state.go("account");
+        console.log("reide");
+      }
+  }
+
    $scope.loginbtn = function () {
    		console.log($scope.upass);
       $('#LoadingModal').modal('open');
