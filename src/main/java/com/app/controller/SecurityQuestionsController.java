@@ -8,8 +8,10 @@ package com.app.controller;
 import com.app.enties.Merchant;
 import com.app.enties.SecurityAnswers;
 import com.app.enties.SecurityQuestions;
+import com.app.enties.Users;
 import com.app.repository.SecurityAnswersRepository;
 import com.app.repository.SecurityQuestionRepository;
+import com.app.repository.UsersRepository;
 import com.app.service.AccountService;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +29,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class SecurityQuestionsController {
 
     @Autowired SecurityQuestionRepository securityQuestionRepository;    
-    @Autowired SecurityAnswersRepository securityAnswersRepository;     
+    @Autowired SecurityAnswersRepository securityAnswersRepository; 
+    @Autowired private UsersRepository usersRepository;      
     @Autowired private AccountService accountService;
     
    /**
@@ -46,9 +49,12 @@ public class SecurityQuestionsController {
    */
   @RequestMapping("/api/security_question")
   @GetMapping
-  public List<SecurityQuestions> findQuestionForAccount(@RequestParam("id") int userId) {
+  public List<SecurityQuestions> findQuestionForAccount(@RequestParam("username") String username) {
     
-      List<SecurityAnswers> securityAnswers = securityAnswersRepository.findByUserId(userId);
+      
+      Users user=usersRepository.findByUsername(username);
+      
+      List<SecurityAnswers> securityAnswers = user.getSecurityAnswers();
       List<SecurityQuestions> securityQuestions= new ArrayList<SecurityQuestions>();
       for (SecurityAnswers element : securityAnswers) {
           ;
