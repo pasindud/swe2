@@ -36,6 +36,12 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
     response.setContentType("application/json");
     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
+    // Incorrect auth token.
+    if (username.equals("")) {
+      response.getOutputStream().println("{ \"error\": \""+ authenticationException.getMessage() +".\" }");
+      return;
+    }
+
     if (loginHistories.size() >= 3) {
       response.getOutputStream().println("{ \"error\": \"Account temporary locked due to multiple incorrect attempts.\" }");
     } else {
@@ -45,6 +51,9 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
   }
 
   private String getUserNameFromAuthorizationHeader(String authorizationHeader) {
+    if (authorizationHeader == null || authorizationHeader.equals("")) {
+      return "";
+    }
     String base64Credentials = authorizationHeader.substring("Basic".length()).trim();
     String credentials = new String(Base64.getDecoder().decode(base64Credentials), Charset.forName("UTF-8"));
     return credentials.split(":",2)[0];
