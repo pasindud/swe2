@@ -4,6 +4,8 @@ package com.app.controller;
 
 import com.app.Utils;
 import com.app.annotation.Checkdb;
+import com.app.enties.Transaction;
+import com.app.repository.AccountRepository;
 import com.app.repository.TransactionRepository;
 import com.app.request.TransactionRequest;
 import com.app.service.AccountService;
@@ -26,6 +28,7 @@ public class TransactionController {
   @Autowired private TransactionRepository transactionRepository;
   @Autowired private TransactionService transactionService;
   @Autowired private AccountService accountService;
+  @Autowired private AccountRepository accountRepository;
   private static class SimpleRequest{
     @NotNull
     @Checkdb(userCheck = true)
@@ -41,9 +44,14 @@ public class TransactionController {
     return transactionRepository.getAccountTransactions(accountId);
   }
 
+  /**
+   * API endpoint to get transaction by id.
+   * @param transactionId the id of the transaction to retrive the info for.
+   * @return the details of the transaction id or a error map.
+   */
   @GetMapping("/api/transaction_by_id")
   private Object getTransactionById(@RequestParam("id") int transactionId) {
-    return transactionRepository.findByTransactionid(transactionId);
+    return transactionService.getTransactionById(transactionId);
   }
 
   /*

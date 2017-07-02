@@ -11,6 +11,8 @@ import com.app.repository.TransactionRepository;
 import com.app.repository.UsersRepository;
 import com.app.request.TransactionRequest;
 import java.util.*;
+
+import com.sun.xml.internal.fastinfoset.algorithm.BooleanEncodingAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -21,6 +23,7 @@ public class TransactionService {
   @Autowired private AccountRepository accountRepository;
   @Autowired private TransactionRepository transactionRepository;
   @Autowired private UsersRepository usersRepository;
+  @Autowired private UserServiceImpl userService;
 
   private Transaction transaction;
   private List<String> errors = new ArrayList<String>();
@@ -35,6 +38,28 @@ public class TransactionService {
     this.transaction = transaction;
     processTransaction();
     return errors;
+  }
+
+  public Object getTransactionById(int transactionId) {
+    Map<String, String> response = new HashMap<>();
+    Transaction transaction = transactionRepository.findByTransactionid(transactionId);
+
+    if (transaction == null) {
+      response.put("error", "Transaction not found.");
+      return response;
+    }
+
+    Users accountFromUser = accountRepository.findByAccountid(transaction.getFromaccountid()).getUserId();
+    Users accountToUser = accountRepository.findByAccountid(transaction.getToaccountid()).getUserId();
+
+    if (accountFromUser.getUserId() == userService.getLoggedInUserId()) {
+      return transaction;
+    } else if (accountToUser.getUserId() == userService.getLoggedInUserId()) {
+      return transaction;
+    } else {
+      response.put("error", "Access denied to transaction");
+      return response;
+    }
   }
 
   public List<String> do_transactions(TransactionRequest transactionRequest) throws Exception {
