@@ -29,9 +29,6 @@ public class AdminController {
   @Autowired
   AccountRepository accountRepository;
 
-  @Autowired
-  UsersRepository usersRepository;
-
   /**
    * Activate and deactivate users.
    * @param userId the id of user to toggle status of.
