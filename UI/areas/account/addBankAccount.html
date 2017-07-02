@@ -1,44 +1,48 @@
 <div id="AddBankAccountForm" class="col s12 m12 l8 xl8">
-  <div class="col s12 m12 l12 xl12">
+  <div class="col l3 xl3 hide-on-med-and-down"></div>
+  <div class="col s12 m12 l6 xl6">
     <div class="col s12 card-panel grey lighten-4">
       <h5>{{labels.AddBankAccount}}</h5>
       <div class="divider col s12"></div>
-      <div  class="input-field col s12 m12 l6 xl6">
-        <input id="account_number" type="text" length="150" ng-model="AddBankAccountForm.account_number">
-        <label for="account_number">{{labels.AccountNumber}}</label>
+      <div class="col s12 m12 l12 xl12">
+        <div class="col s12 nny-margin-add"><h7>{{labels.Branch}}<h7></div>
+        <div class="input-field col s12 nny-margin-fix">
+          <select material-select watch  ng-change="setBranch()" ng-model="AddBankAccountForm.branch">
+            <option value="" disabled selected><i>- Select -</i></option>
+            <option ng-repeat="branch in branches" value={{branch.id}}>{{branch.name}}</option>
+          </select>
+        </div>
       </div>
-      <div class="input-field col s12 m12 l6 xl6">
-        <input id="branch" type="text" length="150" ng-model="AddBankAccountForm.branch">
-        <label for="branch">{{labels.Branch}}</label>
+      <div class="col s12 m12 l12 xl12">
+        <div class="col s12">{{labels.AccountType}}</div>
+        <div class="input-field col s12 nny-margin-fix">
+          <select material-select watch  ng-change="setAccType()" ng-model="AddBankAccountForm.account_type">
+            <option value="" disabled selected><i>- Select -</i></option>
+            <option ng-repeat="type in accountTypes" value={{type.id}}>{{type.name}}</option>
+          </select>
+        </div>
       </div>
-      <div   class="input-field col s12">
-        <input id="account_barrier" type="text" length="150" ng-model="AddBankAccountForm.account_barrier">
-        <label for="account_barrier">{{labels.AccountBarriersName}}</label>
-      </div>
-      <div   class="input-field col s12 m12 l6 xl6">
-        <input id="account_type" type="text" length="150" ng-model="AddBankAccountForm.account_type">
-        <label for="account_type">{{labels.AccountType}}</label>
-      </div>
-      <div class="col s12 m12 16 xl6" ng-controller="DatePickerController">
-        <label for="account_open_date">{{labels.AccountOpenDate}}</label>
-        <input input-date type="text" name="account_open_date"  id="account_open_date"  ng-model="AddBankAccountForm.account_open_date" container="" format="dd/mm/yyyy"
-        months-full="{{ month }}" months-short="{{ monthShort }}" weekdays-full="{{ weekdaysFull }}" weekdays-short="{{ weekdaysShort }}"
-        weekdays-letter="{{ weekdaysLetter }}" disable="disable"  min="{{ minDate }}" max="{{ maxDateToday }}" today="today" first-day="1"
-        clear="clear" close="close" select-years="15" on-start="onStart()" on-render="onRender()" on-open="onOpen()" on-close="onClose()"
-        on-set="onSet()" on-stop="onStop()" />
+      <div class="col s12 m12 l12 xl12">
+        <div class="col s12">{{labels.Currency}}</div>
+        <div class="input-field col s12 nny-margin-fix">
+          <select material-select watch  ng-change="setCurrency()" ng-model="AddBankAccountForm.currency">
+            <option value="" disabled selected><i>- Select -</i></option>
+            <option ng-repeat="currency in currencies" value={{currency.id}}>{{currency.name}}</option>
+          </select>
+        </div>
       </div>
       <div class="col s12 center">
-        <div class="col m3 hide-on-small-only"></div>
-        <div class="col s12 m3">
-          <button class="btn waves-effect waves-light" ng-click="submitBtn()">{{labels.SubmitForVerification}}</button>
+        <div class="col s12 m6">
+          <button class="btn waves-effect waves-light" ng-click="submitBtn()">{{labels.Submit}}</button>
         </div>
-        <div class="col s12 m3">
+        <div class="col s12 hide-on-med-and-up" style="margin-top:10px"></div>
+        <div class="col s12 m6">
           <button class="btn waves-effect waves-light"ui-sref="account">{{labels.Back}}</button>
         </div>
-        <div class="col m3 hide-on-small-only"></div>
       </div>
       <div class="col s12" style="margin-bottom:20px;"></div>
     </div>
-  </div>
+  </div
+  <div class="col l3 xl3 hide-on-med-and-down"></div>
 </div>
 <div class="col s12" style="margin-bottom:30px;"></div>

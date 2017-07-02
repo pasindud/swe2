@@ -132,5 +132,6 @@
   "RegNo" : "Registration No",
   "TaxNo": "Tax No",
   "ServiceName" : "Service Name",
-  "Title" : "Title"
+  "Title" : "Title",
+  "Currency" : "Currency"
   }]
