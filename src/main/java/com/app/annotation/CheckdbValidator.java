@@ -49,7 +49,7 @@ public class CheckdbValidator implements ConstraintValidator<Checkdb, Integer> {
       return false;
     }
     if (entityClass == Account.class) {
-      accountService.checkUserHasPermissions(id, userCheck);
+      return accountService.checkUserHasPermissions(id, userCheck);
     } else if (MerchantServices.class == entityClass
         && merchantServicesRepository.findByServiceid(id) != null) {
       return true;
