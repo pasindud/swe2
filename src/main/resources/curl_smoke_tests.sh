@@ -47,3 +47,17 @@ curl -u xyz:xyz -H "Content-Type: application/json" -X POST http://localhost:808
 
 curl -u xyz:xyz  "http://localhost:8080/api/admin/change_user_status?user_id=1&activate=true"
 curl -u ADMIN:xyz "http://localhost:8080/api/admin/change_user_status?user_id=1&activate=true"
+
+curl -u ADMIN:xyz "http://localhost:8080/api/admin/lock_account?accountid=1&lock=true"
+curl -u ADMIN:xyz "http://localhost:8080/api/admin/lock_account?accountid=1&lock=false"
+
+curl -u xyz:xyz "http://localhost:8080/api/admin/lock_account?accountid=1&lock=true"
+curl -u xyz:xyz "http://localhost:8080/api/admin/lock_account?accountid=1&lock=false"
+
+
+curl -u xyz:xyz "http://localhost:8080/api/transaction_by_id?id=1"
+curl -u xyz:xyz "http://localhost:8080/api/transaction_by_id?id=4"
+curl -u xyz:xyz "http://localhost:8080/api/transaction_by_id?id=123123"
+
+
+

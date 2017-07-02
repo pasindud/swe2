@@ -11,8 +11,6 @@ import com.app.repository.TransactionRepository;
 import com.app.repository.UsersRepository;
 import com.app.request.TransactionRequest;
 import java.util.*;
-
-import com.sun.xml.internal.fastinfoset.algorithm.BooleanEncodingAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

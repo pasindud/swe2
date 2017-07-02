@@ -46,6 +46,9 @@ public class TransactionController {
 
   /**
    * API endpoint to get transaction by id.
+   * <p>
+   *  curl -u xyz:xyz "http://localhost:8080/api/transaction_by_id?id=1"
+   * <p/>
    * @param transactionId the id of the transaction to retrive the info for.
    * @return the details of the transaction id or a error map.
    */
