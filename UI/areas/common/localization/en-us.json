@@ -34,7 +34,7 @@
   "AccountNumber" : "Account Number",
   "AccountBarriersName": "Account Barrier's Name",
   "AccountOpenDate" : "Account Open Date",
-  "AccountType" : "AccountType",
+  "AccountType" : "Account Type",
   "Branch" : "Branch",
   "FirstName" : "First Name",
   "LastName" : "Last Name",
@@ -133,5 +133,10 @@
   "TaxNo": "Tax No",
   "ServiceName" : "Service Name",
   "Title" : "Title",
-  "Currency" : "Currency"
+  "Currency" : "Currency",
+  "SecurityQuestions" : "Security Questions",
+  "Question" : "Question",
+  "Answer" : "Answer",
+  "SelectProfileType": "Select Profile Type",
+  "MerchantInformation" : "Merchant Information"
   }]
