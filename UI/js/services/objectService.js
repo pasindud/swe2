@@ -5,7 +5,8 @@ nnyApp.factory('ObjectService', ['$http', 'nnyConst', '$rootScope', function($ht
   function getUsersObj() {
     var userObj = {
       username : "",
-      password : ""
+      password : "",
+      userType : ""
     };
     return userObj;
   }
@@ -51,7 +52,8 @@ nnyApp.factory('ObjectService', ['$http', 'nnyConst', '$rootScope', function($ht
     var userObj = getUsersObj();
     userObj.username = data.username;
     userObj.password = data.password;
-
+    userObj.userType = "CUSTOMER";
+    
     var customerObj = getCustomerObj();
     customerObj.title = data.title;
     customerObj.firstname = data.first_name;
