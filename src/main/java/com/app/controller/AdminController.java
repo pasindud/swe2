@@ -85,7 +85,7 @@ public class AdminController {
    */
   @RequestMapping("/api/admin/all_users")
   public List<Users> getUsers() {
-    return usersRepository.findAll();
+    return usersRepository.getAllUsers();
   }
 
   /**

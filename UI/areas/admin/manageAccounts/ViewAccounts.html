@@ -23,20 +23,22 @@
       <table class="striped highlight">
         <thead>
           <tr>
-            <th>{{labels.Username}}</th>
-            <th>{{labels.UserID}}</th>
-            <th>{{labels.NoOfBankAccounts}}</th>
-            <th>{{labels.NIC}}</th>
-            <th>{{labels.Actions}}</th>
+            <th>Account ID</th>
+            <th>Created Data</th>
+            <th>Currency</th>
+            <th>Expire Date</th>
+            <th>Locked</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat = "user in UsersList">
-            <td>{{user.Username}}</td>
-            <td>{{user.UserID}}</td>
-            <td>{{user.Accounts.length}}</td>
-            <td>{{user.PersonalInformation.NIC}}</td>
-            <td>{{user.Actions}}<a ui-sref="user({userID: user.UserID})">View</a></td>
+          <tr ng-repeat = "account in all_acounts">
+            <td>{{account.accountid}}</td>
+            <td>{{account.createdDate}}</td>
+            <td>{{account.currency}}</td>
+            <td>{{account.expireDate}}</td>
+            <td>{{account.locked}}</td>
+            <td><a ui-sref="account_view({accountid: account.accountid})">View</a></td>
           </tr>
         </tbody>
       </table>

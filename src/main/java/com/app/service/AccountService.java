@@ -49,12 +49,18 @@ public class AccountService {
       logger.info(String.format("Validating account id - %s", accountId));
       Account account = accountRepository.findByAccountid(accountId);
       if (account == null) {
+        logger.info(String.format("Validating No account id - %s found", accountId));
         return false;
       } else if (userCheck == false) {
+        logger.info(String.format("Validating account - %s exists.", accountId));
         return true;
       } else if (account.getUserId().getUserId() == userService.getLoggedInUserId()) {
+        logger.info(String.format("Validating account %s owned by .", accountId, userService.getLoggedInUserId()));
         return true;
       } else {
+        logger.error(String.format("User %s trying to access account %s owned by %s",
+                userService.getLoggedInUserId(),
+                accountId, account.getUserId().getUserId()));
         return false;
       }
   }

@@ -15,18 +15,19 @@ import javax.validation.constraints.Null;
 /** Created by Pasindu on 6/29/17. */
 public class TransactionRequest {
   @NotNull private Integer toaccountid;
+
   @Checkdb(userCheck = true)
   @NotNull private Integer fromaccountid;
 
   @Column(nullable=false, length=1)
   @Enumerated(EnumType.STRING)
-  private TransactionType transtype;
+  private TransactionType transtype = TransactionType.T;
 
-  @Min(value = 1)
+  @Min(value = 1, message = "Amount must to more than 1.")
   private float amount = -1;
 
-  @NotNull private String message;
-  @NotNull private Users userId;
+  private String message;
+  private Users userId;
 
   public String getMessage() {
     return message;

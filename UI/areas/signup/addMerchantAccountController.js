@@ -1,10 +1,9 @@
 /* Author : Dushan Galappaththi */
 'use strict';
 angular.module('banking')
-  .controller('AddBankAccountController', function($state, $rootScope, $scope, $http, $stateParams, AuthService, ValidateService) {
+  .controller('AddMerchantAccountController', function($state, $rootScope, $scope, $http, $stateParams, AuthService, ValidateService) {
     var isInvalidForm = false;
     var errors = [""];
-    debugger;
 
     function inputFieldAnimate(id, status) {
       if (status) {
@@ -22,31 +21,32 @@ angular.module('banking')
         errors.push(field.errorMsg);
       }
     }
+
     $scope.submitBtn = function(res) {
       $('#LoadingModal').modal('open');
-      if ($scope.AddBankAccountForm !== undefined) {
-        var FormData = $scope.AddBankAccountForm;
+      debugger;
+      if ($scope.AddMerchantAccountForm !== undefined) {
+        var FormData = $scope.AddMerchantAccountForm;
         errors = [""];
         isInvalidForm = false;
 
-        var accountNumberVal = ValidateService.ValidateAccountNumber(FormData.account_number);
-        var branchVal = ValidateService.ValidateBranch(FormData.branch);
-        var accountBarrierVal = ValidateService.ValidateAccBarrier(FormData.account_barrier);
-        var accountTypeVal = ValidateService.ValidateAccountType(FormData.account_type);
-        var openDateVal = ValidateService.ValidateDate(FormData.account_open_date);
+        var orgNameVal = ValidateService.ValidateOrgName(FormData.org_name);
+        var regNoVal = ValidateService.ValidateRegNo(FormData.reg_no);
+        var taxNoVal = ValidateService.ValidateTaxNo(FormData.tax_no);
+        var serviceNameVal = ValidateService.ValidateServiceName(FormData.service_name);
+        var descVal = ValidateService.ValidateDesc(FormData.desc);
 
-        formValidate(accountNumberVal);
-        formValidate(branchVal);
-        formValidate(accountBarrierVal);
-        formValidate(accountTypeVal);
-        formValidate(openDateVal);
+        formValidate(orgNameVal);
+        formValidate(regNoVal);
+        formValidate(taxNoVal);
+        formValidate(serviceNameVal);
+        formValidate(descVal);
 
-        inputFieldAnimate("account_number", accountNumberVal.status);
-        inputFieldAnimate("branch", branchVal.status);
-        inputFieldAnimate("account_barrier", accountBarrierVal.status);
-        inputFieldAnimate("account_type", accountTypeVal.status);
-        inputFieldAnimate("account_open_date", openDateVal.status);
-
+        inputFieldAnimate("org_name", orgNameVal.status);
+        inputFieldAnimate("reg_no", regNoVal.status);
+        inputFieldAnimate("tax_no", taxNoVal.status);
+        inputFieldAnimate("service_name", serviceNameVal.status);
+        inputFieldAnimate("desc", descVal.status);
         if (isInvalidForm) {
           var errorContent = {
             Title: "Validation Error",

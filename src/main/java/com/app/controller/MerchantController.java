@@ -20,6 +20,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
+
+import com.app.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.validation.Errors;
@@ -49,6 +51,7 @@ public class MerchantController {
   @Autowired private MerchantServicesRepository merchantServicesRepository;
   /** Service to operate on transaction data. */
   @Autowired private TransactionService transactionService;
+  @Autowired UserServiceImpl userService;
 
   /**
    * API to get all the merchants.
@@ -112,6 +115,7 @@ public class MerchantController {
     transaction.setTranstype(TransactionType.T);
     // Validate the code here.
     transaction.setFromaccountid(payBillRequest.getSelectedAccountId());
+    transaction.setUserId(userService.getLoggedInUser());
     transaction.setToaccountid(service.getAccountid());
     System.out.println("payBillRequest.getAmount() " + payBillRequest.getAmount());
     transaction.setAmount(payBillRequest.getAmount());

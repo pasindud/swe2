@@ -136,5 +136,7 @@
   "Currency" : "Currency",
   "SecurityQuestions" : "Security Questions",
   "Question" : "Question",
-  "Answer" : "Answer"
+  "Answer" : "Answer",
+  "SelectProfileType": "Select Profile Type",
+  "MerchantInformation" : "Merchant Information"
   }]

@@ -22,8 +22,9 @@ public class TransactionService {
   @Autowired private AccountRepository accountRepository;
   @Autowired private TransactionRepository transactionRepository;
   @Autowired private UsersRepository usersRepository;
+  @Autowired private UserServiceImpl userService;
   @Autowired private JdbcTemplate jdbcTemplate;
-  
+
   private Transaction transaction;
   private List<String> errors = new ArrayList<String>();
   private Account fromAccount;
@@ -50,6 +51,28 @@ public class TransactionService {
   
   }
 
+  public Object getTransactionById(int transactionId) {
+    Map<String, String> response = new HashMap<>();
+    Transaction transaction = transactionRepository.findByTransactionid(transactionId);
+
+    if (transaction == null) {
+      response.put("error", "Transaction not found.");
+      return response;
+    }
+
+    Users accountFromUser = accountRepository.findByAccountid(transaction.getFromaccountid()).getUserId();
+    Users accountToUser = accountRepository.findByAccountid(transaction.getToaccountid()).getUserId();
+
+    if (accountFromUser.getUserId() == userService.getLoggedInUserId()) {
+      return transaction;
+    } else if (accountToUser.getUserId() == userService.getLoggedInUserId()) {
+      return transaction;
+    } else {
+      response.put("error", "Access denied to transaction");
+      return response;
+    }
+  }
+
   public List<String> do_transactions(TransactionRequest transactionRequest) throws Exception {
     errors = new ArrayList<String>();
     this.transaction = new Transaction();
@@ -58,7 +81,7 @@ public class TransactionService {
     this.transaction.setAmount(transactionRequest.getAmount());
     this.transaction.setMessage(transactionRequest.getMessage());
     this.transaction.setTranstype(transactionRequest.getTranstype());
-    this.transaction.setUserId(usersRepository.findByUserId(transactionRequest.getUserId().getUserId()));
+    this.transaction.setUserId(usersRepository.findByUserId(userService.getLoggedInUserId()));
     // TODO Add currency to transaction object.
     processTransaction();
     return errors;

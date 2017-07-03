@@ -1,13 +1,13 @@
 package com.app.enties;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.hibernate.annotations.CreationTimestamp;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
-import java.util.function.BinaryOperator;
 import javax.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "Users")
@@ -18,6 +18,8 @@ public class Users {
   private Integer userId;
 
   private String username;
+
+
   private String password;
 
   public Set <Role> getRoles() {
@@ -28,6 +30,7 @@ public class Users {
     this.roles = roles;
   }
 
+  @JsonIgnore
   @ManyToMany
   @JoinTable(
     name = "user_role",
@@ -68,26 +71,16 @@ public class Users {
   @JoinColumn(referencedColumnName = "userId")
   private List<SecurityAnswers> securityAnswers;
 
-  public Boolean getTimeLocked() {
-    return timeLocked;
+  public Boolean getLocked() {
+    return locked;
   }
 
-  public void setTimeLocked(Boolean timeLocked) {
-    this.timeLocked = timeLocked;
+  public void setLocked(Boolean locked) {
+    this.locked = locked;
   }
 
-  public Boolean getActivate() {
-    return activate;
-  }
-
-  public void setActivate(Boolean activate) {
-    this.activate = activate;
-  }
-
-  @Column(name="activate", columnDefinition = "boolean default true", nullable = false)
-  private Boolean activate = true;
-  @Column(name="timeLocked", columnDefinition = "boolean default false", nullable = false)
-  private Boolean timeLocked = false;
+  @Column(name="locked", columnDefinition = "boolean default true", nullable = false)
+  private Boolean locked = true;
 
   public Integer getUserId() {
     return userId;
