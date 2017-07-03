@@ -1,5 +1,8 @@
 package com.app.enties;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.annotations.CreationTimestamp;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -37,8 +40,10 @@ public class Users {
   @Enumerated(EnumType.STRING)
   private UserType userType;
 
+  @CreationTimestamp
+  @Temporal(TemporalType.TIMESTAMP)
   @Column(name = "creationDate")
-  @Temporal(TemporalType.DATE)
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:MM")
   private Date creationDate;
 
   // Comment to avoid a loop.

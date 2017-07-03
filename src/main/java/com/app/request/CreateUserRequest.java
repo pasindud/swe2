@@ -6,12 +6,15 @@
 package com.app.request;
 
 import com.app.enties.Customer;
+import com.app.enties.SecurityAnswers;
 import com.app.enties.Users;
+import java.util.List;
 
 /** Class used to register the user. */
 public class CreateUserRequest {
   private Users users;
   private Customer customer;
+  private List<SecurityAnswers> answers;
 
   public Users getUsers() {
     return users;
@@ -28,4 +31,17 @@ public class CreateUserRequest {
   public Customer getCustomer() {
     return this.customer;
   }
+
+    public List<SecurityAnswers> getAnswers() {
+        return answers;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public void setAnswers(List<SecurityAnswers>answers) {
+        this.answers = answers;
+    }
+  
 }

@@ -57,7 +57,7 @@ public class SecurityQuestionsController {
       List<SecurityAnswers> securityAnswers = user.getSecurityAnswers();
       List<SecurityQuestions> securityQuestions= new ArrayList<SecurityQuestions>();
       for (SecurityAnswers element : securityAnswers) {
-          ;
+          
           securityQuestions.add(securityQuestionRepository.findById(element.getSecurityQuestions().getId()));
       }
       return securityQuestions;
