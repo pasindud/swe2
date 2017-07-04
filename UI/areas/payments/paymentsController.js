@@ -11,22 +11,32 @@ angular.module('banking')
       $scope.merchant_services = response.data;
     });
 
-    $scope.paybill = function() {
+    function handErrors(type, response) {
+      if (response.data.errors != undefined && response.data.errors.length != 0) {
+         $('#ErrorModal').modal('open');
+         var errorContent = {
+           Title: type + " Error",
+           Body: response.data.errors
+         }
+         $rootScope.ErrorDialog = errorContent;
+      } else {
+       // TODO show sucessfull message;
+      }
+    }
 
+    $scope.paybill = function() {
       var data = {
         amount: $scope.amount,
         billReferenceNumber: $scope.bill_reference_number,
         selectedServiceId: $scope.selectedService,
         selectedAccountId: $scope.selectedAccount
       }
+      console.log(data);
 
-      // TODO(pasindu): To be implmented.
       AuthService.getRequest("/api/merchant_services_pay_bill", data, function(response) {
-        return response
+        handErrors("Pay Bills", response);
       });
-
-    }
-
+    };
 
     $scope.transfer = function() {
       var data = {
@@ -38,9 +48,7 @@ angular.module('banking')
       console.log(data);
 
       AuthService.getRequest("/api/do_transaction", data, function(response) {
-        return response
+        handErrors("Transfer", response);
       });
-
     }
-
   });
