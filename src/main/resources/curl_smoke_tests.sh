@@ -4,6 +4,17 @@ set -v
 
 curl -u xyz:xyz "http://localhost:8080/api/auth"
 
+USERNAME=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+
+curl -u ${USERNAME}:xyz "http://localhost:8080/api/auth"
+curl -u ${USERNAME}:xyz "http://localhost:8080/api/auth"
+curl -u ${USERNAME}:xyz "http://localhost:8080/api/auth"
+
+curl -u sahan:xassyz "http://localhost:8080/api/auth"
+curl -u sahan:xassyz "http://localhost:8080/api/auth"
+curl -u sahan:xassyz "http://localhost:8080/api/auth"
+curl -u sahan:xassyz "http://localhost:8080/api/auth"
+
 curl -u ADMIN:xyz "http://localhost:8080/api/auth"
 
 curl -u xyz:xyz "http://localhost:8080/api/merchant_services"
@@ -66,6 +77,7 @@ curl -u xyz:xyz "http://localhost:8080/api/transaction_by_id?id=123123"
 
 
 curl -u ADMIN:xyz "http://localhost:8080/api/admin/all_acounts" 
+curl -u ADMIN:xyz "http://localhost:8080/api/admin/account_id?id=1" 
 curl -u ADMIN:xyz "http://localhost:8080/api/admin/all_users" 
 curl -u ADMIN:xyz "http://localhost:8080/api/admin/all_merchants" 
 

@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Role;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,7 +54,7 @@ public class AdminController {
    * @param lock whether to lock or unlock the account.
    * @return the updated state of account.
    */
-  @RequestMapping("/api/admin/lock_account")
+  @GetMapping("/api/admin/lock_account")
   public Map<String, String> lockAccount(@RequestParam("accountid") int accountid, @RequestParam("lock") boolean lock) {
 //    return accountRepository.updateAccountLock(lock, accountid);
     Map<String, String> response = new HashMap<>();
@@ -74,9 +75,24 @@ public class AdminController {
    * API endpoint to get all the accounts.
    * @return
    */
-  @RequestMapping("/api/admin/all_acounts")
+  @GetMapping("/api/admin/all_acounts")
   public List<Account> getAccounts(){
     return accountRepository.findAll();
+  }
+
+  /**
+   * API endpoint get all details of the given account.
+   * @param id of the account to get the details of.
+   */
+  @GetMapping("/api/admin/account_id")
+  public Object getAccountById(@RequestParam("id") int id) {
+    Map<String, String> response = new HashMap<>();
+    Account account = accountRepository.findByAccountid(id);
+    if (account == null) {
+      response.put("errors", "Not account found");
+      return response;
+    }
+    return account;
   }
 
   /**
