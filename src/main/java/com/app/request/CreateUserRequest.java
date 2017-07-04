@@ -6,6 +6,7 @@
 package com.app.request;
 
 import com.app.enties.Customer;
+import com.app.enties.Merchant;
 import com.app.enties.SecurityAnswers;
 import com.app.enties.Users;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 public class CreateUserRequest {
   private Users users;
   private Customer customer;
+  private Merchant merchant;
   private List<SecurityAnswers> answers;
 
   public Users getUsers() {
@@ -42,6 +44,14 @@ public class CreateUserRequest {
 
     public void setAnswers(List<SecurityAnswers>answers) {
         this.answers = answers;
+    }
+
+    public Merchant getMerchant() {
+        return merchant;
+    }
+
+    public void setMerchant(Merchant merchant) {
+        this.merchant = merchant;
     }
   
 }

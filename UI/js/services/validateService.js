@@ -81,6 +81,14 @@ nnyApp.factory('ValidateService', ['$http', 'nnyConst', '$rootScope', function($
         //TODO
         return false;
     }
+    function validateNIC(nic) {
+      var nicPattern = /([0-9]){9}([vx]){1}/g;
+      if (nicPattern.test(nic)) {
+          return true;
+      } else {
+          return false;
+      }
+    }
 
     //Common Functions reigon end ---------------------------------------
 
@@ -116,7 +124,10 @@ nnyApp.factory('ValidateService', ['$http', 'nnyConst', '$rootScope', function($
             return getValidateResult(false, "Confirm Password Cannot Be Empty!");
         } else if (password !== confirmPassword) {
             return getValidateResult(false, "Passwords do not match");
-        } else {
+        } else if (lengthCheck(password,16,8)) {
+            return getValidateResult(false, "Password should be 8 to 16 characters long");
+        }
+        else {
             return getValidateResult(true, "");
         }
     }
@@ -152,7 +163,7 @@ nnyApp.factory('ValidateService', ['$http', 'nnyConst', '$rootScope', function($
     function checkNIC(nic) {
         if (isNull(nic)) {
             return getValidateResult(false, "Please enter your NIC");
-        } else if (!lengthCheck(nic, 10, 10)) {
+        } else if (!validateNIC(nic)) {
             return getValidateResult(false, "Please enter a valid NIC");
         } else {
             return getValidateResult(true, "");
