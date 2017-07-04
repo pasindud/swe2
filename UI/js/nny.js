@@ -1,6 +1,7 @@
-angular.module('banking', [
+var app = angular.module('banking', [
     'ui.router',
-    'ui.materialize'
+    'ui.materialize',
+    'ngTable'
   ])
   .constant('ENDPOINT_URI', 'localhost:8989/SampleJSON')
   .config(function($stateProvider, $urlRouterProvider, $locationProvider, nnyConst) {

@@ -3,44 +3,20 @@
     <div class="col s5" style="padding-top:30px">
       <h5>{{labels.Accounts}} : {{labels.Personal}}</h5>
     </div>
-    <div class="col s7 nny-rounded-flat-card2">
-      <div class="col s3" style="padding-top:15px">
-        <select material-select class="center">
-          <option value="1">{{labels.Username}}</option>
-          <option value="2">{{labels.UserID}}</option>
-          <option value="3">{{labels.NIC}}</option>
-        </select>
-      </div>
-      <div class="input-field col s9" >
-        <input id="accountsSearch" type="search" required>
-        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-      </div>
-    </div>
     <div class="divider col s12"></div>
   </div>
   <div class="col s12">
     <div class="">
-      <table class="striped highlight">
-        <thead>
-          <tr>
-            <th>Account ID</th>
-            <th>Created Data</th>
-            <th>Currency</th>
-            <th>Expire Date</th>
-            <th>Locked</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat = "account in all_acounts">
-            <td>{{account.accountid}}</td>
-            <td>{{account.createdDate}}</td>
-            <td>{{account.currency}}</td>
-            <td>{{account.expireDate}}</td>
-            <td>{{account.locked}}</td>
+      <table ng-table ="accounts_table" class="striped highlight">
+        <tr ng-repeat="account in $data">
+            {{account.accountid}}
+            <td title="'Account ID'" filter="{ accountid: 'number'}" sortable="'accountid'"> {{account.accountid}}</td>
+            <td title="'Create date'" filter="{ createdDate: 'text'}" sortable="'createdDate'"> {{account.createdDate}}</td>
+            <td title="'Currency'" filter="{ currency: 'text'}" sortable="'currency'"> {{account.currency}}</td>
+            <td title="'Expire Date'" filter="{ expireDate: 'text'}" sortable="'expireDate'"> {{account.expireDate}}</td>
+            <td title="'Locked'" filter="{ locked: 'text'}" sortable="'locked'"> {{account.locked}}</td>
             <td><a ui-sref="account_view({accountid: account.accountid})">View</a></td>
-          </tr>
-        </tbody>
+        </tr>
       </table>
     </div>
   </div>
