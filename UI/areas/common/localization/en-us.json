@@ -90,6 +90,7 @@
   "Reject" : "Reject",
   "Comply" : "Comply",
   "NIC" : "NIC",
+  "AdminAllUsers":"All Users",
   "NoOfBankAccounts" : "# Accounts",
   "UserID" : "User ID",
   "AdminTools" : "Admin Tools",

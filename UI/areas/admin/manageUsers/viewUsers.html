@@ -1,1 +1,22 @@
-<h1>ALL USERS</h1>
+<div id="viewAllAccountsUI" class="col s12 m12 l8 xl8 card-panel grey lighten-4">
+  <div class="col s12 m12 l12">
+    <div class="col s5" style="padding-top:30px">
+      <h5>{{labels.AdminAllUsers}}</h5>
+    </div>
+    <div class="divider col s12"></div>
+  </div>
+  <div class="col s12">
+    <div class="">
+      <table ng-table ="users_table" class="striped highlight">
+        <tr ng-repeat="user in $data">
+            <td title="'User Id'" filter="{ userId: 'number'}" sortable="'userId'"> {{user.userId}}</td>
+            <td title="'Username'" filter="{ username: 'text'}" sortable="'username'"> {{user.username}}</td>
+            <td title="'First Name'" filter="{ 'customer.firstName': 'text'}" sortable="'customer.firstName'"> {{user.customer.firstName}}</td>
+            <td title="'Created Date'" filter="{ creationDate: 'text'}" sortable="'creationDate'"> {{user.creationDate}}</td>
+            <td title="'Locked'" filter="{ locked: 'text'}" sortable="'locked'"> {{user.locked}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="col s12" style="margin-bottom:15px;"></div>
+</div>
