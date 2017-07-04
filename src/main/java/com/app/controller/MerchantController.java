@@ -101,6 +101,7 @@ public class MerchantController {
   public Map<String, List<String>> payBill(
       @Valid @RequestBody PayBillRequest payBillRequest, Errors requestError) {
     Map<String, List<String>> response = new HashMap<String, List<String>>();
+    List<String> errors = new ArrayList <>();
 
     if (requestError.hasErrors()) {
       response.put("errors", Utils.getListFromErrors(requestError));
@@ -111,7 +112,12 @@ public class MerchantController {
     MerchantServices service =
         merchantServicesRepository.findByServiceid(payBillRequest.getSelectedServiceId());
 
-    if (service == null) {}
+    if (service == null) {
+      errors.add("Service not found.");
+      response.put("errors", errors);
+      return response;
+    };
+
     transaction.setTranstype(TransactionType.T);
     // Validate the code here.
     transaction.setFromaccountid(payBillRequest.getSelectedAccountId());
@@ -120,7 +126,6 @@ public class MerchantController {
     System.out.println("payBillRequest.getAmount() " + payBillRequest.getAmount());
     transaction.setAmount(payBillRequest.getAmount());
 
-    List<String> errors = new ArrayList <>();
     try {
       errors = transactionService.do_transactions(transaction);
     } catch (Exception e) {
