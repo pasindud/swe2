@@ -9,7 +9,6 @@
     <div class="">
       <table ng-table ="accounts_table" class="striped highlight">
         <tr ng-repeat="account in $data">
-            {{account.accountid}}
             <td title="'Account ID'" filter="{ accountid: 'number'}" sortable="'accountid'"> {{account.accountid}}</td>
             <td title="'Create date'" filter="{ createdDate: 'text'}" sortable="'createdDate'"> {{account.createdDate}}</td>
             <td title="'Currency'" filter="{ currency: 'text'}" sortable="'currency'"> {{account.currency}}</td>

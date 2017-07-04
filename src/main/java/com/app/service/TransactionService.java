@@ -41,12 +41,11 @@ public class TransactionService {
   }
   
   public List<Map<String, Object>> getTransactionsPerAccount(int accountid){
-      
   String GET_ALL_Transactions_Account_SQL_QUERY =
-          "SELECT `transactionid` 'Id', -(`amount`*`fromrate`) 'Amount','transtype' 'Type', `fromcurrency` 'Currency', `Message`, `transactiontime` 'Timestamp', (select username from users where user_id=userid) 'By' FROM `transaction` where upper(`transtype`)= 'W' and `fromaccountid` ="+accountid+" union "
-        + "SELECT `transactionid` 'Id', +(`amount`*`torate`) 'Amount','transtype' 'Type', `tocurrency` 'Currency', `Message`, `transactiontime` 'Timestamp', (select username from users where user_id=userid) 'By' FROM `transaction` where upper(`transtype`)= 'D' and `toaccountid` ="+accountid+" union "
-        + "SELECT `transactionid` 'Id', +(`amount`*`torate`) 'Amount','transtype' 'Type', `tocurrency` 'Currency', `Message`, `transactiontime` 'Timestamp', (select username from users where user_id=userid) 'By' FROM `transaction` where upper(`transtype`)= 'T' and `toaccountid` ="+accountid+" union "
-        + "SELECT `transactionid` 'Id', -(`amount`*`fromrate`) 'Amount','transtype' 'Type', `fromcurrency` 'Currency', `Message`, `transactiontime` 'Timestamp', (select username from users where user_id=userid) 'By' FROM `transaction` where upper(`transtype`)= 'T' and `fromaccountid` ="+accountid+" order by Id ";
+          "SELECT `transactionid` 'transactionid', -(`amount`*`fromrate`) 'amount',`transtype`, `fromcurrency` 'Currency', `Message`, `transactiontime` , (select username from users where user_id=userid) 'By' FROM `transaction` where upper(`transtype`)= 'W' and `fromaccountid` ="+accountid+" union "
+        + "SELECT `transactionid` 'transactionid', +(`amount`*`torate`) 'amount',  `transtype`, `tocurrency` 'Currency', `Message`, `transactiontime` , (select username from users where user_id=userid) 'By' FROM `transaction` where upper(`transtype`)= 'D' and `toaccountid` ="+accountid+" union "
+        + "SELECT `transactionid` 'transactionid', +(`amount`*`torate`) 'amount',  `transtype` , `tocurrency` 'Currency', `Message`, `transactiontime` , (select username from users where user_id=userid) 'By' FROM `transaction` where upper(`transtype`)= 'T' and `toaccountid` ="+accountid+" union "
+        + "SELECT `transactionid` 'transactionid', -(`amount`*`fromrate`) 'amount',`transtype`, `fromcurrency` 'Currency', `Message`, `transactiontime` , (select username from users where user_id=userid) 'By' FROM `transaction` where upper(`transtype`)= 'T' and `fromaccountid` ="+accountid+" order by transactionid ";
   return jdbcTemplate.queryForList(GET_ALL_Transactions_Account_SQL_QUERY);
   
   }
