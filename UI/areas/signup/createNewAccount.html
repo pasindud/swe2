@@ -48,7 +48,7 @@
       on-set="onSet()" on-stop="onStop()" />
     </div>
     <div class="input-field col s12 m12 16 xl6">
-      <div input-field>
+      <div class "input-field">
           <select class="" ng-model="FormData.gender" material-select watch>
               <option value="" disabled selected><i>- Choose Gender -</i></option>
               <option value="male">male</option>
@@ -101,7 +101,7 @@
       <div class="input-field col s12 nny-margin-fix">
         <select material-select watch  ng-change="setQuestion()" ng-model="FormData.question1">
           <option value="" disabled selected><i>- Select -</i></option>
-          <option ng-repeat="question in questions" value={{question.id}}>{{question.name}}</option>
+          <option ng-repeat="quest in masterData.Questions" value={{quest.id}}>{{quest.question}}</option>
         </select>
       </div>
       <div class="input-field col s12 nny-margin-fix">
@@ -116,7 +116,7 @@
       <div class="input-field col s12 nny-margin-fix">
         <select material-select watch  ng-change="setQuestion()" ng-model="FormData.question2">
           <option value="" disabled selected><i>- Select -</i></option>
-          <option ng-repeat="question in questions" value={{question.id}}>{{question.name}}</option>
+          <option ng-repeat="quest in masterData.Questions" value={{quest.id}}>{{quest.question}}</option>
         </select>
       </div>
       <div class="input-field col s12 nny-margin-fix">
@@ -130,7 +130,7 @@
       <div class="input-field col s12 nny-margin-fix">
         <select material-select watch  ng-change="setQuestion()" ng-model="FormData.question3">
           <option value="" disabled selected><i>- Select -</i></option>
-          <option ng-repeat="question in questions" value={{question.id}}>{{question.name}}</option>
+          <option ng-repeat="quest in masterData.Questions" value={{quest.id}}>{{quest.question}}</option>
         </select>
       </div>
       <div class="input-field col s12 nny-margin-fix">

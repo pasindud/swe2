@@ -53,11 +53,11 @@ nnyApp.factory('ObjectService', ['$http', 'nnyConst', '$rootScope', function($ht
     userObj.username = data.username;
     userObj.password = data.password;
     userObj.userType = "CUSTOMER";
-    
+
     var customerObj = getCustomerObj();
     customerObj.title = data.title;
-    customerObj.firstname = data.first_name;
-    customerObj.lastname = data.last_name;
+    customerObj.firstName = data.first_name;
+    customerObj.lastName = data.last_name;
     customerObj.dob = data.dob;
     customerObj.nic = data.nic;
     customerObj.email = data.email;
