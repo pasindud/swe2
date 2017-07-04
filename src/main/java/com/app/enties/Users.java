@@ -19,7 +19,7 @@ public class Users {
 
   private String username;
 
-
+  @JsonIgnore
   private String password;
 
   public Set <Role> getRoles() {
@@ -63,10 +63,12 @@ public class Users {
     return securityAnswers;
   }
 
+
   public void setSecurityAnswers(List <SecurityAnswers> securityAnswers) {
     this.securityAnswers = securityAnswers;
   }
 
+  @JsonIgnore
   @OneToMany(targetEntity = SecurityAnswers.class)
   @JoinColumn(referencedColumnName = "userId")
   private List<SecurityAnswers> securityAnswers;
