@@ -1,12 +1,13 @@
 package com.app.enties;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
-import java.util.function.BinaryOperator;
 import javax.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "Users")
@@ -18,7 +19,7 @@ public class Users {
 
   private String username;
 
-  @JsonIgnore
+
   private String password;
 
   public Set <Role> getRoles() {
@@ -42,8 +43,10 @@ public class Users {
   @Enumerated(EnumType.STRING)
   private UserType userType;
 
+  @CreationTimestamp
+  @Temporal(TemporalType.TIMESTAMP)
   @Column(name = "creationDate")
-  @Temporal(TemporalType.DATE)
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:MM")
   private Date creationDate;
 
   // Comment to avoid a loop.

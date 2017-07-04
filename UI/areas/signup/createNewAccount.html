@@ -47,14 +47,14 @@
       clear="clear" close="close" select-years="15" on-start="onStart()" on-render="onRender()" on-open="onOpen()" on-close="onClose()"
       on-set="onSet()" on-stop="onStop()" />
     </div>
-    <div class="col s12 m12 16 xl6">
-      <p class="col s12 center">
-        {{labels.Gender}} :
-        <input name="gender" type="radio" id="male" ng-model="FormData.gender" ng-value="male"/>
-        <label for="male">{{labels.Male}}</label>
-        <input name="gender" type="radio" id="female" ng-model="FormData.gender" ng-value="female"/>
-        <label for="female">{{labels.Female}}</label>
-      </p>
+    <div class="input-field col s12 m12 16 xl6">
+      <div input-field>
+          <select class="" ng-model="FormData.gender" material-select watch>
+              <option value="" disabled selected><i>- Choose Gender -</i></option>
+              <option value="male">male</option>
+              <option value="female">female</option>
+          </select>
+      </div>
     </div>
     <div class="input-field col s12">
       <input id="NIC" type="text" ng-model="FormData.nic">
@@ -65,11 +65,11 @@
       <label>{{labels.EmailAddress}}</label>
     </div>
     <div class="input-field col s6 m6 l6 xl6">
-      <input id="contact1" type="text" class="validate" ng-model="FormData.contact1">
+      <input id="contact1" type="number" class="validate" ng-model="FormData.contact1">
       <label for="contact1">{{labels.Contact1}}</label>
     </div>
     <div   class="input-field col s6 m6 l6 xl6">
-      <input id="contact2" type="text" class="validate" ng-model="FormData.contact2">
+      <input id="contact2" type="number" class="validate" ng-model="FormData.contact2">
       <label for="contact2">{{labels.Contact2}}</label>
     </div>
     <div   class="input-field col s6 m6 l6 xl6">
@@ -122,6 +122,20 @@
       <div class="input-field col s12 nny-margin-fix">
         <input id="answer2" type="text" ng-model="FormData.answer2">
         <label for="answer2">{{labels.Answer}} #2</label>
+      </div>
+      <div class="divider col s12"></div>
+    </div>
+    <div class="col s12 m12 l12 xl12">
+      <div class="col s12 nny-margin-add">{{labels.Question}} #3</div>
+      <div class="input-field col s12 nny-margin-fix">
+        <select material-select watch  ng-change="setQuestion()" ng-model="FormData.question3">
+          <option value="" disabled selected><i>- Select -</i></option>
+          <option ng-repeat="question in questions" value={{question.id}}>{{question.name}}</option>
+        </select>
+      </div>
+      <div class="input-field col s12 nny-margin-fix">
+        <input id="answer3" type="text" ng-model="FormData.answer3">
+        <label for="answer3">{{labels.Answer}} #2</label>
       </div>
       <div class="divider col s12"></div>
     </div>

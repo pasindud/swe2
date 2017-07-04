@@ -170,6 +170,7 @@ nnyApp.factory('ValidateService', ['$http', 'nnyConst', '$rootScope', function($
     }
 
     function contactCheck(contact, nullable = true) {
+        return getValidateResult(true, "");
         if (isNull(contact) && !nullable) {
             return getValidateResult(false, "Contact cannot be null.")
         } else if (isNumbersOnly(contact)) {
