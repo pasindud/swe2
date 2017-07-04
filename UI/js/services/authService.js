@@ -1,6 +1,6 @@
 /* Author : Dushan Galappaththi */
 var nnyApp = angular.module('banking');
-nnyApp.factory('AuthService', ['$http', 'nnyConst', '$rootScope', function($http, nnyConst, $rootScope) {
+nnyApp.factory('AuthService', ['$http', 'nnyConst', '$rootScope', '$state', function($http, nnyConst, $rootScope, $state) {
 
         function requestor(username, password) {
             var result = $http.get('SampleJSON/Auth/auth.json')
@@ -92,13 +92,6 @@ nnyApp.factory('AuthService', ['$http', 'nnyConst', '$rootScope', function($http
             getRequest: function(url, data, cb) {
                 // var headers = {"x-auth-token": $rootScope.authData.accessToken};
                 // console.log(headers);
-
-                if (!getIsLoggedIn()) {
-                    cb({
-                        error: "User not logged in."
-                    })
-                    return;
-                };
                 var config = {
                     url: nnyConst.ENDPOINT_URI + url
                 };
@@ -111,6 +104,10 @@ nnyApp.factory('AuthService', ['$http', 'nnyConst', '$rootScope', function($http
 
                 $http(config).then(function(response) {
                     console.log(response.data);
+                    if (response.status == 401) {
+                        $state.go("login");
+                        localStorage.clear()
+                    };
                     cb(response);
                 });
             },
