@@ -5,6 +5,7 @@ angular.module('banking')
     var isInvalidForm = false;
     var errors = [""];
     debugger;
+    $scope.masterData = $rootScope.MasterData;
 
     function inputFieldAnimate(id, status) {
       if (status) {
