@@ -133,8 +133,8 @@ angular.module('banking', [
           authorizedRoles: [nnyConst.UserRoles.Admin]
         }
       })
-      .state('users', {
-        url: '/admin/users',
+      .state('listaccounts', {
+        url: '/admin/accounts',
         templateUrl: 'areas/admin/manageAccounts/ViewAccounts.html',
         controller: 'ViewAccountsController',
         data: {
@@ -143,7 +143,7 @@ angular.module('banking', [
         }
       })
       .state('account_view', {
-        url: '/admin/user/{accountid}',
+        url: '/admin/accounts/{accountid}',
         templateUrl: 'areas/admin/manageAccounts/userAccount.html',
         controller: 'UserAccountController',
         data: {

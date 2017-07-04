@@ -2,13 +2,14 @@
   <div class="col s12 m12 l12 xl12">
     <div class="col s12">
       <div class="col s12 card-panel grey lighten-4">
-        <h5>{{labels.PersonalAccounts}}</h5>
+        <h5>{{labels.Accounts}}</h5>
         <div class="divider"></div>
         <div class="col s4"><i class="large material-icons">perm_identity</i></div>
         <div class="col s8">
           <ul class="">
             <li ><a class="waves-effect" ng-click="setPage('createnew')">{{labels.CreateNewAccount}}</a></li>
-            <li ><a class="waves-effect" ui-sref="users">{{labels.ViewAllAccounts}}</a></li>
+            <li ><a class="waves-effect" ui-sref="listaccounts">{{labels.ViewAllAccounts}}</a></li>
+            <li ><a class="waves-effect"> {{labels.ViewAllUsers}} </a></li>
             <li ><a class="waves-effect" ng-click="setPage('deleteaccounts')">{{labels.DeleteAccounts}}</a></li>
           </ul>
         </div>
