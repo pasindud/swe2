@@ -1,11 +1,14 @@
 package com.app.service;
 
 import com.app.enties.Customer;
+import com.app.enties.Merchant;
 import com.app.enties.Role;
 import com.app.enties.SecurityAnswers;
 import com.app.enties.SecurityQuestions;
+import com.app.enties.UserType;
 import com.app.enties.Users;
 import com.app.repository.CustomerRepository;
+import com.app.repository.MerchantRepository;
 import com.app.repository.RoleRepository;
 import com.app.repository.SecurityAnswersRepository;
 import com.app.repository.SecurityQuestionRepository;
@@ -33,9 +36,11 @@ public class UserRegistration {
   SecurityAnswersRepository securityAnswersRepository;
   @Autowired SecurityQuestionRepository securityQuestionsRepository;
   @Autowired RoleRepository roleRepository;
+  @Autowired MerchantRepository merchantRepository;
   
   private Users users;
   private Customer customer;
+  private Merchant merchant;
   private List<SecurityAnswers> answers;
   private SecurityQuestions securityQuestions;
   private List<String> errors;
@@ -46,10 +51,27 @@ public class UserRegistration {
             this.users = createUserRequest.getUsers();
             this.customer = createUserRequest.getCustomer();
             this.answers = createUserRequest.getAnswers();
-
+            this.merchant=createUserRequest.getMerchant();
+            
             validateObjectsPresent();
             validateSecurityAnswers();
-            validateCustomerInfo();
+            
+            if (!errors.isEmpty()) {
+                return errors;
+            }
+            
+            if(this.users.getUserType()==UserType.CUSTOMER){
+                validateCustomerInfo();
+            }
+            else if(this.users.getUserType()==UserType.MERCHANT){
+                validateMerchantInfo();
+            }
+            else{
+                errors.add("Unknown user type");
+                return errors;
+            }
+            
+            
             if (!errors.isEmpty()) {
                 return errors;
             }
@@ -66,7 +88,11 @@ public class UserRegistration {
     }
 
     private void save() {
-        users.setCustomer(customer);
+        if (this.users.getUserType() == UserType.CUSTOMER) {
+            users.setCustomer(customer);
+        } else if (this.users.getUserType() == UserType.MERCHANT) {
+            users.setMerchant(merchant);
+        }
 
         //Adding role 1 - USER to user
         Role role = roleRepository.findById(new Long(1));
@@ -92,10 +118,18 @@ public class UserRegistration {
                 errors.add("Issues with security role");
             }
             //Save customer
-            Customer saved_cust = customerRepository.save(customer);
-            if (saved_cust == null) {
-                errors.add("Issues with saving personal details");
+            if (this.users.getUserType() == UserType.CUSTOMER) {
+                Customer saved_cust = customerRepository.save(customer);
+                if (saved_cust == null) {
+                    errors.add("Issues with saving personal details");
+                }
+            } else if (this.users.getUserType() == UserType.MERCHANT) {
+                Merchant saved_merchant = merchantRepository.save(merchant);
+                if (saved_merchant == null) {
+                    errors.add("Issues with saving merchant details");
+                }
             }
+            
         }
     }
 
@@ -136,7 +170,19 @@ public class UserRegistration {
        
        
    } 
-   
+   private void validateMerchantInfo() {
+       
+       if(this.merchant.getOrgname()==null ||this.merchant.getOrgname().length()>45 ){
+           errors.add("Organization name missing or too long");
+       }
+       if(this.merchant.getRegistrationno()==null ||this.merchant.getRegistrationno().length()>45 ){
+           errors.add("Org registraion no missing or too long");
+       }
+       if(this.merchant.getTaxno()==null ||this.merchant.getTaxno().length()>45 ){
+           errors.add("Tax file no missing or too long");
+       }
+
+   }   
     private void validateSecurityAnswers() {
         for (SecurityAnswers element : answers) {
             if (element.getSecurityQuestions().getId() == null) {
