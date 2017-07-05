@@ -5,27 +5,6 @@
       <div class="divider col s12"></div>
     </br>
     <div class="col s12">
-      <h6>{{labels.Preferences}}</h6>
-      <div class="divider col s12"></div>
-    </br>
-    <div class="input-field col s12 m12 l12 xl12">
-      <div class="col s3">Preferred Language :</div>
-      <div class="col s9">
-      <select material-select watch  ng-change="setLanguage()" ng-model="UpdatePreference.language">
-        <option value="" disabled selected><i>- Select -</i></option>
-        <option ng-repeat="language in languages" value={{language.id}}>{{language.name}}</option>
-      </select>
-    </div>
-    </div>
-    <div class="input-field col s12 m12 l12 xl12">
-      <div class="col s3">Preferred Currency :</div>
-      <div class="col s9">
-      <select material-select watch  ng-change="setCurrency()" ng-model="UpdatePreference.currency">
-        <option value="" disabled selected><i>- Select -</i></option>
-        <option ng-repeat="currency in currencies" value={{currency.id}}>{{currency.name}}</option>
-      </select>
-    </div>
-    </div>
   </div>
   <div class="col s12">
     <h6>{{labels.ChangePassword}}</h6>
