@@ -11,6 +11,7 @@ angular.module('banking')
     };
     AuthService.getRequest("/api/transactions?id=" + transactionId, null, function(response) {
       $scope.Transactions = response.data;
+      handlePagination($scope.Transactions);
     });
 
     var paginationObj = "";
@@ -43,6 +44,10 @@ angular.module('banking')
 
     //Pagination button
     $scope.pageBtn = function(toPage, fromPage) {
+      if (typeof toPage == "undefined" || typeof fromPage == "undefined") {
+        return;
+      }
+
       $('#LoadingModal').modal('open');
       pageNumbers[fromPage].isCurrent = false;
       pageNumbers[toPage].isCurrent = true;

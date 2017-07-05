@@ -45,7 +45,9 @@
       </thead>
       <tbody>
         <tr ng-repeat = "transaction in Transactions">
-          <td>{{transaction.transactiontime}}</td>
+          <td>
+            {{transaction.transactiontime | date:'MM-dd-yyyy'}}
+          </td>
           <td>{{transaction.fromaccountid}}</td>
           <td>{{transaction.transtype}}</td>
           <td>{{transaction.amount}}</td>
