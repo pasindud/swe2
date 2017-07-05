@@ -17,14 +17,46 @@
           />
           <label for="username">{{labels.Username}}</label>
         </div>
+        <div class="section col s12">
+          <h5>{{labels.SecurityQuestions}}</h5>
+          <div class="divider col s12"></div>
+          <div class="col s12 m12 l12 xl12">
+            <div class="col s12 nny-margin-add">{{labels.Question}} #1</div>
+            <div class="input-field col s12 nny-margin-fix">
+              <select material-select watch  ng-change="setQuestion()" ng-model="FormData.question1">
+                <option value="" disabled selected><i>- Select -</i></option>
+                <option ng-repeat="quest in questionslist" value={{quest.id}}>{{quest.question}}</option>
+              </select>
+            </div>
+            <div class="input-field col s12 nny-margin-fix">
+              <input id="answer1" type="text" ng-model="FormData.answer1">
+              <label for="answer1">{{labels.Answer}} #1</label>
+            </div>
+            <div class="divider col s12"></div>
+          </div>
+          <div class="col s12 m12 l12 xl12">
+            <div class="col s12 nny-margin-add">{{labels.Question}} #3</div>
+            <div class="input-field col s12 nny-margin-fix">
+              <select material-select watch  ng-change="setQuestion()" ng-model="FormData.question2">
+                <option value="" disabled selected><i>- Select -</i></option>
+                <option ng-repeat="quest in questionslist" value={{quest.id}}>{{quest.question}}</option>
+              </select>
+            </div>
+            <div class="input-field col s12 nny-margin-fix">
+              <input id="answer2" type="text" ng-model="FormData.answer2">
+              <label for="answer2">{{labels.Answer}} #2</label>
+            </div>
+            <div class="divider col s12"></div>
+          </div>
+        </div>
         <div class="col s12">
           <button class="btn waves-effect waves-light green draken-2" ng-click="recoverbtn()"
           name="action">{{labels.Recover}}
-            <i class="material-icons left">lock_open</i>
+          <i class="material-icons left">lock_open</i>
           </button>
         </div>
         <div class="col s12" style="margin-bottom:20px;"></div>
+      </div>
     </div>
   </div>
-</div>
-<div class="col s12" style="margin-bottom:30px;"></div>
+  <div class="col s12" style="margin-bottom:30px;"></div>
