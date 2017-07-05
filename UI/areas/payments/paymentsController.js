@@ -1,6 +1,6 @@
 'use strict';
 angular.module('banking')
-  .controller('PaymentsController', function($state, $rootScope, $scope, $http, $filter, AuthService) {
+  .controller('PaymentsController', function($state, $rootScope, $scope, $http, $filter, AuthService, toastr) {
 
     // Dedup the code here
     AuthService.getRequest("/api/accounts?id=" + $rootScope.authData.userId, null, function(response) {
@@ -20,7 +20,7 @@ angular.module('banking')
          }
          $rootScope.ErrorDialog = errorContent;
       } else {
-       // TODO show sucessfull message;
+        toastr.success(type + " done.", 'Sucessfull');
       }
     }
 
