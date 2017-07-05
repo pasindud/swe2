@@ -62,9 +62,13 @@ public class TransactionService {
     Users accountFromUser = accountRepository.findByAccountid(transaction.getFromaccountid()).getUserId();
     Users accountToUser = accountRepository.findByAccountid(transaction.getToaccountid()).getUserId();
 
-    if (accountFromUser.getUserId() == userService.getLoggedInUserId()) {
-      return transaction;
-    } else if (accountToUser.getUserId() == userService.getLoggedInUserId()) {
+    if (accountFromUser != null && accountToUser != null) {
+      response.put("error", "Transaction not found.");
+      return response;
+    } 
+
+    if ((accountFromUser.getUserId() == userService.getLoggedInUserId()) || 
+      (accountToUser.getUserId() == userService.getLoggedInUserId())) {
       return transaction;
     } else {
       response.put("error", "Access denied to transaction");
@@ -89,6 +93,16 @@ public class TransactionService {
   private void processTransaction() throws Exception {
     this.fromAccount = accountRepository.findByAccountid(transaction.getFromaccountid());
     this.toAccount = accountRepository.findByAccountid(transaction.getToaccountid());
+
+    if (this.fromAccount == null) {
+      errors.add("Incorrect account provided.");
+      return;
+    }
+
+    if (this.toAccount == null) {
+      errors.add("Receiver account not found.");
+      return;
+    }
 
     if (validate()) {
       saveTransaction();
@@ -183,7 +197,7 @@ public class TransactionService {
       return false;
     }
     if (toAccount == null && !getTransactionTypeEqW()) {
-      errors.add("Receiver account account not found");
+      errors.add("Receiver account not found");
       return false;
     }
 
