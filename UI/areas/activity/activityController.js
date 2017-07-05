@@ -10,8 +10,17 @@ angular.module('banking')
       return;
     };
     AuthService.getRequest("/api/transactions?id=" + transactionId, null, function(response) {
-      $scope.Transactions = response.data;
-      handlePagination($scope.Transactions);
+      if (response.data.error) {
+        $('#ErrorModal').modal('open');
+        var errorContent = {
+          Title: "Transactions Error",
+          Body: [response.data.error]
+        }
+        $rootScope.ErrorDialog = errorContent;
+      } else {
+        $scope.Transactions = response.data;
+        handlePagination($scope.Transactions); 
+      }
     });
 
     var paginationObj = "";

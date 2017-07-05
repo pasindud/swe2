@@ -52,7 +52,7 @@
           <td>{{transaction.transtype}}</td>
           <td>{{transaction.amount}}</td>
           <td>{{transaction.message}}</td>
-          <td><a class="waves-effect" ng-click="viewDetailsBtn(transaction.id)">{{labels.ViewMore}}</a></td>
+          <td><a class="waves-effect" ui-sref="transaction({transactionId: transaction.transactionid})">{{labels.ViewMore}}</a></td>
         </tr>
       </tr>
     </tbody>
