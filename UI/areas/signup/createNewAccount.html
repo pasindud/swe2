@@ -101,7 +101,7 @@
       <div class="input-field col s12 nny-margin-fix">
         <select material-select watch  ng-change="setQuestion()" ng-model="FormData.question1">
           <option value="" disabled selected><i>- Select -</i></option>
-          <option ng-repeat="quest in masterData.Questions" value={{quest.id}}>{{quest.question}}</option>
+          <option ng-repeat="quest in questionslist" value={{quest.id}}>{{quest.question}}</option>
         </select>
       </div>
       <div class="input-field col s12 nny-margin-fix">
@@ -116,7 +116,7 @@
       <div class="input-field col s12 nny-margin-fix">
         <select material-select watch  ng-change="setQuestion()" ng-model="FormData.question2">
           <option value="" disabled selected><i>- Select -</i></option>
-          <option ng-repeat="quest in masterData.Questions" value={{quest.id}}>{{quest.question}}</option>
+          <option ng-repeat="quest in questionslist" value={{quest.id}}>{{quest.question}}</option>
         </select>
       </div>
       <div class="input-field col s12 nny-margin-fix">
@@ -130,7 +130,7 @@
       <div class="input-field col s12 nny-margin-fix">
         <select material-select watch  ng-change="setQuestion()" ng-model="FormData.question3">
           <option value="" disabled selected><i>- Select -</i></option>
-          <option ng-repeat="quest in masterData.Questions" value={{quest.id}}>{{quest.question}}</option>
+          <option ng-repeat="quest in questionslist" value={{quest.id}}>{{quest.question}}</option>
         </select>
       </div>
       <div class="input-field col s12 nny-margin-fix">

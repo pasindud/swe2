@@ -20,7 +20,7 @@ angular.module('banking')
          }
          $rootScope.ErrorDialog = errorContent;
       } else {
-        toastr.success(type + " done.", 'Sucessfull');
+        toastr.success(type + " done.", 'Sucessful');
       }
     }
 

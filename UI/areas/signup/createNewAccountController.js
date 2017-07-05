@@ -1,11 +1,31 @@
 /* Author : Dushan Galappaththi */
 'use strict';
 angular.module('banking')
-.controller('CreateNewAccountController', function($state, $rootScope, $scope, ValidateService, AuthService,ObjectService) {
+.controller('CreateNewAccountController', function($state, $rootScope, $scope, ValidateService, AuthService,ObjectService, toastr) {
   var isInvalidForm = false;
   var errors = [""];
 
   $scope.masterData = $rootScope.MasterData;
+ 
+  AuthService.getRequest("/api/ui_all_questions", null, function(response) {
+    console.log(response.data);
+    $scope.questionslist = response.data; 
+  });
+
+  $scope.FormData = {
+    nic: "950483628v",
+    username: "950483628v",
+    password: "1234567890",
+    confirmPassword : "1234567890",
+    first_name:"Hellow",
+    last_name:"HMM",
+    email: "testing@localhost.com",
+    contact1Val: "123456789",
+    contact2Val: "1234567890",
+    addressL1: "Lane 1",
+    city: "Colombo",
+    gender: "Male"
+  }
 
   function inputFieldAnimate(id, status) {
     if (status) {
@@ -30,7 +50,7 @@ angular.module('banking')
       var FormData = $scope.FormData;
       FormData.dob = $rootScope.ca_formData_DOB;
       FormData.aod = $rootScope.ca_formData_AOD;
-      debugger;
+
       errors = [""];
       isInvalidForm = false;
 
@@ -83,6 +103,17 @@ angular.module('banking')
         var mappedData = ObjectService.getMappedSignUpDataC(FormData);
         AuthService.getRequest("/api/registration", mappedData, function(response) {
           console.log(response);
+           if (response.data.errors != undefined && response.data.errors.length != 0) {
+             $('#ErrorModal').modal('open');
+             var errorContent = {
+               Title: "Registration Error",
+               Body: response.data.errors
+             }
+             $rootScope.ErrorDialog = errorContent;
+          } else {
+            toastr.success("Registration done.", 'Sucessful');
+          }
+
         })
       }
       $scope.FormData = FormData;
