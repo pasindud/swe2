@@ -1,7 +1,9 @@
 var app = angular.module('banking', [
     'ui.router',
     'ui.materialize',
-    'ngTable'
+    'ngTable',
+    'ngAnimate', 
+    'toastr'
   ])
   .constant('ENDPOINT_URI', 'localhost:8989/SampleJSON')
   .config(function($stateProvider, $urlRouterProvider, $locationProvider, nnyConst) {
@@ -71,7 +73,7 @@ var app = angular.module('banking', [
 
       })
       .state('transaction', {
-        url: '/activity/{transactionId}',
+        url: '/transaction/{transactionId}',
         templateUrl: 'areas/activity/transaction.html',
         controller: 'TransactionController',
         data: {
