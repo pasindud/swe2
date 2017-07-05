@@ -13,6 +13,7 @@ import com.app.enties.TransactionType;
 import com.app.repository.MerchantRepository;
 import com.app.repository.MerchantServicesRepository;
 import com.app.request.PayBillRequest;
+import com.app.service.AccountService;
 import com.app.service.TransactionService;
 
 import java.util.ArrayList;
@@ -51,6 +52,8 @@ public class MerchantController {
   @Autowired private MerchantServicesRepository merchantServicesRepository;
   /** Service to operate on transaction data. */
   @Autowired private TransactionService transactionService;
+  /** Service used to operate on accounts. */
+  @Autowired private AccountService accountService;
   @Autowired UserServiceImpl userService;
 
   /**
@@ -118,12 +121,16 @@ public class MerchantController {
       return response;
     };
 
+    if (!accountService.checkUserHasPermissions(payBillRequest.getSelectedAccountId(), true)) {
+      errors.add("Unable to pay bill.");
+      response.put("errors", errors);
+      return response;
+    }
+
     transaction.setTranstype(TransactionType.T);
-    // Validate the code here.
     transaction.setFromaccountid(payBillRequest.getSelectedAccountId());
     transaction.setUserId(userService.getLoggedInUser());
     transaction.setToaccountid(service.getAccountid());
-    System.out.println("payBillRequest.getAmount() " + payBillRequest.getAmount());
     transaction.setAmount(payBillRequest.getAmount());
 
     try {
