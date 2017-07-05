@@ -55,6 +55,12 @@ curl -H "Content-Type: application/json" -X POST \
 -d '{"users": {"username":"username","password":"pw"}, "customer": {"first_name":"TESTING"}}' \
 http://localhost:8080/api/registration
 
+curl -H "Content-Type: application/json" -X POST \
+-d '{"users":{"username":"950483628v","password":"1234567890","userType":"CUSTOMER"},"customer":{"firstname":"","lastname":"","nic":"950483628v","addressLine1":"Lane 1","city":"Colombo","email":"testing@localhost.com","firstName":"Hellow","lastName":"HMM"},"answers":[{"answer":"1","securityQuestions":{"id":"1"}},{"answer":"2","securityQuestions":{"id":"2"}},{"answer":"3","securityQuestions":{"id":"1"}}]}' \
+http://localhost:8080/api/registration
+
+
+
 curl -u xyz:xyz -H "Content-Type: application/json" -X POST http://localhost:8080/api/merchant_services_pay_bill -d '{"amount":1, "selectedServiceId": 1  }'
 
 curl -u xyz:xyz -H "Content-Type: application/json" -X POST http://localhost:8080/api/merchant_services_pay_bill -d '{"amount":-21, "selectedServiceId": 1  }'
