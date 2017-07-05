@@ -42,7 +42,6 @@ curl -u xyz:xyz -H "Content-Type: application/json" -X POST \
 http://localhost:8080/api/merchant_services_pay_bill \
 -d '{"amount":1, "selectedServiceId": 1,  "billReferenceNumber": 1}'
 
-
 curl -u xyz:xyz  -H "Content-Type: application/json" -X POST \
 http://localhost:8080/api/do_transaction \
 -d '{"toaccountid":1, "fromaccountid": 1}'
@@ -81,6 +80,8 @@ curl -u ADMIN:xyz "http://localhost:8080/api/admin/account_id?id=1"
 curl -u ADMIN:xyz "http://localhost:8080/api/admin/all_users" 
 curl -u ADMIN:xyz "http://localhost:8080/api/admin/all_merchants" 
 
-
+ curl -u xyz:xyz -H "Content-Type: application/json" -X POST \
+ http://localhost:8080/api/merchant_services_pay_bill -d \
+ '{"amount":123123123121231231231231, "selectedServiceId": 1, "selectedAccountId":1, "billReferenceNumber": 1}asdasd' 
 
 
