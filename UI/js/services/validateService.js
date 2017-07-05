@@ -20,6 +20,7 @@ nnyApp.factory('ValidateService', ['$http', 'nnyConst', '$rootScope', function($
     }
 
     function lengthCheck(value, maxLength, minLength = 0) {
+        console.log(value.length, maxLength,minLength);
         if (value.length <= maxLength && value.length >= minLength) {
             return true;
         } else {
@@ -124,7 +125,7 @@ nnyApp.factory('ValidateService', ['$http', 'nnyConst', '$rootScope', function($
             return getValidateResult(false, "Confirm Password Cannot Be Empty!");
         } else if (password !== confirmPassword) {
             return getValidateResult(false, "Passwords do not match");
-        } else if (lengthCheck(password,16,8)) {
+        } else if (!lengthCheck(password,16,8)) {
             return getValidateResult(false, "Password should be 8 to 16 characters long");
         }
         else {
