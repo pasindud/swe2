@@ -7,9 +7,11 @@ package com.app.controller;
 
 import com.app.enties.Role;
 import com.app.enties.SecurityAnswers;
+import com.app.enties.SecurityQuestions;
 import com.app.enties.Users;
 import com.app.repository.LoginHistoryRepository;
 import com.app.repository.SecurityAnswersRepository;
+import com.app.repository.SecurityQuestionRepository;
 import com.app.repository.UsersRepository;
 import com.app.request.CreateUserRequest;
 import com.app.service.UserRegistration;
@@ -46,6 +48,8 @@ public class UserController {
 
   @Autowired private SecurityAnswersRepository securityAnswersRepository;
 
+  @Autowired private SecurityQuestionRepository securityQuestionRepository;
+
   @Autowired private UserRegistration userRegistration;
 
   @RequestMapping("/api/auth")
@@ -67,10 +71,8 @@ public class UserController {
   }
 
   /*
-
-  curl -u xyz:xzy "http://localhost:8080/api/user_questions"
-
-  * */
+    curl -u xyz:xzy "http://localhost:8080/api/user_questions"
+  */
   @RequestMapping("/api/user_questions")
   @GetMapping
   public List<SecurityAnswers> getSecurityQuestions() {

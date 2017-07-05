@@ -149,9 +149,6 @@ public class UserRegistration {
     
   }
    private void validateCustomerInfo() {
-       if(this.customer.getTitle()==null){
-           errors.add("Title missing");
-       }
        if(this.customer.getFirstName()==null ||this.customer.getFirstName().length()>45 ){
            errors.add("First name missing or too long");
        }
@@ -176,7 +173,7 @@ public class UserRegistration {
            errors.add("Organization name missing or too long");
        }
        if(this.merchant.getRegistrationno()==null ||this.merchant.getRegistrationno().length()>45 ){
-           errors.add("Org registraion no missing or too long");
+           errors.add("Org registration no missing or too long");
        }
        if(this.merchant.getTaxno()==null ||this.merchant.getTaxno().length()>45 ){
            errors.add("Tax file no missing or too long");
@@ -184,21 +181,23 @@ public class UserRegistration {
 
    }   
     private void validateSecurityAnswers() {
+        int i = 1;
         for (SecurityAnswers element : answers) {
             if (element.getSecurityQuestions().getId() == null) {
-                errors.add("Invalid Sequrity question");
+                errors.add("Invalid security question " + i);
             } else {
                 SecurityQuestions temp = securityQuestionsRepository.findById(element.getSecurityQuestions().getId());
                 if (temp == null) {
-                    errors.add("Invalid Sequrity question");
+                    errors.add("Invalid security question " + i);
                 } else {
                     if (element.getAnswer() != null || element.getAnswer().length() > 45) {
                         element.setSecurityQuestions(temp);
                     } else {
-                        errors.add("Invalid Sequrity answer");
+                        errors.add("Invalid security answer " + i);
                     }
                 }
             }
+            i +=1;
         }
     }
   
@@ -212,12 +211,15 @@ public class UserRegistration {
             errors.add("Personal data incomplete");
         }
         if (this.answers == null) {
-            errors.add("Sequrity answer data incomplete");
+            errors.add("security answer data incomplete");
         }
 
     }
 
     private boolean lengthCheck(String value, int maxLength, int minLength) {
+        if (value == null) {
+          return false;
+        }
         if (value.length() <= maxLength && value.length() >= minLength) {
             return true;
         } else {

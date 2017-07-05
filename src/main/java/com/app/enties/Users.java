@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
@@ -19,7 +21,7 @@ public class Users {
 
   private String username;
 
-  @JsonIgnore
+  @JsonIgnore()
   private String password;
 
   public Set <Role> getRoles() {
@@ -100,10 +102,12 @@ public class Users {
     this.username = username;
   }
 
+  @JsonIgnore
   public String getPassword() {
     return password;
   }
 
+  @JsonProperty
   public void setPassword(String password) {
     this.password = password;
   }
