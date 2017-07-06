@@ -79,7 +79,7 @@ angular.module('banking')
         isDsc = false;
       }
 
-      var recordSet = $scope.AllUsersOriginal;
+      var recordSet = $scope.AllUsersOriginal; //View Ori
       var sortedRecordSet = SortingService.sortObjBy(recordSet, field, isDsc);
       $scope.sortedRecordSet = sortedRecordSet;
       handlePagination(sortedRecordSet);
@@ -102,7 +102,7 @@ angular.module('banking')
 
     $scope.$watchCollection('SearchData', function() {
       if($scope.SearchData!== undefined){
-        if(($scope.SearchData.SearchValue!=="" )|| ($scope.SearchData.SearchValue!==undefined)){
+        if(($scope.SearchData.SearchValue!=="" )&& ($scope.SearchData.SearchValue!==undefined)){
           var searchField = $scope.SearchData.SearchField;
           var searchValue = $scope.SearchData.SearchValue;
           var searchResult = SearchService.search($scope.AllUsersOriginal,searchField,searchValue);
