@@ -1,6 +1,6 @@
 'use strict';
 angular.module('banking')
-.controller('ViewUsers', function($state, $rootScope, $scope, AuthService, PaginationService, SortingService, SearchService)
+.controller('ViewUsers', function($state, $rootScope, $scope, AuthService, PaginationService, SortingService, SearchService, toastr)
     {
 
       AuthService.getRequest("/api/admin/all_users", null, function (response) {
@@ -24,6 +24,19 @@ angular.module('banking')
         $scope.AllUsersOriginal = responseData; //View
 
       });
+
+    $scope.lockUser = function (lock, userId) {
+        AuthService.getRequest("/api/admin/change_user_status?user_id="+ 
+          userId + "&lock=" +lock, null, function (response) {
+            toastr.success("User lock toggled", 'Sucessful');
+            for (var i = $scope.AllUsers.length - 1; i >= 0; i--) {
+              if ($scope.AllUsers[i].userId == userId) {
+                $scope.AllUsers[i].locked = lock;
+                break;
+              };
+            };
+        });
+    }
 
     var paginationObj = "";
     var pageNumbers = "";
