@@ -143,6 +143,8 @@
   "MerchantInformation" : "Merchant Information",
   "CreatedDate" : "Created Date",
   "Locked" :"Locked",
-  "UserId" : "User ID"
-
+  "UserId" : "User ID",
+  "Rate" : "Rate",
+  "BaseCurrency" : "Base Currency",
+  "ExchangeRates" : "Exchange Rates"
   }]
