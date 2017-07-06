@@ -10,6 +10,7 @@ import com.app.repository.TransactionRepository;
 import com.app.request.TransactionRequest;
 import com.app.service.AccountService;
 import com.app.service.TransactionService;
+import java.util.Date;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +20,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +36,13 @@ public class TransactionController {
     @Checkdb(userCheck = true)
     Integer id;
   }
-
+  
+  /**
+   * API endpoint to get transactions of a specific account
+   * @param accountId
+   * @return all transactions for accountId
+   * curl -u xyz:xyz "http://localhost:8080/api/transactions?id=1"
+   */
   @GetMapping("/api/transactions")
   private List<Map<String, Object>> getTransactions(@RequestParam("id") int accountId) {
     List<Map<String, Object>> response = new ArrayList<Map<String, Object>>();
@@ -47,6 +55,49 @@ public class TransactionController {
     }
    // return transactionRepository.getAccountTransactions(accountId);
    return transactionService.getTransactionsPerAccount(accountId);
+  }
+  
+  /**
+   * API endpoint to get transactions of a specific account on specific day
+   * @param accountId
+   * @param fromDate
+   * @return all transactions for accountId on specific day
+   * curl -u xyz:xyz "http://localhost:8080/api/transactions_perday?id=1&from=2017-07-04"
+   */
+  @GetMapping("/api/transactions_perday")
+  private List<Map<String, Object>> getTransactionsPerDay(@RequestParam("id") int accountId,@RequestParam("from") @DateTimeFormat(pattern="yyyy-MM-dd") Date fromDate) {
+    List<Map<String, Object>> response = new ArrayList<Map<String, Object>>();
+    
+    if (!accountService.checkUserHasPermissions(accountId, true)) {
+        Map<String, Object> responseMap = new HashMap<>();
+        responseMap.put("error", "Account not found.");
+        response.add(responseMap);
+        return response;
+    }
+   // return transactionRepository.getAccountTransactions(accountId);
+   return transactionService.getTransactionsPerAccountPerDay(accountId,fromDate);
+  }
+  
+  /**
+   * API endpoint to get transactions of a specific account on specific date range (Bank statement)
+   * @param accountId
+   * @param fromDate
+   * @param toDate
+   * @return all transactions for accountId on specific date range (Bank statement)
+   * curl -u xyz:xyz "http://localhost:8080/api/transactions_perday?id=232&from=2017-07-04&to=2017-07-07"
+   */
+  @GetMapping("/api/transactions_statement")
+  private List<Map<String, Object>> getTransactionsSatemnt(@RequestParam("id") int accountId,@RequestParam("from") @DateTimeFormat(pattern="yyyy-MM-dd") Date fromDate,@RequestParam("to") @DateTimeFormat(pattern="yyyy-MM-dd") Date toDate) {
+    List<Map<String, Object>> response = new ArrayList<Map<String, Object>>();
+    
+    if (!accountService.checkUserHasPermissions(accountId, true)) {
+        Map<String, Object> responseMap = new HashMap<>();
+        responseMap.put("error", "Account not found.");
+        response.add(responseMap);
+        return response;
+    }
+   // return transactionRepository.getAccountTransactions(accountId);
+   return transactionService.getTransactionsStatement(accountId,fromDate,toDate);
   }
 
   /**
