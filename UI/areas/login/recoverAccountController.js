@@ -12,6 +12,7 @@ angular.module('banking')
 
 		var data = {
 			username : $scope.username,
+			password : $scope.password,
 			answers : [
 			{
 				"id":$scope.FormData.question1,
