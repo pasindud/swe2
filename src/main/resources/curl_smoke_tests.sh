@@ -97,6 +97,8 @@ curl -H "Content-Type: application/json"  -X POST \
 
  # '[{"answer":"Jayawardhana","securityQuestions":{"id":1}},{"answer":"Rex","securityQuestions":{"id":2}},{"answer":"colombo","securityQuestions":{"id":8}}]'
 
+ curl -H "Content-Type: application/json" -X POST -u xyz:xyz \
+   -d '{ "current":"xyz", "newPassword":"xyzz"}' "http://localhost:8080/api/change_password"
 
 
 
