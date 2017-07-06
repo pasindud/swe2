@@ -5,6 +5,7 @@
  */
 package com.app.controller;
 
+import com.app.crypt.CustomerCryptor;
 import com.app.enties.Customer;
 import com.app.enties.Users;
 import com.app.repository.CustomerRepository;
@@ -33,11 +34,43 @@ public class CustomerController {
   /*
       curl -u xyz:xyz -v http://localhost:8080/api/customer?id=1
   */
+
+  private class CustomerRowMapper implements RowMapper
+  {
+    public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+      Customer customer = new Customer();
+      customer.setFirstName(rs.getString("first_name"));
+      customer.setLastName(rs.getString("last_name"));
+      customer.setEmail(rs.getString("email"));
+      customer.setAddressLine1(rs.getString("address_line1"));
+      customer.setAddressLine2(rs.getString("address_line2"));
+      customer.setAddressLine3(rs.getString("address_line3"));
+      customer.setGender(rs.getString("gender"));
+      customer.setMobileNo(rs.getString("mobile_no"));
+      customer.setTelephoneNo(rs.getString("telephone_no"));
+      customer.setTitle(rs.getString("title"));
+      customer.setFaxNo(rs.getString("fax_no"));
+      customer.setDob(rs.getString("dob"));
+      customer.setCity(rs.getString("city"));
+      return customer;
+    }
+
+  }
+
   @RequestMapping("/api/customer")
   @GetMapping
   Customer getCustomers() {
     Users users = userService.getLoggedInUser();
-    return customerRepository.findByCustomerid(users.getCustomer().getUserId());
+
+    String sql = "Select * FROM customer  c where c.customerid=?";
+
+    Customer customer = (Customer)jdbcTemplate.queryForObject(
+            sql, new Object[] {  users.getCustomer().getUserId() }, new CustomerRowMapper());
+
+    CustomerCryptor customerCryptor = new CustomerCryptor();
+    // Remove after unlimited issue is solved.
+    // Customer decustomer = customerCryptor.decodeCustomer(users.getUsername(),users.getPassword(), customer);
+    return customer;
   }
 
   @RequestMapping("/api/customer_save")
