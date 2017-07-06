@@ -3,34 +3,25 @@
     <h5>{{labels.TransactionHistroy}}</h5>
     <div class="divider col s12"></div>
   </br>
-
-  <div class="col s12 m12 l8" ng-controller="DatePickerController">
-    <div class="input-field col s6">
-      <label for="start_date">{{labels.StartDate}}</label>
-      <input input-date type="text" name="created"  id="start_date"  ng-model="currentTime" container="" format="dd/mm/yyyy"
-      months-full="{{ month }}" months-short="{{ monthShort }}" weekdays-full="{{ weekdaysFull }}" weekdays-short="{{ weekdaysShort }}"
-      weekdays-letter="{{ weekdaysLetter }}" disable="disable"  min="{{ minDate }}" max="{{ maxDate }}" today="today" first-day="1"
-      clear="clear" close="close" select-years="15" on-start="onStart()" on-render="onRender()" on-open="onOpen()" on-close="onClose()"
-      on-set="onSet()" on-st  op="onStop()" />
-    </div>
-    <div class="input-field col s6">
-      <label for="end_date">{{labels.EndDate}}</label>
-      <input input-date type="text" name="created"  id="end_date"  ng-model="currentTime" container="" format="dd/mm/yyyy"
-      months-full="{{ month }}" months-short="{{ monthShort }}" weekdays-full="{{ weekdaysFull }}" weekdays-short="{{ weekdaysShort }}"
-      weekdays-letter="{{ weekdaysLetter }}" disable="disable"  min="{{ minDate }}" max="{{ maxDate }}" today="today" first-day="1"
-      clear="clear" close="close" select-years="15" on-start="onStart()" on-render="onRender()" on-open="onOpen()" on-close="onClose()"
-      on-set="onSet()" on-stop="onStop()" />
-    </div>
+  
+  <!-- Serach-->
+  <div id="" class="input-field col s12 m12 l3 nny-margin-fix right">
+    <input id="searchField" type="text" ng-model="SearchData.SearchValue">
+    <label for="searchField"></label>
   </div>
-  <div id="" class="input-field col s12 m12 l4">
-    <input id="activitySearch" type="search" required>
-    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+  <div class="input-field col s12 m12 l3 nny-margin-fix right">
+    <select material-select watch ng-model="SearchData.SearchField">
+      <option ng-repeat="sf in SearchFields" value={{sf.id}}>{{sf.name}}</option>
+    </select>
   </div>
+  <!--Search End-->
 
   <div class="col s2 hide-on-med-and-down"></div>
 </div>
 <div class="col s12">
   <div class="">
+
+    <!--Table-->
     <table class="striped highlight responsive-table">
       <thead>
         <tr>
@@ -39,7 +30,7 @@
           <th> From Id <a class="waves-effect" ng-click="sortBtn('Name',true)"><i class="tiny material-icons">swap_vert</i></a></th>
           <th> {{labels.Type}} <a class="waves-effect" ng-click="sortBtn('Type',true)"><i class="tiny material-icons">swap_vert</i></a></th>
           <th>{{labels.Amount}} <a class="waves-effect" ng-click="sortBtn('Amount',true)"><i class="tiny material-icons">swap_vert</i></a></th>
-          <th>{{labels.Message}} <a class="waves-effect" ng-click="sortBtn('Amount',true)"><i class="tiny material-icons">swap_vert</i></a></th>
+          <th>{{labels.Message}} <a class="waves-effect" ng-click="sortBtn('Message',true)"><i class="tiny material-icons">swap_vert</i></a></th>
           <th>{{labels.Actions}}</th>
         </tr>
       </thead>
