@@ -75,6 +75,7 @@ public class UserController {
   }
 
   /*
+   *Out of 3 sequrity questions send 2 random ones to the user with their quesion id
     curl -u xyz:xzy "http://localhost:8080/api/user_questions?userName=aaabbbccc"
   */
   @RequestMapping("/api/user_questions")
@@ -85,14 +86,18 @@ public class UserController {
         return securityAnswersService.getRandomQuestions(user.getUserId());//securityAnswersRepository.findByUserId(userService.getLoggedInUser().getUserId());
       return  null;
   }
-  
+/*
+    verify the answers for questions user sends (with question ids included)
+    curl -X POST "http://localhost:8080/api/security_answer_vrification?userName=aaabbbccc" -H "content-type:application/json" -d '[{"answer":"Jayawardhana","securityQuestions":{"id":1}},{"answer":"Rex","securityQuestions":{"id":2}},{"answer":"colombo","securityQuestions":{"id":8}}]'
+  */  
 @RequestMapping("/api/security_answer_vrification")
 @PostMapping
   public boolean verifyAnserwers(@RequestBody List<SecurityAnswers> answers,@RequestParam("userName") String userName){
      Users user=userService.findByUsername(userName);
-      if (user!=null)
+      
+     if(user!=null)
         return securityAnswersService.verifyanswers(answers,user.getUserId());
-     return  false;
+      return false;
   }
   /*
 

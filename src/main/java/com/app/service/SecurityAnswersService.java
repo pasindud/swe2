@@ -24,6 +24,11 @@ public class SecurityAnswersService {
     @Autowired SecurityAnswersRepository securityAnswersRepository;
     @Autowired private UserServiceImpl userService;
 
+    /**
+     * Return random 2 out of 3 security questions for user
+     * @param userid user id of the requesting user
+     * @return 
+     */
      public List<SecurityQuestions> getRandomQuestions(int userid){
         List<SecurityAnswers> allAnswesr=securityAnswersRepository.findByUserId(userid);
         List<SecurityQuestions> random_questions=new ArrayList<SecurityQuestions>();
@@ -39,6 +44,12 @@ public class SecurityAnswersService {
         return random_questions;
      }
      
+     /**
+      * verifies security answers with user request  
+      * @param answers list of SecurityAnswers from clients
+      * @param userid  User id of whom SecurityAnswers belong 
+      * @return 
+      */
      public boolean verifyanswers(List<SecurityAnswers> answers,int userid){
          String currentAnswer="";
          
@@ -50,6 +61,12 @@ public class SecurityAnswersService {
          return true;
      }
      
+     /**
+      * 
+      * @param questionid security question id for user
+      * @param userid user
+      * @return the answer related to the user's security question. null if user have no answer for that question id
+      */
      public String AnswerForQuestion(int questionid,int userid){
         List<SecurityAnswers> answers=securityAnswersRepository.findByUserId(userid);
         for(SecurityAnswers element : answers){            
