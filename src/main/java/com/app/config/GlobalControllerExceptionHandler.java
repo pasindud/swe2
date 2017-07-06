@@ -17,8 +17,8 @@ import java.util.Map;
  */
 @ControllerAdvice
 public class GlobalControllerExceptionHandler extends ResponseEntityExceptionHandler {
-  @ExceptionHandler
-  @ResponseStatus(HttpStatus.BAD_REQUEST)
+//  @ExceptionHandler
+//  @ResponseStatus(HttpStatus.BAD_REQUEST)
   public Map<String, String>  defaultErrorHandler(HttpServletRequest request, Exception e) {
     Map<String, String> response = new HashMap <>();
     response.put("error", "Error occurred try again.");
