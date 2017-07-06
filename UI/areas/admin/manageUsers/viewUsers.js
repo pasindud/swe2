@@ -92,7 +92,8 @@ angular.module('banking')
     searchFields.push({id : 'customer.firstName', name : 'First Name'});
     searchFields.push({id : 'customer.lastName', name : 'Last Name'});
     searchFields.push({id : 'creationDate', name : 'Creation Date'});
-    searchFields.push({id : 'Locked', name : 'Locked'});
+    searchFields.push({id : 'customer.nic', name : 'NIC'});
+    searchFields.push({id : 'customer.email', name : 'e-Mail'});
     $scope.SearchFields = searchFields;
 
     //default
