@@ -1,11 +1,22 @@
 /* Author : Dushan Galappaththi */
 'use strict';
 angular.module('banking')
-  .controller('AddBankAccountController', function($state, $rootScope, $scope, $http, $stateParams, AuthService, ValidateService) {
+  .controller('AddBankAccountController', function($state, $rootScope, $scope, $http, $stateParams, AuthService, ValidateService,toastr) {
     var isInvalidForm = false;
     var errors = [""];
-    debugger;
+
     $scope.masterData = $rootScope.MasterData;
+
+    $scope.currencies = ["USD", "LKR", "SGD", "EUR", "GBP"];
+
+    AuthService.getRequest("/api/ui_data_branch", null, function(response) {
+      $scope.Branch = response.data;
+      console.log(response.data);
+    });
+    AuthService.getRequest("/api/ui_data_acctype", null, function(response) {
+      $scope.AccountType = response.data;
+      console.log(response.data);
+    });
 
     function inputFieldAnimate(id, status) {
       if (status) {
@@ -57,6 +68,26 @@ angular.module('banking')
           $rootScope.ErrorDialog = errorContent;
         } else {
           //TODO Post or Get request
+          //
+          var data = {
+            currency: FormData.currency,
+            accTypeid: FormData.account_type,
+            branchid: FormData.branch           
+          }
+          
+          AuthService.getRequest("/api/accounts_save", data, function(response) {
+              if (response.data.errors != undefined && response.data.errors.length != 0) {
+                 $('#ErrorModal').modal('open');
+                 var errorContent = {
+                   Title: "Error create account.",
+                   Body: response.data.errors
+                 }
+                 $rootScope.ErrorDialog = errorContent;
+              } else {
+                toastr.success("Bank account created", 'Sucessful');
+              }
+          });
+
         }
       } else {
         $('#ErrorModal').modal('open');

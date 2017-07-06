@@ -9,7 +9,7 @@
         <div class="input-field col s12 nny-margin-fix">
           <select material-select watch  ng-change="setBranch()" ng-model="AddBankAccountForm.branch">
             <option value="" disabled selected><i>- Select -</i></option>
-            <option ng-repeat="branch in masterData.Branch" value={{branch.branch_id}}>{{branch.branch_name}}</option>
+            <option ng-repeat="branch in Branch" value={{branch.branch_id}}>{{branch.branch_name}}</option>
           </select>
         </div>
       </div>
@@ -18,7 +18,7 @@
         <div class="input-field col s12 nny-margin-fix">
           <select material-select watch  ng-change="setAccType()" ng-model="AddBankAccountForm.account_type">
             <option value="" disabled selected><i>- Select -</i></option>
-            <option ng-repeat="type in masterData.AccountType" value={{type.acc_type_id}}>{{type.acc_name}}</option>
+            <option ng-repeat="type in AccountType" value={{type.acc_type_id}}>{{type.acc_name}}</option>
           </select>
         </div>
       </div>
@@ -27,7 +27,7 @@
         <div class="input-field col s12 nny-margin-fix">
           <select material-select watch  ng-change="setCurrency()" ng-model="AddBankAccountForm.currency">
             <option value="" disabled selected><i>- Select -</i></option>
-            <option ng-repeat="currency in currencies" value={{currency.id}}>{{currency.name}}</option>
+            <option ng-repeat="currency in currencies" value={{currency}}>{{currency}}</option>
           </select>
         </div>
       </div>
