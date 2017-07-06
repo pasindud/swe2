@@ -31,8 +31,6 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
                        AuthenticationException authenticationException) throws IOException, ServletException {
     String username = getUserNameFromAuthorizationHeader(request.getHeader("Authorization"));
 
-    List<LoginHistory> loginHistories = loginHistoryRepository.getLast10MinsLoginHistoryByUsername(username);
-
     response.setContentType("application/json");
     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
@@ -41,6 +39,9 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
       response.getOutputStream().println("{ \"error\": \""+ authenticationException.getMessage() +".\" }");
       return;
     }
+
+    List<LoginHistory> loginHistories = loginHistoryRepository.getLast10MinsLoginHistoryByUsername(username);
+
 
     if (loginHistories.size() >= 3) {
       response.getOutputStream().println("{ \"error\": \"Account temporary locked due to multiple incorrect attempts.\" }");
