@@ -41,14 +41,23 @@ nnyApp.factory('AuthService', ['$http', 'nnyConst', '$rootScope', '$state', func
         }
 
         function getIsLoggedIn() {
-            var authDataLocalStorage = localStorage.getItem("accessToken");
-            console.log(authDataLocalStorage);
-            if (authDataLocalStorage) {
-                $rootScope.authData = JSON.parse(authDataLocalStorage);
-                $http.defaults.headers.common['x-auth-token'] = $rootScope.authData.accessToken;
-                return true;
+            if (localStorage) {
+                var authDataLocalStorage = localStorage.getItem("accessToken");
+                console.log(authDataLocalStorage);
+                if (authDataLocalStorage) {
+                    $rootScope.authData = JSON.parse(authDataLocalStorage);
+                    $http.defaults.headers.common['x-auth-token'] = $rootScope.authData.accessToken;
+                    return true;
+                } else {
+                    return false;
+                }
             } else {
-                return false;
+                if ($rootScope.authData) {
+                    return true;
+                } else {
+                    return false;
+                }
+
             }
         }
         return {
@@ -63,8 +72,6 @@ nnyApp.factory('AuthService', ['$http', 'nnyConst', '$rootScope', '$state', func
                         'Authorization': 'Basic ' + btoa(username + ":" + password)
                     }
                 }).then(function(response) {
-                    console.log("REPONSE");
-                    console.log(response.status);
                     if (response.status == 200) {
                         var temp = response.data;
                         $rootScope.authData = {
@@ -72,8 +79,13 @@ nnyApp.factory('AuthService', ['$http', 'nnyConst', '$rootScope', '$state', func
                             accessLevel: temp.AccessLevel,
                             userId: temp.userId
                         };
+                        
                         console.log("Storing Credentials");
-                        localStorage.setItem("accessToken", JSON.stringify($rootScope.authData))
+                        
+                        if (localStorage) {
+                            localStorage.setItem("accessToken", JSON.stringify($rootScope.authData))    
+                        }
+                        
                         // Set the x-auth-token globally.
                         $http.defaults.headers.common['x-auth-token'] = temp.session;
                         cb(response);
