@@ -13,6 +13,7 @@ import com.app.repository.LoginHistoryRepository;
 import com.app.repository.SecurityAnswersRepository;
 import com.app.repository.SecurityQuestionRepository;
 import com.app.repository.UsersRepository;
+import com.app.request.ChangePasswordRequest;
 import com.app.request.CreateUserRequest;
 import com.app.service.UserRegistration;
 import com.app.service.UserServiceImpl;
@@ -24,11 +25,11 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
 /** @author Pasindu */
 @RestController
@@ -52,6 +53,9 @@ public class UserController {
 
   @Autowired private UserRegistration userRegistration;
 
+  @Autowired
+  private PasswordEncoder passwordEncoder;
+
   @RequestMapping("/api/auth")
   @GetMapping
   Map<String, Object> getToken(HttpSession session) {
@@ -71,12 +75,36 @@ public class UserController {
   }
 
   /*
-    curl -u xyz:xzy "http://localhost:8080/api/user_questions"
+    curl -u xyz:xyz "http://localhost:8080/api/user_questions"
   */
   @RequestMapping("/api/user_questions")
   @GetMapping
   public List<SecurityAnswers> getSecurityQuestions() {
     return securityAnswersRepository.findByUserId(userService.getLoggedInUser().getUserId());
+  }
+
+  /**
+   * <p>
+
+      curl -H "Content-Type: application/json" -X POST -u xyz:xyz \
+      -d '{ "current":"xyz", "newPassword":"xyzz"}' "http://localhost:8080/api/change_password"
+
+   * <p/>
+   * @return
+   */
+  @RequestMapping(value = "/api/change_password")
+  @PostMapping
+  public ImmutableMap<String, String> changePassword(@RequestBody ChangePasswordRequest changePasswordRequest) {
+    Users user = usersRepository.findByUserId(userService.getLoggedInUserId());
+
+    if (user == null) {
+      return ImmutableMap.of("errors","Invalid user.");
+    } else if (passwordEncoder.matches(changePasswordRequest.getCurrent(), user.getPassword())) {
+      usersRepository.changePassword(passwordEncoder.encode(changePasswordRequest.getNewPassword()), userService.getLoggedInUserId());
+      return ImmutableMap.of("errors","");
+    } else {
+      return ImmutableMap.of("errors","Invalid password.");
+    }
   }
 
   /*
