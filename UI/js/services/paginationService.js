@@ -47,6 +47,11 @@ nnyApp.factory('PaginationService', ['$http', 'nnyConst', '$rootScope', function
             recordCount: 1,
             pages: ""
         }
+
+        if (recordSet == undefined) {
+            return paginationObj;
+        };
+        
         loopCount = 1;
         page = [];
         pages = [""];
