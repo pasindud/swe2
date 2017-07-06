@@ -11,21 +11,27 @@ nnyApp.factory('AuthService', ['$http', 'nnyConst', '$rootScope', '$state', func
             return result;
         }
 
-        function setErrorDialog(status) {
+        function setErrorDialog(response) {
             var errorContent = {
                 Title: "",
                 Body: ""
             }
-
-            switch (status) {
+            var data = response.data;
+            console.log(data);
+            switch (response.status) {
                 case 401:
-                    var error = [""];
-                    error.push("Please enter valid Credentials!");
-                    errorContent.Title = "Invalid Credentials";
+                    var error = [];
+                    if(data.error !== "null"){
+                        error.push(data.error);
+                      }
+                      else {
+                        error.push("Please enter valid Credentials!");
+                      }
+                    errorContent.Title = "Authentication Error!";
                     errorContent.Body = error;
                     break;
                 case -1:
-                    var error = [""];
+                    var error = [];
                     error.push("Connection Refused or Invalid Request URI");
                     errorContent.Title = "Connection Error";
                     errorContent.Body = error;
@@ -84,7 +90,7 @@ nnyApp.factory('AuthService', ['$http', 'nnyConst', '$rootScope', '$state', func
                         $http.defaults.headers.common['x-auth-token'] = temp.session;
                         cb(response);
                     } else {
-                        setErrorDialog(response.status);
+                        setErrorDialog(response);
                         cb(response);
                     }
                 });

@@ -100,8 +100,19 @@ h7{
 .nny-p3{
   font-size: 25pt;
 }
-
+.nny-ul-square{
+  list-style-type:square !important;
+}
 .nny-modal-Loading{
   background-color:transparent !important;
   overflow-y:hidden !important;
+}
+
+.nny-modal-error-header{
+  border-radius:5px;
+  background:#ef5350;
+  padding-top:5px;
+}
+.nny-modal-error-container{
+  width:400px !important;
 }
