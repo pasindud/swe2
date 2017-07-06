@@ -1,12 +1,12 @@
 <div class="col s12 m12 l8 xl8">
     <div class="section col s12 card-panel grey lighten-4">
-      <h5>Bank Transfer</h5>
+      <h5>{{labels.BankTransfer}}</h5>
       <div class="divider col s12"></div>
       <form>
       <div class="input-field col s12">
-        Paying account
+        {{labels.PayingAccount}}
         <select material-select watch ng-model="selectedTransfereAccount">
-          <option value="" disabled selected>Choose your account</option>
+          <option value="" disabled selected>{{labels.ChooseYourAccount}}</option>
           <option required ng-repeat="transfere_accounts in user_accounts"
             value={{transfere_accounts.accountid}}>{{transfere_accounts.accountid}}
           </option>
@@ -15,47 +15,45 @@
       <div class="input-field col s12 m12 l12 xl6">
         <input id="toaccountid" type="number" length="60" ng-model="transfere_toaccountid" required></input>
         <label for="toaccountid">
-          <!-- TODO add to labels -->
-          Recipient's Account Number
+        {{labels.RecipientsAccountNumber}}
         </label>
       </div>
       <div class="input-field col s12 m12 l12 xl6">
         <input id="message" type="text" length="60" ng-model="transfere_message"></input>
         <label for="message">
-          <!-- TODO add to labels -->
-          Message
+          {{labels.Message}}
         </label>
       </div>
       <div class="input-field col s12">
         <input id="amount" type="number"  min="1" max="10000" length="60" ng-model="transfere_amount" required></input>
         <label for="amount">
-          Amount
+          {{labels.Amount}}
         </label>
       </div>
       <div class="col s12 center" style="margin-top:50px;margin-bottom:30px;">
         <button class="btn waves-effect waves-light" type="submit" name="action" ng-click="transfer()">
-        Transfer
+        {{labels.Transfer}}
         <i class="material-icons right"></i>
         </button>
       </div>
       </form>
     </div>
   <div class="section col s12 card-panel grey lighten-4">
-    <h5>Pay Bills</h5>
+    <h5>{{labels.PayBill}}</h5>
     <div class="divider col s12"></div>
     <div class="input-field col s12 m12 l12 xl6">
-      Merchant services
+      {{labels.MerchantServices}}
       <select material-select watch ng-model="selectedService">
-        <option value="" disabled selected>Choose merchant service</option>
+        <option value="" disabled selected>{{labels.ChooseMerchantService}}</option>
         <option ng-repeat="service in merchant_services"
           value={{service.serviceid}}>{{service.servicename}}
         </option>
       </select>
     </div>
     <div class="input-field col s12 m12 l12 xl6">
-      Paying account
+      {{labels.PayingAccount}}
       <select material-select watch ng-model="selectedAccount">
-        <option value="" disabled selected>Choose your account</option>
+        <option value="" disabled selected>{{labels.ChooseYourAccount}}</option>
         <option ng-repeat="accounts in user_accounts"
           value={{accounts.accountid}}>{{accounts.accountid}}
         </option>
@@ -64,18 +62,18 @@
     <div class="input-field col s12">
       <input id="bill_reference_number" type="text" length="60" ng-model="bill_reference_number"></input>
       <label for="bill_reference_number">
-        Bill Reference Number
+        {{labels.BillReferenceNumber}}
       </label>
     </div>
     <div class="input-field col s12">
       <input id="amount" type="number" length="60" ng-model="amount"></input>
       <label for="amount">
-        Amount
+        {{labels.Amount}}
       </label>
     </div>
     <div class="col s12 center" style="margin-top:50px;margin-bottom:30px;">
       <button class="btn waves-effect waves-light" type="submit" name="action" ng-click="paybill()">
-      Pay Biil
+      {{labels.PayBill}}
       <i class="material-icons right"></i>
       </button>
     </div>

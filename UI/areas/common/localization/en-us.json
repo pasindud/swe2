@@ -148,5 +148,15 @@
   "BaseCurrency" : "Base Currency",
   "ExchangeRates" : "Exchange Rates",
   "ManageAccounts" : "Manage Accounts",
-  "AddAdmin" :"Add Admin"
+  "AddAdmin" :"Add Admin",
+  "RecipientsAccountNumber" : "Recipient's Account Number",
+  "MerchantServices" : "Merchant Services",
+  "BillReferenceNumber":"Bill Reference Number",
+  "PayBill" : "Pay Biil",
+  "BankTransfer" : "Bank Transfer",
+  "ChooseYourAccount" : "Choose your account",
+  "ChooseMerchantService" : "Choose merchant service",
+  "ChooseYourAccount" : "Choose your account",
+  "PayingAccount" : "Paying Account"
+
   }]
