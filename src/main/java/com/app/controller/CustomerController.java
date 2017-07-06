@@ -69,7 +69,7 @@ public class CustomerController {
 
     CustomerCryptor customerCryptor = new CustomerCryptor();
     // Remove after unlimited issue is solved.
-    // Customer decustomer = customerCryptor.decodeCustomer(users.getUsername(),users.getPassword(), customer);
+    Customer decustomer = customerCryptor.decodeCustomer(users.getUsername(),users.getPassword(), customer);
     return customer;
   }
 

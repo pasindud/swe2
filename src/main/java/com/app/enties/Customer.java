@@ -201,4 +201,14 @@ public class Customer implements Serializable {
   public void setUsers(Users users) {
     this.users = users;
   }
+
+    public void setCustomerid(Integer customerid) {
+        this.customerid = customerid;
+    }
+
+    public Integer getCustomerid() {
+        return customerid;
+    }
+  
+  
 }
