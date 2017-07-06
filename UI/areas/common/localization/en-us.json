@@ -140,5 +140,9 @@
   "Question" : "Question",
   "Answer" : "Answer",
   "SelectProfileType": "Select Profile Type",
-  "MerchantInformation" : "Merchant Information"
+  "MerchantInformation" : "Merchant Information",
+  "CreatedDate" : "Created Date",
+  "Locked" :"Locked",
+  "UserId" : "User ID"
+
   }]

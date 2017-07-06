@@ -21,7 +21,7 @@ public class Users {
 
   private String username;
 
-  @JsonIgnore()
+//  @JsonIgnore()
   private String password;
 
   public Set <Role> getRoles() {

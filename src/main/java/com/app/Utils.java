@@ -4,6 +4,7 @@ package com.app;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.validation.Errors;
@@ -25,4 +26,10 @@ public class Utils {
     }
     return errors;
   }
+  
+  public static int randInt(int min, int max) {
+    Random rand=new Random();
+    int randomNum = rand.nextInt((max - min) + 1) + min;
+    return randomNum;
+}
 }

@@ -15,6 +15,7 @@ import com.app.repository.SecurityQuestionRepository;
 import com.app.repository.UsersRepository;
 import com.app.request.ChangePasswordRequest;
 import com.app.request.CreateUserRequest;
+import com.app.service.SecurityAnswersService;
 import com.app.service.UserRegistration;
 import com.app.service.UserServiceImpl;
 import com.google.common.collect.ImmutableMap;
@@ -25,11 +26,13 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /** @author Pasindu */
 @RestController
@@ -53,8 +56,9 @@ public class UserController {
 
   @Autowired private UserRegistration userRegistration;
 
-  @Autowired
-  private PasswordEncoder passwordEncoder;
+  @Autowired private SecurityAnswersService securityAnswersService;
+
+  @Autowired private PasswordEncoder passwordEncoder;
 
   @RequestMapping("/api/auth")
   @GetMapping
@@ -75,19 +79,49 @@ public class UserController {
   }
 
   /*
-    curl -u xyz:xyz "http://localhost:8080/api/user_questions"
+   *Out of 3 sequrity questions send 2 random ones to the user with their quesion id
+    curl -u xyz:xzy "http://localhost:8080/api/user_questions?userName=aaabbbccc"
   */
   @RequestMapping("/api/user_questions")
   @GetMapping
-  public List<SecurityAnswers> getSecurityQuestions() {
-    return securityAnswersRepository.findByUserId(userService.getLoggedInUser().getUserId());
+  public List<SecurityQuestions> getSecurityQuestions(@RequestParam("userName") String userName ) {
+      Users user=userService.findByUsername(userName);
+      if (user!=null)
+        return securityAnswersService.getRandomQuestions(user.getUserId());//securityAnswersRepository.findByUserId(userService.getLoggedInUser().getUserId());
+      return  null;
+  }
+/*
+    verify the answers for questions user sends (with question ids included)
+    curl -X POST "http://localhost:8080/api/security_answer_vrification?userName=aaabbbccc" -H "content-type:application/json" -d '[{"answer":"Jayawardhana","securityQuestions":{"id":1}},{"answer":"Rex","securityQuestions":{"id":2}},{"answer":"colombo","securityQuestions":{"id":8}}]'
+  */  
+@RequestMapping("/api/security_answer_vrification")
+@PostMapping
+  public boolean verifyAnserwers(@RequestBody List<SecurityAnswers> answers,@RequestParam("userName") String userName){
+     Users user=userService.findByUsername(userName);
+      
+     if(user!=null)
+        return securityAnswersService.verifyanswers(answers,user.getUserId());
+      return false;
+  }
+  /*
+
+  curl -H "Content-Type: application/json" -X POST \
+  -d '{"username":"xyz","password":"xyz"}¡¡™' \
+  http://localhost:8080/api/registration
+     */
+  @RequestMapping(value = "/api/registration")
+  @PostMapping
+  public ImmutableMap<String, List<String>> registration(
+      @RequestBody CreateUserRequest createUserRequest) {
+
+    return ImmutableMap.of("errors", userRegistration.registerUser(createUserRequest));
   }
 
   /**
    * <p>
 
-      curl -H "Content-Type: application/json" -X POST -u xyz:xyz \
-      -d '{ "current":"xyz", "newPassword":"xyzz"}' "http://localhost:8080/api/change_password"
+   curl -H "Content-Type: application/json" -X POST -u xyz:xyz \
+   -d '{ "current":"xyz", "newPassword":"xyzz"}' "http://localhost:8080/api/change_password"
 
    * <p/>
    * @return
@@ -105,19 +139,5 @@ public class UserController {
     } else {
       return ImmutableMap.of("errors","Invalid password.");
     }
-  }
-
-  /*
-
-  curl -H "Content-Type: application/json" -X POST \
-  -d '{"username":"xyz","password":"xyz"}¡¡™' \
-  http://localhost:8080/api/registration
-     */
-  @RequestMapping(value = "/api/registration")
-  @PostMapping
-  public ImmutableMap<String, List<String>> registration(
-      @RequestBody CreateUserRequest createUserRequest) {
-
-    return ImmutableMap.of("errors", userRegistration.registerUser(createUserRequest));
   }
 }

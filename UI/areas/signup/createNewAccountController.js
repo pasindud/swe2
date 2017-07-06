@@ -6,13 +6,13 @@ angular.module('banking')
   var errors = [""];
 
   $scope.masterData = $rootScope.MasterData;
- 
+
   AuthService.getRequest("/api/ui_all_questions", null, function(response) {
     console.log(response.data);
-    $scope.questionslist = response.data; 
+    $scope.questionslist = response.data;
   });
 
-  $scope.FormData = {
+  /*$scope.FormData = {
     nic: "950483628v",
     username: "950483628v",
     password: "1234567890",
@@ -25,7 +25,7 @@ angular.module('banking')
     addressL1: "Lane 1",
     city: "Colombo",
     gender: "Male"
-  }
+  }*/
 
   function inputFieldAnimate(id, status) {
     if (status) {
@@ -51,7 +51,7 @@ angular.module('banking')
       FormData.dob = $rootScope.ca_formData_DOB;
       FormData.aod = $rootScope.ca_formData_AOD;
 
-      errors = [""];
+      errors = [];
       isInvalidForm = false;
 
       var usernameVal = ValidateService.ValidateUsername(FormData.username);
