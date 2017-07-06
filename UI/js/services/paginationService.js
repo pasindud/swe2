@@ -53,14 +53,14 @@ nnyApp.factory('PaginationService', ['$http', 'nnyConst', '$rootScope', function
         angular.forEach(recordSet, function(value, key) {
             if (page.length < maxPerPage) {
                 page.push(value);
-                if (loopCount == recordSet.length) {
-                    pages.push(page);
-                }
             } else {
                 pages.push(page);
                 page = [];
                 page.push(value);
                 //page.splice(0, 1);
+            }
+            if (loopCount == recordSet.length) {
+                pages.push(page);
             }
             loopCount++;
         });
