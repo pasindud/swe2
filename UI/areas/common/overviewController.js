@@ -23,19 +23,23 @@ angular.module('banking')
 
   $scope.title = 'No Name Yet';
   $scope.selectedLanguage = "EN";
+  $rootScope.selectedLanguage = "en-us";
+  var selLang = $rootScope.selectedLanguage;
 
   //Default Language
   $scope.setLanguage = function(provider) {
     $http.get('areas/common/localization/' + provider + '.json')
     .then(function(res) {
       $rootScope.labels = res.data[0];
+      $rootScope.selectedLanguage = provider;
+      selLang = provider;
       $scope.selectedLanguage = provider.toUpperCase();
     });
   };
 
   //look for language change
   $scope.$on('$viewContentLoaded', function() {
-    $http.get('areas/common/localization/en-us.json')
+    $http.get('areas/common/localization/'+selLang+'.json')
     .then(function(res) {
       $rootScope.labels = res.data[0];
     });
@@ -80,6 +84,7 @@ angular.module('banking')
   //Localize
   $scope.getLabels = function() {
     return $rootScope.labels;
+    debugger;
   };
   $scope.setPage = function(view) {
     $location.path(view);

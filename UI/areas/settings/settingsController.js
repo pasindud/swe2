@@ -1,7 +1,7 @@
 /* Author : Dushan Galappaththi */
 'use strict';
 angular.module('banking')
-  .controller('SettingsController', function($http, $state, $rootScope, $scope, AuthService, $location, nnyConst, ValidateService) {
+  .controller('SettingsController', function($http, $state, $rootScope, $scope, AuthService, $location, nnyConst, ValidateService, toastr) {
     var UpdatePasswordData = "";
     var errors = [""];
     var isInvalidForm = false;
@@ -25,6 +25,8 @@ angular.module('banking')
       id: "LKR",
       name: "Rupees"
     }];
+
+
 
     function formValidate(field) {
       if (!field.status) {
@@ -63,7 +65,24 @@ angular.module('banking')
           $('#ErrorModal').modal('open');
           $rootScope.ErrorDialog = errorContent;
         } else {
-          //TODO : on validation success;
+          var data = {
+            current :UpdatePasswordData.oldPassword, 
+            newPassword :UpdatePasswordData.newPassword
+          };
+
+          AuthService.getRequest("/api/change_password", data, function(response) {
+              if (response.data.errors != undefined && response.data.errors.length != 0) {
+                 $('#ErrorModal').modal('open');
+                 var errorContent = {
+                   Title: "Error changing password.",
+                   Body: response.data.errors
+                 }
+                 $rootScope.ErrorDialog = errorContent;
+              } else {
+                toastr.success("Password has been changed.", 'Sucessful');
+              }
+          });
+
         }
         $scope.UpdatePasswordForm = UpdatePasswordData;
       } else {

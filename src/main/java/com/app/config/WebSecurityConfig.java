@@ -76,6 +76,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/api/ui_data_branch",
                 "/api/ui_data_acctype",
                 "/api/ui_all_questions",
+                "/api/user_questions",
+                "/api/forgot_password",
                 "/api/ui_data","/api/user_questions","/api/security_answer_vrification")
         .permitAll()
             .antMatchers("/api/admin/change_user_status").access("hasRole('ADMIN')")

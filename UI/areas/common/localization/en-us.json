@@ -146,5 +146,7 @@
   "UserId" : "User ID",
   "Rate" : "Rate",
   "BaseCurrency" : "Base Currency",
-  "ExchangeRates" : "Exchange Rates"
+  "ExchangeRates" : "Exchange Rates",
+  "ManageAccounts" : "Manage Accounts",
+  "AddAdmin" :"Add Admin"
   }]

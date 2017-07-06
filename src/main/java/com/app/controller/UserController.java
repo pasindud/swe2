@@ -15,6 +15,7 @@ import com.app.repository.SecurityQuestionRepository;
 import com.app.repository.UsersRepository;
 import com.app.request.ChangePasswordRequest;
 import com.app.request.CreateUserRequest;
+import com.app.request.ForgotPasswordRequest;
 import com.app.service.SecurityAnswersService;
 import com.app.service.UserRegistration;
 import com.app.service.UserServiceImpl;
@@ -103,6 +104,31 @@ public class UserController {
         return securityAnswersService.verifyanswers(answers,user.getUserId());
       return false;
   }
+
+  @RequestMapping("/api/forgot_password")
+  @PostMapping
+  public Map<String ,String> forgotPassword(@RequestBody ForgotPasswordRequest forgotPasswordRequest) {
+    Users user=userService.findByUsername(forgotPasswordRequest.getUsername());
+
+    if (user == null) {
+      return ImmutableMap.of("errors", "Invalid username");
+    } else {
+      System.out.println(forgotPasswordRequest.getPassword());
+      System.out.println(forgotPasswordRequest.getUsername());
+      System.out.println(forgotPasswordRequest.getAnswerslist().get(0).getId());;
+      boolean correct = securityAnswersService.verifyanswers(forgotPasswordRequest.getAnswerslist(), user.getUserId());
+      if (!correct) {
+        return ImmutableMap.of("errors", "Incorrect answers");
+      } else {
+        usersRepository.changePassword(
+                passwordEncoder.encode(forgotPasswordRequest.getPassword()),
+                user.getUserId());
+        return ImmutableMap.of("errors", "");
+      }
+    }
+
+  }
+
   /*
 
   curl -H "Content-Type: application/json" -X POST \
