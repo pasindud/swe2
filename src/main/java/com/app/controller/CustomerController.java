@@ -5,6 +5,7 @@
  */
 package com.app.controller;
 
+import com.app.crypt.CustomerCryptor;
 import com.app.enties.Customer;
 import com.app.enties.Users;
 import com.app.repository.CustomerRepository;
@@ -37,6 +38,11 @@ public class CustomerController {
   @GetMapping
   Customer getCustomers() {
     Users users = userService.getLoggedInUser();
+    
+    CustomerCryptor decryptor=new CustomerCryptor();
+    Customer customer=decryptor.decodeCustomer(users.getUsername(), users.getPassword(), customerRepository.findByCustomerid(users.getCustomer().getUserId()));
+    if(customer!=null)
+        return customer;
     return customerRepository.findByCustomerid(users.getCustomer().getUserId());
   }
 
