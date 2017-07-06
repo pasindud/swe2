@@ -6,6 +6,7 @@ import com.app.enties.Users;
 import com.app.repository.AccountRepository;
 import com.app.repository.MerchantRepository;
 import com.app.repository.UsersRepository;
+import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Role;
@@ -36,13 +37,13 @@ public class AdminController {
   /**
    * Activate and deactivate users.
    * @param userId the id of user to toggle status of.
-   * @param activate whether status should be active or in active.
+   * @param lock whether status should be active or in active.
    * @return whether the operation was successful or not,
    */
-  @RequestMapping("/api/admin/change_user_status")
-  public boolean changeUserStatus(@RequestParam("user_id") int userId, @RequestParam("activate") boolean activate) {
-    usersRepository.updateActivate(activate, userId);
-    return false;
+  @GetMapping("/api/admin/change_user_status")
+  public Map<String, String> changeUserStatus(@RequestParam("user_id") String userId, @RequestParam("lock") boolean lock) {
+    usersRepository.updateLock(lock, Integer.parseInt(userId));
+    return ImmutableMap.of("error", "");
   }
 
   /**

@@ -25,7 +25,7 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
 
   @Modifying(clearAutomatically = true)
   @Query("UPDATE Users c SET c.locked = ?1 WHERE c.userId = ?2")
-  void updateActivate(boolean locked, int user_id);
+  void updateLock(boolean locked, int user_id);
 
   @Modifying(clearAutomatically = true)
   @Query("UPDATE Users c SET c.password = ?1 WHERE c.userId = ?2")

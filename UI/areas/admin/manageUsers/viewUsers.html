@@ -27,7 +27,6 @@
           <th>{{labels.FirstName}} <a class="waves-effect" ng-click="sortBtn('customer.firstName',true)"><i class="tiny material-icons">swap_vert</i></a></th>
           <th>{{labels.CreatedDate}} <a class="waves-effect" ng-click="sortBtn('creationDate',true)"><i class="tiny material-icons">swap_vert</i></a></th>
           <th>{{labels.Locked}}<a class="waves-effect" ng-click="sortBtn('locked',true)"><i class="tiny material-icons">swap_vert</i></a></th>
-          <th>{{labels.Actions}}</th>
         </tr>
       </thead>
       <tbody>
@@ -36,8 +35,17 @@
           <td>{{user.username}}</td>
           <td>{{user.customer.firstName}}</td>
           <td>{{user.creationDate| date:'MM-dd-yyyy'}}</td>
-          <td>{{user.locked}}</td>
-          <td><a class="waves-effect" >{{labels.ViewMore}}</a></td>
+          <td>
+            <div ng-switch="user.locked">
+              <div ng-switch-when="false">
+                <a ng-click="lockUser('true', user.userId )" class="waves-effect"> Lock</a> 
+
+              </div>
+              <div ng-switch-when="true">
+                <a  ng-click="lockUser('false', user.userId )" class="waves-effect"> Unlock</a> 
+              </div>
+            </div>
+          </td>
         </tr>
       </tr>
     </tbody>

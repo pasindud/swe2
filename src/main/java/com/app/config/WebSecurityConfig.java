@@ -28,7 +28,7 @@ import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
-//@EnableWebMvc
+@EnableWebMvc // Commen to static content working.
 @ComponentScan
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   @Autowired private UserDetailsService userDetailsService;
@@ -79,13 +79,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/api/user_questions",
                 "/api/forgot_password",
                 "/api/ui_data","/api/user_questions","/api/security_answer_vrification")
-        .permitAll()
-            .antMatchers("/api/admin/change_user_status").access("hasRole('ADMIN')")
+            .permitAll()
+            .antMatchers("/api/admin/**").hasAuthority("ADMIN")
             .anyRequest()
-        .authenticated()
+            .authenticated()
         .and()
-        .requestCache()
-        .requestCache(new NullRequestCache())
+            .requestCache()
+            .requestCache(new NullRequestCache())
         .and()
         .cors()
         .and()
