@@ -29,7 +29,7 @@ public class EmailController {
             sendEmail();
             return "Email Sent!";
         }catch(Exception ex) {
-            return "Error in sending email: "+ex;
+            return "Error in sending email: " +ex;
         }
 }
     private void sendEmail() throws Exception{
