@@ -52,18 +52,6 @@ nnyApp.factory('AuthService', ['$http', 'nnyConst', '$rootScope', '$state', func
             }
         }
         return {
-            authenticate: function() {
-                var url = nnyConst.ENDPOINT_URI + "/api/auth";
-                var authData = btoa("xyz:xyz");
-                console.log(authData);
-                var headers = {
-                    "Content-Type": "application/json"
-                };
-                $http.defaults.headers.common['Authorization'] = 'Basic ' + authData;
-                return $http.get(nnyConst.ENDPOINT_URI + "/api/auth", {
-                    headers: headers
-                });
-            },
             getAuthToken: function(username, password, cb) {
                 var url = nnyConst.ENDPOINT_URI + "/api/auth";
                 $http.defaults.headers.common['Content-Type'] = 'application/json';
