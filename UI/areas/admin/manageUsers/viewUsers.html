@@ -1,22 +1,65 @@
-<div id="viewAllAccountsUI" class="col s12 m12 l8 xl8 card-panel grey lighten-4">
-  <div class="col s12 m12 l12">
-    <div class="col s5" style="padding-top:30px">
-      <h5>{{labels.AdminAllUsers}}</h5>
-    </div>
+<div id="ActivityFilter" class="col s12 m12 l8 xl8 card-panel">
+  <div class="section col s12">
+    <h5>{{labels.AdminAllUsers}}</h5>
     <div class="divider col s12"></div>
+  </br>
+  <!-- Serach-->
+  <div id="" class="input-field col s12 m12 l3 nny-margin-fix right">
+    <input id="searchField" type="text" ng-model="SearchData.SearchValue">
+    <label for="searchField"></label>
   </div>
-  <div class="col s12">
-    <div class="">
-      <table ng-table ="users_table" class="striped highlight">
-        <tr ng-repeat="user in $data">
-            <td title="'User Id'" filter="{ userId: 'number'}" sortable="'userId'"> {{user.userId}}</td>
-            <td title="'Username'" filter="{ username: 'text'}" sortable="'username'"> {{user.username}}</td>
-            <td title="'First Name'" filter="{ 'customer.firstName': 'text'}" sortable="'customer.firstName'"> {{user.customer.firstName}}</td>
-            <td title="'Created Date'" filter="{ creationDate: 'text'}" sortable="'creationDate'"> {{user.creationDate}}</td>
-            <td title="'Locked'" filter="{ locked: 'text'}" sortable="'locked'"> {{user.locked}}</td>
-        </tr>
-      </table>
-    </div>
+  <div class="input-field col s12 m12 l3 nny-margin-fix right">
+    <select material-select watch ng-model="SearchData.SearchField">
+      <option ng-repeat="sf in SearchFields" value={{sf.id}}>{{sf.name}}</option>
+    </select>
   </div>
-  <div class="col s12" style="margin-bottom:15px;"></div>
+  <!--Search End-->
 </div>
+
+<!--Table-->
+<div class="col s12">
+  <div class="">
+    <table class="striped highlight responsive-table">
+      <thead>
+        <tr>
+          <th>{{labels.UserId}} <a class="waves-effect" ng-click="sortBtn('userId',true)"><i class="tiny material-icons">swap_vert</i></a></th>
+          <th>{{labels.Username}} <a class="waves-effect" ng-click="sortBtn('username',true)"><i class="tiny material-icons">swap_vert</i></a></th>
+          <th>{{labels.FirstName}} <a class="waves-effect" ng-click="sortBtn('customer.firstName',true)"><i class="tiny material-icons">swap_vert</i></a></th>
+          <th>{{labels.CreatedDate}} <a class="waves-effect" ng-click="sortBtn('creationDate',true)"><i class="tiny material-icons">swap_vert</i></a></th>
+          <th>{{labels.Locked}}<a class="waves-effect" ng-click="sortBtn('locked',true)"><i class="tiny material-icons">swap_vert</i></a></th>
+          <th>{{labels.Actions}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat = "user in AllUsers">
+          <td>{{user.userId}}</td>
+          <td>{{user.username}}</td>
+          <td>{{user.customer.firstName}}</td>
+          <td>{{user.creationDate| date:'MM-dd-yyyy'}}</td>
+          <td>{{user.locked}}</td>
+          <td><a class="waves-effect" >{{labels.ViewMore}}</a></td>
+        </tr>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+
+<!--Pagination-->
+<div class="divider col s12" style="margin-bottom:15px;"></div>
+<div class="col s12 center">
+  <ul class="pagination">
+    <li class="disabled"><a ng-click="pageBtn(1)"><i class="material-icons">chevron_left</i></a></li>
+    <span ng-repeat="page in PageNumbers">
+      <li ng-if="page.isCurrent == false" class="waves-effect"><a ng-click="pageBtn(page.number, CurrentPage)">{{page.number}}</a></li>
+      <li ng-if="page.isCurrent == true" class="active"><a ng-click="pageBtn(page.number, CurrentPage)">{{page.number}}</a></li>
+    </span>
+    <li class="waves-effect"><a ng-click="pageBtn(pageNumbers.lastNumber)"><i class="material-icons">chevron_right</i></a></li>
+  </ul>
+</div>
+
+
+
+
+
+<div class="col s12" style="margin-bottom:30px;"></div>

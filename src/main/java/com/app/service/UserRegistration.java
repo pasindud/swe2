@@ -1,5 +1,6 @@
 package com.app.service;
 
+import com.app.crypt.CustomerCryptor;
 import com.app.enties.Customer;
 import com.app.enties.Merchant;
 import com.app.enties.Role;
@@ -14,10 +15,12 @@ import com.app.repository.SecurityAnswersRepository;
 import com.app.repository.SecurityQuestionRepository;
 import com.app.repository.UsersRepository;
 import com.app.request.CreateUserRequest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +40,8 @@ public class UserRegistration {
   @Autowired SecurityQuestionRepository securityQuestionsRepository;
   @Autowired RoleRepository roleRepository;
   @Autowired MerchantRepository merchantRepository;
+  
+  CustomerCryptor customerCryptor;
   
   private Users users;
   private Customer customer;
@@ -119,6 +124,14 @@ public class UserRegistration {
             }
             //Save customer
             if (this.users.getUserType() == UserType.CUSTOMER) {
+                try {
+                    ///Encrypt customer data
+                    customerCryptor=new CustomerCryptor();
+                    customer=customerCryptor.encodeCustomer(this.users.getUsername(), this.users.getPassword(), customer);
+                   // customer=customerCryptor.decodeCustomer(this.users.getUsername(), this.users.getPassword(), customer);
+                } catch (NoSuchAlgorithmException ex) {
+                    errors.add("Customer data encryption error");
+                }
                 Customer saved_cust = customerRepository.save(customer);
                 if (saved_cust == null) {
                     errors.add("Issues with saving personal details");
