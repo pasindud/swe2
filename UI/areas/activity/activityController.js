@@ -98,12 +98,14 @@ angular.module('banking')
     //Search
     //TODO add proper search fields
      var searchFields = [];
-     searchFields.push({id : 'username', name : 'Username'});
-     searchFields.push({id : 'userId', name : 'User ID'});
+     searchFields.push({id : 'By', name : 'Username'});
+     searchFields.push({id : 'Message', name : 'Message'});
+     searchFields.push({id : 'transactionid', name : 'Transaction ID'});
+     searchFields.push({id : 'transactiontime', name : 'Date/Time'});
      $scope.SearchFields = searchFields;
 
      //default
-     var searchDataObj = {SearchField : 'username', SearchValue : ''}
+     var searchDataObj = {SearchField : 'By', SearchValue : ''}
      $scope.SearchData = searchDataObj;
 
      $scope.$watchCollection('SearchData', function() {
