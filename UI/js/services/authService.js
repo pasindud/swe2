@@ -117,6 +117,26 @@ nnyApp.factory('AuthService', ['$http', 'nnyConst', '$rootScope', '$state', func
                     cb(response);
                 });
             },
+            getExternal: function (url, data, cb) {
+              var config = {
+                  url: url
+              };
+              if (data != null) {
+                  config.method = "POST";
+                  config.data = data;
+              } else {
+                  config.method = "GET";
+              }
+
+              $http(config).then(function(response) {
+                  console.log(response.data);
+                  if (response.status == 401) {
+                      $state.go("login");
+                      localStorage.clear()
+                  };
+                  cb(response);
+              });
+            },
             isLoggedin: function() {
                 return getIsLoggedIn();
             },

@@ -2,7 +2,7 @@ var app = angular.module('banking', [
     'ui.router',
     'ui.materialize',
     'ngTable',
-    'ngAnimate', 
+    'ngAnimate',
     'toastr'
   ])
   .constant('ENDPOINT_URI', 'localhost:8989/SampleJSON')
@@ -201,6 +201,14 @@ var app = angular.module('banking', [
         url: '/signup',
         controller: 'ChooseProfileTypeController',
         templateUrl: 'areas/signup/chooseProfileType.html',
+        data: {
+          requireLogin: false
+        }
+      })
+      .state('exchangerates', {
+        url: '/exchangerates',
+        controller: 'ExchangeRatesController',
+        templateUrl: 'areas/common/exchangeRates.html',
         data: {
           requireLogin: false
         }
