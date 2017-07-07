@@ -48,23 +48,25 @@ public class AdminService {
     List <FreqAmount>  freqAmountList = getFreqTransactionAmounts();
     Map<Double, Double> errors = new HashMap <>();
 
+    errors.put(runLinearRegression(freqAmountList, null), -1d);
+
     for (FreqAmount freqAmount : freqAmountList) {
       double error = runLinearRegression(freqAmountList, new Point(freqAmount.amounts, freqAmount.freq));
       errors.put(error, freqAmount.amounts);
     }
 
-    double topValue = -1;
-    double topAmount = -1;
+    double totalError = errors.get(freqAmountList.get(0).amounts);
+    double amountWithout = freqAmountList.get(0).amounts;
 
     for (Map.Entry<Double, Double> entry: errors.entrySet()) {
       logger.info("Scores for each amount - " + entry.getValue() + " - score - " + entry.getKey());
 
-      if (topValue < entry.getValue()) {
-        topAmount = entry.getKey();
-        topValue = entry.getValue();
+      if (totalError > entry.getValue()) {
+        totalError = entry.getKey();
+        amountWithout = entry.getValue();
       }
     }
-    return topAmount;
+    return amountWithout;
   }
 
   private double runLinearRegression(List <FreqAmount> freqAmountList, Point pointToRemove) {
@@ -74,18 +76,23 @@ public class AdminService {
     for(int i = 0; i < freqAmountList.size(); i++) {
       simpleRegression.addData(freqAmountList.get(i).amounts, freqAmountList.get(i).freq);
     }
-    simpleRegression.removeData(pointToRemove.x, pointToRemove.y);
+
+    if (pointToRemove != null) {
+      simpleRegression.removeData(pointToRemove.x, pointToRemove.y);
+    }
 
     Point a = new Point(10d, simpleRegression.predict(10));
     Point b = new Point(20d, simpleRegression.predict(20));
 
     for (FreqAmount freqAmount: freqAmountList){
-      if (freqAmount.amounts != pointToRemove.x) {
+      if (pointToRemove == null || freqAmount.amounts != pointToRemove.x) {
         Point c = new Point(freqAmount.amounts, freqAmount.freq);
         Point p = pointToProjectLine(a, b, c);
-        tolalError += distance(c,p);
+        double dist = distance(c,p);
+        tolalError += dist;
       }
     }
+    logger.info("Total Error - " + tolalError);
     return tolalError;
   }
 
