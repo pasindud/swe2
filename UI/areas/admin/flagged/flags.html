@@ -1,58 +1,57 @@
-<div id="flagsUI" class="col s12 m12 l8 xl8 card-panel grey lighten-4">
-  <div class="col s12 m12 l12">
-    <div class="col s5" style="padding-top:30px">
-      <h5>{{labels.SuspiciousActivity}}</h5>
-    </div>
-    <div class="col s7 nny-rounded-flat-card2">
-      <div class="col s3" style="padding-top:15px">
-        <select material-select class="center">
-          <option value="1">{{labels.Username}}</option>
-          <option value="2">{{labels.Violation}}</option>
-          <option value="3">{{labels.Severity}}</option>
-        </select>
-      </div>
-      <div class="input-field col s9" >
-        <input id="activitySearch" type="search" required>
-        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-      </div>
-    </div>
+<div id="viewAllAccountsUI" class="col s12 m12 l8 xl8 card-panel grey lighten-4">
+  <div class="col s12" style="padding-top:30px">
+    <h5>{{labels.SuspiciousActivity}}</h5>
     <div class="divider col s12"></div>
+    <br>
+    <!-- Serach-->
+    <div id="" class="input-field col s12 m12 l3 nny-margin-fix right">
+      <input id="searchField" type="text" ng-model="SearchData.SearchValue">
+      <label for="searchField"></label>
+    </div>
+    <div class="input-field col s12 m12 l3 nny-margin-fix right">
+      <select material-select watch ng-model="SearchData.SearchField">
+        <option ng-repeat="sf in SearchFields" value={{sf.id}}>{{sf.name}}</option>
+      </select>
+    </div>
+    <!--Search End-->
   </div>
+
+  <!--Table-->
   <div class="col s12">
     <div class="">
-      <table class="striped highlight">
+      <table class="striped highlight responsive-table">
         <thead>
           <tr>
-            <th>{{labels.Username}}</th>
-            <th>{{labels.Violation}}</th>
-            <th>{{labels.Severity}}</th>
-            <th>{{labels.Date}}</th>
-            <th>{{labels.Time}}</th>
-            <th>{{labels.Actions}}</th>
+            <th class="center">{{labels.ViolationID}} <a class="waves-effect" ng-click="sortBtn('id',true)"><i class="tiny material-icons">swap_vert</i></a></th>
+            <th class="center">{{labels.Message}} <a class="waves-effect" ng-click="sortBtn('message',true)"><i class="tiny material-icons">swap_vert</i></a></th>
+            <th class="center">{{labels.CreatedDate}} <a class="waves-effect" ng-click="sortBtn('createdDate',true)"><i class="tiny material-icons">swap_vert</i></a></th>
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat = "flag in FlaggedList">
-            <td>{{flag.Username}}</td>
-            <td>{{flag.Violation}}</td>
-            <td>{{flag.Severity}}</td>
-            <td>{{flag.Date}}</td>
-            <td>{{flag.Time}}</td>
-            <td>{{flag.Actions}}<a ui-sref="flag({flagID: flag.ViolationID})">View</a></td>
+          <tr ng-repeat = "log in Logs">
+            <td class="center">{{log.id}}</td>
+            <td class="center">{{log.message}}</td>
+            <td class="center">{{log.createdDate | date:'MM-dd-yyyy'}}</td>
           </tr>
-        </tbody>
-      </table>
-    </div>
+        </tr>
+      </tbody>
+    </table>
   </div>
+</div>
+<!--Table End-->
+
+  <!--Pagination-->
   <div class="divider col s12" style="margin-bottom:15px;"></div>
   <div class="col s12 center">
-      <ul class="pagination">
-        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-        <li class="active"><a href="#!">1</a></li>
-        <li class="waves-effect"><a href="#!">2</a></li>
-        <li class="waves-effect"><a href="#!">3</a></li>
-        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-      </ul>
+    <ul class="pagination">
+      <li class="disabled"><a ng-click="pageBtn(1)"><i class="material-icons">chevron_left</i></a></li>
+      <span ng-repeat="page in PageNumbers">
+        <li ng-if="page.isCurrent == false" class="waves-effect"><a ng-click="pageBtn(page.number, CurrentPage)">{{page.number}}</a></li>
+        <li ng-if="page.isCurrent == true" class="active"><a ng-click="pageBtn(page.number, CurrentPage)">{{page.number}}</a></li>
+      </span>
+      <li class="waves-effect"><a ng-click="pageBtn(pageNumbers.lastNumber)"><i class="material-icons">chevron_right</i></a></li>
+    </ul>
   </div>
+  <!--Pagination End-->
   <div class="col s12" style="margin-bottom:15px;"></div>
 </div>
