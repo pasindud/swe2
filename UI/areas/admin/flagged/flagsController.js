@@ -1,8 +1,15 @@
 'use strict';
 angular.module('banking')
-.controller('FlagsController',function ($state,$rootScope,$scope,$http,AuthService,PaginationService,SortingService,SearchService) {
+.controller('FlagsController',function ($state,$rootScope,$scope,$http,AuthService,PaginationService,SortingService,SearchService, toastr) {
 
   //request to server
+  //
+  $scope.runana = function () {
+    AuthService.getRequest("/api/admin/get_freq_amount", null, function(response) {
+      toastr.success("Running Suspicious Activity Algorithms", 'Sucessful');
+    });
+  }
+
   AuthService.getRequest("/api/admin/get_suspicious_logs", null, function(response) {
     var responseData = response.data;
 

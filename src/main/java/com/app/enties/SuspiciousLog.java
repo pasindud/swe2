@@ -1,5 +1,8 @@
 package com.app.enties;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -15,9 +18,10 @@ public class SuspiciousLog {
   private Integer id;
   private String message;
 
-  @Column(name = "createdDate")
-  @Basic
-  @Temporal(TemporalType.DATE)
+  @CreationTimestamp
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "creationDate")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:MM")
   private Date createdDate;
 
   public Date getCreatedDate() {
