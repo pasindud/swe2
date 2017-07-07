@@ -5,8 +5,10 @@
  */
 package com.app.emailSender;
 
+import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
@@ -35,7 +37,9 @@ public class EmailController {
             return "Error in sending email: " +ex;
         }
 }
-    private void sendEmail() throws Exception{
+    private void sendEmail() throws MailException, MessagingException{
+        
+        try{
         MimeMessage message = sender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         
@@ -44,6 +48,12 @@ public class EmailController {
         helper.setSubject(getSubject());
         
         sender.send(message);
+        }catch(MailException me){
+            throw me;
+        }
+        catch(MessagingException mes){
+            throw mes;
+        }
     }
 
     public String getToMail() {

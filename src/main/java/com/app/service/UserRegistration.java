@@ -28,6 +28,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.mail.MessagingException;
+import org.springframework.mail.MailException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /** Created by Pasindu on 6/29/17. */
 @Service
@@ -41,6 +44,8 @@ public class UserRegistration {
   @Autowired SecurityQuestionRepository securityQuestionsRepository;
   @Autowired RoleRepository roleRepository;
   @Autowired MerchantRepository merchantRepository;
+  @Autowired private PasswordEncoder passwordEncoder;
+  @Autowired EmailService emailService;
   
   CustomerCryptor customerCryptor;
   
@@ -94,8 +99,28 @@ public class UserRegistration {
     }
 
     private void save() throws Exception {
+        String body =null;
+        String toMail=null;
+        this.users.setPassword(passwordEncoder.encode(this.users.getPassword()));
+
         if (this.users.getUserType() == UserType.CUSTOMER) {
             users.setCustomer(customer);
+
+            //Prepare email before encrypting data
+             body = emailService.prepareMailRegister(users, customer);
+             toMail = customer.getEmail();
+
+            try {
+                ///Encrypt customer data
+                customerCryptor = new CustomerCryptor();
+                customer = customerCryptor.encodeCustomer(this.users.getUsername(), this.users.getPassword(), customer);
+                //customer=customerCryptor.decodeCustomer(this.users.getUsername(), this.users.getPassword(), customer);
+
+            } catch (NoSuchAlgorithmException ex) {
+                errors.add("Customer data encryption error");
+            } catch (JCEException je) {
+                errors.add(je.getMessage());
+            }
         } else if (this.users.getUserType() == UserType.MERCHANT) {
             users.setMerchant(merchant);
         }
@@ -125,16 +150,7 @@ public class UserRegistration {
             }
             //Save customer
             if (this.users.getUserType() == UserType.CUSTOMER) {
-                try {
-                    ///Encrypt customer data
-                    customerCryptor=new CustomerCryptor();
-                    customer=customerCryptor.encodeCustomer(this.users.getUsername(), this.users.getPassword(), customer);
-                   // customer=customerCryptor.decodeCustomer(this.users.getUsername(), this.users.getPassword(), customer);
-                } catch (NoSuchAlgorithmException ex) {
-                    errors.add("Customer data encryption error");
-                }catch(JCEException je){
-                    errors.add(je.getMessage());
-                }
+
                 Customer saved_cust = customerRepository.save(customer);
                 if (saved_cust == null) {
                     errors.add("Issues with saving personal details");
@@ -145,7 +161,17 @@ public class UserRegistration {
                     errors.add("Issues with saving merchant details");
                 }
             }
-            
+
+        }
+        
+        if (errors.isEmpty()) {
+            if (toMail != null) {
+                try {//send email
+                    emailService.sendMails(toMail, "Registration Confirmation from Adaala Na Bank", body);
+                } catch (MailException me) {
+                    errors.add("Sending Registration email failed");
+                }
+            }
         }
     }
 
