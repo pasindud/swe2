@@ -1,12 +1,13 @@
 <div class="col s12 m12 l8 xl8">
   <!--Admin Tools-->
   <div id="adminTool" class="section col s12 card-panel grey lighten-4">
-    <h5>{{labels.Account}} - {{selected_account.accountid}} </h5>
+    <h5>{{labels.ProfileView}} : <i>{{PersonalInformation.userObj.username}}</i> </h5>
     <div class="divider col s12"></div>
     <div class="col s12 center hide-on-small-and-down">
-      <a class="waves-effect waves-light btn">{{labels.UnOrLockAccount}}</a>
+      <a class="waves-effect waves-light btn" ng-click="btnUnlock()">{{labels.Unlock}}</a>
+      <a class="waves-effect waves-light btn" ng-click="btnLock()">{{labels.Lock}}</a>
       <a class="waves-effect waves-light btn">{{labels.ViewActivity}}</a>
-      <a class="waves-effect waves-light btn red" ui-sref="users">{{labels.Cancel}}</a>
+      <a class="waves-effect waves-light btn red right" ui-sref="listUsers">{{labels.Cancel}}</a>
     </div>
     <div class="col s12" style="margin-bottom:15px;"></div>
   </div>
