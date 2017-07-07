@@ -1,0 +1,41 @@
+<div id="flaggedUI" class="col s12 m12 l8 xl8 card-panel grey lighten-4">
+  <div class="col s12">
+    <h5>{{labels.SuspiciousActivity}}</h5>
+    <div class="divider col s12" style="margin-bottom:15px;"></div>
+    <div class="col s12 m6 l6 xl6">
+      <p><b>{{labels.Username}} :</b> {{flag.Username}}</p>
+      <p><b>{{labels.ViolationID}} :</b> {{flag.ViolationID}}</p>
+      <p><b>{{labels.Violation}} :</b> {{flag.Violation}}</p>
+      <p><b>{{labels.Severity}} :</b> {{flag.Severity}}</p>
+    </div>
+    <div class="col s12 m6 l6 xl6">
+      <p><b>{{labels.Date}} :</b> {{flag.Date}}</p>
+      <p><b>{{labels.Time}} :</b> {{flag.Time}}</p>
+      <p><b>{{labels.IPAddress}} : </b>{{flag.IP}}</p>
+      <p><b>{{labels.Browser}} : </b>{{flag.Browser}}</p>
+    </div>
+    <div class="col s12">
+      <div class="col s12 nny-rounded-flat-card" style="min-height:150px">
+        <div class="col s12">
+          <p><b>{{labels.Description}}</b></p>
+        </div>
+        <div class="col s12">
+          <p>{{flag.Description}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="divider col s12" style="margin-bottom:15px;"></div>
+  <div class="col s12 center hide-on-small-and-down">
+    <a class="waves-effect waves-light btn">{{labels.LockUser}}</a>
+    <a class="waves-effect waves-light btn">{{labels.Remove}}</a>
+    <a class="waves-effect waves-light btn red" ui-sref="flags">{{labels.Cancel}}</a>
+  </div>
+  <div class="col s12 center hide-on-med-and-up">
+    <div class="col s12 m4 l4 xl4" style="margin-bottom:5px;"><a class="waves-effect waves-light btn col s12 m6">{{labels.LockUser}}</a></div>
+    <div class="col s12 m4 l4 xl4" style="margin-bottom:5px;"><a class="waves-effect waves-light btn col s12 m6">{{labels.Remove}}</a></div>
+    <div class="col s12 m4 l4 xl4" style="margin-bottom:5px;"><a class="waves-effect waves-light btn red col s12 m6" ui-sref="flags">{{labels.Cancel}}</a></div>
+  </div>
+
+  <div class="col s12" style="margin-bottom:15px;"></div>
+</div>

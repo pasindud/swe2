@@ -1,0 +1,51 @@
+<div class="col s12 m12 l8 xl8">
+  <div class="col s12 m12 l12 xl12">
+    <div class="col s12">
+      <div class="col s12 card-panel grey lighten-4">
+        <h5>{{labels.ManageAccounts}}</h5>
+        <div class="divider"></div>
+        <div class="col s12" style="margin-top:5px">
+          <div class="col s12 m6 center"><a class="waves-effect waves-light btn" ui-sref="listaccounts"><i class="material-icons left">assignment</i>{{labels.ViewAllAccounts}}</a></div>
+          <div class="col s12 m6 center"><a class="waves-effect waves-light btn" ui-sref="listUsers"><i class="material-icons left">perm_identity</i>{{labels.ViewAllUsers}}</a></div>
+          <!--<div class="col s12 m4"><a class="waves-effect waves-light btn" ui-sref="listUsers"><i class="material-icons left">queue</i>{{labels.AddAdmin}}</a></div>-->
+        </div>
+        <div class="divider col s12" style="margin-top:5px"></div>
+      </div>
+    </div>
+    <div class="col s12">
+      <div class="col s12 m12 l12 xl12 card-panel grey lighten-4" style="min-height:150px;">
+        <h5>{{labels.SuspiciousActivity}} </h5>
+        <div class="divider col s12"></div>
+        <div class="col s2 hide-on-small-and-down"><i class="large material-icons">report_problem</i></div>
+        <div class="col s2 hide-on-med-and-up"><i class="medium material-icons">report_problem</i></div>
+        <div class="col s10"style="min-height:90px">
+          <p class="right-align" style="margin-top:1px;margin-bottom:1px"><i>{{labels.LatestActivities}}</i></p>
+          <div class="divider" ></div>
+          <ul class="center">
+            <li>{{labels.NoNewActivities}}</li>
+            <li><a class="waves-effect" ui-sref="flags">{{labels.ViewSuspiciousActivities}}</a></li>
+          </ul>
+        </div>
+        <div class="divider col s12" style="margin-bottom:20px"></div>
+      </div>
+    </div>
+    <div class="col s12">
+      <div class="col s12 m12 l12 xl12 card-panel grey lighten-4" style="min-height:150px;">
+        <h5>{{labels.Approvals}} </h5>
+        <div class="divider col s12"></div>
+        <div class="col s2 hide-on-small-and-down"><i class="large material-icons">verified_user</i></div>
+        <div class="col s2 hide-on-med-and-up"><i class="medium material-icons">verified_user</i></div>
+        <div class="col s10"style="min-height:90px">
+          <p class="right-align" style="margin-top:1px;margin-bottom:1px"><i>{{labels.LatestApprovals}}</i></p>
+          <div class="divider" ></div>
+          <ul class="center">
+            <li>{{labels.NoNewApprovals}}</li>
+            <li><a class="waves-effect" ui-sref="approvals">{{labels.ViewAllApprovals}}</a></li>
+          </ul>
+        </div>
+        <div class="divider col s12" style="margin-bottom:20px"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col s12" style="margin-bottom:30px;"></div>
