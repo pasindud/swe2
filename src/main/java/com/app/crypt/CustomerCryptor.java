@@ -44,6 +44,7 @@ public class CustomerCryptor {
         }
         Key Mykey=KeystoreUtil.getKeyFromKeyStore(KEYSTORE,STOREPASS,ALIAS,KEYPASS);
         
+        if(Mykey!=null){
         AESCipher cipher = new AESCipher(Mykey);
         
         
@@ -67,7 +68,7 @@ public class CustomerCryptor {
             cust.setNic(cipher.getEncryptedText(cust.getNic()));
         if(!isNullOrEmpty(cust.getCity()))
              cust.setCity(cipher.getEncryptedText(cust.getCity()));
-        
+        }
             return cust;
         }catch(Exception ex){
             return null;
@@ -81,8 +82,9 @@ public class CustomerCryptor {
         try {
         Key key=KeystoreUtil.getKeyFromKeyStore(KEYSTORE,STOREPASS,ALIAS,KEYPASS);
 
+        if(key!=null){
         AESCipher cipher = new AESCipher(key);
-        
+
         if(!isNullOrEmpty(cust.getFirstName()))
             cust.setFirstName(cipher.getDecryptedText(cust.getFirstName()));
         if(!isNullOrEmpty(cust.getAddressLine1()))
@@ -103,6 +105,7 @@ public class CustomerCryptor {
             cust.setNic(cipher.getDecryptedText(cust.getNic()));
         if(!isNullOrEmpty(cust.getCity()))
             cust.setCity(cipher.getDecryptedText(cust.getCity()));
+        }
         return cust;
         
         }catch (Exception e){

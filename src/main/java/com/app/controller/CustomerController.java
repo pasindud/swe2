@@ -39,6 +39,7 @@ public class CustomerController {
   {
     public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
       Customer customer = new Customer();
+      customer.setCustomerid(rs.getInt("customerid"));
       customer.setFirstName(rs.getString("first_name"));
       customer.setLastName(rs.getString("last_name"));
       customer.setEmail(rs.getString("email"));
@@ -46,6 +47,7 @@ public class CustomerController {
       customer.setAddressLine2(rs.getString("address_line2"));
       customer.setAddressLine3(rs.getString("address_line3"));
       customer.setGender(rs.getString("gender"));
+      customer.setNic(rs.getString("nic"));      
       customer.setMobileNo(rs.getString("mobile_no"));
       customer.setTelephoneNo(rs.getString("telephone_no"));
       customer.setTitle(rs.getString("title"));
@@ -68,8 +70,7 @@ public class CustomerController {
             sql, new Object[] {  users.getCustomer().getUserId() }, new CustomerRowMapper());
 
     CustomerCryptor customerCryptor = new CustomerCryptor();
-    // Remove after unlimited issue is solved.
-    Customer decustomer = customerCryptor.decodeCustomer(users.getUsername(),users.getPassword(), customer);
+    customer = customerCryptor.decodeCustomer(users.getUsername(),users.getPassword(), customer);
     return customer;
   }
 
