@@ -101,7 +101,8 @@ public class UserRegistration {
     private void save() throws Exception {
         String body =null;
         String toMail=null;
-        this.users.setPassword(passwordEncoder.encode(this.users.getPassword()));
+      System.out.printf(this.users.getPassword());
+//        this.users.setPassword(passwordEncoder.encode(this.users.getPassword()));
 
         if (this.users.getUserType() == UserType.CUSTOMER) {
             users.setCustomer(customer);

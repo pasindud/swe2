@@ -34,6 +34,7 @@ public class AccountService {
     errors = new ArrayList<String>();
     this.accTypeid = createAccountRequest.getAccTypeid();
     this.branchid = createAccountRequest.getBranchid();
+    this.currency = createAccountRequest.getCurrency();
     validateIds();
     if (errors.isEmpty()) {
       save();
@@ -76,6 +77,7 @@ public class AccountService {
     users.setUserId(userService.getLoggedInUserId());
 
     Account account = new Account();
+    account.setCurrency(currency);
     account.setAccTypeId(accountType);
     account.setBranchId(branch);
     account.setUserId(users);

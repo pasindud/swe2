@@ -19,6 +19,8 @@ import java.util.Map;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.Errors;
@@ -31,6 +33,8 @@ public class TransactionController {
   @Autowired private TransactionService transactionService;
   @Autowired private AccountService accountService;
   @Autowired private AccountRepository accountRepository;
+  private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
+
   private static class SimpleRequest{
     @NotNull
     @Checkdb(userCheck = true)
@@ -110,9 +114,11 @@ public class TransactionController {
    */
   @GetMapping("/api/transaction_by_id")
   private Object getTransactionById(@RequestParam("id") int transactionId) {
+    logger.info("HERERERERRE");
     try {
       return transactionService.getTransactionById(transactionId);
     } catch (Exception e) {
+      e.printStackTrace();
       Map<String, String> response = new HashMap<>();
       response.put("error", "Transaction not found");
       return response;

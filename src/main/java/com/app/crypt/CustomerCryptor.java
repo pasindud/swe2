@@ -27,11 +27,12 @@ public class CustomerCryptor {
 
     private static final String KEYSTORE = "aes-keystore.jck";
     private static final String STOREPASS = "8u5+6an-QR!CagS<";
-   
+    String KEYPASS_STRING = "";
+
     public Customer encodeCustomer(String userName, String password,Customer cust) throws NoSuchAlgorithmException,JCEException,Exception{
         try{
         String ALIAS =userName;
-        String KEYPASS=password;
+        String KEYPASS=KEYPASS_STRING;
 
         KeyGenerator keyGen = KeyGenerator.getInstance("AES");
         keyGen.init(256); // for example
@@ -76,7 +77,7 @@ public class CustomerCryptor {
     }
 
     public Customer decodeCustomer(String userName, String password,Customer cust){
-        String KEYPASS=password;
+        String KEYPASS=KEYPASS_STRING;
         String ALIAS =userName;
         try {
         Key key=KeystoreUtil.getKeyFromKeyStore(KEYSTORE,STOREPASS,ALIAS,KEYPASS, false);

@@ -1,6 +1,9 @@
 package com.app.enties;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.CreationTimestamp;
+
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -27,10 +30,11 @@ public class Account {
   @Basic
   @Temporal(TemporalType.DATE)
   private Date expireDate;
-
-  @Column(name = "createdDate")
-  @Basic
-  @Temporal(TemporalType.DATE)
+  
+  @CreationTimestamp
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "creationDate")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:MM")
   private Date createdDate;
 
   @Column(name = "balance", precision = 12)

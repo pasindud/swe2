@@ -19,6 +19,7 @@ public class SecurityServiceImpl {
   private static final Logger logger = LoggerFactory.getLogger(SecurityServiceImpl.class);
 
   public String findLoggedInUsername() {
+    System.out.println("66666666666");
     Object userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
     if (userDetails instanceof UserDetails) {
       return ((UserDetails) userDetails).getUsername();

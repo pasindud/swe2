@@ -35,7 +35,7 @@ public class UserServiceImpl {
   }
 
   public Users save(Users user) {
-    //user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+    user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
     return usersRepository.save(user);
   }
 

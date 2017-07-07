@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * Created by Pasindu on 7/6/17.
  */
-@ControllerAdvice
+//@ControllerAdvice
 public class GlobalControllerExceptionHandler extends ResponseEntityExceptionHandler {
 //  @ExceptionHandler
 //  @ResponseStatus(HttpStatus.BAD_REQUEST)

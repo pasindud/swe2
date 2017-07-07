@@ -34,6 +34,7 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
     response.setContentType("application/json");
     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
+    System.out.println("333333333");
     // Incorrect auth token.
     if (username.equals("")) {
       response.getOutputStream().println("{ \"error\": \""+ authenticationException.getMessage() +".\" }");
@@ -44,9 +45,11 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
 
     if (loginHistories.size() >= 3) {
+      System.out.println("2322222222");
       response.getOutputStream().println("{ \"error\": \"Account temporary locked due to multiple incorrect attempts.\" }");
     } else {
       loginHistoryService.logUserLogginHistory(0, username);
+      System.out.println("1111111");
       response.getOutputStream().println("{ \"error\": \"" + authenticationException.getMessage() + "\" }");
     }
   }

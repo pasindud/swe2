@@ -86,17 +86,24 @@ public class TransactionService {
     Transaction transaction = transactionRepository.findByTransactionid(transactionId);
 
     if (transaction == null) {
+      System.out.println("NUNUNUNUNUNUN");
       response.put("error", "Transaction not found.");
       return response;
+    } else {
+      System.out.println("ONTONTONONTAONSINOJ");
     }
 
     Users accountFromUser = accountRepository.findByAccountid(transaction.getFromaccountid()).getUserId();
     Users accountToUser = accountRepository.findByAccountid(transaction.getToaccountid()).getUserId();
 
     if (accountFromUser != null && accountToUser != null) {
+      System.out.println("klfalkshfa lkshdfl kajhsfhasfdlkajh");
       response.put("error", "Transaction not found.");
       return response;
-    } 
+    } else {
+
+      System.out.println("aslkhfakshfaskjfskjhfdskjhds");
+    }
 
     if ((accountFromUser.getUserId() == userService.getLoggedInUserId()) || 
       (accountToUser.getUserId() == userService.getLoggedInUserId())) {
