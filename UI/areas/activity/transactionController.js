@@ -8,11 +8,12 @@ angular.module('banking')
 	      $('#ErrorModal').modal('open');
 	      var errorContent = {
 	        Title: "Transaction Error",
-	        Body: ["No transaction found"]
+	        Body: [response.data.error]
 	      }
 	      $rootScope.ErrorDialog = errorContent;
+        //$state.go()
 	    } else {
-	  	  $scope.TransactionDetails = response.data;  	
+	  	  $scope.TransactionDetails = response.data;
 	    }
     });
   });
