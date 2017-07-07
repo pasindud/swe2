@@ -15,6 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 
 /** @author Pasindu */
 @Service
@@ -46,6 +49,34 @@ public class TransactionService {
         + "SELECT `transactionid` 'transactionid', +(`amount`*`torate`) 'amount',  `transtype`, `tocurrency` 'Currency', `Message`, `transactiontime` , (select username from users where user_id=userid) 'By' FROM `transaction` where upper(`transtype`)= 'D' and `toaccountid` ="+accountid+" union "
         + "SELECT `transactionid` 'transactionid', +(`amount`*`torate`) 'amount',  `transtype` , `tocurrency` 'Currency', `Message`, `transactiontime` , (select username from users where user_id=userid) 'By' FROM `transaction` where upper(`transtype`)= 'T' and `toaccountid` ="+accountid+" union "
         + "SELECT `transactionid` 'transactionid', -(`amount`*`fromrate`) 'amount',`transtype`, `fromcurrency` 'Currency', `Message`, `transactiontime` , (select username from users where user_id=userid) 'By' FROM `transaction` where upper(`transtype`)= 'T' and `fromaccountid` ="+accountid+" order by transactionid ";
+  return jdbcTemplate.queryForList(GET_ALL_Transactions_Account_SQL_QUERY);
+  
+  }
+  
+  public List<Map<String, Object>> getTransactionsPerAccountPerDay(int accountid,Date fromDate){
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    String dateFromSql =dateFormat.format(fromDate);
+
+  String GET_ALL_Transactions_Account_SQL_QUERY =
+       "SELECT `transactionid` 'transactionid', -(`amount`*`fromrate`) 'amount',`transtype`, `fromcurrency` 'Currency', `Message`, `transactiontime` , (select username from users where user_id=userid) 'By' FROM `transaction` where upper(`transtype`)= 'W' and `fromaccountid` =" + accountid + " and Date(`transactiontime`)=Date('" + dateFromSql + "') union "
+              + "SELECT `transactionid` 'transactionid', +(`amount`*`torate`) 'amount',  `transtype`, `tocurrency` 'Currency', `Message`, `transactiontime` , (select username from users where user_id=userid) 'By' FROM `transaction` where upper(`transtype`)= 'D' and `toaccountid` =" + accountid + " and Date(`transactiontime`)=Date('" + dateFromSql + "') union "
+              + "SELECT `transactionid` 'transactionid', +(`amount`*`torate`) 'amount',  `transtype` , `tocurrency` 'Currency', `Message`, `transactiontime` , (select username from users where user_id=userid) 'By' FROM `transaction` where upper(`transtype`)= 'T' and `toaccountid` =" + accountid + " and Date(`transactiontime`)=Date('" + dateFromSql + "') union "
+              + "SELECT `transactionid` 'transactionid', -(`amount`*`fromrate`) 'amount',`transtype`, `fromcurrency` 'Currency', `Message`, `transactiontime` , (select username from users where user_id=userid) 'By' FROM `transaction` where upper(`transtype`)= 'T' and `fromaccountid` =" + accountid + " and Date(`transactiontime`)=Date('" + dateFromSql + "') order by transactionid ";
+
+  return jdbcTemplate.queryForList(GET_ALL_Transactions_Account_SQL_QUERY);
+  
+  }
+  
+  public List<Map<String, Object>> getTransactionsStatement(int accountid,Date fromDate,Date todate){
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    String dateFromSql =dateFormat.format(fromDate);
+    String dateToSql =dateFormat.format(todate);
+    
+   String GET_ALL_Transactions_Account_SQL_QUERY =
+      "SELECT `transactionid` 'transactionid', -(`amount`*`fromrate`) 'amount',`transtype`, `fromcurrency` 'Currency', `Message`, `transactiontime` , (select username from users where user_id=userid) 'By' FROM `transaction` where upper(`transtype`)= 'W' and `fromaccountid` =" + accountid + " and  Date(`transactiontime`) between Date('" + dateFromSql + "') and Date('" + dateToSql + "')  union "
+              + "SELECT `transactionid` 'transactionid', +(`amount`*`torate`) 'amount',  `transtype`, `tocurrency` 'Currency', `Message`, `transactiontime` , (select username from users where user_id=userid) 'By' FROM `transaction` where upper(`transtype`)= 'D' and `toaccountid` =" + accountid + " and  Date(`transactiontime`) between Date('" + dateFromSql + "') and Date('" + dateToSql + "')  union "
+              + "SELECT `transactionid` 'transactionid', +(`amount`*`torate`) 'amount',  `transtype` , `tocurrency` 'Currency', `Message`, `transactiontime` , (select username from users where user_id=userid) 'By' FROM `transaction` where upper(`transtype`)= 'T' and `toaccountid` =" + accountid + " and  Date(`transactiontime`) between Date('" + dateFromSql + "') and Date('" + dateToSql + "') union "
+              + "SELECT `transactionid` 'transactionid', -(`amount`*`fromrate`) 'amount',`transtype`, `fromcurrency` 'Currency', `Message`, `transactiontime` , (select username from users where user_id=userid) 'By' FROM `transaction` where upper(`transtype`)= 'T' and `fromaccountid` =" + accountid + "  and Date(`transactiontime`) between Date('" + dateFromSql + "') and Date('" + dateToSql + "')  order by transactionid ";
   return jdbcTemplate.queryForList(GET_ALL_Transactions_Account_SQL_QUERY);
   
   }

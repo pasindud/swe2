@@ -18,6 +18,7 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import static com.google.common.base.Strings.isNullOrEmpty;  
+import com.app.Exceptions.JCEException;
 /**
  *
  * @author dilsh
@@ -27,7 +28,7 @@ public class CustomerCryptor {
     private static final String KEYSTORE = "aes-keystore.jck";
     private static final String STOREPASS = "8u5+6an-QR!CagS<";
    
-    public Customer encodeCustomer(String userName, String password,Customer cust) throws NoSuchAlgorithmException{
+    public Customer encodeCustomer(String userName, String password,Customer cust) throws NoSuchAlgorithmException,JCEException,Exception{
         try{
         String ALIAS =userName;
         String KEYPASS=password;
@@ -36,14 +37,10 @@ public class CustomerCryptor {
         keyGen.init(256); // for example
         
         Key secretKey = keyGen.generateKey();
-        try{
-            KeystoreUtil.seKeyStoreEntry(KEYSTORE, STOREPASS, ALIAS, KEYPASS, secretKey);
-         }
-        catch(Exception ee){
-
-        }
+        KeystoreUtil.seKeyStoreEntry(KEYSTORE, STOREPASS, ALIAS, KEYPASS, secretKey);
         Key Mykey=KeystoreUtil.getKeyFromKeyStore(KEYSTORE,STOREPASS,ALIAS,KEYPASS);
         
+        if(Mykey!=null){
         AESCipher cipher = new AESCipher(Mykey);
         
         
@@ -67,10 +64,11 @@ public class CustomerCryptor {
             cust.setNic(cipher.getEncryptedText(cust.getNic()));
         if(!isNullOrEmpty(cust.getCity()))
              cust.setCity(cipher.getEncryptedText(cust.getCity()));
-        
+        }
             return cust;
         }catch(Exception ex){
-            return null;
+            throw new JCEException ("Make sure Java Cryptography Extension (JCE) unlimited strength jurisdiction policy files are installed in the server. "
+            +"Please Visit http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html ");
         }
       
     }
@@ -81,8 +79,9 @@ public class CustomerCryptor {
         try {
         Key key=KeystoreUtil.getKeyFromKeyStore(KEYSTORE,STOREPASS,ALIAS,KEYPASS);
 
+        if(key!=null){
         AESCipher cipher = new AESCipher(key);
-        
+
         if(!isNullOrEmpty(cust.getFirstName()))
             cust.setFirstName(cipher.getDecryptedText(cust.getFirstName()));
         if(!isNullOrEmpty(cust.getAddressLine1()))
@@ -103,12 +102,22 @@ public class CustomerCryptor {
             cust.setNic(cipher.getDecryptedText(cust.getNic()));
         if(!isNullOrEmpty(cust.getCity()))
             cust.setCity(cipher.getDecryptedText(cust.getCity()));
+        }
         return cust;
         
         }catch (Exception e){
           return null;
         }
     }
-    
+    public boolean changeCustomerPrivateKey (String userName, String old_password,String new_password){
+        try {
+        if(KeystoreUtil.updateEntry(KEYSTORE,STOREPASS,userName,old_password,new_password))
+            return true;
+        else
+            return false;
+        }catch (Exception e){
+            return false;
+        }
+    }
     
 }

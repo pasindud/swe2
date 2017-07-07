@@ -1,48 +1,105 @@
 <div class="col s12 m12 l8 xl8">
-  <div class="section col s12 card-panel grey lighten-4">
-    <h5>{{labels.BankAccountInformation}}</h5>
-    <div class="divider col s12"></div>
-    <div class="input-field col s12 m12 l12 xl6">
-      {{labels.accountid}}
-      <select material-select watch  ng-change="setAccountDetails()" ng-model="selectedAccount">
-        <option value="" disabled selected>Choose your Account</option>
-        <option ng-repeat="account in user_accounts" value={{account.accountid}}>{{account.accountid}}</option>
-      </select>
-      <div class="col s12">
-        <div class="col s12">
-          <p><b>{{labels.Branch}} : </b> {{selectedAccountDetails.branchId.branchName}}</p>
-        </div>
-
-        <div class="col s12">
-          <p><b>{{labels.AccountType}} : </b> {{selectedAccountDetails.accTypeId.accName}}</p>
-        </div>
-
-        <div class="col s12">
-          <p>
-            <b>{{labels.InterestRate}} : 
-            </b> {{selectedAccountDetails.accTypeId.accInterestRates}}
-          </p>
-        </div>
-
-        <div class="col s12">
-          <p><b>{{labels.Balance}} : </b> {{selectedAccountDetails.balance}} {{selectedAccountDetails.currency}} </p>
-        </div>
-
-        <div class="col s12">
-          <p><b>{{labels.AccountOpenDate}} : </b> {{selectedAccountDetails.createdDate}}</p>
-        </div>
+  <div class="col s12 card-panel grey lighten-4">
+    <div id="AccountDetails" class="section col s12">
+      <h5>{{labels.BankAccountInformation}}</h5>
+      <div class="divider col s12"></div>
+      <div class="input-field col s12 m12 l6 xl6">
+        {{labels.accountid}}
+        <select material-select watch  ng-change="setAccountDetails()" ng-model="selectedAccount">
+          <option value="" disabled selected>Choose your Account</option>
+          <option ng-repeat="account in user_accounts" value={{account.accountid}}>{{account.accountid}}</option>
+        </select>
       </div>
-    </div>
-      <div class="col s12 center" style="margin-top:50px;margin-bottom:30px;">
-        <div class="col s12 m6">
+      <div class="col s12 m12 l6 xl6 center" style="margin-top:20px;margin-bottom:30px;">
+        <div class="col s12 m6" style="margin-bottom:10px">
           <button class="btn waves-effect waves-light" ui-sref="activity({transactionId: selectedAccountDetails.accountid})">{{labels.ViewActivity}}</button>
         </div>
         <div class="col s12 m6">
-          <button class="btn waves-effect waves-light" 
+          <button class="btn waves-effect waves-light"
           ui-sref="addbankaccount">{{labels.AddBankAccount}}
           </button>
         </div>
       </div>
+        <div class="col s12">
+          <div class="col s12 m4 nny-rounded-flat-card3">
+            <p><b>{{labels.AccountId}} : </b> {{selectedAccountDetails.accountid}}</p>
+          </div>
+          <div class="col s12 m4 nny-rounded-flat-card3">
+            <p><b>{{labels.AccountType}} : </b> {{selectedAccountDetails.accTypeId.accName}}</p>
+          </div>
+          <div class="col s12 m4 nny-rounded-flat-card3">
+            <p><b>{{labels.Branch}} : </b> {{selectedAccountDetails.branchId.branchName}}</p>
+          </div>
+          <div class="col s12 m6 nny-rounded-flat-card3">
+            <p><b>{{labels.Balance}} : </b> {{selectedAccountDetails.balance}} {{selectedAccountDetails.currency}} </p>
+          </div>
+          <div class="col s12 m6 nny-rounded-flat-card3">
+            <p><b>{{labels.InterestRate}} :</b> {{selectedAccountDetails.accTypeId.accInterestRates}}</p>
+          </div>
+          <div class="col s12 m6 nny-rounded-flat-card3">
+            <p><b>{{labels.AccountOpenDate}} : </b> {{selectedAccountDetails.createdDate}}</p>
+          </div>
+          <div class="col s12 m6 nny-rounded-flat-card3">
+            <p><b>{{labels.AccountExpireDate}} : </b> {{selectedAccountDetails.expireDate}}</p>
+          </div>
+          <div class="col s12 m6 nny-rounded-flat-card3">
+            <p><b>{{labels.AccountStatus}} : </b> {{selectedAccountDetails.locked}}</p>
+          </div>
+        </div>
     </div>
+
+    <div id="AccountTypeDetails" class="section col s12">
+      <h5>{{labels.AccountTypeDetails}}</h5>
+      <div class="divider col s12"></div>
+      <div class="col s12 m6 nny-rounded-flat-card3">
+        <p><b>{{labels.AccountType}} : </b> {{selectedAccountDetails.accTypeId.accName}}</p>
+      </div>
+      <div class="col s12 m6 nny-rounded-flat-card3">
+        <p><b>{{labels.InterestRate}} :</b> {{selectedAccountDetails.accTypeId.accInterestRates}}</p>
+      </div>
+      <div class="col s12 m6 nny-rounded-flat-card3">
+        <p><b>{{labels.AccountWithdrawLimit}} :</b> {{selectedAccountDetails.accTypeId.dailyWithdrawLimit}} {{selectedAccountDetails.currency}}</p>
+      </div>
+      <div class="col s12 m6 nny-rounded-flat-card3">
+        <p><b>{{labels.MaximumOverDraftAmount}} :</b> {{selectedAccountDetails.accTypeId.maxOverDraftAmount}} {{selectedAccountDetails.currency}}</p>
+      </div>
+      <div class="col s12 m6 nny-rounded-flat-card3">
+        <p><b>{{labels.MaximumMonths}} :</b> {{selectedAccountDetails.accTypeId.maxMonths}}</p>
+      </div>
+      <div class="col s12 m6 nny-rounded-flat-card3">
+        <p><b>{{labels.MinimumMonths}} :</b> {{selectedAccountDetails.accTypeId.minMonths}}</p>
+      </div>
+      <div class="col s12 m6 nny-rounded-flat-card3">
+        <p><b>{{labels.MinimumAverageBalance}} :</b> {{selectedAccountDetails.accTypeId.minAvgBalance}} {{selectedAccountDetails.currency}}</p>
+      </div>
+      <div class="col s12 m6 nny-rounded-flat-card3">
+        <p><b>{{labels.MinimumInitialBalance}} :</b> {{selectedAccountDetails.accTypeId.minInitBalance}} {{selectedAccountDetails.currency}}</p>
+      </div>
+    </div>
+
+    <div id="BranchDetails" class="section col s12">
+      <h5>{{labels.BranchDetails}}</h5>
+      <div class="divider col s12"></div>
+      <div class="col s12 m6 nny-rounded-flat-card3">
+        <p><b>{{labels.Branch}} : </b> {{selectedAccountDetails.branchId.branchName}}</p>
+      </div>
+      <div class="col s12 m6 nny-rounded-flat-card3">
+        <p><b>{{labels.City}} : </b> {{selectedAccountDetails.branchId.city}}</p>
+      </div>
+      <div class="col s12 m6 nny-rounded-flat-card3">
+        <p><b>{{labels.EmailAddress}} : </b> {{selectedAccountDetails.branchId.email}}</p>
+      </div>
+      <div class="col s12 m6 nny-rounded-flat-card3">
+        <p><b>{{labels.Contact}} # : </b> {{selectedAccountDetails.branchId.branchName}}</p>
+      </div>
+      <div class="col s12 m6 nny-rounded-flat-card3">
+        <p><b>{{labels.FaxNo}} : </b> {{selectedAccountDetails.branchId.faxNo}}</p>
+      </div>
+      <div class="col s12 m12 nny-rounded-flat-card3">
+        <p><b>{{labels.Address}} : </b> {{selectedAccountDetails.branchId.wholeAddress}}</p>
+      </div>
+    </div>
+    <div class="col s12" style="margin-bottom:30px;"></div>
   </div>
-  <div class="col s12" style="margin-bottom:30px;"></div>
+</div>
+<div class="col s12" style="margin-bottom:30px;"></div>

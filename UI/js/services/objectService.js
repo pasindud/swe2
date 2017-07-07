@@ -1,6 +1,7 @@
 /* Author : Dushan Galappaththi */
 var nnyApp = angular.module('banking');
 nnyApp.factory('ObjectService', ['$http', 'nnyConst', '$rootScope', function($http, nnyConst, $rootScope) {
+  var NA = "N/A";
 
   function getUsersObj() {
     var userObj = {
@@ -87,6 +88,56 @@ nnyApp.factory('ObjectService', ['$http', 'nnyConst', '$rootScope', function($ht
     return signupObj;
   }
 
+  function getBranchObj()
+  {
+    var Branch = {
+      branchId : NA,
+      branchName : NA,
+      city : NA,
+      email : NA,
+      faxNo : NA,
+      telephoneNo : NA,
+      addressLine1 : "",
+      addressLine2 : "",
+      addressLine3 : "",
+      wholeAddress : NA
+    }
+    return Branch;
+  }
+
+  function getAccountType() {
+    var AccountType = {
+      accTypeId : NA,
+      accName : NA,
+      accInterestRates: NA,
+      dailyWithdrawLimit : NA,
+      maxMonths : NA,
+      maxOverDraftAmount : NA,
+      minAvgBalance : NA,
+      minInitBalance : NA,
+      minMonths : NA
+    }
+
+    return AccountType;
+  }
+
+  function getAccountObj() {
+    var accountTypeObj = getAccountType();
+    var branchObj = getBranchObj();
+
+    var AccountObj = {
+      accTypeId : accountTypeObj,
+      accountid : NA,
+      balance : NA,
+      branchId : branchObj,
+      createdDate : NA,
+      currency : "",
+      expireDate : NA,
+      locked : false
+    }
+
+    return AccountObj;
+  }
 
   return {
     getCustomerSignUpObj: function() {
@@ -100,6 +151,9 @@ nnyApp.factory('ObjectService', ['$http', 'nnyConst', '$rootScope', function($ht
     },
     getMappedSignUpDataC : function (data) {
       return getMappedSignUpDataC(data);
+    },
+    getAccountObj: function () {
+      return getAccountObj();
     }
   }
 
