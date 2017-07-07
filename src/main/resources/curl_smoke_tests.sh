@@ -83,6 +83,7 @@ curl -u xyz:xyz "http://localhost:8080/api/transaction_by_id?id=123123"
 
 
 curl -u ADMIN:xyz "http://localhost:8080/api/admin/all_acounts" 
+ 
 curl -u ADMIN:xyz "http://localhost:8080/api/admin/account_id?id=1" 
 curl -u ADMIN:xyz "http://localhost:8080/api/admin/all_users" 
 curl -u ADMIN:xyz "http://localhost:8080/api/admin/all_merchants" 
@@ -101,6 +102,5 @@ curl -H "Content-Type: application/json"  -X POST \
  curl -H "Content-Type: application/json" -X POST -u xyz:xyz \
    -d '{ "current":"xyz", "newPassword":"xyzz"}' "http://localhost:8080/api/change_password"
 
-
-
+curl -u ADMIN:xyz "http://localhost:8080//api/admin/get_suspicious_logs"
 
