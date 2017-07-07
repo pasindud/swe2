@@ -31,6 +31,7 @@ INSERT INTO `customer` (`customerid`, `address_line1`, `address_line2`, `address
 VALUES
     (1, 'rUKVrIm0hVXBAmn6MoU7zg==', NULL, NULL, 'wb5ELIgAjUET9BLTxLxjIQ==', NULL, 'kJScSvtzM0tB36PSse8GdAqlammTmdqyt4YF9wbvv/s=', NULL, 'OrL5aKAP2Kan5BQoXyGoHA==', NULL, '2fCrdZwn3DPDrPRVXOdauw==', NULL, '5ugCjoAV1CZlF6PshvnrBA==', NULL, NULL);
 
+
 -- testinguser1 testpassword
 INSERT INTO `users` (`user_id`, `creation_date`, `locked`, `password`, `user_type`, `username`, `customer_id`, `merchant_merchantid`)
 VALUES
@@ -40,6 +41,10 @@ INSERT INTO `users` (`user_id`, `creation_date`, `locked`, `password`, `user_typ
 VALUES
     (2, '2017-07-08 05:29:32', 1, '$2a$10$7p.ELkhd6nROL1L12MVsRu8kSEj2mJTxe8aCNxryNamimqKHMR932', 'CUSTOMER', 'ADMIN', NULL, NULL);
 
+INSERT INTO `users` (`user_id`, `creation_date`, `locked`, `password`, `user_type`, `username`, `customer_id`, `merchant_merchantid`)
+VALUES
+    (3, '2017-07-08 05:49:39', 1, '$2a$10$VnHvizPAek3IOeHqgb4i.OBfUWtEMJrjWIue/SBVsm4zqWx5TFqSi', 'CUSTOMER', 'testinguser2', 2, NULL);
+
 
 INSERT INTO `user_role` (`users_user_id`, `role_id`)
 VALUES
@@ -48,14 +53,14 @@ VALUES
 
 INSERT INTO `account` (`accountid`, `balance`, `creation_date`, `currency`, `expire_date`, `locked`, `acctypeid`, `branchid`, `userid`)
 VALUES
-    (1, 10000, '2017-07-08 05:39:12', 'EUR', NULL, 0, 1, 1, 1);
-
-INSERT INTO `account` (`accountid`, `balance`, `creation_date`, `currency`, `expire_date`, `locked`, `acctypeid`, `branchid`, `userid`)
-VALUES
-    (2, 10000, '2017-07-08 05:39:12', 'USD', NULL, 0, 1, 1, 1);
+    (1, 9945, '2017-07-08 05:39:12', 'EUR', NULL, 0, 1, 1, 1),
+    (2, 12489.8, '2017-07-08 05:47:04', 'LKR', NULL, 0, 1, 1, 1),
+    (3, 18597, '2017-07-08 05:47:04', 'LKR', NULL, 0, 1, 1, 2);
 
 
 INSERT INTO merchant (merchantid, logourl, orgname, registrationno, taxno) VALUES (1,'non','Dialog','1232','12313');
-INSERT INTO merchant_services (serviceid, merchantid,accountid,  servicename) VALUES (1,1,2, "Phone Bill");
+INSERT INTO merchant_services (serviceid, merchantid,accountid,  servicename) VALUES (1,1,3, "Phone Bill");
+
+
 
 
