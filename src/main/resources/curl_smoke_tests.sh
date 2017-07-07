@@ -56,7 +56,7 @@ curl -H "Content-Type: application/json" -X POST \
 http://localhost:8080/api/registration
 
 curl -H "Content-Type: application/json" -X POST \
--d '{"users":{"username":"1111111110006","password":"1234567890","userType":"CUSTOMER"},"customer":{"firstname":"","lastname":"","nic":"950483628v","addressLine1":"Lane 1","city":"Colombo","email":"testing@localhost.com","firstName":"Hellow","lastName":"HMM"},"answers":[{"answer":"1","securityQuestions":{"id":"1"}},{"answer":"2","securityQuestions":{"id":"2"}},{"answer":"3","securityQuestions":{"id":"1"}}]}' \
+-d '{"users":{"username":"testinguser1","password":"testpassword","userType":"CUSTOMER"},"customer":{"firstname":"","lastname":"","nic":"950483628v","addressLine1":"Lane 1","city":"Colombo","email":"testing@localhost.com","firstName":"Hellow","lastName":"HMM"},"answers":[{"answer":"1","securityQuestions":{"id":"1"}},{"answer":"1","securityQuestions":{"id":"2"}},{"answer":"1","securityQuestions":{"id":"1"}}]}' \
 http://localhost:8080/api/registration
 
 
@@ -94,7 +94,7 @@ curl -u ADMIN:xyz "http://localhost:8080/api/admin/all_merchants"
 
 curl -H "Content-Type: application/json"  -X POST \
 "http://localhost:8080/api/forgot_password" \
--d '{"username":"xyz","password":"xyz","answerslist":[{"securityQuestions":{"id":1},"answer":"1"},{"securityQuestions":{"id":2},"answer":"1"}]}'
+-d '{"username":"xyz","password":"xyz","answers":[{"securityQuestions":{"id":1},"answer":"1"},{"securityQuestions":{"id":2},"answer":"1"}]}'
 
  # '[{"answer":"Jayawardhana","securityQuestions":{"id":1}},{"answer":"Rex","securityQuestions":{"id":2}},{"answer":"colombo","securityQuestions":{"id":8}}]'
 

@@ -33,7 +33,13 @@ public class AdminService {
     for (Map row : rows) {
       FreqAmount freqAmount = new FreqAmount();
       freqAmount.amounts = (double)row.get("amounts") ;
+      if (freqAmount.amounts == 0) {
+        continue;
+      }
       freqAmount.freq = (long) row.get("freq") ;
+      if (freqAmount.freq == 0) {
+        continue;
+      }
       freqAmountList.add(freqAmount);
       logger.info(String.format("Amount - %s | Freq - %s", freqAmount.amounts, freqAmount.freq));
     }
@@ -48,15 +54,26 @@ public class AdminService {
     List <FreqAmount>  freqAmountList = getFreqTransactionAmounts();
     Map<Double, Double> errors = new HashMap <>();
 
+    if (freqAmountList.size() == 0) {
+      return -1;
+    }
+
     errors.put(runLinearRegression(freqAmountList, null), -1d);
 
     for (FreqAmount freqAmount : freqAmountList) {
       double error = runLinearRegression(freqAmountList, new Point(freqAmount.amounts, freqAmount.freq));
-      errors.put(error, freqAmount.amounts);
+      if (error != 0) {
+        errors.put(error, freqAmount.amounts);
+      }
     }
 
-    double totalError = errors.get(freqAmountList.get(0).amounts);
-    double amountWithout = freqAmountList.get(0).amounts;
+    if (errors.isEmpty()){
+      return -1;
+    }
+
+    double firstAmount = freqAmountList.get(0).amounts;
+    double totalError = Double.POSITIVE_INFINITY;
+    double amountWithout = -1;
 
     for (Map.Entry<Double, Double> entry: errors.entrySet()) {
       logger.info("Scores for each amount - " + entry.getValue() + " - score - " + entry.getKey());

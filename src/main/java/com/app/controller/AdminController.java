@@ -2,14 +2,8 @@ package com.app.controller;
 
 import static com.app.Utils.FreqAmount;
 import com.app.Utils;
-import com.app.enties.Account;
-import com.app.enties.Customer;
-import com.app.enties.Merchant;
-import com.app.enties.Users;
-import com.app.repository.AccountRepository;
-import com.app.repository.MerchantRepository;
-import com.app.repository.TransactionRepository;
-import com.app.repository.UsersRepository;
+import com.app.enties.*;
+import com.app.repository.*;
 import com.app.service.AdminService;
 import com.app.service.ExchangeRates;
 import com.google.common.collect.ImmutableMap;
@@ -51,8 +45,18 @@ public class AdminController {
   @Autowired MerchantRepository merchantRepository;
   @Autowired private JdbcTemplate jdbcTemplate;
   @Autowired TransactionRepository transactionRepository;
+  @Autowired AdminService adminService;
   @Autowired
-  AdminService adminService;
+  SuspiciousLogRepository suspiciousLogRepository;
+
+  /**
+   * API endpoint to get the suspicious logs.
+   * @return returns suspicious logs.
+   */
+  @GetMapping("/api/admin/get_suspicious_logs")
+  public List<SuspiciousLog> getSuspiciousLogApi() {
+    return suspiciousLogRepository.findAll();
+  }
 
   /**
    * <p>
@@ -62,6 +66,12 @@ public class AdminController {
   @GetMapping("/api/admin/get_freq_amount")
   public void getFreqAmount() {
     double amount = adminService.analyzeAmounts();
+
+    if (amount != -1) {
+      SuspiciousLog suspiciousLog = new SuspiciousLog();
+      suspiciousLog.setMessage("Transaction with amount " + amount + " is considered suspicious");
+      suspiciousLogRepository.save(suspiciousLog);
+    }
   }
 
   /**

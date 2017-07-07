@@ -125,7 +125,7 @@ public class UserController {
             return ImmutableMap.of("errors", "Invalid username");
         } else {
 
-            boolean correct = securityAnswersService.verifyanswers(forgotPasswordRequest.getAnswerslist(), user.getUserId());
+            boolean correct = securityAnswersService.verifyanswers(forgotPasswordRequest.getAnswers(), user.getUserId());
             if (!correct) {
                 return ImmutableMap.of("errors", "Incorrect answers");
             } else {
