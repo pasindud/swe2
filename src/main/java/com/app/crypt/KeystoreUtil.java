@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
 public class KeystoreUtil {
      private static final Logger LOG = LoggerFactory.getLogger(KeystoreUtil.class);
 
-    public static Key getKeyFromKeyStore(final String keystoreLocation, final String keystorePass, final String alias, final String keyPass) {
+    public static Key getKeyFromKeyStore(final String keystoreLocation, final String keystorePass, final String alias, final String keyPass, boolean delete) {
         try {
 
             InputStream keystoreStream = new FileInputStream(keystoreLocation);
@@ -44,6 +44,7 @@ public class KeystoreUtil {
             }
 
             Key key = keystore.getKey(alias, keyPass.toCharArray());
+
             LOG.debug("Key Found {} -> {}", key.getAlgorithm(), BaseEncoding.base64().encode(key.getEncoded()));
 
             return key;
@@ -56,7 +57,7 @@ public class KeystoreUtil {
          return null;
     }
     
-    public static boolean seKeyStoreEntry(final String keystoreLocation, final String keystorePass, String alias, String keyPass,Key userKey) {
+    public static boolean seKeyStoreEntry(final String keystoreLocation, final String keystorePass, String alias, String keyPass,Key userKey,boolean delete) {
         try {
 
             InputStream keystoreStream = new FileInputStream(keystoreLocation);
@@ -67,7 +68,13 @@ public class KeystoreUtil {
 
             LOG.debug("Keystore with alias {} found == {}", alias, keystore.containsAlias(alias));
             if (keystore.containsAlias(alias)) {
+              if (delete) {
+                keystore.deleteEntry(alias);
+                OutputStream writeStream = new FileOutputStream(keystoreLocation);
+                keystore.store(writeStream, keystorePass.toCharArray());
+              } else {
                 throw new RuntimeException("Alias for key  found");
+              }
             }
             
             keystore.setKeyEntry(alias, userKey, keyPass.toCharArray(), null);

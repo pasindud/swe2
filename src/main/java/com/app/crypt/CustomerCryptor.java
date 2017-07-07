@@ -24,7 +24,7 @@ import com.app.Exceptions.JCEException;
  * @author dilsh
  */
 public class CustomerCryptor {
-    
+
     private static final String KEYSTORE = "aes-keystore.jck";
     private static final String STOREPASS = "8u5+6an-QR!CagS<";
    
@@ -37,8 +37,9 @@ public class CustomerCryptor {
         keyGen.init(256); // for example
         
         Key secretKey = keyGen.generateKey();
-        KeystoreUtil.seKeyStoreEntry(KEYSTORE, STOREPASS, ALIAS, KEYPASS, secretKey);
-        Key Mykey=KeystoreUtil.getKeyFromKeyStore(KEYSTORE,STOREPASS,ALIAS,KEYPASS);
+
+        KeystoreUtil.seKeyStoreEntry(KEYSTORE, STOREPASS, ALIAS, KEYPASS, secretKey, true);
+        Key Mykey=KeystoreUtil.getKeyFromKeyStore(KEYSTORE,STOREPASS,ALIAS,KEYPASS, true);
         
         if(Mykey!=null){
         AESCipher cipher = new AESCipher(Mykey);
@@ -67,6 +68,7 @@ public class CustomerCryptor {
         }
             return cust;
         }catch(Exception ex){
+          ex.printStackTrace();
             throw new JCEException ("Make sure Java Cryptography Extension (JCE) unlimited strength jurisdiction policy files are installed in the server. "
             +"Please Visit http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html ");
         }
@@ -77,7 +79,7 @@ public class CustomerCryptor {
         String KEYPASS=password;
         String ALIAS =userName;
         try {
-        Key key=KeystoreUtil.getKeyFromKeyStore(KEYSTORE,STOREPASS,ALIAS,KEYPASS);
+        Key key=KeystoreUtil.getKeyFromKeyStore(KEYSTORE,STOREPASS,ALIAS,KEYPASS, false);
 
         if(key!=null){
         AESCipher cipher = new AESCipher(key);

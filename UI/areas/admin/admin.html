@@ -2,17 +2,14 @@
   <div class="col s12 m12 l12 xl12">
     <div class="col s12">
       <div class="col s12 card-panel grey lighten-4">
-        <h5>{{labels.Accounts}}</h5>
+        <h5>{{labels.ManageAccounts}}</h5>
         <div class="divider"></div>
-        <div class="col s4"><i class="large material-icons">perm_identity</i></div>
-        <div class="col s8">
-          <ul class="">
-            <li ><a class="waves-effect" ng-click="setPage('createnew')">{{labels.CreateNewAccount}}</a></li>
-            <li ><a class="waves-effect" ui-sref="listaccounts">{{labels.ViewAllAccounts}}</a></li>
-            <li ><a class="waves-effect" ui-sref="listUsers"> {{labels.ViewAllUsers}} </a></li>
-            <li ><a class="waves-effect" ng-click="setPage('deleteaccounts')">{{labels.DeleteAccounts}}</a></li>
-          </ul>
+        <div class="col s12" style="margin-top:5px">
+          <div class="col s12 m6 center"><a class="waves-effect waves-light btn" ui-sref="listaccounts"><i class="material-icons left">assignment</i>{{labels.ViewAllAccounts}}</a></div>
+          <div class="col s12 m6 center"><a class="waves-effect waves-light btn" ui-sref="listUsers"><i class="material-icons left">perm_identity</i>{{labels.ViewAllUsers}}</a></div>
+          <!--<div class="col s12 m4"><a class="waves-effect waves-light btn" ui-sref="listUsers"><i class="material-icons left">queue</i>{{labels.AddAdmin}}</a></div>-->
         </div>
+        <div class="divider col s12" style="margin-top:5px"></div>
       </div>
     </div>
     <div class="col s12">

@@ -1,4 +1,6 @@
--- insert into city(id, country, name, state, map) values (1, 'Australia', 'Brisbane', 'Queensland', '-27.470933, 153.023502')
+-- insert into city(id, country, name, state, map) values (1, 'Australia', 'Brisbane', 'Queensland', '-27.470933, 153.023502')i
+
+
 
 -- INSERT INTO customer (customerid, first_name) VALUES (1,"one name");
 insert into role (id, name) values (1,'USER');

@@ -10,6 +10,7 @@ import com.app.repository.AccountRepository;
 import com.app.repository.MerchantRepository;
 import com.app.repository.TransactionRepository;
 import com.app.repository.UsersRepository;
+import com.app.service.AdminService;
 import com.app.service.ExchangeRates;
 import com.google.common.collect.ImmutableMap;
 import org.slf4j.Logger;
@@ -50,6 +51,8 @@ public class AdminController {
   @Autowired MerchantRepository merchantRepository;
   @Autowired private JdbcTemplate jdbcTemplate;
   @Autowired TransactionRepository transactionRepository;
+  @Autowired
+  AdminService adminService;
 
   /**
    * <p>
@@ -58,78 +61,7 @@ public class AdminController {
    */
   @GetMapping("/api/admin/get_freq_amount")
   public void getFreqAmount() {
-    List<Utils.FreqAmount> freqAmountList = new ArrayList <>();
-    String sql = "SELECT round(`amount`,2) as 'amounts',count(*) as freq  FROM Transaction GROUP by round(`amount`,2)";
-
-    List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
-
-    for (Map row : rows) {
-      FreqAmount freqAmount = new FreqAmount();
-      freqAmount.amounts = (double)row.get("amounts") ;
-      freqAmount.freq = (long) row.get("freq") ;
-      freqAmountList.add(freqAmount);
-      logger.info(String.format("Amount - %s | Freq - %s", freqAmount.amounts, freqAmount.freq));
-    }
-    SimpleRegression simpleRegression = new SimpleRegression();
-
-    for(int i = 0; i < freqAmountList.size(); i++) {
-      simpleRegression.addData(freqAmountList.get(i).amounts, freqAmountList.get(i).freq);
-    }
-
-
-    double p1 = simpleRegression.predict(10);
-    Point a = new Point(10d, p1);
-    double p2 = simpleRegression.predict(20);
-    Point b = new Point(20d, p2);
-
-//    12323.0 | Freq - 2
-
-
-    for(int i = 0; i < freqAmountList.size(); i++) {
-//      simpleRegression.addData(, freqAmountList.get(i).freq);
-
-      Point c = new Point(freqAmountList.get(i).amounts, freqAmountList.get(i).freq);
-      Point p = pointToProjectLine(a, b, c);
-      double dist = distance(c,p);
-      System.out.println("Amount - "+ freqAmountList.get(i).amounts + " Freq - " + freqAmountList.get(i).freq);
-      System.out.println(" Point on line - " + p.x + "  Y - " + p.y);
-      System.out.println(" Distance - " + dist);
-    }
-
-    System.out.println("---------------");
-//    System.out.println("Point on line - " + p.x + "  Y - " + p.y);
-//    System.out.println("Distance - " + dist);
-    System.out.println("Start date unit at t = 0:");
-    System.out.println("Intercept: " + simpleRegression.getIntercept());
-    System.out.println("Slope    : " + simpleRegression.getSlope());
-    System.out.println("Predict 1.0    : " + simpleRegression.predict(1.0));
-    System.out.println("Predict 12323.0    : " + simpleRegression.predict(12323.0));
-  }
-
-  public  double distance(Point a, Point b) {
-    Point p = new Point(a.x - b.x, a.y - b.y);
-    return Math.sqrt(dot(p, p))
-            ;
-  }
-
-  public Point pointToProjectLine(Point a, Point b, Point c) {
-    double R = dot(new Point(c.x - a.x, c.y-a.y), new Point(b.x - a.x, b.y-a.y)) /
-            dot(new Point(b.x - a.x, b.y-a.y), new Point(b.x - a.x, b.y-a.y));
-    Point p = new Point(new Point(b.x - a.x, b.y-a.y).x * R, new Point(b.x - a.x, b.y-a.y).y * R);
-    return  new Point(p.x + a.x, p.y + a.y);
-  }
-
-  public double dot(Point p, Point q) {
-    return p.x*q.x+p.y*q.y;
-  }
-
-  class Point{
-    public double x;
-    public double y;
-    Point(double x, double y) {
-      this.x = x ;
-      this.y = y;
-    }
+    double amount = adminService.analyzeAmounts();
   }
 
   /**

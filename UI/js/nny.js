@@ -145,6 +145,15 @@ var app = angular.module('banking', [
           authorizedRoles: [nnyConst.UserRoles.Admin]
         }
       })
+      .state('viewuser', {
+        url: '/admin/user/{userid}',
+        templateUrl: 'areas/admin/manageUsers/viewUserProfile.html',
+        controller: 'ViewUserProfileController',
+        data: {
+          requireLogin: true,
+          authorizedRoles: [nnyConst.UserRoles.Admin]
+        }
+      })
       .state('listaccounts', {
         url: '/admin/accounts',
         templateUrl: 'areas/admin/manageAccounts/ViewAccounts.html',
