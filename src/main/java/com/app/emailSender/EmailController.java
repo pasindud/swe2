@@ -22,6 +22,9 @@ public class EmailController {
     @Autowired
     private JavaMailSender sender;
     
+    private String toMail;
+    private String body;
+    private String Subject;
     @RequestMapping("/api/emailSender")
     @ResponseBody
     String home() {
@@ -36,10 +39,34 @@ public class EmailController {
         MimeMessage message = sender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         
-        helper.setTo("ishan.ranatunga@gmail.com"); //change email
-        helper.setText("Test email bodyyyyy");
-        helper.setSubject("Test email Subject");
+        helper.setTo(getToMail()); //change email
+        helper.setText(getBody());
+        helper.setSubject(getSubject());
         
         sender.send(message);
+    }
+
+    public String getToMail() {
+        return toMail;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public String getSubject() {
+        return Subject;
+    }
+
+    public void setToMail(String toMail) {
+        this.toMail = toMail;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public void setSubject(String Subject) {
+        this.Subject = Subject;
     }
 }
