@@ -60,8 +60,10 @@ public class AdminController {
   public void getFreqAmount() {
     double amount = adminService.analyzeAmounts();
 
-    SuspiciousLog suspiciousLog = new SuspiciousLog();
-    suspiciousLog.setMessage("Transaction with amount " + amount + " is considered suspicious");
+    if (amount != -1) {
+      SuspiciousLog suspiciousLog = new SuspiciousLog();
+      suspiciousLog.setMessage("Transaction with amount " + amount + " is considered suspicious");
+    }
   }
 
   /**
