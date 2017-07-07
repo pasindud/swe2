@@ -6,6 +6,7 @@
 package com.app.controller;
 
 import com.app.crypt.CustomerCryptor;
+import com.app.enties.Customer;
 import com.app.enties.Role;
 import com.app.enties.SecurityAnswers;
 import com.app.enties.SecurityQuestions;
@@ -17,6 +18,7 @@ import com.app.repository.UsersRepository;
 import com.app.request.ChangePasswordRequest;
 import com.app.request.CreateUserRequest;
 import com.app.request.ForgotPasswordRequest;
+import com.app.service.EmailService;
 import com.app.service.SecurityAnswersService;
 import com.app.service.UserRegistration;
 import com.app.service.UserServiceImpl;
@@ -26,8 +28,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -61,6 +65,8 @@ public class UserController {
   @Autowired private SecurityAnswersService securityAnswersService;
 
   @Autowired private PasswordEncoder passwordEncoder;
+  
+  @Autowired EmailService emailService;
 
   @RequestMapping("/api/auth")
   @GetMapping
@@ -106,29 +112,55 @@ public class UserController {
       return false;
   }
 
-  @RequestMapping("/api/forgot_password")
-  @PostMapping
-  public Map<String ,String> forgotPassword(@RequestBody ForgotPasswordRequest forgotPasswordRequest) {
-    Users user=userService.findByUsername(forgotPasswordRequest.getUsername());
+    @RequestMapping("/api/forgot_password")
+    @PostMapping
+    public Map<String, String> forgotPassword(@RequestBody ForgotPasswordRequest forgotPasswordRequest) throws MessagingException {
+        Users user = userService.findByUsername(forgotPasswordRequest.getUsername());
+        CustomerCryptor customerCryptor = new CustomerCryptor();
+        String oldEncodedPassword = "";
+        String newEncodedPassword = "";
+        String body = null;
+        String toMail = null;
+        if (user == null) {
+            return ImmutableMap.of("errors", "Invalid username");
+        } else {
 
-    if (user == null) {
-      return ImmutableMap.of("errors", "Invalid username");
-    } else {
-      System.out.println(forgotPasswordRequest.getPassword());
-      System.out.println(forgotPasswordRequest.getUsername());
-      System.out.println(forgotPasswordRequest.getAnswerslist().get(0).getId());;
-      boolean correct = securityAnswersService.verifyanswers(forgotPasswordRequest.getAnswerslist(), user.getUserId());
-      if (!correct) {
-        return ImmutableMap.of("errors", "Incorrect answers");
-      } else {
-        usersRepository.changePassword(
-                passwordEncoder.encode(forgotPasswordRequest.getPassword()),
-                user.getUserId());
-        return ImmutableMap.of("errors", "");
-      }
+            boolean correct = securityAnswersService.verifyanswers(forgotPasswordRequest.getAnswerslist(), user.getUserId());
+            if (!correct) {
+                return ImmutableMap.of("errors", "Incorrect answers");
+            } else {
+                try {
+                    oldEncodedPassword = user.getPassword();
+                    newEncodedPassword = passwordEncoder.encode(forgotPasswordRequest.getPassword());
+
+                    usersRepository.changePassword(
+                            newEncodedPassword,
+                            user.getUserId());
+
+                    customerCryptor.changeCustomerPrivateKey(user.getUsername(), oldEncodedPassword, newEncodedPassword);
+                } catch (Exception e) {
+                    return ImmutableMap.of("errors", "Password encryption error. ");
+                }
+                try{
+                Customer customer = customerCryptor.decodeCustomer(user.getUsername(),newEncodedPassword, user.getCustomer());
+                body = emailService.prepareMailChangedPsssword(user, customer);
+                toMail = customer.getEmail();
+                }catch(Exception ex){
+                    return ImmutableMap.of("errors", "errors during sending mail. ");
+                }
+                if (toMail != null) {
+                    try {//send email
+                        emailService.sendMails(toMail, "Password changed notification from Adaala Na Bank", body);
+                    } catch (MailException me) {
+                        return ImmutableMap.of("errors", "email error. ");
+                    }
+                }
+
+                return ImmutableMap.of("errors", "");
+            }
+        }
+
     }
-
-  }
 
   /*
 
@@ -155,10 +187,13 @@ public class UserController {
    */
   @RequestMapping(value = "/api/change_password")
   @PostMapping
-    public ImmutableMap<String, String> changePassword(@RequestBody ChangePasswordRequest changePasswordRequest) {
+    public ImmutableMap<String, String> changePassword(@RequestBody ChangePasswordRequest changePasswordRequest) throws MessagingException {
         Users user = usersRepository.findByUserId(userService.getLoggedInUserId());
+         CustomerCryptor customerCryptor = new CustomerCryptor();
         String oldEncodedPassword = "";
         String newEncodedPassword = "";
+        String body = null;
+        String toMail = null;
         if (user == null) {
             return ImmutableMap.of("errors", "Invalid user.");
         } else if (passwordEncoder.matches(changePasswordRequest.getCurrent(), user.getPassword())) {
@@ -166,11 +201,27 @@ public class UserController {
             oldEncodedPassword = user.getPassword();
             newEncodedPassword = passwordEncoder.encode(changePasswordRequest.getNewPassword());
             usersRepository.changePassword(newEncodedPassword, userService.getLoggedInUserId());
-            CustomerCryptor customerCryptor = new CustomerCryptor();
+            
             customerCryptor.changeCustomerPrivateKey(user.getUsername(), oldEncodedPassword, newEncodedPassword);
             }catch(Exception e){
                 return ImmutableMap.of("errors", "Password encryption error. ");
             }
+            
+            try{
+                Customer customer = customerCryptor.decodeCustomer(user.getUsername(),newEncodedPassword, user.getCustomer());
+                body = emailService.prepareMailChangedPsssword(user, customer);
+                toMail = customer.getEmail();
+                }catch(Exception ex){
+                    return ImmutableMap.of("errors", "errors during sending mail. ");
+                }
+                if (toMail != null) {
+                    try {//send email
+                        emailService.sendMails(toMail, "Password changed notification from Adaala Na Bank", body);
+                    } catch (MailException me) {
+                        return ImmutableMap.of("errors", "email error. ");
+                    }
+                }
+            
             return ImmutableMap.of("errors", "");
         } else {
             return ImmutableMap.of("errors", "Invalid password.");
