@@ -85,6 +85,13 @@
                         <artifactId>spring-boot-starter-mail</artifactId>
                         <version>1.4.3.RELEASE</version>
                 </dependency>
+                
+                <dependency>
+                        <groupId>com.lowagie</groupId>
+                        <artifactId>itext</artifactId>
+                        <version>4.2.2</version>
+                </dependency>  
+        
 	 <dependency>
 	  <groupId>com.google.guava</groupId>
 	  <artifactId>guava</artifactId>
