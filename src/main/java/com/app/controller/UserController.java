@@ -5,6 +5,7 @@
  */
 package com.app.controller;
 
+import com.app.crypt.CustomerCryptor;
 import com.app.enties.Role;
 import com.app.enties.SecurityAnswers;
 import com.app.enties.SecurityQuestions;
@@ -154,16 +155,25 @@ public class UserController {
    */
   @RequestMapping(value = "/api/change_password")
   @PostMapping
-  public ImmutableMap<String, String> changePassword(@RequestBody ChangePasswordRequest changePasswordRequest) {
-    Users user = usersRepository.findByUserId(userService.getLoggedInUserId());
-
-    if (user == null) {
-      return ImmutableMap.of("errors","Invalid user.");
-    } else if (passwordEncoder.matches(changePasswordRequest.getCurrent(), user.getPassword())) {
-      usersRepository.changePassword(passwordEncoder.encode(changePasswordRequest.getNewPassword()), userService.getLoggedInUserId());
-      return ImmutableMap.of("errors","");
-    } else {
-      return ImmutableMap.of("errors","Invalid password.");
+    public ImmutableMap<String, String> changePassword(@RequestBody ChangePasswordRequest changePasswordRequest) {
+        Users user = usersRepository.findByUserId(userService.getLoggedInUserId());
+        String oldEncodedPassword = "";
+        String newEncodedPassword = "";
+        if (user == null) {
+            return ImmutableMap.of("errors", "Invalid user.");
+        } else if (passwordEncoder.matches(changePasswordRequest.getCurrent(), user.getPassword())) {
+            try{
+            oldEncodedPassword = user.getPassword();
+            newEncodedPassword = passwordEncoder.encode(changePasswordRequest.getNewPassword());
+            usersRepository.changePassword(newEncodedPassword, userService.getLoggedInUserId());
+            CustomerCryptor customerCryptor = new CustomerCryptor();
+            customerCryptor.changeCustomerPrivateKey(user.getUsername(), oldEncodedPassword, newEncodedPassword);
+            }catch(Exception e){
+                return ImmutableMap.of("errors", "Password encryption error. ");
+            }
+            return ImmutableMap.of("errors", "");
+        } else {
+            return ImmutableMap.of("errors", "Invalid password.");
+        }
     }
-  }
 }

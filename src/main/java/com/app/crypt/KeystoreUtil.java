@@ -84,4 +84,36 @@ public class KeystoreUtil {
          }
          
     }
+    
+    public static boolean updateEntry(final String keystoreLocation, final String keystorePass, String alias, String keyPass,String newpassword) throws UnrecoverableKeyException {
+        try {
+
+            InputStream keystoreStream = new FileInputStream(keystoreLocation);
+
+            KeyStore keystore = KeyStore.getInstance("JCEKS");
+
+            keystore.load(keystoreStream, keystorePass.toCharArray());
+
+            LOG.debug("Keystore with alias {} found == {}", alias, keystore.containsAlias(alias));
+            if (!keystore.containsAlias(alias)) {
+                throw new RuntimeException("No Alias for key  found");
+            }
+            
+            Key privateKey = keystore.getKey(alias, keyPass.toCharArray());
+            keystore.deleteEntry(alias);
+            keystore.setKeyEntry(alias, privateKey, newpassword.toCharArray(), null);
+
+            OutputStream writeStream = new FileOutputStream(keystoreLocation);
+            keystore.store(writeStream, keystorePass.toCharArray());
+            writeStream.close();
+            return true;
+           
+
+        } catch (KeyStoreException | IOException | NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        } catch (java.security.cert.CertificateException ex) {
+             return false;
+         }
+         
+    }
 }

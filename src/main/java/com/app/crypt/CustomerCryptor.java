@@ -112,6 +112,15 @@ public class CustomerCryptor {
           return null;
         }
     }
-    
+    public boolean changeCustomerPrivateKey (String userName, String old_password,String new_password){
+        try {
+        if(KeystoreUtil.updateEntry(KEYSTORE,STOREPASS,userName,old_password,new_password))
+            return true;
+        else
+            return false;
+        }catch (Exception e){
+            return false;
+        }
+    }
     
 }
