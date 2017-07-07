@@ -169,5 +169,6 @@
   "MaximumOverDraftAmount" : "Maximum Overdraft Amount",
   "MinimumAverageBalance" : "Minimum Average Balance",
   "MinimumInitialBalance" : "Minimum Initial Balance",
-  "AccountWithdrawLimit" : "Account Withdraw Limit"
+  "AccountWithdrawLimit" : "Account Withdraw Limit",
+  "ExpireDate" : "Expire Date"
   }]
