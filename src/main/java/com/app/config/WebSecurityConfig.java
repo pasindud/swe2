@@ -28,7 +28,7 @@ import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
-@EnableWebMvc // Commen to static content working.
+//@EnableWebMvc // Commen to static content working.
 @ComponentScan
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   @Autowired private UserDetailsService userDetailsService;
