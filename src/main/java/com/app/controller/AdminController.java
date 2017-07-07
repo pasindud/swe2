@@ -214,7 +214,7 @@ public class AdminController {
       response.put("errors", "Not account found");
       return response;
     }
-    
+
     ResponseAccount responseAccount = new ResponseAccount();
     responseAccount.account = account;
     responseAccount.user = account.getUserId();
