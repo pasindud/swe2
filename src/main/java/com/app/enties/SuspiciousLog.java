@@ -3,6 +3,7 @@ package com.app.enties;
 import org.hibernate.annotations.Table;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by Pasindu on 7/8/17.
@@ -15,6 +16,19 @@ public class SuspiciousLog {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
   private String message;
+
+  @Column(name = "createdDate")
+  @Basic
+  @Temporal(TemporalType.DATE)
+  private Date createdDate;
+
+  public Date getCreatedDate() {
+    return createdDate;
+  }
+
+  public void setCreatedDate(Date createdDate) {
+    this.createdDate = createdDate;
+  }
 
   public Integer getId() {
     return id;

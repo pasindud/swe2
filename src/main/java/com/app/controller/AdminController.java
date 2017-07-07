@@ -2,10 +2,7 @@ package com.app.controller;
 
 import static com.app.Utils.FreqAmount;
 import com.app.Utils;
-import com.app.enties.Account;
-import com.app.enties.Customer;
-import com.app.enties.Merchant;
-import com.app.enties.Users;
+import com.app.enties.*;
 import com.app.repository.AccountRepository;
 import com.app.repository.MerchantRepository;
 import com.app.repository.TransactionRepository;
@@ -62,6 +59,9 @@ public class AdminController {
   @GetMapping("/api/admin/get_freq_amount")
   public void getFreqAmount() {
     double amount = adminService.analyzeAmounts();
+
+    SuspiciousLog suspiciousLog = new SuspiciousLog();
+    suspiciousLog.setMessage("Transaction with amount " + amount + " is considered suspicious");
   }
 
   /**
