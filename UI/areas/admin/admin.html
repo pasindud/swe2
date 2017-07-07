@@ -22,7 +22,12 @@
           <p class="right-align" style="margin-top:1px;margin-bottom:1px"><i>{{labels.LatestActivities}}</i></p>
           <div class="divider" ></div>
           <ul class="center">
-            <li>{{labels.NoNewActivities}}</li>
+            <li ng-if="noSuspicious">{{labels.NoNewActivities}}</li>
+            <li ng-repeat="log in Logs">
+                <div class="col s3">{{log.createdDate}}</div>
+                <div class="col s9" style="text-align:justify">{{log.message}}</div>
+                <div class="divider"></div>
+            </li>
             <li><a class="waves-effect" ui-sref="flags">{{labels.ViewSuspiciousActivities}}</a></li>
           </ul>
         </div>
