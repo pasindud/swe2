@@ -58,7 +58,7 @@ curl -H "Content-Type: application/json" -X POST \
 http://localhost:8080/api/registration
 
 curl -H "Content-Type: application/json" -X POST \
--d '{"users":{"username":"testinguser1","password":"testpassword","userType":"CUSTOMER"},"customer":{"firstname":"","lastname":"","nic":"950483628v","addressLine1":"Lane 1","city":"Colombo","email":"testing@localhost.com","firstName":"Hellow","lastName":"HMM"},"answers":[{"answer":"1","securityQuestions":{"id":"1"}},{"answer":"1","securityQuestions":{"id":"2"}},{"answer":"1","securityQuestions":{"id":"1"}}]}' \
+-d '{"users":{"username":"testinguser2","password":"testpassword","userType":"CUSTOMER"},"customer":{"firstname":"","lastname":"","nic":"950483628v","addressLine1":"Lane 1","city":"Colombo","email":"testing@localhost.com","firstName":"Hellow","lastName":"HMM"},"answers":[{"answer":"1","securityQuestions":{"id":"1"}},{"answer":"1","securityQuestions":{"id":"2"}},{"answer":"1","securityQuestions":{"id":"1"}}]}' \
 http://localhost:8080/api/registration
 
 

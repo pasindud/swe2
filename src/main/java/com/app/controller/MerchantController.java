@@ -127,6 +127,7 @@ public class MerchantController {
       return response;
     }
 
+    System.out.println(" service - " + service.getAccountid());
     transaction.setTranstype(TransactionType.T);
     transaction.setFromaccountid(payBillRequest.getSelectedAccountId());
     transaction.setUserId(userService.getLoggedInUser());

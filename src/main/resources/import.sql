@@ -56,6 +56,6 @@ VALUES
 
 
 INSERT INTO merchant (merchantid, logourl, orgname, registrationno, taxno) VALUES (1,'non','Dialog','1232','12313');
-INSERT INTO merchant_services (serviceid, merchantid,accountid,  servicename) VALUES (1,1,2, "New Service");
+INSERT INTO merchant_services (serviceid, merchantid,accountid,  servicename) VALUES (1,1,2, "Phone Bill");
 
 

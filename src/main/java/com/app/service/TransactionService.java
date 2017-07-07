@@ -130,6 +130,7 @@ public class TransactionService {
 
   private void processTransaction() throws Exception {
     this.fromAccount = accountRepository.findByAccountid(transaction.getFromaccountid());
+    System.out.printf("transaction.getToaccountid() -  " + transaction.getToaccountid());
     this.toAccount = accountRepository.findByAccountid(transaction.getToaccountid());
 
     if (this.fromAccount == null) {

@@ -30,7 +30,8 @@ public class Account {
   @Basic
   @Temporal(TemporalType.DATE)
   private Date expireDate;
-  
+
+
   @CreationTimestamp
   @Temporal(TemporalType.TIMESTAMP)
   @Column(name = "creationDate")
