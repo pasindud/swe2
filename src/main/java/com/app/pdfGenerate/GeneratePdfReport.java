@@ -33,22 +33,30 @@ public class GeneratePdfReport {
 
         try {
 
-            PdfPTable table = new PdfPTable(3);
-            table.setWidthPercentage(60);
-            table.setWidths(new int[]{1, 3, 3});
+            PdfPTable table = new PdfPTable(5);
+            table.setWidthPercentage(40);
+            table.setWidths(new int[]{3, 3, 3, 3, 3});
 
             Font headFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
 
             PdfPCell hcell;
-            hcell = new PdfPCell(new Phrase("Id", headFont));
+            hcell = new PdfPCell(new Phrase("ID", headFont));
             hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(hcell);
 
-            hcell = new PdfPCell(new Phrase("Name", headFont));
+            hcell = new PdfPCell(new Phrase("Time", headFont));
             hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(hcell);
 
-            hcell = new PdfPCell(new Phrase("Population", headFont));
+            hcell = new PdfPCell(new Phrase("Amount", headFont));
+            hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(hcell);
+            
+            hcell = new PdfPCell(new Phrase("To", headFont));
+            hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(hcell);
+            
+            hcell = new PdfPCell(new Phrase("Type", headFont));
             hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(hcell);
 
