@@ -2,6 +2,7 @@
 
 package com.app.repository;
 
+import com.app.Utils;
 import com.app.enties.MerchantServices;
 import com.app.enties.Transaction;
 import com.app.enties.Users;
@@ -13,8 +14,16 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /** @author Pasindu */
+
+
 @Transactional
 public interface TransactionRepository extends CrudRepository<Transaction, Long> {
+  @Query(
+          value = "SELECT round(`amount`,2) as 'amounts',count(*) as freq  FROM Transaction GROUP by round(`amount`,2)",
+          nativeQuery = true
+  )
+  public List<Utils.FreqAmount> getFreqOfAmounts();
+
   @Query(
           value = "SELECT * FROM Transaction t WHERE t.fromaccountid=?1 or t.toaccountid=?1",
           nativeQuery = true
