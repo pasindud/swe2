@@ -1,0 +1,73 @@
+<div id="viewAllAccountsUI" class="col s12 m12 l8 xl8 card-panel grey lighten-4">
+  <div class="col s12" style="padding-top:30px">
+    <h5>{{labels.Accounts}}</h5>
+    <div class="divider col s12"></div>
+    <br>
+    <!-- Serach-->
+    <div id="" class="input-field col s12 m12 l3 nny-margin-fix right">
+      <input id="searchField" type="text" ng-model="SearchData.SearchValue">
+      <label for="searchField"></label>
+    </div>
+    <div class="input-field col s12 m12 l3 nny-margin-fix right">
+      <select material-select watch ng-model="SearchData.SearchField">
+        <option ng-repeat="sf in SearchFields" value={{sf.id}}>{{sf.name}}</option>
+      </select>
+    </div>
+    <!--Search End-->
+  </div>
+
+  <!--Table-->
+  <div class="col s12">
+    <div class="">
+      <table class="striped highlight responsive-table">
+        <thead>
+          <tr>
+            <th>{{labels.AccountId}} <a class="waves-effect" ng-click="sortBtn('accountid',true)"><i class="tiny material-icons">swap_vert</i></a></th>
+            <th>{{labels.CreatedDate}} <a class="waves-effect" ng-click="sortBtn('createdDate',true)"><i class="tiny material-icons">swap_vert</i></a></th>
+            <th>{{labels.Currency}} <a class="waves-effect" ng-click="sortBtn('currency',true)"><i class="tiny material-icons">swap_vert</i></a></th>
+            <th>{{labels.ExpireDate}} <a class="waves-effect" ng-click="sortBtn('expireDate',true)"><i class="tiny material-icons">swap_vert</i></a></th>
+            <th>{{labels.Locked}}<a class="waves-effect" ng-click="sortBtn('locked',true)"><i class="tiny material-icons">swap_vert</i></a></th>
+            <th>{{labels.Actions}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat = "account in Accounts">
+            <td>{{account.accountid}}</td>
+            <td>{{account.createdDate | date:'MM-dd-yyyy'}}</td>
+            <td>{{account.currency}}</td>
+            <td>{{account.expireDate | date:'MM-dd-yyyy'}}</td>
+            <td>
+              <div ng-switch="account.locked">
+                <div ng-switch-when="false">
+                  <a ng-click="lockAccount('true', user.userId )" class="waves-effect"> Lock</a>
+
+                </div>
+                <div ng-switch-when="true">
+                  <a  ng-click="lockAccount('false', user.userId )" class="waves-effect"> Unlock</a>
+                </div>
+              </div>
+            </td>
+            <td><a class="waves-effect" ui-sref="account_view({accountid: account.accountid})">{{labels.ViewMore}}</a></td>
+          </tr>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!--Table End-->
+
+<!--Pagination-->
+<div class="divider col s12" style="margin-bottom:15px;"></div>
+<div class="col s12 center">
+  <ul class="pagination">
+    <li class="disabled"><a ng-click="pageBtn(1)"><i class="material-icons">chevron_left</i></a></li>
+    <span ng-repeat="page in PageNumbers">
+      <li ng-if="page.isCurrent == false" class="waves-effect"><a ng-click="pageBtn(page.number, CurrentPage)">{{page.number}}</a></li>
+      <li ng-if="page.isCurrent == true" class="active"><a ng-click="pageBtn(page.number, CurrentPage)">{{page.number}}</a></li>
+    </span>
+    <li class="waves-effect"><a ng-click="pageBtn(pageNumbers.lastNumber)"><i class="material-icons">chevron_right</i></a></li>
+  </ul>
+</div>
+<!--Pagination End-->
+<div class="col s12" style="margin-bottom:15px;"></div>
+</div>

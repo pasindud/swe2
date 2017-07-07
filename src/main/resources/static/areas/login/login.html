@@ -1,0 +1,39 @@
+<div id="loginBox" class="col s12 m12 l8 xl8" style="margin-left:-10px;">
+  <div class="col s12" style="min-height:20vh"></div>
+  <div class="col s12">
+    <div class="col s3 m3 hide-on-small-and-down"></div>
+    <div class="col s12 m6 l6 card-panel grey lighten-3" style="padding:0px">
+      <div class="col s12 nny-theme" style="margin-left:0px;margin-right:0px;">
+        <h5 class="white-text center-align nny-auth-header">{{labels.Authentication}}</h5>
+      </div>
+      <div class="input-field col s11 m12 l11 center" style="margin-top:25px">
+        <i class="material-icons prefix">account_circle</i>
+        <input id="username" name="username" type="text" class="validate"
+        ng-model="username"
+        />
+        <label for="username">{{labels.Username}}</label>
+      </div>
+      <div class="input-field col s11 m12 l11 center">
+        <i class="material-icons prefix">lock</i>
+        <input id="password" name="upass" type="password"
+        ng-model="upass"
+        class="validate"/>
+        <label for="password">{{labels.Password}}</label>
+      </div>
+      <center>
+        <div class="col s12">
+          <button class="btn waves-effect waves-light red draken-2" ng-click="loginbtn()"
+          name="action">{{labels.Login}}
+          <i class="material-icons left">lock_open</i>
+        </button>
+      </div>
+      <div class="col s12">
+        <p>
+        <a class="waves-effect" ui-sref="chooseprofile">{{labels.SignUp}}</a> Or   <a class="waves-effect" ui-sref="recover">{{labels.ForgotPassword}}</a> 
+        </p>
+      </div>
+    </center>
+  </div>
+  <div class="col s3 m3 hide-on-small-and-down"></div>
+</div>
+</div>

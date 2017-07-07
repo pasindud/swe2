@@ -1,0 +1,72 @@
+<div id="ActivityFilter" class="col s12 m12 l8 xl8 card-panel">
+  <div class="section col s12">
+    <h5>{{labels.TransactionHistroy}}</h5>
+    <div class="divider col s12"></div>
+  </br>
+
+  <!-- Serach-->
+  <div id="" class="input-field col s12 m12 l3 nny-margin-fix right">
+    <input id="searchField" type="text" ng-model="SearchData.SearchValue">
+    <label for="searchField"></label>
+  </div>
+  <div class="input-field col s12 m12 l3 nny-margin-fix right">
+    <select material-select watch ng-model="SearchData.SearchField">
+      <option ng-repeat="sf in SearchFields" value={{sf.id}}>{{sf.name}}</option>
+    </select>
+  </div>
+  <!--Search End-->
+
+  <div class="col s2 hide-on-med-and-down"></div>
+</div>
+<div class="col s12">
+  <div class="">
+
+    <!--Table-->
+    <table class="striped highlight responsive-table">
+      <thead>
+        <tr>
+          <th>{{labels.Date}} <a class="waves-effect" ng-click="sortBtn('Date',true)"><i class="tiny material-icons">swap_vert</i></a></th>
+          <!-- Add to the labels -->
+          <th> From Id <a class="waves-effect" ng-click="sortBtn('Name',true)"><i class="tiny material-icons">swap_vert</i></a></th>
+          <th> {{labels.Type}} <a class="waves-effect" ng-click="sortBtn('Type',true)"><i class="tiny material-icons">swap_vert</i></a></th>
+          <th>{{labels.Amount}} <a class="waves-effect" ng-click="sortBtn('Amount',true)"><i class="tiny material-icons">swap_vert</i></a></th>
+          <th>{{labels.Message}} <a class="waves-effect" ng-click="sortBtn('Message',true)"><i class="tiny material-icons">swap_vert</i></a></th>
+          <th>{{labels.Actions}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat = "transaction in Transactions">
+          <td>
+            {{transaction.transactiontime | date:'MM-dd-yyyy'}}
+          </td>
+          <td>{{transaction.fromaccountid}}</td>
+          <td>{{transaction.transtype}}</td>
+          <td>{{transaction.amount}}</td>
+          <td>{{transaction.Message}}</td>
+          <td><a class="waves-effect" ui-sref="transaction({transactionId: transaction.transactionid})">{{labels.ViewMore}}</a></td>
+        </tr>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+<div class="divider col s12" style="margin-bottom:15px;"></div>
+<div class="col s12 center">
+  <ul class="pagination">
+    <li class="disabled"><a ng-click="pageBtn(1)"><i class="material-icons">chevron_left</i></a></li>
+    <span ng-repeat="page in PageNumbers">
+      <li ng-if="page.isCurrent == false" class="waves-effect"><a ng-click="pageBtn(page.number, CurrentPage)">{{page.number}}</a></li>
+      <li ng-if="page.isCurrent == true" class="active"><a ng-click="pageBtn(page.number, CurrentPage)">{{page.number}}</a></li>
+    </span>
+    <li class="waves-effect"><a ng-click="pageBtn(pageNumbers.lastNumber)"><i class="material-icons">chevron_right</i></a></li>
+  </ul>
+</div>
+<div class="col s12 center" style="margin-top:10px;margin-bottom:30px;">
+  <button class="btn waves-effect waves-light" name="action"
+    ui-sref="account">
+  {{labels.Back}}
+  <i class="material-icons right"></i>
+  </button>
+</div>
+</div>
+<div class="col s12" style="margin-bottom:30px;"></div>

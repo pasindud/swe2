@@ -1,0 +1,187 @@
+<html ng-app="banking" >
+<head>
+  <title>Banking</title>
+  <base href="/">
+  <!--Import Google Icon Font-->
+  <link href="ico/iconCDN.file" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="css/libs/materialize.css"  media="screen,projection"/>
+  <link type="text/css" rel="stylesheet" href="css/nny.css"  media="screen,projection"/>
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!--Import JQuery-->
+  <script type"text/javascript" src="js/libs/jquery.3.2.1.min.js"></script>
+
+  <!--Import AngularJs 1.6.1-->
+  <script src="js/libs/angular1.6.1.js"></script>
+</head>
+<body class="grey" ng-controller="OverviewController" >
+
+  <!--Import materialize.js-->
+  <script type="text/javascript" src="js/libs/materialize.js"></script>
+  <!--Import AngularJs UI Router-->
+  <script type="text/javascript" src="js/libs/angular-ui-router.min.js"></script>
+  <!--Import materialize for AngularJs-->
+  <script type="text/javascript" src="js/libs/angular-materialize.0.2.2.js"></script>
+
+  <!-- Import angular-toastr -->
+  <script src="js/libs/bower_components/angular-animate/angular-animate.min.js"></script>
+  <script src="https://unpkg.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/angular-toastr/dist/angular-toastr.css" />
+
+  <!--Import Application-->
+  <script type="text/javascript" src="js/nny.js"></script>
+  <script type="text/javascript" src="js/custom.js"></script>
+
+  <!-- Import NgTables -->
+  <link rel="stylesheet"; href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
+  <script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
+
+  <!--Import Controllers-->
+  <script type="text/javascript" src="areas/login/loginController.js"></script>
+  <script type="text/javascript" src="areas/account/accountController.js"></script>
+  <script type="text/javascript" src="areas/activity/activityController.js"></script>
+  <script type="text/javascript" src="areas/activity/transactionController.js"></script>
+  <script type="text/javascript" src="areas/common/datePickerController.js"></script>
+  <script type="text/javascript" src="areas/signup/CreateNewAccountController.js"></script>
+  <script type="text/javascript" src="areas/admin/adminController.js"></script>
+  <script type="text/javascript" src="areas/admin/flagged/flagsController.js"></script>
+  <script type="text/javascript" src="areas/admin/flagged/flaggedActivityController.js"></script>
+  <script type="text/javascript" src="areas/admin/approvals/approvalsController.js"></script>
+  <script type="text/javascript" src="areas/admin/approvals/approvalDetailsController.js"></script>
+  <script type="text/javascript" src="areas/admin/manageAccounts/userAccountController.js"></script>
+  <script type="text/javascript" src="areas/admin/manageAccounts/viewAccountsController.js"></script>
+  <script type="text/javascript" src="areas/admin/manageUsers/ViewUsers.js"></script>
+  <script type="text/javascript" src="areas/settings/settingsController.js"></script>
+  <script type="text/javascript" src="areas/userprofile/userprofileController.js"></script>
+  <script type="text/javascript" src="areas/payments/paymentsController.js"></script>
+  <script type="text/javascript" src="areas/login/recoverAccountController.js"></script>
+  <script type="text/javascript" src="areas/account/addBankAccountController.js"></script>
+  <script type="text/javascript" src="areas/signup/addMerchantAccountController.js"></script>
+  <script type="text/javascript" src="areas/common/overviewController.js"></script>
+  <script type="text/javascript" src="areas/common/exchangeRatesController.js"></script>
+  <script type="text/javascript" src="areas/signup/chooseProfileTypeController.js"></script>
+  <script type="text/javascript" src="areas/userprofile/merchantProfileController.js"></script>
+  <script type="text/javascript" src="areas/admin/manageUsers/viewUserProfileController.js"></script>
+
+  <!--Import Services-->
+  <script type="text/javascript" src="js/services/authService.js"></script>
+  <script type="text/javascript" src="js/services/validateService.js"></script>
+  <script type="text/javascript" src="js/services/paginationService.js"></script>
+  <script type="text/javascript" src="js/services/sortingService.js"></script>
+  <script type="text/javascript" src="js/services/searchService.js"></script>
+  <script type="text/javascript" src="js/services/objectService.js"></script>
+  <script type="text/javascript" src="js/services/constants.js"></script>
+
+
+  <div id="wrapper" style="min-height:100%">
+    <div id="navigationBar" class="">
+      <ul id="dropdown1" class="dropdown-content">
+        <li><a ng-click="setLanguage('en-us')">EN</a></li>
+        <li class="divider"></li>
+        <li><a ng-click="setLanguage('fr')">FR</a></li>
+        <li class="divider"></li>
+        <li><a ng-click="setLanguage('ga')">GA</a></li>
+        <li class="divider"></li>
+        <li><a ng-click="setLanguage('it')">IT</a></li>
+
+      </ul>
+      <nav>
+        <div class="nav-wrapper nny-theme" >
+          <a class="brand-logo" href="/">&nbsp {{ title }}</a>
+          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+          <div class="row">
+            <div class="col s12 hide-on-med-and-down">
+              <div class="col s4">
+              </div>
+              <div class="center col s4">
+                <center>
+                  <ul class="nny-tabs" ng-if="authData.accessLevel == AccessLevels.CustomerP">
+                    <li id="accountTab" class="col s4 nny-tab-selected"><a ui-sref="account" ng-click="tabBtn(1)">{{labels.Account}}</a></li>
+                    <li id="paymentsTab" class="col s4 nny-tab"><a ui-sref="payments" ng-click="tabBtn(2)">{{labels.Payments}}</a></li>
+                    <li id="profileTab" class="col s4 nny-tab"><a ui-sref="userprofile" ng-click="tabBtn(3)"> Profile </a></li>
+                  </ul>
+                  <ul class="nny-tabs" ng-if="authData.accessLevel == AccessLevels.CustomerM">
+                    <li id="accountTab" class="col s4 nny-tab-selected"><a ui-sref="account" ng-click="tabBtn(1)">{{labels.Account}}</a></li>
+                    <li id="paymentsTab" class="col s4 nny-tab"><a ui-sref="payments" ng-click="tabBtn(2)">{{labels.Payments}}</a></li>
+                    <li id="profileTab" class="col s4 nny-tab"><a ui-sref="merchantprofile" ng-click="tabBtn(3)"> Profile </a></li>
+                  </ul>
+                  <ul class="nny-tabs" ng-if="authData.accessLevel == AccessLevels.Admin">
+                    <li class="col s12 nny-tab"><a ui-sref="admin">{{labels.AdminDashboard}}</a></li>
+                  </ul>
+                </center>
+              </div>
+              <div class=" col s4" ng-switch on="authData.accessLevel > 0">
+                <ul class="right">
+                  <li  ng-switch-when="true"><a ui-sref="settings"><i class="material-icons">settings</i></a></li>
+                  <li  ng-switch-when="true"><a ng-click="logout()"><i class="material-icons">power_settings_new</i></a></li>
+                  <li>
+                    <a class="dropdown-button" href="#!" data-activates="dropdown1">{{selectedLanguage}}
+                      <i class="material-icons right">arrow_drop_down</i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <ul class="side-nav" id="mobile-demo">
+              <li><a  ui-sref="account">{{labels.Account}}</a></li>
+              <li><a ui-sref="activity">{{labels.Activity}}</a></li>
+              <li><a ui-sref="payments">{{labels.Payments}}</a></li>
+              <li><a ui-sref="settings">{{labels.Settings}}</a></li>
+              <li><a ng-click="logout()">{{labels.Logout}}</a></li>
+              <li><a ui-sref="Help">{{labels.Help}}</a></li>
+              <li><a ui-sref="contact">{{labels.Contact}}</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div id="container">
+      <div class="row">
+        <div class="col s12">
+          <div class="col l2 xl2 hide-on-med-and-down"></div>
+          <div ui-view></div>
+          <div class="col l2 xl2 hide-on-med-and-down"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="nny-footer nny-theme">
+    {{labels.Copyright}}
+  </div>
+
+  <!--Loading Modal  -->
+<div id="LoadingModal" class="modal z-depth-0 center nny-modal-Loading" style="">
+  <div class="preloader-wrapper big active">
+    <div class="spinner-layer spinner-blue-only">
+      <div class="circle-clipper left">
+        <div class="circle"></div>
+      </div><div class="gap-patch">
+        <div class="circle"></div>
+      </div><div class="circle-clipper right">
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Error Modal -->
+<div id="ErrorModal" class="modal nny-modal-error-container">
+  <div class="modal-content" style="padding-bottom:2px">
+    <div class="center nny-modal-error-header">
+      <h4>{{ErrorDialog.Title}}</h4>
+    </div>
+    <ul  class="nny-ul-square" type="square" style="margin-left:10px;">
+      <li ng-repeat="error in ErrorDialog.Body" class="nny-p0-1"><b>-</b> {{error}}</li>
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <a class="modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+  </div>
+</div>
+
+</body>
+</html>

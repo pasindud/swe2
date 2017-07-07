@@ -1,0 +1,40 @@
+<div id="approvalDetailsUI" class="col s12 m12 l8 xl8 card-panel grey lighten-4">
+  <div class="col s12">
+    <h5>{{labels.ApprovalDetails}}</h5>
+    <div class="divider col s12" style="margin-bottom:15px;"></div>
+    <div class="col s12 m6 l6 xl6">
+      <p><b>{{labels.Username}} :</b> {{approval.Username}}</p>
+      <p><b>{{labels.ApprovalID}} :</b> {{approval.ApprovalID}}</p>
+      <p><b>{{labels.ApprovalType}} :</b> {{approval.ApprovalType}}</p>
+      <p><b>{{labels.Severity}} :</b> {{approval.Severity}}</p>
+    </div>
+    <div class="col s12 m6 l6 xl6">
+      <p><b>{{labels.Date}} :</b> {{approval.Date}}</p>
+      <p><b>{{labels.Time}} :</b> {{approval.Time}}</p>
+      <p><b>{{labels.IPAddress}} : </b>{{approval.IP}}</p>
+      <p><b>{{labels.Requestor}} : </b>{{approval.Requestor}}</p>
+    </div>
+    <div class="col s12">
+      <div class="col s12 nny-rounded-flat-card" style="min-height:150px">
+        <div class="col s12">
+          <p><b>{{labels.Description}}</b></p>
+        </div>
+        <div class="col s12">
+          <p>{{approval.Description}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="divider col s12" style="margin-bottom:15px;"></div>
+  <div class="col s12 center hide-on-small-and-down">
+    <a class="waves-effect waves-light btn">{{labels.Comply}}</a>
+    <a class="waves-effect waves-light btn">{{labels.Reject}}</a>
+    <a class="waves-effect waves-light btn red" ui-sref="approvals">{{labels.Cancel}}</a>
+  </div>
+  <div class="col s12 center hide-on-med-and-up">
+    <div class="col s12 m4 l4 xl4" style="margin-bottom:5px;"><a class="waves-effect waves-light btn col s12 m6">{{labels.Comply}}</a></div>
+    <div class="col s12 m4 l4 xl4" style="margin-bottom:5px;"><a class="waves-effect waves-light btn col s12 m6">{{labels.Reject}}</a></div>
+    <div class="col s12 m4 l4 xl4" style="margin-bottom:5px;"><a class="waves-effect waves-light btn red col s12 m6" ui-sref="approvals">{{labels.Cancel}}</a></div>
+  </div>
+<div class="col s12" style="margin-bottom:15px;"></div>
+</div>

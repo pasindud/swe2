@@ -1,0 +1,50 @@
+<div id="ExchangeRates" class="col s12 m12 l8 xl8">
+  <div class="col s12"></div>
+  <div class="col s12 m12 l12 xl12">
+    <div class="col s12 card-panel grey lighten-4 center">
+      <h5>{{labels.ExchangeRates}}</h5>
+      <div class="divider col s12"></div>
+      <div id="search" class="col s12">
+        <div class="input-field col s12 m12 l4 nny-margin-fix">
+          <select material-select watch ng-model="BaseCode">
+            <option value="" disabled selected><i>- Choose Base Currency-</i></option>
+            <option ng-repeat="r in CMBRates" value={{r}}>{{r}}</option>
+          </select>
+        </div>
+        <div class="col col s12 m12 l4" style="margin-top:15px">
+          <h7 ><b> Base Currency :</b> {{resultBase}}</h7>
+        </div>
+        <div class="col col s12 m12 l4" style="margin-top:15px">
+          <h7 ><b> Date :</b> {{resultDate}}</h7>
+        </div>
+      </div>
+      <div class="divider col s12"></div>
+      <div class="col l3 hide-on-med-and-down"></div>
+      <div id="viewTable" class="col m12 l6">
+        <table class="striped highlight center">
+          <center>
+          <thead>
+            <tr>
+              <th class="center">{{labels.Currency}}</th>
+              <th class="center"> {{labels.Rate}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat = "rate in Rates">
+              <td class="center">{{rate.currencyCode}}</td>
+              <td class="center">{{rate.rate}}</td>
+            </tr>
+          </tr>
+        </tbody>
+      </center>
+      </table>
+    </div>
+    <div class="col l3 hide-on-med-and-down"></div>
+    <div class="col s12" style="margin-bottom:20px;"></div>
+    </div>
+
+    <div class="col s12" style="margin-bottom:20px;"></div>
+  </div>
+
+</div>
+<div class="col s12" style="margin-bottom:30px;"></div>
