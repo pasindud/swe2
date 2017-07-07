@@ -21,7 +21,7 @@ angular.module('banking')
     $state.go("login");
   }
 
-  $scope.title = 'No Name Yet';
+  $scope.title = nnyConst.title;
   $scope.selectedLanguage = "EN";
   $rootScope.selectedLanguage = "en-us";
   var selLang = $rootScope.selectedLanguage;
