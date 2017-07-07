@@ -11,15 +11,15 @@ public class ForgotPasswordRequest {
   String username;
   String password;
 
-  public List <SecurityAnswers> getAnswerslist() {
-    return answerslist;
+  List<SecurityAnswers> answers;
+
+  public List <SecurityAnswers> getAnswers() {
+    return answers;
   }
 
-  public void setAnswerslist(List <SecurityAnswers> answerslist) {
-    this.answerslist = answerslist;
+  public void setAnswers(List <SecurityAnswers> answers) {
+    this.answers = answers;
   }
-
-  List<SecurityAnswers> answerslist;
 
   public String getUsername() {
     return username;

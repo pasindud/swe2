@@ -1,7 +1,5 @@
 package com.app.enties;
 
-import org.hibernate.annotations.Table;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -10,7 +8,7 @@ import java.util.Date;
  */
 
 @Entity
-@javax.persistence.Table(name = "SuspiciousLog")
+@Table(name = "SuspiciousLog")
 public class SuspiciousLog {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)

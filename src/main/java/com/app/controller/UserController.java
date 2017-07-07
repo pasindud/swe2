@@ -116,8 +116,8 @@ public class UserController {
     } else {
       System.out.println(forgotPasswordRequest.getPassword());
       System.out.println(forgotPasswordRequest.getUsername());
-      System.out.println(forgotPasswordRequest.getAnswerslist().get(0).getId());;
-      boolean correct = securityAnswersService.verifyanswers(forgotPasswordRequest.getAnswerslist(), user.getUserId());
+      System.out.println(forgotPasswordRequest.getAnswers().get(0).getId());;
+      boolean correct = securityAnswersService.verifyanswers(forgotPasswordRequest.getAnswers(), user.getUserId());
       if (!correct) {
         return ImmutableMap.of("errors", "Incorrect answers");
       } else {
