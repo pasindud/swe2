@@ -39,11 +39,11 @@
           <td>
             <div ng-switch="user.locked">
               <div ng-switch-when="false">
-                <a ng-click="lockUser('true', user.userId )" class="waves-effect"> Lock</a>
+                <a ng-click="lockUser('true', user.userId )" class="waves-effect"> UnLock</a>
 
               </div>
               <div ng-switch-when="true">
-                <a  ng-click="lockUser('false', user.userId )" class="waves-effect"> Unlock</a>
+                <a  ng-click="lockUser('false', user.userId )" class="waves-effect"> Lock</a>
               </div>
             </div>
           </td>

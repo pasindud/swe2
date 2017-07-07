@@ -129,3 +129,26 @@ h7{
 .nny-modal-error-container{
   width:400px !important;
 }
+.nny-robotify-input{
+  background-color: #3CBC8D !important;
+}
+
+#chatboxInput{
+  background-color: #3CBC8D !important;
+  max-width: 243px !important;
+}
+#chatBoxContent{
+  max-width: 300px !important;
+}
+#chatboxInputBtn{
+  border-right-width: 0px !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  background-color: #516e8b !important;
+  color: white !important;
+  z-index: 2 !important;
+  position: relative !important;
+  display: inline-block !important;
+  padding: 6px 12px !important;
+
+}

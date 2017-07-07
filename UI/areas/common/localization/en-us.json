@@ -69,11 +69,11 @@
   "Time" : "Time",
   "Severity" : "Severity",
   "Actions" : "Actions",
-  "ViewSuspiciousActivities" : "view Suspicious Activities",
+  "ViewSuspiciousActivities" : "View Suspicious Activities",
   "NoNewActivities" : "No New Activities",
   "LatestActivities" : "Latest Activities",
   "LatestApprovals":"Latest Approval requests",
-  "ViewAllApprovals":"view all approval requests",
+  "ViewAllApprovals":"View all approval requests",
   "NoNewApprovals":"No New Approvals",
   "Browser" : "Browser",
   "IPAddress": "IP Address",
@@ -127,7 +127,7 @@
   "Back" : "Back",
   "AccountRecovery" : "Account Recovery",
   "Recover" : "Recover",
-  "AddBankAccount": "Add Bank Account",
+  "AddBankAccount": "Add Account",
   "SubmitForVerification" : "Submit",
   "OrgName" : "Organization Name",
   "AddMerchantAccount" : "Add Merchant Account",
@@ -170,5 +170,8 @@
   "MinimumAverageBalance" : "Minimum Average Balance",
   "MinimumInitialBalance" : "Minimum Initial Balance",
   "AccountWithdrawLimit" : "Account Withdraw Limit",
-  "ExpireDate" : "Expire Date"
+  "ExpireDate" : "Expire Date",
+  "ProfileView" : "Profile View",
+  "Lock" : "Lock",
+  "Unlock" : "Unlock"
   }]

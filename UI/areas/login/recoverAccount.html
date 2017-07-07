@@ -3,14 +3,14 @@
     <div class="col s12 card-panel grey lighten-4">
       <h5>{{labels.AccountRecovery}}</h5>
       <div class="divider col s12"></div>
-      <p>Enter your username to recieve an account recovery link</p>
-      <p>Please Note that you may not recieve an email for the following reasons<p>
+      <p>Enter your username to recieve an account recovery</p>
+      <p>Please Note that you may not unlock for the following reasons<p>
         <ol style="list-style-type:square">
           <li>Username is invalid</li>
           <li>User Profile has been locked out</li>
           <li>User Profile has been deactivated</li>
         </ol>
-        <div ng-hide="showusername" class="input-field col s4" style="margin-top:25px">
+        <div ng-hide="showusername" class="input-field col s12 center" style="margin-top:25px">
           <i class="material-icons prefix">account_circle</i>
           <input id="username" name="username" type="text" class="validate"
           ng-model="username"
@@ -59,7 +59,7 @@
           <input id="password" text="password" name="password" type="password" class="validate" ng-model="password"/>
           <label for="password">{{labels.Password}}</label>
         </div>
-        <div class="col s12">
+        <div class="col s12 center">
           <button class="btn waves-effect waves-light green draken-2" ng-click="recoverbtn()"
           name="action">{{labels.Recover}}
           <i class="material-icons left">lock_open</i>
