@@ -157,6 +157,17 @@
   "ChooseYourAccount" : "Choose your account",
   "ChooseMerchantService" : "Choose merchant service",
   "ChooseYourAccount" : "Choose your account",
-  "PayingAccount" : "Paying Account"
-
+  "PayingAccount" : "Paying Account",
+  "Transfer" : "Transfer",
+  "AccountTypeDetails" : "Account Type Details",
+  "BranchDetails" : "Branch Details",
+  "AccountId" : "Account ID",
+  "AccountExpireDate" : "Account Expire Date",
+  "AccountStatus" : "Account Status (Locked)",
+  "MaximumMonths" : "Maximum Months",
+  "MinimumMonths" : "Minimum Months",
+  "MaximumOverDraftAmount" : "Maximum Overdraft Amount",
+  "MinimumAverageBalance" : "Minimum Average Balance",
+  "MinimumInitialBalance" : "Minimum Initial Balance",
+  "AccountWithdrawLimit" : "Account Withdraw Limit"
   }]
