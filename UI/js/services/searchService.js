@@ -29,7 +29,12 @@ nnyApp.factory('SearchService', ['$filter', 'nnyConst', function($filter, nnyCon
 
   return {
     search: function(recordSet, searchField, value) {
-      return search(recordSet, searchField, value);
+      if(value!==""){
+        return search(recordSet, searchField, value);
+      }
+      else{
+        return recordSet;
+      }
     }
   }
 }]);

@@ -116,6 +116,9 @@ angular.module('banking')
            var searchResult = SearchService.search($scope.TransactionsOriginal,searchField,searchValue);
            handlePagination(searchResult);
          }
+         else {
+           handlePagination($scope.TransactionsOriginal);
+         }
        }
 
      });

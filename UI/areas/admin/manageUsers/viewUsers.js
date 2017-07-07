@@ -26,7 +26,7 @@ angular.module('banking')
       });
 
     $scope.lockUser = function (lock, userId) {
-        AuthService.getRequest("/api/admin/change_user_status?user_id="+ 
+        AuthService.getRequest("/api/admin/change_user_status?user_id="+
           userId + "&lock=" +lock, null, function (response) {
             toastr.success("User lock toggled", 'Sucessful');
             for (var i = $scope.AllUsers.length - 1; i >= 0; i--) {
@@ -120,6 +120,8 @@ angular.module('banking')
           var searchValue = $scope.SearchData.SearchValue;
           var searchResult = SearchService.search($scope.AllUsersOriginal,searchField,searchValue);
           handlePagination(searchResult);
+        }else {
+          handlePagination($scope.AllUsersOriginal);
         }
       }
 
