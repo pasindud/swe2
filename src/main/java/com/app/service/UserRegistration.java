@@ -1,5 +1,6 @@
 package com.app.service;
 
+import com.app.Exceptions.JCEException;
 import com.app.crypt.CustomerCryptor;
 import com.app.enties.Customer;
 import com.app.enties.Merchant;
@@ -92,7 +93,7 @@ public class UserRegistration {
         return errors;
     }
 
-    private void save() {
+    private void save() throws Exception {
         if (this.users.getUserType() == UserType.CUSTOMER) {
             users.setCustomer(customer);
         } else if (this.users.getUserType() == UserType.MERCHANT) {
@@ -131,6 +132,8 @@ public class UserRegistration {
                    // customer=customerCryptor.decodeCustomer(this.users.getUsername(), this.users.getPassword(), customer);
                 } catch (NoSuchAlgorithmException ex) {
                     errors.add("Customer data encryption error");
+                }catch(JCEException je){
+                    errors.add(je.getMessage());
                 }
                 Customer saved_cust = customerRepository.save(customer);
                 if (saved_cust == null) {
